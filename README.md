@@ -1,4 +1,4 @@
-![](http://dl.iteye.com/upload/picture/pic/134643/dde43813-5299-3e75-b1ae-341623eaa3f1.jpg)
+![](http://dl.iteye.com/upload/picture/pic/134645/8f35c1f5-43a6-358c-843e-00c3f9ab7271.jpg)
 ## Shark简介 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 轻量级Mysql分库分表(Sharding)中间件，丰富的Sharding算法支持(2类4种分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。Shark站在巨人的肩膀上(SpringJdbc、Druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
