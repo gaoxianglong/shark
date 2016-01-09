@@ -49,7 +49,7 @@
 - 项目主页：https://github.com/gaoxianglong/shark
 - Wiki：https://github.com/gaoxianglong/shark/wiki
 - Issues：https://github.com/gaoxianglong/shark/issues
-- :penguin: QQ Group:150445731
+- ![](http://dl.iteye.com/upload/picture/pic/134669/42a14783-5fe5-3c51-9bdd-aad235c61672.png): QQ Group:150445731
 - Blog：http://gao-xianglong.iteye.com
 - [![Join the chat at https://gitter.im/gaoxianglong/kratos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaoxianglong/kratos?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
