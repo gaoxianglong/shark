@@ -47,9 +47,9 @@
 
 ## 学习 & 联系我们
 - 项目主页：https://github.com/gaoxianglong/shark
-- Wiki：https://github.com/gaoxianglong/shark/wiki
-- Issues：https://github.com/gaoxianglong/shark/issues
-- ![](http://dl.iteye.com/upload/picture/pic/134669/42a14783-5fe5-3c51-9bdd-aad235c61672.png): QQ Group:150445731
-- Blog：http://gao-xianglong.iteye.com
+- wiki：https://github.com/gaoxianglong/shark/wiki
+- issues：https://github.com/gaoxianglong/shark/issues
+- ![](http://dl.iteye.com/upload/picture/pic/134683/97e5d3af-cb7b-3115-97c1-230cbf6ad081.png): QQ Group:150445731
+- blog：http://gao-xianglong.iteye.com
 
 ----------
