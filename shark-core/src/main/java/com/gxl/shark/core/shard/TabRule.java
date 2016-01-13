@@ -13,3 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.core.shard;
+
+import org.springframework.stereotype.Component;
+
+import com.gxl.shark.exception.ShardException;
+
+/**
+ * 解析分表规则后计算分表索引
+ * 
+ * @author gaoxianglong
+ */
+@Component
+public class TabRule extends RuleImpl {
+	@Override
+	public int getIndex(long routeValue, String ruleArray) {
+		return getTabIndex(routeValue, ruleArray);
+	}
+}

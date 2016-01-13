@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2101 gaoxianglong
+ * Copyright 1999-2101 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,3 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.sql.dialect.mysql.ast;
+
+public interface MySqlIndexHint extends MySqlHint {
+    public static enum Option {
+        JOIN("JOIN"),
+        ORDER_BY("ORDER BY"),
+        GROUP_BY("GROUP BY")
+        ;
+        
+        public final String name;
+        
+        Option(String name) {
+            this.name = name;
+        }
+    }
+}

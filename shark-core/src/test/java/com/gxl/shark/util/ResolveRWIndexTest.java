@@ -13,3 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.util;
+
+import org.junit.Test;
+
+import com.gxl.shark.util.ResolveRWIndex;
+
+import junit.framework.Assert;
+
+public class ResolveRWIndexTest {
+	public @Test void testGetIndex() {
+		Assert.assertEquals(0, ResolveRWIndex.getIndex("r1024w0", true));
+		Assert.assertEquals(1024, ResolveRWIndex.getIndex("r1024w0", false));
+		Assert.assertEquals(0, ResolveRWIndex.getIndex("R1024W0", true));
+		Assert.assertEquals(1024, ResolveRWIndex.getIndex("R0w1024", true));
+	}
+}

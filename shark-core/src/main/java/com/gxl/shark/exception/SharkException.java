@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.exception;
+
+/**
+ * kratos非运行时异常超类
+ * 
+ * @author gaoxianglong
+ */
+public class SharkException extends Exception {
+	private static final long serialVersionUID = -6153893412860260199L;
+
+	public SharkException(String str) {
+		super(str);
+	}
+}

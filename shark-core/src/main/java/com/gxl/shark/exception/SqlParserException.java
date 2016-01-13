@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.exception;
+
+/**
+ * Sql解析异常
+ * 
+ * @author gaoxianglong
+ */
+public class SqlParserException extends SharkRuntimeException {
+	private static final long serialVersionUID = -3043258158329700507L;
+
+	public SqlParserException(String str){
+		super(str);
+	}
+}

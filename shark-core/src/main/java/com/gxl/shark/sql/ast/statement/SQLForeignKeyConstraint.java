@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2101 gaoxianglong
+ * Copyright 1999-2101 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,3 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.sql.ast.statement;
+
+import java.util.List;
+
+import com.gxl.shark.sql.ast.SQLName;
+
+public interface SQLForeignKeyConstraint extends SQLConstraint, SQLTableElement, SQLTableConstraint {
+
+    List<SQLName> getReferencingColumns();
+
+    SQLName getReferencedTableName();
+
+    void setReferencedTableName(SQLName value);
+
+    List<SQLName> getReferencedColumns();
+}

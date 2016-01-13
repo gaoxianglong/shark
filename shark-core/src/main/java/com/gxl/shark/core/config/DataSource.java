@@ -13,3 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.core.config;
+
+/**
+ * shark的数据源路由接口
+ * 
+ * @author gaoxianglong
+ */
+public interface DataSource {
+}

@@ -13,3 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.util;
+
+import com.gxl.shark.util.ResolveTableName;
+
+public abstract class ResolveDbName {
+	public static String getNewDbName(int index, String dbName, String tbSuffix) {
+		return ResolveTableName.getNewTabName(index, dbName, tbSuffix);
+	}
+}

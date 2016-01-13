@@ -13,3 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.test.core.shard;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+/**
+ * Message实体映射类
+ * 
+ * @author gaoxianglong
+ */
+@Component
+public class MessageMapper implements RowMapper<Message> {
+	@Override
+	public Message mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Message msg = new Message();
+		msg.setMessage(rs.getString("message"));
+		return msg;
+	}
+}

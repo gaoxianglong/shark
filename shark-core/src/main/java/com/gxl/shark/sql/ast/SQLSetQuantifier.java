@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2101 gaoxianglong
+ * Copyright 1999-2101 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,3 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.sql.ast;
+
+public interface SQLSetQuantifier {
+
+    // SQL 92
+    public final static int ALL         = 1;
+    public final static int DISTINCT    = 2;
+
+    public final static int UNIQUE      = 3;
+    public final static int DISTINCTROW = 4;
+
+    // <SetQuantifier>
+}

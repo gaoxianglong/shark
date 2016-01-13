@@ -13,3 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.test;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * 对应数据库表[userinfo_test]
+ *
+ * @author JohnGao
+ */
+@Component
+public class User {
+	private long userinfo_Id;
+	private String username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public long getUserinfo_Id() {
+		return userinfo_Id;
+	}
+
+	public void setUserinfo_Id(long userinfo_Id) {
+		this.userinfo_Id = userinfo_Id;
+	}
+}

@@ -13,3 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.core.config;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * master数据源路由选择器
+ * 
+ * @author gaoxianglong
+ */
+@Component
+public class SharkDataSourceHolder implements DataSourceHolder {
+	private static final ThreadLocal<Integer> holder;
+
+	static {
+		holder = new ThreadLocal<Integer>();
+	}
+
+	@Override
+	public void setIndex(int index) {
+		holder.set(index);
+	}
+
+	@Override
+	public int getIndex() {
+		return holder.get();
+	}
+}

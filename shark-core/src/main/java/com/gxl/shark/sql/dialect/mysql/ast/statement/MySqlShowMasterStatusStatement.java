@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2101 gaoxianglong
+ * Copyright 1999-2101 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,3 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.sql.dialect.mysql.ast.statement;
+
+import com.gxl.shark.sql.dialect.mysql.visitor.MySqlASTVisitor;
+
+public class MySqlShowMasterStatusStatement extends MySqlStatementImpl implements MySqlShowStatement {
+
+    public void accept0(MySqlASTVisitor visitor) {
+        visitor.visit(this);
+        visitor.endVisit(this);
+    }
+}

@@ -13,3 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.sql;
+
+import com.gxl.shark.sql.ast.SQLObject;
+import com.gxl.shark.sql.dialect.mysql.visitor.MySqlOutputVisitor;
+
+/**
+ * Sql工具类
+ *
+ * @author gaoxianglong
+ */
+public class SQLUtils {
+	public static String toSQLString(SQLObject sqlObject, String dbType) {
+		return toSQLString(sqlObject);
+	}
+
+	public static String toSQLString(SQLObject sqlObject) {
+		StringBuilder out = new StringBuilder();
+		sqlObject.accept(new MySqlOutputVisitor(out));
+		String sql = out.toString();
+		return sql;
+	}
+}

@@ -13,3 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.core.config;
+
+/**
+ * 数据源路由选择器接口
+ * 
+ * @author gaoxianglong
+ */
+public interface DataSourceHolder {
+	/**
+	 * 设置数据源路由索引
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param index
+	 *            数据源路由索引
+	 * 
+	 * @return void
+	 */
+	public void setIndex(int index);
+
+	/**
+	 * 获取数据源路由索引
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @return int 数据源路由索引
+	 */
+	public int getIndex();
+}

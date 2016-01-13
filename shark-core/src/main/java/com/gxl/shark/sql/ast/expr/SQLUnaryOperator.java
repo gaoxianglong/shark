@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2101 gaoxianglong
+ * Copyright 1999-2101 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,3 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.sql.ast.expr;
+
+public enum SQLUnaryOperator {
+    Plus("+"), //
+    Negative("-"), //
+    Not("!"), //
+    Compl("~"), //
+    Prior("PRIOR"), //
+    ConnectByRoot("CONNECT BY"), //
+    BINARY("BINARY"), //
+    RAW("RAW"), //
+    NOT("NOT"),
+    Pound("#") // Number of points in path or polygon
+    ;
+
+    public final String name;
+
+    SQLUnaryOperator(String name){
+        this.name = name;
+    }
+}

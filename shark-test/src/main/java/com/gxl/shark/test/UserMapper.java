@@ -13,3 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.test;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+/**
+ * User实体映射类
+ * 
+ * @author gaoxianglong
+ */
+@Component
+public class UserMapper implements RowMapper<User> {
+	@Override
+	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+		User user = new User();
+		user.setUsername(rs.getString("username"));
+		return user;
+	}
+}

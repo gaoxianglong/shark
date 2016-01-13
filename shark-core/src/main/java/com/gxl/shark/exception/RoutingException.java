@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.exception;
+
+/**
+ * 数据源路由异常
+ * 
+ * @author gaoxianglong
+ */
+public class RoutingException extends SharkException {
+	private static final long serialVersionUID = 7386614134234153751L;
+
+	public RoutingException(String str) {
+		super(str);
+	}
+}

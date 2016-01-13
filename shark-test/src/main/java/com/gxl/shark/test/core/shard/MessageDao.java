@@ -13,3 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.test.core.shard;
+
+import java.util.List;
+
+public interface MessageDao {
+	public void insertMessage(Message message) throws Exception;
+
+	public List<Message> queryMessagebyUid(long uid) throws Exception;
+}

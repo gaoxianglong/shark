@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.exception;
+
+/**
+ * 动态数据源异常
+ *
+ * @author gaoxianglong
+ */
+public class DataSourceException extends SharkException {
+	private static final long serialVersionUID = -5675794019244821292L;
+
+	public DataSourceException(String str) {
+		super(str);
+	}
+}

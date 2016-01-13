@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.exception;
+
+/**
+ * 数据库链接异常
+ * 
+ * @author gaoxianglong
+ */
+public class DbConnectionException extends UtilsRuntimeException {
+	private static final long serialVersionUID = 1305240660584213199L;
+
+	public DbConnectionException(String str) {
+		super(str);
+	}
+}

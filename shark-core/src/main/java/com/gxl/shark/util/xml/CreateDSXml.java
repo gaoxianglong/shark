@@ -13,3 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.util.xml;
+
+import java.io.File;
+
+/**
+ * 生成数据源配置文件
+ * 
+ * @author gaoxianglong
+ */
+public interface CreateDSXml {
+	/**
+	 * 生成kratos的数据源信息配置文件
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @return boolean 生成结果
+	 */
+	public boolean createDatasourceXml(File savePath);
+}

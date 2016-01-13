@@ -13,3 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.util;
+
+import org.junit.Test;
+
+import com.gxl.shark.util.ResolveTableName;
+
+public class GetNewTabNameTest {
+	public @Test void getNewTabName() {
+		System.out.println(ResolveTableName.getNewTabName(1, "userinfo_test", "_00000"));
+		System.out.println(ResolveTableName.getNewTabName(1024, "userinfo_test", "_0000"));
+	}
+}

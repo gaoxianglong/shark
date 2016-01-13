@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.test;
+
+import java.util.List;
+
+/**
+ * 用户信息Dao接口
+ * 
+ * @author gaoxianglong
+ */
+public interface UserDao {
+	public void insertUser(User user) throws Exception;
+
+	public List<User> queryUserbyId(long uid) throws Exception;
+}

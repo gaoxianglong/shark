@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2101 gaoxianglong
+ * Copyright 1999-2101 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,3 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.sql.dialect.mysql.ast.expr;
+
+public enum MySqlIntervalUnit {
+    YEAR, YEAR_MONTH,
+
+    QUARTER,
+
+    MONTH, WEEK, DAY, DAY_HOUR, DAY_MINUTE, DAY_SECOND, DAY_MICROSECOND,
+
+    HOUR, HOUR_MINUTE, HOUR_SECOND, HOUR_MICROSECOND,
+
+    MINUTE, MINUTE_SECOND, MINUTE_MICROSECOND,
+
+    SECOND, SECOND_MICROSECOND,
+
+    MICROSECOND
+}

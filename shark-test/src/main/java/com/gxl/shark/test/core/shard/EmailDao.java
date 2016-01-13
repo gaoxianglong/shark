@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.test.core.shard;
+
+import java.util.List;
+
+/**
+ * email反向索引表Dao接口
+ * 
+ * @author gaoxianglong
+ */
+public interface EmailDao {
+	public void insertEmail(Email email) throws Exception;
+
+	public List<Email> queryEmailbyId(Email email) throws Exception;
+}

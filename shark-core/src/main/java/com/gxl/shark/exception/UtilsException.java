@@ -13,3 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.gxl.shark.exception;
+
+/**
+ * kratos的utils非运行时异常超类
+ * 
+ * @author gaoxianglong
+ */
+public class UtilsException extends Exception {
+	private static final long serialVersionUID = -2899204026370522984L;
+
+	public UtilsException(String str) {
+		super(str);
+	}
+}
