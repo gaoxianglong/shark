@@ -17,9 +17,12 @@ package com.gxl.shark.test.util.sequence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import com.gxl.shark.util.sequence.DbConnectionManager;
 import com.gxl.shark.util.sequence.SequenceIDManger;
 
@@ -29,12 +32,10 @@ import com.gxl.shark.util.sequence.SequenceIDManger;
  * @author gaoxianglong
  */
 public class SequenceIdTest {
-	final static String NAME = "";
-	final static String PWD = "";
-	final static String URL = "jdbc:mysql://ip:3306/id";
+	final static String NAME = "root";
+	final static String PWD = "88888888";
+	final static String URL = "jdbc:mysql://ip:3306/um_id";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
-	static boolean c_result1 = false;
-	static boolean c_result2 = false;
 
 	/**
 	 * 初始化数据源信息
@@ -71,6 +72,7 @@ public class SequenceIdTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void getSequenceId3() {
+		final CountDownLatch count = new CountDownLatch(2);
 		final List<Long> id1 = new ArrayList<Long>();
 		final List<Long> id2 = new ArrayList<Long>();
 		final int size = 10000;
@@ -79,7 +81,7 @@ public class SequenceIdTest {
 				for (int i = 0; i < size; i++) {
 					id1.add(SequenceIDManger.getSequenceId(1, 1, 5000));
 				}
-				SequenceIdTest.c_result1 = true;
+				count.countDown();
 			}
 		}.start();
 		new Thread() {
@@ -87,24 +89,14 @@ public class SequenceIdTest {
 				for (int i = 0; i < size; i++) {
 					id2.add(SequenceIDManger.getSequenceId(1, 1, 5000));
 				}
-				SequenceIdTest.c_result2 = true;
+				count.countDown();
 			}
 		}.start();
-		for (;;) {
-			if (c_result1 && c_result2) {
-				if (id1.containsAll(id2)) {
-					System.out.println("出现重复");
-				} else {
-					System.out.println("未出现重复");
-				}
-				break;
-			}
-			try {
-				/* 休眠避免CPU虚高 */
-				Thread.sleep(1);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		try {
+			count.await();
+			Assert.assertFalse(id1.containsAll(id2));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

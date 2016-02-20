@@ -73,7 +73,7 @@ public class DbConnectionManager {
 			Class.forName(getDriverClass());
 			conn = DriverManager.getConnection(getJdbcUrl(), getName(), getPassword());
 		} catch (Exception e) {
-			throw new DbConnectionException("获取数据库链接异常...");
+			throw new DbConnectionException("与数据库链接发生异常[" + e.toString() + "]");
 		}
 		return conn;
 	}

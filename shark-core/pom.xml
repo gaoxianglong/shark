@@ -24,6 +24,7 @@
 		<servlet-api-version>2.5</servlet-api-version>
 		<fastjson-version>1.2.5</fastjson-version>
 		<junit-version>4.7</junit-version>
+		<javadoc-version>2.6.1</javadoc-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
@@ -180,4 +181,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc-version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
