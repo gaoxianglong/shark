@@ -9,7 +9,8 @@
 	<!-- 加载本地数据源配置信息 -->
 	<context:property-placeholder location="classpath*:c3p0-jdbc.properties" />
 	<!-- 定义数据源信息 -->
-	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
 		<property name="jdbcUrl" value="jdbc:mysql://ip:3306/test" />
@@ -20,7 +21,8 @@
 		<property name="maxStatements" value="${maxStatements}" />
 		<property name="maxIdleTime" value="${maxIdleTime}" />
 	</bean>
-	<bean id="dataSource2" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource2" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
 		<property name="jdbcUrl" value="jdbc:mysql://ip:3306/test" />
