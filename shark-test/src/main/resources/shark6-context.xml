@@ -40,7 +40,7 @@
 	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
-		<property name="jdbcUrl" value="jdbc:mysql://ip:3306/db_0000" />
+		<property name="jdbcUrl" value="jdbc:mysql://120.25.58.116:3306/db_0000" />
 		<property name="driverClass" value="${driverClass}" />
 		<property name="initialPoolSize" value="${initialPoolSize}" />
 		<property name="minPoolSize" value="${minPoolSize}" />

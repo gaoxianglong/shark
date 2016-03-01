@@ -52,12 +52,10 @@ public class RegisterDataSource implements RegisterBean {
 
 	@Override
 	public void register(String nodePathValue, DataSourceBean dataSourceBean) {
-		BufferedWriter out = null;
-		try {
+		final String tmpdir = System.getProperty("java.io.tmpdir") + "shark-datasource.xml";
+		try (BufferedWriter out = new BufferedWriter(new FileWriter(tmpdir))) {
 			if (null != nodePathValue) {
-				final String tmpdir = System.getProperty("java.io.tmpdir") + "shark-datasource.xml";
 				logger.debug("从zookeeper配置中心中获取的配置信息存储位置-->" + tmpdir);
-				out = new BufferedWriter(new FileWriter(tmpdir));
 				out.write(nodePathValue);
 				out.flush();
 				FileSystemResource resource = new FileSystemResource(tmpdir);
@@ -77,19 +75,11 @@ public class RegisterDataSource implements RegisterBean {
 			}
 		} catch (Exception e) {
 			throw new ResourceException("zookeeper配置中心发生错误[" + e.toString() + "]");
-		} finally {
-			if (null != out) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
 	/**
-	 * 关闭连接池中持有的数据库连接
+	 * 关闭连接池中持有的数据库连接,由于druid自身原因,目前从配置中心拉数据后,只支持c3p0连接池的重新注册
 	 * 
 	 * @author gaoxianglong
 	 * 

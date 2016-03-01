@@ -44,7 +44,7 @@ public abstract class GetIndexData {
 	 */
 	protected static String getData(SharkJdbcTemplate jdbcTemplate) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sharkVersion", "1.3.6");
+		jsonObj.put("sharkVersion", "1.3.7");
 		jsonObj.put("osName", System.getProperty("os.name"));
 		jsonObj.put("javaVersion", System.getProperty("java.version"));
 		jsonObj.put("JvmName", System.getProperty("java.vm.name"));
