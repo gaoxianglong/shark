@@ -44,7 +44,7 @@ public class DbRouteFacade implements Route {
 	private TabRule tabRule;
 	@Resource
 	private SetDataSource setDataSource;
-
+	
 	@Override
 	public Object[] dbRouteByOne(String sql, Object[] params, boolean indexType) {
 		String newSQL = null;

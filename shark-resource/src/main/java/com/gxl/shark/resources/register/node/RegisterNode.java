@@ -13,17 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.shark.resources.register.node;
+
+import org.apache.zookeeper.ZooKeeper;
+
+import com.gxl.shark.resources.zookeeper.DataSourceBean;
 
 /**
- * kratos运行时异常超类
+ * 注册与sharding、数据源相关的节点信息
  * 
  * @author gaoxianglong
  */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
-
-	public SharkRuntimeException(String str) {
-		super(str);
-	}
+public interface RegisterNode {
+	/**
+	 * 注册Znode
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param zk_client
+	 *            zookeeper客户端会话连接
+	 * 
+	 * @exception Exception
+	 * 
+	 * @return void
+	 */
+	public void register(ZooKeeper zk_client, DataSourceBean dataSourceBean);
 }

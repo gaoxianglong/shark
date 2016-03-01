@@ -10,5 +10,6 @@
 	<modules>
 		<module>shark-test</module>
 		<module>shark-core</module>
+		<module>shark-resource</module>
 	</modules>
 </project>

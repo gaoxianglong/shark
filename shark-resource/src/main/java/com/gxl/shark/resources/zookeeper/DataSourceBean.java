@@ -13,17 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.shark.resources.zookeeper;
 
 /**
- * kratos运行时异常超类
- * 
+ * 数据源信息bean
+ *
  * @author gaoxianglong
  */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
+public class DataSourceBean {
+	private String nodePath;
+	private int dataSourceSize;
+	private int connPoolType;
 
-	public SharkRuntimeException(String str) {
-		super(str);
+	public int getDataSourceSize() {
+		return dataSourceSize;
+	}
+
+	public void setDataSourceSize(int dataSourceSize) {
+		this.dataSourceSize = dataSourceSize;
+	}
+
+	public int getConnPoolType() {
+		return connPoolType;
+	}
+
+	public void setConnPoolType(int connPoolType) {
+		this.connPoolType = connPoolType;
+	}
+
+	public String getNodePath() {
+		return nodePath;
+	}
+
+	public void setNodePath(String nodePath) {
+		this.nodePath = nodePath;
 	}
 }

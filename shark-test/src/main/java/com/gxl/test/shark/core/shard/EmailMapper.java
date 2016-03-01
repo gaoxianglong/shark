@@ -13,17 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.test.shark.core.shard;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 /**
- * kratos运行时异常超类
+ * Email实体映射类
  * 
  * @author gaoxianglong
  */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
-
-	public SharkRuntimeException(String str) {
-		super(str);
+@Component
+public class EmailMapper implements RowMapper<Email> {
+	@Override
+	public Email mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Email email = new Email();
+		email.setEmail(rs.getString("email"));
+		email.setEmail_hash(rs.getLong("email_hash"));
+		email.setUserinfo_Id(rs.getLong("userinfo_test_id"));
+		return email;
 	}
 }

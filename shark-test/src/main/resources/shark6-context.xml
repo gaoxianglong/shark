@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<context:component-scan base-package="com.gxl.shark">
+		<context:include-filter type="annotation"
+			expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
+	<context:property-placeholder location="classpath*:*.properties" />
+	<bean class="com.gxl.shark.resources.zookeeper.ZookeeperConnectionManager"
+		init-method="init">
+		<constructor-arg index="0" value="${address}" />
+		<constructor-arg index="1" value="${session.timeout}" />
+		<constructor-arg index="2" ref="dataSourceBean" />
+	</bean>
+	<bean id="dataSourceBean" class="com.gxl.shark.resources.zookeeper.DataSourceBean">
+		<property name="nodePath" value="${nodepath}" />
+		<property name="dataSourceSize" value="2" />
+	</bean>
+	<bean id="jdbcTemplate" class="com.gxl.shark.core.shard.SharkJdbcTemplate">
+		<constructor-arg name="isShard" value="true" />
+		<property name="dataSource" ref="dataSourceGroup" />
+	</bean>
+	<!-- 引用一个缺省数据源 -->
+	<bean id="dataSourceGroup" class="com.gxl.shark.core.config.SharkDatasourceGroup">
+		<property name="targetDataSources">
+			<map key-type="java.lang.Integer">
+				<entry key="0" value-ref="dataSource1" />
+			</map>
+		</property>
+	</bean>
+	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="${name}" />
+		<property name="password" value="${password}" />
+		<property name="jdbcUrl" value="jdbc:mysql://ip:3306/db_0000" />
+		<property name="driverClass" value="${driverClass}" />
+		<property name="initialPoolSize" value="${initialPoolSize}" />
+		<property name="minPoolSize" value="${minPoolSize}" />
+		<property name="maxPoolSize" value="${maxPoolSize}" />
+		<property name="maxStatements" value="${maxStatements}" />
+		<property name="maxIdleTime" value="${maxIdleTime}" />
+	</bean>
+</beans>

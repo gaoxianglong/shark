@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.test.shark.core.shard;
+
+import java.util.List;
 
 /**
- * kratos运行时异常超类
+ * email反向索引表Dao接口
  * 
  * @author gaoxianglong
  */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
+public interface EmailDao {
+	public void insertEmail(Email email) throws Exception;
 
-	public SharkRuntimeException(String str) {
-		super(str);
-	}
+	public List<Email> queryEmailbyId(Email email) throws Exception;
 }

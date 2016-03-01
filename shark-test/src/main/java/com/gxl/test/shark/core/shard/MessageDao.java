@@ -13,17 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.test.shark.core.shard;
 
-/**
- * kratos运行时异常超类
- * 
- * @author gaoxianglong
- */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
+import java.util.List;
 
-	public SharkRuntimeException(String str) {
-		super(str);
-	}
+public interface MessageDao {
+	public void insertMessage(Message message) throws Exception;
+
+	public List<Message> queryMessagebyUid(long uid) throws Exception;
 }

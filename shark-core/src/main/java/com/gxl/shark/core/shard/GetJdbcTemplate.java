@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.shark.core.shard;
 
 /**
- * kratos运行时异常超类
+ * 从配置中心读取到相关配置后,
+ * 从此类中获取SharkJdbcTemplate实例,避免watcher监听到事件后重新注册相关bean时,应用持有的还是之前引用
  * 
  * @author gaoxianglong
  */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
+public class GetJdbcTemplate {
+	private static SharkJdbcTemplate jdbcTemplate;
 
-	public SharkRuntimeException(String str) {
-		super(str);
+	public static SharkJdbcTemplate getSharkJdbcTemplate() {
+		return jdbcTemplate;
+	}
+
+	public static void setSharkJdbcTemplate(SharkJdbcTemplate jdbcTemplate) {
+		GetJdbcTemplate.jdbcTemplate = jdbcTemplate;
 	}
 }

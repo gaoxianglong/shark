@@ -16,12 +16,9 @@
 package com.gxl.shark.core.config;
 
 import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-
-import com.gxl.shark.core.shard.SharkJdbcTemplate;
 
 /**
  * shark数据源路由实现，持有多数据源

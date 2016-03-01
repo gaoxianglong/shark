@@ -15,15 +15,10 @@
  */
 package com.gxl.shark.exception;
 
-/**
- * kratos运行时异常超类
- * 
- * @author gaoxianglong
- */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
+public class ResourceException extends SharkRuntimeException {
+	private static final long serialVersionUID = -1280572478348303040L;
 
-	public SharkRuntimeException(String str) {
+	public ResourceException(String str) {
 		super(str);
 	}
 }

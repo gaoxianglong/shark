@@ -24,6 +24,11 @@
 			<artifactId>shark-core</artifactId>
 			<version>${shark-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.gxl</groupId>
+			<artifactId>shark-resource</artifactId>
+			<version>${shark-version}</version>
+		</dependency>
 		<!-- C3p0 -->
 		<dependency>
 			<groupId>c3p0</groupId>

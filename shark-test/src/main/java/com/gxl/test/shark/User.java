@@ -13,17 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.test.shark;
+
+import org.springframework.stereotype.Component;
 
 /**
- * kratos运行时异常超类
- * 
- * @author gaoxianglong
+ * 对应数据库表[userinfo_test]
+ *
+ * @author JohnGao
  */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
+@Component
+public class User {
+	private long userinfo_Id;
+	private String username;
 
-	public SharkRuntimeException(String str) {
-		super(str);
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public long getUserinfo_Id() {
+		return userinfo_Id;
+	}
+
+	public void setUserinfo_Id(long userinfo_Id) {
+		this.userinfo_Id = userinfo_Id;
 	}
 }

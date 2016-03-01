@@ -13,17 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.exception;
+package com.gxl.shark.resources.register.bean;
+
+import org.springframework.context.ApplicationContextAware;
+
+import com.gxl.shark.resources.zookeeper.DataSourceBean;
 
 /**
- * kratos运行时异常超类
+ * 动态向spring的ioc容器中注册bean实例
  * 
  * @author gaoxianglong
  */
-public class SharkRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 5455555073000748273L;
-
-	public SharkRuntimeException(String str) {
-		super(str);
-	}
+public interface RegisterBean extends ApplicationContextAware {
+	/**
+	 * 注册bean
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param nodePathValue
+	 *            zookeeper注册中心的节点value
+	 * 
+	 * @param dataSourceBean
+	 *            数据源信息bean
+	 */
+	public void register(String nodePathValue, DataSourceBean dataSourceBean);
 }
