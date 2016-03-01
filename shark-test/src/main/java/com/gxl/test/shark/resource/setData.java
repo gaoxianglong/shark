@@ -35,7 +35,7 @@ public class setData {
 	private Logger logger = LoggerFactory.getLogger(setData.class);
 
 	public @Test void testSetData() {
-		try (BufferedReader reader = new BufferedReader(new FileReader("filePath"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("c:/shark-datasource.xml"))) {
 			StringBuffer str = new StringBuffer();
 			String value = "";
 			while (null != (value = reader.readLine()))
@@ -66,7 +66,7 @@ public class setData {
 						}
 					});
 			countDownLatch.await();
-			zk_client.setData("nodePath", str.toString().getBytes(), -1);
+			zk_client.setData("/info/datasource", str.toString().getBytes(), -1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

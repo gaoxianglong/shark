@@ -37,10 +37,10 @@
 			</map>
 		</property>
 	</bean>
-	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
-		<property name="jdbcUrl" value="jdbc:mysql://120.25.58.116:3306/db_0000" />
+		<property name="jdbcUrl" value="jdbc:mysql://120.24.75.22:3306/db_0000" />
 		<property name="driverClass" value="${driverClass}" />
 		<property name="initialPoolSize" value="${initialPoolSize}" />
 		<property name="minPoolSize" value="${minPoolSize}" />
@@ -48,4 +48,18 @@
 		<property name="maxStatements" value="${maxStatements}" />
 		<property name="maxIdleTime" value="${maxIdleTime}" />
 	</bean>
+	<!-- <bean id="dataSource1" class="com.alibaba.druid.pool.DruidDataSource" 
+		init-method="init" destroy-method="close"> <property name="username" value="${um.username}" 
+		/> <property name="password" value="${um.password}" /> <property name="url" 
+		value="jdbc:mysql://120.24.75.22:3306/db_0000" /> <property name="initialSize" 
+		value="${um.initialSize}" /> <property name="minIdle" value="${um.minIdle}" 
+		/> <property name="maxActive" value="${um.maxActive}" /> <property name="poolPreparedStatements" 
+		value="${um.poolPreparedStatements}" /> <property name="maxOpenPreparedStatements" 
+		value="${um.maxOpenPreparedStatements}" /> <property name="testOnBorrow" 
+		value="${um.testOnBorrow}" /> <property name="testOnReturn" value="${um.testOnReturn}" 
+		/> <property name="testWhileIdle" value="${um.testWhileIdle}" /> <property 
+		name="filters" value="${um.filters}" /> <property name="connectionProperties" 
+		value="${um.connectionProperties}" /> <property name="useGlobalDataSourceStat" 
+		value="${um.useGlobalDataSourceStat}" /> <property name="timeBetweenLogStatsMillis" 
+		value="${um.timeBetweenLogStatsMillis}" /> </bean> -->
 </beans>

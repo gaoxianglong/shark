@@ -23,6 +23,7 @@ package com.gxl.shark.resources.zookeeper;
 public class DataSourceBean {
 	private String nodePath;
 	private int dataSourceSize;
+	@Deprecated
 	private int connPoolType;
 
 	public int getDataSourceSize() {

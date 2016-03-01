@@ -52,7 +52,7 @@ public class RegisterDataSource implements RegisterBean {
 
 	@Override
 	public void register(String nodePathValue, DataSourceBean dataSourceBean) {
-		final String tmpdir = System.getProperty("java.io.tmpdir") + "shark-datasource.xml";
+		final String tmpdir = System.getProperty("java.io.tmpdir") + "shark-info.xml";
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(tmpdir))) {
 			if (null != nodePathValue) {
 				logger.debug("从zookeeper配置中心中获取的配置信息存储位置-->" + tmpdir);
@@ -63,8 +63,6 @@ public class RegisterDataSource implements RegisterBean {
 				DefaultListableBeanFactory beanfactory = (DefaultListableBeanFactory) cfgContext.getBeanFactory();
 				/* 验证jdbcTemplate是否已经存在 */
 				if (beanfactory.isBeanNameInUse("jdbcTemplate")) {
-					for (int i = 1; i <= dataSourceBean.getDataSourceSize(); i++)
-						close(beanfactory, i);
 					beanfactory.removeBeanDefinition("jdbcTemplate");
 					logger.debug("从ioc容器中删除bean-->jdbcTemplate");
 				}
@@ -79,7 +77,7 @@ public class RegisterDataSource implements RegisterBean {
 	}
 
 	/**
-	 * 关闭连接池中持有的数据库连接,由于druid自身原因,目前从配置中心拉数据后,只支持c3p0连接池的重新注册
+	 * 关闭连接池中持有的数据库连接,在连接池中设置属性destroy-method="close"便可自动关闭连接池所持有的数据库连接
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -93,6 +91,7 @@ public class RegisterDataSource implements RegisterBean {
 	 * @return void
 	 */
 	@SuppressWarnings("unused")
+	@Deprecated
 	private void close(int connPoolType, DefaultListableBeanFactory beanfactory, int num) {
 		final String beanName = "dataSource" + num;
 		if (beanfactory.isBeanNameInUse(beanName)) {
@@ -103,29 +102,6 @@ public class RegisterDataSource implements RegisterBean {
 				DruidDataSource dataSource = (DruidDataSource) beanfactory.getBean(beanName);
 				dataSource.close();
 			}
-			logger.debug("关闭dataSource" + num + "所持有的数据库连接");
-		}
-	}
-
-	/**
-	 * 关闭连接池中持有的数据库连接
-	 * 
-	 * @author gaoxianglong
-	 * 
-	 * @param connPoolType
-	 *            连接池类型,缺省为0即ComboPooledDataSource,反之为DruidDataSource
-	 * 
-	 * @param beanfactory
-	 * 
-	 * @param num
-	 * 
-	 * @return void
-	 */
-	private void close(DefaultListableBeanFactory beanfactory, int num) {
-		final String beanName = "dataSource" + num;
-		if (beanfactory.isBeanNameInUse(beanName)) {
-			ComboPooledDataSource dataSource = (ComboPooledDataSource) beanfactory.getBean(beanName);
-			dataSource.close();
 			logger.debug("关闭dataSource" + num + "所持有的数据库连接");
 		}
 	}
