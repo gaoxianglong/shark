@@ -17,12 +17,14 @@ package com.gxl.shark.resources.register.bean;
 
 import org.springframework.context.ApplicationContextAware;
 
-import com.gxl.shark.resources.zookeeper.DataSourceBean;
+import com.gxl.shark.resources.conn.DataSourceBean;
 
 /**
  * 动态向spring的ioc容器中注册bean实例
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
 public interface RegisterBean extends ApplicationContextAware {
 	/**
@@ -33,8 +35,7 @@ public interface RegisterBean extends ApplicationContextAware {
 	 * @param nodePathValue
 	 *            zookeeper注册中心的节点value
 	 * 
-	 * @param dataSourceBean
-	 *            数据源信息bean
+	 * @return void
 	 */
-	public void register(String nodePathValue, DataSourceBean dataSourceBean);
+	public void register(String nodePathValue);
 }

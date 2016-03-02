@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.resources.zookeeper;
+package com.gxl.shark.resources.conn;
 
 /**
  * 数据源信息bean
  *
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
+@Deprecated
 public class DataSourceBean {
 	private String nodePath;
 	private int dataSourceSize;
-	@Deprecated
 	private int connPoolType;
 
 	public int getDataSourceSize() {

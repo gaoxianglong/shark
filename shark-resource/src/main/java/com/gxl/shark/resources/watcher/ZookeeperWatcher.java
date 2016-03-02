@@ -24,25 +24,32 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import com.gxl.shark.exception.ResourceException;
+import com.gxl.shark.resources.conn.DataSourceBean;
 import com.gxl.shark.resources.register.bean.RegisterBean;
-import com.gxl.shark.resources.zookeeper.DataSourceBean;
 
 /**
- * sharding、数据源相关的节点watcher
+ * sharding、数据源相关的zookeeper节点watcher
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
 @Component
-public class DataSourceWatcher implements Watcher {
+public class ZookeeperWatcher implements Watcher {
 	@Resource(name = "registerDataSource")
 	private RegisterBean registerBean;
 	private ZooKeeper zk_client;
 	private DataSourceBean dataSourceBean;
-	private Logger logger = LoggerFactory.getLogger(DataSourceWatcher.class);
+	private String nodePath;
+	private Logger logger = LoggerFactory.getLogger(ZookeeperWatcher.class);
 
 	public void init(ZooKeeper zk_client, DataSourceBean dataSourceBean) {
+		init(zk_client, dataSourceBean.getNodePath());
+	}
+
+	public void init(ZooKeeper zk_client, String nodePath) {
 		this.zk_client = zk_client;
-		this.dataSourceBean = dataSourceBean;
+		this.nodePath = nodePath;
 	}
 
 	@Override
@@ -52,7 +59,7 @@ public class DataSourceWatcher implements Watcher {
 		try {
 			Thread.sleep(100);
 			/* 重新注册节点 */
-			zk_client.exists(dataSourceBean.getNodePath(), this);
+			zk_client.exists(nodePath, this);
 			EventType eventType = event.getType();
 			final String VALUE = "zookeeper配置中心";
 			switch (eventType) {
@@ -60,8 +67,8 @@ public class DataSourceWatcher implements Watcher {
 				logger.info(VALUE + "节点[" + event.getPath() + "]被创建");
 				break;
 			case NodeDataChanged:
-				String nodePathValue = new String(zk_client.getData(dataSourceBean.getNodePath(), false, null));
-				registerBean.register(nodePathValue, dataSourceBean);
+				String nodePathValue = new String(zk_client.getData(nodePath, false, null));
+				registerBean.register(nodePathValue);
 				logger.info(VALUE + "节点[" + event.getPath() + "]下的数据发生变化");
 				break;
 			case NodeChildrenChanged:

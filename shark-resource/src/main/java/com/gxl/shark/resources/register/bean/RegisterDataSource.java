@@ -17,8 +17,6 @@ package com.gxl.shark.resources.register.bean;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -32,13 +30,14 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.gxl.shark.core.shard.GetJdbcTemplate;
 import com.gxl.shark.core.shard.SharkJdbcTemplate;
 import com.gxl.shark.exception.ResourceException;
-import com.gxl.shark.resources.zookeeper.DataSourceBean;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * 动态向spring的ioc容器中注册bean实例实现
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
 @Component
 public class RegisterDataSource implements RegisterBean {
@@ -51,7 +50,7 @@ public class RegisterDataSource implements RegisterBean {
 	}
 
 	@Override
-	public void register(String nodePathValue, DataSourceBean dataSourceBean) {
+	public void register(String nodePathValue) {
 		final String tmpdir = System.getProperty("java.io.tmpdir") + "shark-info.xml";
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(tmpdir))) {
 			if (null != nodePathValue) {

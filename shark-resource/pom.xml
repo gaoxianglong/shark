@@ -21,6 +21,7 @@
 		<zookeeper-version>3.4.6</zookeeper-version>
 		<c3p0-version>0.9.1</c3p0-version>
 		<druid-version>1.0.15</druid-version>
+		<jedis.version>2.6.2</jedis.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
@@ -45,11 +46,15 @@
 			<artifactId>c3p0</artifactId>
 			<version>${c3p0-version}</version>
 		</dependency>
-		<!-- Druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>${druid-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.resources.register.node;
+package com.gxl.shark.resources.register.zookeeper.node;
 
 import org.apache.zookeeper.ZooKeeper;
 
-import com.gxl.shark.resources.zookeeper.DataSourceBean;
+import com.gxl.shark.resources.conn.DataSourceBean;
 
 /**
  * 注册与sharding、数据源相关的节点信息
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
 public interface RegisterNode {
 	/**
@@ -33,9 +35,27 @@ public interface RegisterNode {
 	 * @param zk_client
 	 *            zookeeper客户端会话连接
 	 * 
+	 * @param dataSourceBean
+	 * 
 	 * @exception Exception
 	 * 
 	 * @return void
 	 */
 	public void register(ZooKeeper zk_client, DataSourceBean dataSourceBean);
+
+	/**
+	 * 注册Znode
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param zk_client
+	 *            zookeeper客户端会话连接
+	 * 
+	 * @param nodePath
+	 * 
+	 * @exception Exception
+	 * 
+	 * @return void
+	 */
+	public void register(ZooKeeper zk_client, String nodePath);
 }

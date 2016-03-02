@@ -30,9 +30,11 @@ import org.slf4j.LoggerFactory;
  * 向zookeeper配置中心添加数据
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
-public class setData {
-	private Logger logger = LoggerFactory.getLogger(setData.class);
+public class zkSetData {
+	private Logger logger = LoggerFactory.getLogger(zkSetData.class);
 
 	public @Test void testSetData() {
 		try (BufferedReader reader = new BufferedReader(new FileReader("c:/shark-datasource.xml"))) {
@@ -67,8 +69,9 @@ public class setData {
 					});
 			countDownLatch.await();
 			zk_client.setData("/info/datasource", str.toString().getBytes(), -1);
+			logger.info("insert success");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("insert fail", e);
 		}
 	}
 }

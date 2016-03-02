@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.resources.zookeeper;
+package com.gxl.shark.resources.conn;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
@@ -25,27 +25,33 @@ import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.gxl.shark.exception.ResourceException;
-import com.gxl.shark.resources.register.node.RegisterNode;
+import com.gxl.shark.resources.register.zookeeper.node.RegisterNode;
 
 /**
  * 客户端连接管理器,与zookeeper服务器建立session会话
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
 public class ZookeeperConnectionManager {
 	private String zk_address;
 	private int zk_session_timeout;
 	private CountDownLatch countDownLatch;
 	private ZooKeeper zk_client;
-	private DataSourceBean dataSourceBean;
+	private String nodePath;
 	@Resource(name = "registerDataSourceNode")
 	private RegisterNode registerNode;
 	private Logger logger = LoggerFactory.getLogger(ZookeeperConnectionManager.class);
 
 	private ZookeeperConnectionManager(String zk_address, int zk_session_timeout, DataSourceBean dataSourceBean) {
+		this(zk_address, zk_session_timeout, dataSourceBean.getNodePath());
+	}
+
+	private ZookeeperConnectionManager(String zk_address, int zk_session_timeout, String nodePath) {
 		this.zk_address = zk_address;
 		this.zk_session_timeout = zk_session_timeout;
-		this.dataSourceBean = dataSourceBean;
+		this.nodePath = nodePath;
 		countDownLatch = new CountDownLatch(1);
 	}
 
@@ -91,7 +97,7 @@ public class ZookeeperConnectionManager {
 			});
 			countDownLatch.await();
 			/* 注册与数据源相关的节点 */
-			registerNode.register(zk_client, dataSourceBean);
+			registerNode.register(zk_client, nodePath);
 		} catch (IOException e) {
 			throw new ResourceException("与zookeeper建立会话失败[" + e.toString() + "]");
 		} catch (InterruptedException e) {

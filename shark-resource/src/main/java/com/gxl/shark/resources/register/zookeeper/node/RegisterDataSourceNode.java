@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.resources.register.node;
+package com.gxl.shark.resources.register.zookeeper.node;
 
 import javax.annotation.Resource;
 
@@ -21,35 +21,41 @@ import org.apache.zookeeper.ZooKeeper;
 import org.springframework.stereotype.Component;
 
 import com.gxl.shark.exception.ResourceException;
+import com.gxl.shark.resources.conn.DataSourceBean;
 import com.gxl.shark.resources.register.bean.RegisterBean;
-import com.gxl.shark.resources.watcher.DataSourceWatcher;
-import com.gxl.shark.resources.zookeeper.DataSourceBean;
+import com.gxl.shark.resources.watcher.ZookeeperWatcher;
 
 /**
  * 注册与sharding、数据源相关的节点信息实现
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.7
  */
 @Component
 public class RegisterDataSourceNode implements RegisterNode {
 	@Resource
-	private DataSourceWatcher dataSourceWatcher;
+	private ZookeeperWatcher zookeeperWatcher;
 
 	@Resource(name = "registerDataSource")
 	private RegisterBean registerBean;
 
 	@Override
 	public void register(ZooKeeper zk_client, DataSourceBean dataSourceBean) {
-		final String nodePath = dataSourceBean.getNodePath();
+		register(zk_client, dataSourceBean.getNodePath());
+	}
+
+	@Override
+	public void register(ZooKeeper zk_client, String nodePath) {
 		String nodePathValeu = null;
 		if (null != nodePath) {
-			dataSourceWatcher.init(zk_client, dataSourceBean);
+			zookeeperWatcher.init(zk_client, nodePath);
 			try {
 				/* 注册节点 */
-				if (null != zk_client.exists(nodePath, dataSourceWatcher))
+				if (null != zk_client.exists(nodePath, zookeeperWatcher))
 					nodePathValeu = new String(zk_client.getData(nodePath, false, null));
 				/* 动态向spring的ioc容器中注册相关bean */
-				registerBean.register(nodePathValeu, dataSourceBean);
+				registerBean.register(nodePathValeu);
 			} catch (Exception e) {
 				throw new ResourceException("zookeeper配置中心发生错误[" + e.toString() + "]");
 			}
