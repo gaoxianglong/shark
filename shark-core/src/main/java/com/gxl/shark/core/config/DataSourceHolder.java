@@ -19,6 +19,8 @@ package com.gxl.shark.core.config;
  * 数据源路由选择器接口
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public interface DataSourceHolder {
 	/**

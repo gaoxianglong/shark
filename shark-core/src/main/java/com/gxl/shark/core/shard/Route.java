@@ -21,6 +21,8 @@ import com.gxl.shark.exception.ShardException;
  * 路由模式接口
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public interface Route {
 	/**

@@ -17,6 +17,11 @@ package com.gxl.shark.util;
 
 import com.gxl.shark.util.ResolveTableName;
 
+/**
+ * @author gaoxianglong
+ * 
+ * @version 1.3.5
+ */
 public abstract class ResolveDbName {
 	public static String getNewDbName(int index, String dbName, String tbSuffix) {
 		return ResolveTableName.getNewTabName(index, dbName, tbSuffix);

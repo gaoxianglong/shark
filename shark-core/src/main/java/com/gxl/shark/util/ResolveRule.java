@@ -22,6 +22,8 @@ import java.util.List;
  * 路由规则解析
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public abstract class ResolveRule {
 	public static List<Integer> resolveDbRule(String dbRuleArray) {

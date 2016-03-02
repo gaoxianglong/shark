@@ -21,6 +21,8 @@ import org.springframework.stereotype.Component;
  * master数据源路由选择器
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 @Component
 public class SharkDataSourceHolder implements DataSourceHolder {

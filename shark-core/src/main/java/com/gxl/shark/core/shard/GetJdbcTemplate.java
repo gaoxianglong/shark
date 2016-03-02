@@ -20,6 +20,8 @@ package com.gxl.shark.core.shard;
  * 从此类中获取SharkJdbcTemplate实例,避免watcher监听到事件后重新注册相关bean时,应用持有的还是之前引用
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class GetJdbcTemplate {
 	private static SharkJdbcTemplate jdbcTemplate;

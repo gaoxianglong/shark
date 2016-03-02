@@ -26,6 +26,8 @@ import com.gxl.shark.core.config.DataSourceHolder;
  * 设置数据源
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 @Component
 public class SetDataSource {

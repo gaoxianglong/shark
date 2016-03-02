@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * master/slave读写分离起始索引异常
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class IndexException extends SharkRuntimeException {
 	private static final long serialVersionUID = -468683407472606355L;

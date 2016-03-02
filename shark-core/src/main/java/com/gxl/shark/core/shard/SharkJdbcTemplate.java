@@ -53,6 +53,8 @@ import org.springframework.stereotype.Component;
  * shark的 JdbcTemplate，扩展自Spring JdbcTemplate
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class SharkJdbcTemplate extends JdbcTemplate {
 	private Logger logger = LoggerFactory.getLogger(SharkJdbcTemplate.class);

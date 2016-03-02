@@ -27,6 +27,8 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  * 能够非常方便的实现数据源路由工作
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class SharkDatasourceGroup extends AbstractRoutingDataSource implements DataSource {
 	private Logger logger = LoggerFactory.getLogger(SharkDatasourceGroup.class);

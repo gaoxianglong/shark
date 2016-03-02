@@ -27,6 +27,8 @@ import org.slf4j.LoggerFactory;
  * 加载sql配置文件中的sql信息
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class PropertyPlaceholderConfigurer {
 	private Logger logger = LoggerFactory.getLogger(PropertyPlaceholderConfigurer.class);

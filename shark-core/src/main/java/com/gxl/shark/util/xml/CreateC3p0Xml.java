@@ -27,6 +27,8 @@ import com.gxl.shark.util.ResolveDbName;
  * 生成基于c3p0的数据源配置文件
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class CreateC3p0Xml implements CreateDSXml {
 	private String isShard;

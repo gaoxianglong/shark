@@ -19,6 +19,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * @author gaoxianglong
+ *
+ * @version 1.3.5
+ */
 @XmlRootElement(name = "constructor-arg")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ConstructorArg {

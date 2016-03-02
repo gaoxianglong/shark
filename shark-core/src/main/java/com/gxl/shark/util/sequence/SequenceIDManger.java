@@ -19,6 +19,8 @@ package com.gxl.shark.util.sequence;
  * sequenceID的Manager类
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class SequenceIDManger {
 	private SequenceIDManger() {

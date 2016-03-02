@@ -24,6 +24,8 @@ import com.gxl.shark.core.shard.SharkJdbcTemplate;
  * 解析分库规则后计算数据源索引
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 @Component
 public class DbRule extends RuleImpl {

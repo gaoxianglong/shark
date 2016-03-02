@@ -27,6 +27,8 @@ import com.gxl.shark.util.ResolveDbName;
  * 生成基于druid的数据源配置文件
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class CreateDruidXml implements CreateDSXml {
 	private String isShard;

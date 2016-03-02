@@ -25,6 +25,8 @@ import org.aspectj.lang.annotation.Aspect;
  * 数据路由入口
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 @Aspect
 public class SQLExecuterInterceptor {

@@ -32,6 +32,8 @@ import com.gxl.shark.sql.parser.SQLStatementParser;
  * 使用Druid的SqlParser解析路由条件
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public abstract class ResolveRoute {
 	/**

@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * Sql解析异常
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class SqlParserException extends SharkRuntimeException {
 	private static final long serialVersionUID = -3043258158329700507L;

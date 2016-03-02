@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * 动态数据源异常
  *
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class DataSourceException extends SharkException {
 	private static final long serialVersionUID = -5675794019244821292L;

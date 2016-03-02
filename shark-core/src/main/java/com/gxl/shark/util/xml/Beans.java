@@ -22,6 +22,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * @author gaoxianglong
+ *
+ * @version 1.3.5
+ */
 @XmlRootElement(name = "beans")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Beans {

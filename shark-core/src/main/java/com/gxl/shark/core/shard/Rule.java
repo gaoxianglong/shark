@@ -19,6 +19,8 @@ package com.gxl.shark.core.shard;
  * 路由规则接口
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public interface Rule {
 	/**

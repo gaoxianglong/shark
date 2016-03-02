@@ -23,6 +23,8 @@ import com.gxl.shark.util.ResolveRule;
  * 路由规则接口实现
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public abstract class RuleImpl implements Rule {
 	@Override

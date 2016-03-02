@@ -25,6 +25,8 @@ import com.gxl.shark.exception.SequenceIdException;
  * 生成SequenceId接口
  * 
  * @author JohnGao
+ * 
+ * @version 1.3.5
  */
 public class CreateSequenceIdService {
 	private static CreateSequenceIdService createSequenceId;

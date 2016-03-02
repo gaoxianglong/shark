@@ -23,6 +23,8 @@ import com.gxl.shark.exception.ShardException;
  * 解析分表规则后计算分表索引
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 @Component
 public class TabRule extends RuleImpl {

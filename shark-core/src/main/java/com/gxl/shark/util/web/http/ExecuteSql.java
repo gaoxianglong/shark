@@ -23,6 +23,8 @@ import com.gxl.shark.core.shard.SharkJdbcTemplate;
  * 执行sql操作
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class ExecuteSql {
 	private SharkJdbcTemplate jdbcTemplate;

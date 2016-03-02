@@ -37,6 +37,8 @@ import com.gxl.shark.core.shard.SharkJdbcTemplate;
  * shark的sql执行视图控制器
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class QueryViewServlet extends HttpServlet {
 	private static Logger logger = LoggerFactory.getLogger(QueryViewServlet.class);

@@ -24,6 +24,8 @@ import com.gxl.shark.util.ResolveTableName;
  * 设置片名,比如通用的片名为tab,那么设置后则为tab_0000
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 @Component
 public class SetTabName {

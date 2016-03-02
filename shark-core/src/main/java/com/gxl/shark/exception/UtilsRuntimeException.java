@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * kratos的utils运行时异常超类
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class UtilsRuntimeException extends RuntimeException {
 	private static final long serialVersionUID = 454913616783864156L;

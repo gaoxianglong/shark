@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * 分库分表异常
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class ShardException extends SharkRuntimeException {
 	private static final long serialVersionUID = -4815365861254362333L;

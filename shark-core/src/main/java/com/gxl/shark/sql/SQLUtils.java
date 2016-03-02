@@ -22,6 +22,8 @@ import com.gxl.shark.sql.dialect.mysql.visitor.MySqlOutputVisitor;
  * Sql工具类
  *
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class SQLUtils {
 	public static String toSQLString(SQLObject sqlObject, String dbType) {

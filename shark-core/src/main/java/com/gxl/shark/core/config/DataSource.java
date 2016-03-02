@@ -19,6 +19,8 @@ package com.gxl.shark.core.config;
  * shark的数据源路由接口
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public interface DataSource {
 }

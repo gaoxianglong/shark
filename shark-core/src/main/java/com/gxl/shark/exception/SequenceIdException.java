@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * SequenceId生成异常
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class SequenceIdException extends UtilsRuntimeException {
 	private static final long serialVersionUID = 467676658994285663L;

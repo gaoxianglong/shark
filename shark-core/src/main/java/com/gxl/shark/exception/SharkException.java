@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * kratos非运行时异常超类
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class SharkException extends Exception {
 	private static final long serialVersionUID = -6153893412860260199L;

@@ -24,6 +24,8 @@ import com.gxl.shark.exception.ShardException;
  * 获取分库分表的关键字
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public abstract class GetKeyName {
 	/**

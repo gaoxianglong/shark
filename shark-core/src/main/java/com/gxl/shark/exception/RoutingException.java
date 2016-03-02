@@ -19,6 +19,8 @@ package com.gxl.shark.exception;
  * 数据源路由异常
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class RoutingException extends SharkException {
 	private static final long serialVersionUID = 7386614134234153751L;

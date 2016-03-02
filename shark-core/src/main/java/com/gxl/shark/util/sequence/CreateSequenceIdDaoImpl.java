@@ -24,6 +24,8 @@ import java.sql.SQLException;
  * 生成唯一用户生成SequenceId的Dao接口实现
  * 
  * @author JohnGao
+ * 
+ * @version 1.3.5
  */
 public final class CreateSequenceIdDaoImpl implements CreateSequenceIdDao {
 	public static Connection conn;

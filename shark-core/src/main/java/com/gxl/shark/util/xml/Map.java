@@ -23,6 +23,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * 生成基于c3p0的数据源配置文件
+ * 
+ * @author gaoxianglong
+ * 
+ * @version 1.3.5
+ */
 @XmlRootElement(name = "map")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Map {

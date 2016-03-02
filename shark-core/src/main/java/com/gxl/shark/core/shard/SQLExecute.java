@@ -28,6 +28,8 @@ import com.gxl.shark.util.ResolveRWIndex;
  * 在SQL执行之前进行数据路由
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 @Component
 public class SQLExecute {

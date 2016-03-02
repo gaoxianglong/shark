@@ -21,6 +21,8 @@ import java.sql.SQLException;
  * 生成唯一用户生成SequenceId的Dao接口
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public interface CreateSequenceIdDao {
 	/**

@@ -24,6 +24,8 @@ import com.gxl.shark.exception.DbConnectionException;
  * 数据源链接管理
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class DbConnectionManager {
 	private static String name;

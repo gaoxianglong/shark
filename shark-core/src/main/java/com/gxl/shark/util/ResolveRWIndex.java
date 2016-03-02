@@ -21,6 +21,8 @@ import com.gxl.shark.exception.IndexException;
  * 读写分离起始索引解析
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public abstract class ResolveRWIndex {
 	/**

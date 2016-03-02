@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 package com.gxl.shark.util.xml;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * 生成基于c3p0的数据源配置文件
+ * 
+ * @author gaoxianglong
+ * 
+ * @version 1.3.5
+ */
 @XmlRootElement(name = "bean")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Property {
@@ -28,13 +36,13 @@ public class Property {
 
 	@XmlAttribute(name = "ref")
 	private String ref;
-	
+
 	@XmlAttribute(name = "value")
 	private String value;
-	
+
 	@XmlElement(name = "map")
 	private Map map;
-	
+
 	public Map getMap() {
 		return map;
 	}

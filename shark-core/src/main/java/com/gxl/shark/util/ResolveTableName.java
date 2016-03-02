@@ -33,6 +33,8 @@ import com.gxl.shark.sql.visitor.SQLASTOutputVisitor;
  * 使用Druid的SqlParser解析数据库表名
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public abstract class ResolveTableName {
 	/**

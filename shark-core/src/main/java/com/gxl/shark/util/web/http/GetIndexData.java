@@ -24,6 +24,8 @@ import com.gxl.shark.core.shard.SharkJdbcTemplate;
  * 获取index首页数据
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public abstract class GetIndexData {
 	private static String startTime;

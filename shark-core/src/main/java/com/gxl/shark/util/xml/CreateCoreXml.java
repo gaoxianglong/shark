@@ -26,6 +26,8 @@ import javax.xml.bind.Marshaller;
  * 生成kratos核心配置文件
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.3.5
  */
 public class CreateCoreXml {
 	private String isShard;

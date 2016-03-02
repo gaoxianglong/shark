@@ -15,6 +15,13 @@
  */
 package com.gxl.shark.exception;
 
+/**
+ * 资源配置中心异常信息
+ *
+ * @author gaoxianglong
+ * 
+ * @version 1.3.7
+ */
 public class ResourceException extends SharkRuntimeException {
 	private static final long serialVersionUID = -1280572478348303040L;
 
