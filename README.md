@@ -53,5 +53,6 @@
 - issues：https://github.com/gaoxianglong/shark/issues
 - ![](http://dl.iteye.com/upload/picture/pic/134683/97e5d3af-cb7b-3115-97c1-230cbf6ad081.png): QQ Group:150445731
 - blog：http://gao-xianglong.iteye.com
+- email：gao_xianglong@sina.com
 
 ----------
