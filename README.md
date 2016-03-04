@@ -6,6 +6,7 @@
 - [中文手册](https://github.com/gaoxianglong/shark/wiki)<br>
 - [常见问题](https://github.com/gaoxianglong/shark/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)<br>
 - [入门示例](https://github.com/gaoxianglong/shark/wiki/shark使用入门)<br>
+- [基准测试](https://github.com/gaoxianglong/shark/wiki/shark-benchmark)<br>
 
 ----------
 
