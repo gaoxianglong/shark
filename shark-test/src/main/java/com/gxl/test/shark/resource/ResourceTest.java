@@ -32,9 +32,9 @@ import com.gxl.shark.core.shard.SharkJdbcTemplate;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 /* 基于zookeeper的配置中心 */
-@ContextConfiguration(locations = "classpath*:shark6-context.xml")
+// @ContextConfiguration(locations = "classpath*:shark6-context.xml")
 /* 基于redis的配置中心 */
-//@ContextConfiguration(locations = "classpath*:shark7-context.xml")
+@ContextConfiguration(locations = "classpath*:shark7-context.xml")
 public class ResourceTest {
 	public @Test void testInsert() {
 		while (true) {

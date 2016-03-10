@@ -16,8 +16,12 @@
 package com.gxl.shark.resources.conn;
 
 import javax.annotation.Resource;
+
+import com.gxl.shark.exception.ResourceException;
 import com.gxl.shark.resources.register.bean.RegisterBean;
 import com.gxl.shark.resources.watcher.RedisWatcher;
+import com.gxl.shark.util.MD5Util;
+
 import redis.clients.jedis.JedisCluster;
 
 /**
@@ -30,10 +34,12 @@ import redis.clients.jedis.JedisCluster;
 public class RedisConnectionManager {
 	@Resource(name = "registerDataSource")
 	private RegisterBean registerBean;
-	
+
 	@Resource
 	private RedisWatcher redisWatcher;
 	private String key;
+	/* 0使用版本号比对,1使用MD5校验 */
+	private static int type = 0;
 	private JedisCluster jedisCluster;
 
 	public JedisCluster getJedisCluster() {
@@ -41,8 +47,16 @@ public class RedisConnectionManager {
 	}
 
 	private RedisConnectionManager(String key, JedisCluster jedisCluster) {
+		this(key, jedisCluster, type);
+	}
+
+	private RedisConnectionManager(String key, JedisCluster jedisCluster, int type) {
 		this.key = key;
 		this.jedisCluster = jedisCluster;
+		if (!(type >= 0 && type <= 1)) {
+			throw new ResourceException("redis配置中心客户端的检查配置变更参数type值仅限于0或者1");
+		} else
+			this.type = type;
 	}
 
 	/**
@@ -61,10 +75,15 @@ public class RedisConnectionManager {
 	 * @author gaoxianglong
 	 */
 	public void getResource() {
-		final String[] values = jedisCluster.get(key).split("\\,");
-		final String value = values[1];
+		String value = null;
+		if (1 == type) {
+			value = jedisCluster.get(key);
+			RedisWatcher.md5Code = MD5Util.toMd5Code(value);
+		} else {
+			value = jedisCluster.get(key).split("\\,")[1];
+		}
 		if (null != value) {
-			redisWatcher.init(jedisCluster, key);
+			redisWatcher.init(jedisCluster, key, type);
 			/* 向ioc容器中动态注册相关bean实例 */
 			registerBean.register(value);
 		}

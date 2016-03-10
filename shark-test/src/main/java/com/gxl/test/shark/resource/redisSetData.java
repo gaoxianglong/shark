@@ -53,13 +53,26 @@ public class redisSetData {
 		jedis = new JedisCluster(hostAndPorts, cfg);
 	}
 
-	public @Test void testSetData() {
+	public @Test void testVersionSetData() {
 		try (BufferedReader reader = new BufferedReader(new FileReader("c:/shark-datasource.xml"))) {
 			StringBuffer str = new StringBuffer();
 			String value = "";
 			while (null != (value = reader.readLine()))
 				str.append(value);
 			jedis.set("shark-datasource", "2," + str.toString());
+			logger.info("insert success");
+		} catch (Exception e) {
+			logger.error("insert fail", e);
+		}
+	}
+
+	public @Test void testMd5SetData() {
+		try (BufferedReader reader = new BufferedReader(new FileReader("c:/shark-datasource.xml"))) {
+			StringBuffer str = new StringBuffer();
+			String value = "";
+			while (null != (value = reader.readLine()))
+				str.append(value);
+			jedis.set("shark-datasource", str.toString());
 			logger.info("insert success");
 		} catch (Exception e) {
 			logger.error("insert fail", e);
