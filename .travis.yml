@@ -3,5 +3,3 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
-script:
-  mvn test -Dmaven.test.skip=false -fae
