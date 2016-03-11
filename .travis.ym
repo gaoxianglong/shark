@@ -5,3 +5,4 @@ jdk:
   - openjdk7
 script:
   mvn test -Dmaven.test.skip=false -fae
+
