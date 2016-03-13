@@ -43,7 +43,8 @@ public class RedisWatcher {
 	private String key;
 	private int type;
 	private static int version = 1;
-	public static String md5Code;
+	private static String md5Code;
+	private String resourceType = "redis";
 	private Logger logger = LoggerFactory.getLogger(RedisWatcher.class);
 
 	public void init(JedisCluster jedisCluster, String key, int type) {
@@ -54,10 +55,15 @@ public class RedisWatcher {
 
 	@Scheduled(cron = "0/10 * * * * ?")
 	private void run() {
-		if (1 == type) {
-			md5Check();
-		} else if (0 == type) {
+		switch (type) {
+		case 0:
 			versionCheck();
+			break;
+		case 1:
+			md5Check();
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -71,13 +77,13 @@ public class RedisWatcher {
 	private void versionCheck() {
 		if (null != jedisCluster && null != key) {
 			logger.debug("redisWatch执行中...");
-			final String[] values = jedisCluster.get(key).split("\\,");
+			final String[] values = jedisCluster.get(key).split("(%@%)");
 			final int version = Integer.valueOf(values[0]);
 			final String resource = values[1];
-			/* 如果版本发生变化，则重新向ioc容器中注册相关bean实例 */
-			if (RedisWatcher.version != version) {
-				registerBean.register(resource);
-				RedisWatcher.version = version;
+			if (RedisWatcher.getVersion() != version) {
+				/* 如果版本发生变化，则重新向ioc容器中注册相关bean实例 */
+				registerBean.register(resource, resourceType);
+				RedisWatcher.setVersion(version);
 				logger.debug("resource version-->" + version);
 			}
 		}
@@ -95,12 +101,28 @@ public class RedisWatcher {
 			logger.debug("redisWatch执行中...");
 			final String value = jedisCluster.get(key);
 			final String md5Code = MD5Util.toMd5Code(value);
-			if (!md5Code.equals(RedisWatcher.md5Code)) {
+			if (!md5Code.equals(RedisWatcher.getMd5Code())) {
 				/* 如果版本发生变化，则重新向ioc容器中注册相关bean实例 */
-				registerBean.register(value);
-				RedisWatcher.md5Code = md5Code;
+				registerBean.register(value, resourceType);
+				RedisWatcher.setMd5Code(md5Code);
 				logger.debug("md5 code-->" + md5Code);
 			}
 		}
+	}
+
+	public static String getMd5Code() {
+		return md5Code;
+	}
+
+	public static void setMd5Code(String md5Code) {
+		RedisWatcher.md5Code = md5Code;
+	}
+
+	public static int getVersion() {
+		return version;
+	}
+
+	public static void setVersion(int version) {
+		RedisWatcher.version = version;
 	}
 }

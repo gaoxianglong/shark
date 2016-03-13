@@ -35,7 +35,10 @@ public interface RegisterBean extends ApplicationContextAware {
 	 * @param nodePathValue
 	 *            zookeeper注册中心的节点value
 	 * 
+	 * @param resourceType
+	 *            注册中心类型
+	 * 
 	 * @return void
 	 */
-	public void register(String nodePathValue);
+	public void register(String nodePathValue, String resourceType);
 }

@@ -68,7 +68,7 @@ public class ZookeeperWatcher implements Watcher {
 				break;
 			case NodeDataChanged:
 				String nodePathValue = new String(zk_client.getData(nodePath, false, null));
-				registerBean.register(nodePathValue);
+				registerBean.register(nodePathValue, "zookeeper");
 				logger.info(VALUE + "节点[" + event.getPath() + "]下的数据发生变化");
 				break;
 			case NodeChildrenChanged:

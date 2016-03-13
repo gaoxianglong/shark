@@ -59,7 +59,7 @@ public class redisSetData {
 			String value = "";
 			while (null != (value = reader.readLine()))
 				str.append(value);
-			jedis.set("shark-datasource", "2," + str.toString());
+			jedis.set("shark-datasource", "2%@%" + str.toString());
 			logger.info("insert success");
 		} catch (Exception e) {
 			logger.error("insert fail", e);

@@ -55,8 +55,9 @@ public class RedisConnectionManager {
 		this.jedisCluster = jedisCluster;
 		if (!(type >= 0 && type <= 1)) {
 			throw new ResourceException("redis配置中心客户端的检查配置变更参数type值仅限于0或者1");
-		} else
+		} else {
 			this.type = type;
+		}
 	}
 
 	/**
@@ -73,19 +74,26 @@ public class RedisConnectionManager {
 	 * 从配置中心拉取出配置信息
 	 * 
 	 * @author gaoxianglong
+	 * 
+	 * @return void
 	 */
 	public void getResource() {
 		String value = null;
-		if (1 == type) {
+		switch (type) {
+		case 0:
+			value = jedisCluster.get(key).split("(%@%)")[1];
+			break;
+		case 1:
 			value = jedisCluster.get(key);
-			RedisWatcher.md5Code = MD5Util.toMd5Code(value);
-		} else {
-			value = jedisCluster.get(key).split("\\,")[1];
+			RedisWatcher.setMd5Code(MD5Util.toMd5Code(value));
+			break;
+		default:
+			break;
 		}
 		if (null != value) {
 			redisWatcher.init(jedisCluster, key, type);
 			/* 向ioc容器中动态注册相关bean实例 */
-			registerBean.register(value);
+			registerBean.register(value, "redis");
 		}
 	}
 }

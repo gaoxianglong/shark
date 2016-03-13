@@ -50,11 +50,11 @@ public class RegisterDataSource implements RegisterBean {
 	}
 
 	@Override
-	public void register(String nodePathValue) {
+	public void register(String nodePathValue, String resourceType) {
 		final String tmpdir = System.getProperty("java.io.tmpdir") + "shark-info.xml";
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(tmpdir))) {
 			if (null != nodePathValue) {
-				logger.debug("从zookeeper配置中心中获取的配置信息存储位置-->" + tmpdir);
+				logger.debug("从" + resourceType + "配置中心中获取的配置信息存储位置-->" + tmpdir);
 				out.write(nodePathValue);
 				out.flush();
 				FileSystemResource resource = new FileSystemResource(tmpdir);
@@ -71,7 +71,7 @@ public class RegisterDataSource implements RegisterBean {
 				GetJdbcTemplate.setSharkJdbcTemplate((SharkJdbcTemplate) beanfactory.getBean("jdbcTemplate"));
 			}
 		} catch (Exception e) {
-			throw new ResourceException("zookeeper配置中心发生错误[" + e.toString() + "]");
+			throw new ResourceException(resourceType + "配置中心发生错误[" + e.toString() + "]");
 		}
 	}
 

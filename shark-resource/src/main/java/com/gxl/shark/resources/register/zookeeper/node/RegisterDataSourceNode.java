@@ -55,7 +55,7 @@ public class RegisterDataSourceNode implements RegisterNode {
 				if (null != zk_client.exists(nodePath, zookeeperWatcher))
 					nodePathValeu = new String(zk_client.getData(nodePath, false, null));
 				/* 动态向spring的ioc容器中注册相关bean */
-				registerBean.register(nodePathValeu);
+				registerBean.register(nodePathValeu, "zookeeper");
 			} catch (Exception e) {
 				throw new ResourceException("zookeeper配置中心发生错误[" + e.toString() + "]");
 			}
