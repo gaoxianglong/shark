@@ -30,6 +30,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.gxl.shark.core.shard.GetJdbcTemplate;
 import com.gxl.shark.core.shard.SharkJdbcTemplate;
 import com.gxl.shark.exception.ResourceException;
+import com.gxl.shark.util.TmpManager;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
@@ -51,7 +52,7 @@ public class RegisterDataSource implements RegisterBean {
 
 	@Override
 	public void register(String nodePathValue, String resourceType) {
-		final String tmpdir = System.getProperty("java.io.tmpdir") + "shark-info.xml";
+		final String tmpdir = TmpManager.createTmp();
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(tmpdir))) {
 			if (null != nodePathValue) {
 				logger.debug("从" + resourceType + "配置中心中获取的配置信息存储位置-->" + tmpdir);
@@ -72,6 +73,8 @@ public class RegisterDataSource implements RegisterBean {
 			}
 		} catch (Exception e) {
 			throw new ResourceException(resourceType + "配置中心发生错误[" + e.toString() + "]");
+		} finally {
+			TmpManager.deleteTmp(tmpdir);
 		}
 	}
 
