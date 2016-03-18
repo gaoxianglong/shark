@@ -18,6 +18,8 @@ package com.gxl.shark.util;
 import java.util.UUID;
 import org.junit.Test;
 
+import com.sharksharding.util.MD5Util;
+
 public class MD5UtilTest {
 	public @Test void testToMd5Code() {
 		final String value = UUID.randomUUID().toString();

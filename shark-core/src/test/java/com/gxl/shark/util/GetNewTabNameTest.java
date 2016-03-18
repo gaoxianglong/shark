@@ -17,7 +17,7 @@ package com.gxl.shark.util;
 
 import org.junit.Test;
 
-import com.gxl.shark.util.ResolveTableName;
+import com.sharksharding.util.ResolveTableName;
 
 public class GetNewTabNameTest {
 	public @Test void getNewTabName() {

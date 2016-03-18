@@ -17,7 +17,7 @@ package com.gxl.shark.util;
 
 import org.junit.Test;
 
-import com.gxl.shark.util.ResolveRWIndex;
+import com.sharksharding.util.ResolveRWIndex;
 
 import junit.framework.Assert;
 

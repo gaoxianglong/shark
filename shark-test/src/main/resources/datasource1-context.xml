@@ -7,13 +7,13 @@
 			http://www.springframework.org/schema/context 
 			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	<!-- 加载本地数据源配置信息 -->
-	<context:property-placeholder location="classpath*:c3p0-jdbc.properties" />
+	<context:property-placeholder location="classpath*:properties/c3p0-jdbc.properties" />
 	<!-- 定义数据源信息 -->
 	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
-		<property name="jdbcUrl" value="jdbc:mysql://ip:3306/test" />
+		<property name="jdbcUrl" value="jdbc:mysql://120.24.75.22:3306/test" />
 		<property name="driverClass" value="${driverClass}" />
 		<property name="initialPoolSize" value="${initialPoolSize}" />
 		<property name="minPoolSize" value="${minPoolSize}" />
@@ -25,7 +25,7 @@
 		destroy-method="close">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
-		<property name="jdbcUrl" value="jdbc:mysql://ip:3306/test" />
+		<property name="jdbcUrl" value="jdbc:mysql://120.24.75.22:3306/test" />
 		<property name="driverClass" value="${driverClass}" />
 		<property name="initialPoolSize" value="${initialPoolSize}" />
 		<property name="minPoolSize" value="${minPoolSize}" />

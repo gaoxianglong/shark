@@ -17,7 +17,7 @@ package com.gxl.shark.shard;
 
 import org.junit.Test;
 
-import com.gxl.shark.core.shard.RuleImpl;
+import com.sharksharding.core.shard.RuleImpl;
 
 import junit.framework.Assert;
 

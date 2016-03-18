@@ -20,6 +20,8 @@ import java.io.FileWriter;
 import java.util.UUID;
 import org.junit.Test;
 
+import com.sharksharding.util.TmpManager;
+
 public class TmpManagerTest {
 	public @Test void testTmp() {
 		final String tmpdir = TmpManager.createTmp();

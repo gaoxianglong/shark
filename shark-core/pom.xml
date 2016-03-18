@@ -2,10 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.gxl</groupId>
+		<groupId>com.sharksharding</groupId>
 		<artifactId>shark</artifactId>
 		<version>1.3.7</version>
 	</parent>
+	<groupId>com.sharksharding</groupId>
 	<artifactId>shark-core</artifactId>
 	<name>shard-core</name>
 	<url>http://maven.apache.org</url>

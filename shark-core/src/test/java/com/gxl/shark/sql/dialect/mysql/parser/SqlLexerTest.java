@@ -17,8 +17,8 @@ package com.gxl.shark.sql.dialect.mysql.parser;
 
 import org.junit.Test;
 
-import com.gxl.shark.sql.parser.Lexer;
-import com.gxl.shark.sql.parser.Token;
+import com.sharksharding.sql.parser.Lexer;
+import com.sharksharding.sql.parser.Token;
 
 public class SqlLexerTest {
 

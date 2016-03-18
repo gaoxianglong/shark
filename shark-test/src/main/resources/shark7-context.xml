@@ -13,12 +13,12 @@
 			http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 	<task:annotation-driven />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<context:component-scan base-package="com.gxl.shark">
+	<context:component-scan base-package="com.sharksharding">
 		<context:include-filter type="annotation"
 			expression="org.aspectj.lang.annotation.Aspect" />
 	</context:component-scan>
-	<context:property-placeholder location="classpath*:*.properties" />
-	<bean class="com.gxl.shark.resources.conn.RedisConnectionManager"
+	<context:property-placeholder location="classpath*:properties/*.properties" />
+	<bean class="com.sharksharding.resources.conn.RedisConnectionManager"
 		init-method="init">
 		<constructor-arg index="0" value="${redis.key}" />
 		<constructor-arg index="1" ref="jedisCluster" />
@@ -45,12 +45,12 @@
 		</constructor-arg>
 		<constructor-arg index="1" ref="jedisPoolConfig" />
 	</bean>
-	<bean id="jdbcTemplate" class="com.gxl.shark.core.shard.SharkJdbcTemplate">
+	<bean id="jdbcTemplate" class="com.sharksharding.core.shard.SharkJdbcTemplate">
 		<constructor-arg name="isShard" value="true" />
 		<property name="dataSource" ref="dataSourceGroup" />
 	</bean>
 	<!-- 引用一个缺省数据源 -->
-	<bean id="dataSourceGroup" class="com.gxl.shark.core.config.SharkDatasourceGroup">
+	<bean id="dataSourceGroup" class="com.sharksharding.core.config.SharkDatasourceGroup">
 		<property name="targetDataSources">
 			<map key-type="java.lang.Integer">
 				<entry key="0" value-ref="dataSource1" />

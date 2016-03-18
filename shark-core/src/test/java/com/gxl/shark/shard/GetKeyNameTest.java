@@ -18,7 +18,7 @@ package com.gxl.shark.shard;
 import java.util.List;
 import org.junit.Test;
 
-import com.gxl.shark.util.GetKeyName;
+import com.sharksharding.util.GetKeyName;
 
 import junit.framework.Assert;
 

@@ -21,7 +21,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.gxl.shark.util.ResolveRoute;
+import com.sharksharding.util.ResolveRoute;
 
 import junit.framework.Assert;
 

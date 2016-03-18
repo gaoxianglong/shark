@@ -20,15 +20,15 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.gxl.shark.sql.ast.SQLStatement;
-import com.gxl.shark.sql.ast.statement.SQLDeleteStatement;
-import com.gxl.shark.sql.ast.statement.SQLInsertStatement;
-import com.gxl.shark.sql.ast.statement.SQLSelect;
-import com.gxl.shark.sql.ast.statement.SQLSelectQueryBlock;
-import com.gxl.shark.sql.ast.statement.SQLSelectStatement;
-import com.gxl.shark.sql.ast.statement.SQLUpdateStatement;
-import com.gxl.shark.sql.dialect.mysql.parser.MySqlStatementParser;
-import com.gxl.shark.sql.parser.SQLStatementParser;
+import com.sharksharding.sql.ast.SQLStatement;
+import com.sharksharding.sql.ast.statement.SQLDeleteStatement;
+import com.sharksharding.sql.ast.statement.SQLInsertStatement;
+import com.sharksharding.sql.ast.statement.SQLSelect;
+import com.sharksharding.sql.ast.statement.SQLSelectQueryBlock;
+import com.sharksharding.sql.ast.statement.SQLSelectStatement;
+import com.sharksharding.sql.ast.statement.SQLUpdateStatement;
+import com.sharksharding.sql.dialect.mysql.parser.MySqlStatementParser;
+import com.sharksharding.sql.parser.SQLStatementParser;
 
 /**
  * 利用Druid的SqlParser解析出数据库表名和路由条件

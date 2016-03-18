@@ -17,7 +17,7 @@ package com.gxl.shark.sql.dialect.mysql.parser;
 
 import org.junit.Test;
 
-import com.gxl.shark.util.ResolveTableName;
+import com.sharksharding.util.ResolveTableName;
 
 import junit.framework.Assert;
 

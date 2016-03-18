@@ -17,12 +17,12 @@
 			expression="org.aspectj.lang.annotation.Aspect" />
 	</context:component-scan>
 	<!-- 读写分离配置 -->
-	<bean id="jdbcTemplate" class="com.gxl.shark.core.shard.SharkJdbcTemplate">
+	<bean id="jdbcTemplate" class="com.sharksharding.core.shard.SharkJdbcTemplate">
 		<constructor-arg name="isShard" value="false" />
 		<property name="dataSource" ref="dataSourceGroup" />
 		<property name="wr_index" value="r1w0" />
 	</bean>
-	<bean id="dataSourceGroup" class="com.gxl.shark.core.config.SharkDatasourceGroup">
+	<bean id="dataSourceGroup" class="com.sharksharding.core.config.SharkDatasourceGroup">
 		<property name="targetDataSources">
 			<map key-type="java.lang.Integer">
 				<entry key="0" value-ref="dataSource1" />
@@ -30,7 +30,7 @@
 			</map>
 		</property>
 	</bean>
-	<bean class="com.gxl.shark.sql.PropertyPlaceholderConfigurer">
-		<constructor-arg name="path" value="classpath:sql.properties" />
+	<bean class="com.sharksharding.sql.PropertyPlaceholderConfigurer">
+		<constructor-arg name="path" value="classpath:properties/sql.properties" />
 	</bean>
 </beans>
