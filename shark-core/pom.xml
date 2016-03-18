@@ -25,6 +25,7 @@
 		<fastjson-version>1.2.5</fastjson-version>
 		<junit-version>4.7</junit-version>
 		<javadoc-version>2.6.1</javadoc-version>
+		<zookeeper-version>3.4.6</zookeeper-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
@@ -179,6 +180,11 @@
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>${zookeeper-version}</version>
 		</dependency>
 	</dependencies>
 	<build>

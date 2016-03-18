@@ -22,13 +22,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.gxl.shark.util.sequence.DbConnectionManager;
 import com.gxl.shark.util.sequence.SequenceIDManger;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:shark1-context.xml")
 public class CRUDTest {
-	@Resource(name="userDaoImpl")
+	@Resource(name = "userDaoImpl")
 	private UserDao userDao;
 	@Resource
 	private User user;
@@ -43,7 +42,7 @@ public class CRUDTest {
 	 * @author gaoxianglong
 	 */
 	public @BeforeClass static void init() {
-		DbConnectionManager.init(NAME, PWD, URL, DRIVER);
+		SequenceIDManger.init(NAME, PWD, URL, DRIVER);
 	}
 
 	/**

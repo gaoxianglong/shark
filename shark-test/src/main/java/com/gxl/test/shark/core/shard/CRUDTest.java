@@ -26,8 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.gxl.shark.util.sequence.DbConnectionManager;
 import com.gxl.shark.util.sequence.SequenceIDManger;
 import com.gxl.test.shark.User;
 import com.gxl.test.shark.UserDao;
@@ -62,7 +60,7 @@ public class CRUDTest {
 	 * @author gaoxianglong
 	 */
 	public @BeforeClass static void init() {
-		DbConnectionManager.init(NAME, PWD, URL, DRIVER);
+		SequenceIDManger.init(NAME, PWD, URL, DRIVER);
 	}
 
 	/**

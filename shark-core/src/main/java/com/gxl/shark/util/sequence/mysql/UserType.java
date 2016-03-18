@@ -1,4 +1,4 @@
-package com.gxl.shark.util.sequence;
+package com.gxl.shark.util.sequence.mysql;
 /*
  * Copyright 2015-2101 gaoxianglong
  *

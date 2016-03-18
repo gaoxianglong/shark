@@ -15,6 +15,9 @@
  */
 package com.gxl.shark.util.sequence;
 
+import com.gxl.shark.util.sequence.mysql.DbConnectionManager;
+import com.gxl.shark.util.sequence.zookeeper.ZookeeperConnectionManager;
+
 /**
  * sequenceID的Manager类
  * 
@@ -23,26 +26,91 @@ package com.gxl.shark.util.sequence;
  * @version 1.3.5
  */
 public class SequenceIDManger {
+	/**
+	 * 初始化mysql数据源信息
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param name
+	 *            数据库用户帐号
+	 * 
+	 * @param password
+	 *            数据库用户密码
+	 * 
+	 * @param jdbcUrl
+	 *            数据源地址
+	 * 
+	 * @param driverClass
+	 *            数据库驱动
+	 * 
+	 * @return void
+	 */
+	public static void init(String name, String password, String jdbcUrl, String driverClass) {
+		DbConnectionManager.init(name, password, jdbcUrl, driverClass);
+	}
+
+	/**
+	 * 初始化zookeeper数据源信息
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param zk_address
+	 *            zookeeper地址
+	 * 
+	 * @param zk_session_timeout
+	 *            会话超时时间
+	 * 
+	 * @return void
+	 */
+	public static void init(String zk_address, int zk_session_timeout) {
+		ZookeeperConnectionManager.init(zk_address, zk_session_timeout);
+	}
+
 	private SequenceIDManger() {
 	}
 
 	/**
-	 * 获取sequenceID
+	 * 获取mysql生成的sequenceID,其最大值不可超过二进制位数64位long类型的最大值9223372036854775807
 	 * 
 	 * @author gaoxianglong
 	 * 
 	 * @param idcNum
-	 *            IDC机房编码, 用于区分不同的IDC机房,1-3位长度
+	 *            IDC机房编码, 用于区分不同的IDC机房,1-3位数字长度
 	 * 
-	 * @param userType
-	 *            类别,1-2位长度
+	 * @param type
+	 *            业务类别,1-2位数字长度
 	 * 
 	 * @param memData
 	 *            内存占位数量
 	 * 
-	 * @return long 返回生成的17-19位sequenceId
+	 * @return long 返回生成的17-19位数字长度的sequenceId
 	 */
 	public static long getSequenceId(int idcNum, int type, long memData) {
-		return CreateSequenceIdService.createSequenceIdService().getSequenceId(idcNum, type, memData);
+		return com.gxl.shark.util.sequence.mysql.CreateSequenceIdService.createSequenceIdService().getSequenceId(idcNum,
+				type, memData);
+	}
+
+	/**
+	 * 获取zookeeper生成的sequenceID,其最大值不可超过二进制位数64位long类型的最大值9223372036854775807
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param rootPath
+	 *            znode根目录
+	 * 
+	 * @param idcNum
+	 *            IDC机房编码, 用于区分不同的IDC机房,1-3位数字长度
+	 * 
+	 * @param type
+	 *            业务类别,1-6位数字长度
+	 * 
+	 * @param memData
+	 *            内存占位数量
+	 * 
+	 * @return long 返回生成的12-19位数字长度的sequenceId
+	 */
+	public static long getSequenceId(String rootPath, int idcNum, int type) {
+		return com.gxl.shark.util.sequence.zookeeper.CreateSequenceIdService.createSequenceIdService()
+				.getSequenceId(rootPath, idcNum, type);
 	}
 }

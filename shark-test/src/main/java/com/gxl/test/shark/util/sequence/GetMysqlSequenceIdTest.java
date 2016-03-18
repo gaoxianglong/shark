@@ -22,19 +22,17 @@ import java.util.concurrent.CountDownLatch;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.gxl.shark.util.sequence.DbConnectionManager;
 import com.gxl.shark.util.sequence.SequenceIDManger;
 
 /**
- * 获取SequenceId测试类
+ * 获取mysql生成的SequenceId测试类
  * 
  * @author gaoxianglong
  */
-public class SequenceIdTest {
+public class GetMysqlSequenceIdTest {
 	final static String NAME = "root";
-	final static String PWD = "88888888";
-	final static String URL = "jdbc:mysql://ip:3306/um_id";
+	final static String PWD = "cndmss_db";
+	final static String URL = "jdbc:mysql://120.24.75.22:3306/id";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 
 	/**
@@ -43,7 +41,7 @@ public class SequenceIdTest {
 	 * @author gaoxianglong
 	 */
 	public @BeforeClass static void init() {
-		DbConnectionManager.init(NAME, PWD, URL, DRIVER);
+		SequenceIDManger.init(NAME, PWD, URL, DRIVER);
 	}
 
 	/**

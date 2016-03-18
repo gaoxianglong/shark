@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gxl.shark.util.sequence;
+package com.gxl.shark.util.sequence.mysql;
 
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 import com.gxl.shark.exception.SequenceIdException;
 
 /**
- * 生成SequenceId接口
+ * 生成SequenceId
  * 
  * @author JohnGao
  * 
@@ -37,7 +37,7 @@ public class CreateSequenceIdService {
 	private long memData;
 	private static final Logger log = LoggerFactory.getLogger(CreateSequenceIdService.class);
 
-	protected static CreateSequenceIdService createSequenceIdService() {
+	public static CreateSequenceIdService createSequenceIdService() {
 		return createSequenceId;
 	}
 
@@ -60,15 +60,15 @@ public class CreateSequenceIdService {
 	 * @param idcNum
 	 *            IDC机房编码, 用于区分不同的IDC机房
 	 * 
-	 * @param userType
-	 *            类别
+	 * @param type
+	 *            业务类别
 	 * 
 	 * @param memData
 	 *            内存占位数量
 	 * 
 	 * @return long 根据指定规则生成的sequenceId
 	 */
-	protected long getSequenceId(int idcNum, int type, long memData) {
+	public long getSequenceId(int idcNum, int type, long memData) {
 		long sequenceId = -1;
 		/* 避免在并发环境下出现线程安全，则添加同步对象锁 */
 		synchronized (this) {
@@ -182,16 +182,16 @@ public class CreateSequenceIdService {
 	 *            唯一序列
 	 * 
 	 * @param idcNum
-	 *            IDC机房编码, 用于区分不同的IDC机房,3位长度
+	 *            IDC机房编码, 用于区分不同的IDC机房,1-3位数字长度
 	 * 
-	 * @param userType
-	 *            类别,2位长度
+	 * @param type
+	 *            业务类别,1-2位数字长度
 	 * 
-	 * @return long 返回生成的17-19位sequenceId
+	 * @return long 返回生成的17-19位数字长度的sequenceId
 	 */
 	protected long createSequenceId(Long id, int idcNum, int type) {
 		long sequenceId = -1;
-		/* IDC机房编码不能够超过3位,type不能够超过2位 */
+		/* IDC机房编码不能够超过3位数字长度,type不能够超过2位数字长度 */
 		if (idcNum < 1000 && type < 100) {
 			/* 清空历史数据 */
 			if (null != str)
@@ -204,7 +204,7 @@ public class CreateSequenceIdService {
 			str.insert(getIndex(idcNum), type < 10 ? "0" + type : type);
 			sequenceId = Long.parseLong(str.toString());
 		} else {
-			throw new SequenceIdException("IDC机房编码不能够超过3位长度,type不能够超过2位长度...");
+			throw new SequenceIdException("IDC机房编码不能够超过3位数字长度,type不能够超过2位数字长度");
 		}
 		return sequenceId;
 	}
