@@ -17,7 +17,6 @@ package com.sharksharding.resources.register.bean;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -27,8 +26,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
-import com.alibaba.druid.pool.DruidDataSource;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.sharksharding.core.shard.GetJdbcTemplate;
 import com.sharksharding.core.shard.SharkJdbcTemplate;
 import com.sharksharding.exception.ResourceException;
@@ -93,19 +90,22 @@ public class RegisterDataSource implements RegisterBean {
 	 * 
 	 * @return void
 	 */
-	@SuppressWarnings("unused")
-	@Deprecated
-	private void close(int connPoolType, DefaultListableBeanFactory beanfactory, int num) {
-		final String beanName = "dataSource" + num;
-		if (beanfactory.isBeanNameInUse(beanName)) {
-			if (0 == connPoolType) {
-				ComboPooledDataSource dataSource = (ComboPooledDataSource) beanfactory.getBean(beanName);
-				dataSource.close();
-			} else {
-				DruidDataSource dataSource = (DruidDataSource) beanfactory.getBean(beanName);
-				dataSource.close();
-			}
-			logger.debug("关闭dataSource" + num + "所持有的数据库连接");
-		}
-	}
+	// @SuppressWarnings("unused")
+	// @Deprecated
+	// private void close(int connPoolType, DefaultListableBeanFactory
+	// beanfactory, int num) {
+	// final String beanName = "dataSource" + num;
+	// if (beanfactory.isBeanNameInUse(beanName)) {
+	// if (0 == connPoolType) {
+	// ComboPooledDataSource dataSource = (ComboPooledDataSource)
+	// beanfactory.getBean(beanName);
+	// dataSource.close();
+	// } else {
+	// DruidDataSource dataSource = (DruidDataSource)
+	// beanfactory.getBean(beanName);
+	// dataSource.close();
+	// }
+	// logger.debug("关闭dataSource" + num + "所持有的数据库连接");
+	// }
+	// }
 }
