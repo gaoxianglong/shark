@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<!-- 加载本地数据源配置信息 -->
+	<context:property-placeholder location="classpath*:properties/c3p0-jdbc.properties" />
+	<!-- 定义数据源信息 -->
+	<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="user" value="${name}" />
+		<property name="password" value="${password}" />
+		<property name="jdbcUrl" value="jdbc:mysql://120.24.75.22:3306/test" />
+		<property name="driverClass" value="${driverClass}" />
+		<property name="initialPoolSize" value="${initialPoolSize}" />
+		<property name="minPoolSize" value="${minPoolSize}" />
+		<property name="maxPoolSize" value="${maxPoolSize}" />
+		<property name="maxStatements" value="${maxStatements}" />
+		<property name="maxIdleTime" value="${maxIdleTime}" />
+	</bean>
+	<bean id="dataSource2" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="user" value="${name}" />
+		<property name="password" value="${password}" />
+		<property name="jdbcUrl" value="jdbc:mysql://120.24.75.22:3306/test" />
+		<property name="driverClass" value="${driverClass}" />
+		<property name="initialPoolSize" value="${initialPoolSize}" />
+		<property name="minPoolSize" value="${minPoolSize}" />
+		<property name="maxPoolSize" value="${maxPoolSize}" />
+		<property name="maxStatements" value="${maxStatements}" />
+		<property name="maxIdleTime" value="${maxIdleTime}" />
+	</bean>
+</beans>
