@@ -116,7 +116,7 @@ public abstract class ResolveRoute {
 		boolean result = true;
 		if (!rules.contains(firstParam)) {
 			result = false;
-			throw new ShardException("kratos无法找到分库分表条件,Sql-->" + sql);
+			throw new ShardException("shark无法找到分库分表条件,Sql-->" + sql);
 		}
 		return result;
 	}

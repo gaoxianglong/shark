@@ -49,8 +49,8 @@ public abstract class GetIndexData {
 		jsonObj.put("sharkVersion", "1.3.8");
 		jsonObj.put("osName", System.getProperty("os.name"));
 		jsonObj.put("javaVersion", System.getProperty("java.version"));
-		jsonObj.put("jvmName", System.getProperty("java.vm.name"));
-		jsonObj.put("javaPath", System.getProperty("java.home"));
+		jsonObj.put("JvmName", System.getProperty("java.vm.name"));
+		jsonObj.put("JavaPath", System.getProperty("java.home"));
 		String shardType = null;
 		if (jdbcTemplate.getIsShard()) {
 			if (jdbcTemplate.getShardMode()) {

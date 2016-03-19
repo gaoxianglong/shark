@@ -33,7 +33,7 @@
 	1.3.9
 【功能改动】
 	a、调整目录结构，删除src/main/resource，将web.http.resources目录下的html移至src/main/java;
-	b、修复GetIndexData类中的输出页面的json值bug;
+	b、修复GetIndexData类中的输出页面得json值bug;
 	c、将ResolveRoute类中包含的kratos替换为shark;
 【发布日期】
 	2016-03-20
