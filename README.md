@@ -1,7 +1,7 @@
 ![](http://dl.iteye.com/upload/picture/pic/135281/e0f25517-ae0c-3af9-a910-b8c05b4436ff.jpg)
 ## Shark简介 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) [![Join the chat at https://gitter.im/gaoxianglong/shark](https://badges.gitter.im/gaoxianglong/shark.svg)](https://gitter.im/gaoxianglong/shark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub release](https://img.shields.io/github/release/gaoxianglong/shark.svg)](https://github.com/gaoxianglong/shark/releases) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.sharksharding/shark/badge.svg)](http://search.maven.org/#artifactdetails%7Ccom.sharksharding%7Cshark%7C1.3.8%7Cjar/)
 
-轻量级Mysql分库分表(Sharding)中间件，丰富的Sharding算法支持(2类4种分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。Shark站在巨人的肩膀上(SpringJdbc、Druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
+轻量级mysql分库分表(sharding)中间件，丰富的sharding算法支持(2类4种分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
 
 - [常见问题](https://github.com/gaoxianglong/shark/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)<br>
 - [中文手册](https://github.com/gaoxianglong/shark/wiki)<br>
@@ -15,16 +15,16 @@
 - master/slave一主一从读写分离；<br>
 - sql独立配置，与逻辑代码解耦；<br>
 - 单线程读重试(取决于的数据库连接池是否支持)；<br>
-- 单独且友好支持Mysql数据库；<br>
+- 完美支持mysql数据库；<br>
 - 非Proxy架构，与应用集成，应用直连数据库，降低外围系统依赖所带来的宕机风险；<br>
-- 使用简单，侵入性低，站在巨人的肩膀上，依赖于SpringJdbc、Druid；<br>
-- 基于淘宝Druid的SqlParser完成Sql解析任务，解析性能高效、稳定；<br>
+- 使用简单，侵入性低，站在巨人的肩膀上，依赖于springjdbc、druid；<br>
+- 基于淘宝druid的sqlparser完成sql解析任务，解析性能高效、稳定；<br>
 - 分库分表路由算法支持2类4种分片模式，库内分片/一库一片；<br>
-- 提供自动生成全局唯一的sequenceId的API支持；<br>
+- 提供自动生成全局唯一的sequenceid的API支持；<br>
 - 支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
 - 提供自动生成配置文件的支持，降低配置出错率；<br>
 - 提供内置验证页面，方便开发、测试以及运维对执行后的sql进行验证；<br>
-- 专注于Sharding领域，无需兼容通用性，因此核心代码量少、易读易维护；<br>
+- 专注于sharding领域，无需兼容通用性，因此核心代码量少、易读易维护；<br>
 
 ----------
 
