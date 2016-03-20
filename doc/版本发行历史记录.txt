@@ -37,6 +37,7 @@
 		移至src/main/java,修复加载html文件失败bug;
 	b、修复GetIndexData类中的输出页面的json值bug;
 	c、将ResolveRoute类中包含的kratos替换为shark;
+	d、新增RedisResourceTest、zkResourceTest测试用例;
 【发布日期】
-	2016-03-20
+	未发版
 #################################################################################
