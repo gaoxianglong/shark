@@ -1,4 +1,4 @@
-package com.test.sharksharding.use.resource;
+//package com.test.sharksharding.use.resource;
 ///*
 // * Copyright 2015-2101 gaoxianglong
 // *
@@ -14,16 +14,12 @@ package com.test.sharksharding.use.resource;
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-//package com.test.sharksharding.resource;
 //
 //import java.util.Scanner;
-//import java.util.UUID;
-//
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.springframework.test.context.ContextConfiguration;
 //import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//
 //import com.sharksharding.core.shard.GetJdbcTemplate;
 //import com.sharksharding.core.shard.SharkJdbcTemplate;
 //
@@ -36,8 +32,8 @@ package com.test.sharksharding.use.resource;
 ///* 基于zookeeper的配置中心 */
 //// @ContextConfiguration(locations = "classpath*:shark6-context.xml")
 ///* 基于redis的配置中心 */
-//@ContextConfiguration(locations = "classpath*:shark6-context.xml")
-//public class ResourceTest {
+//@ContextConfiguration(locations = "classpath*:shark7-context.xml")
+//public class RedisResourceTest {
 //	public @Test void testInsert() {
 //		while (true) {
 //			Scanner scan = new Scanner(System.in);

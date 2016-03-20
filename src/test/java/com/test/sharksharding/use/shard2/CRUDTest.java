@@ -72,7 +72,7 @@
 //		try {
 //			long sequenceID = SequenceIDManger.getSequenceId(1, 1, 5000);
 //			System.out.println("sequenceID->" + sequenceID);
-//			email.setEmail("gaoxianglong131412@test.com");
+//			email.setEmail("gaoxianglong123541@test.com");
 //			email.setEmail_hash(Math.abs(email.getEmail().hashCode()));
 //			email.setUserinfo_Id(sequenceID);
 //			emailDao.insertEmail(email);
@@ -93,7 +93,7 @@
 //	 */
 //	public @Test void testQuery() {
 //		try {
-//			email.setEmail("gaoxianglong131412@test.com");
+//			email.setEmail("gaoxianglong123541@test.com");
 //			email.setEmail_hash(Math.abs(email.getEmail().hashCode()));
 //			List<Email> emails = emailDao.queryEmailbyId(email);
 //			if (!emails.isEmpty()) {
