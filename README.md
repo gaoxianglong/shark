@@ -48,6 +48,11 @@
 
 ----------
 
+## Shark典型案例
+![](http://dl.iteye.com/upload/picture/pic/135357/01760d0f-d0ff-3606-ac9c-1d99f94f0e30.jpg)
+
+----------
+
 ## 学习 & 联系我们
 - 项目主页：https://github.com/gaoxianglong/shark
 - wiki：https://github.com/gaoxianglong/shark/wiki
@@ -55,10 +60,5 @@
 - ![](http://dl.iteye.com/upload/picture/pic/134683/97e5d3af-cb7b-3115-97c1-230cbf6ad081.png): QQ Group:150445731
 - blog：http://gao-xianglong.iteye.com
 - email：gao_xianglong@sharksharding.com
-
-----------
-
-## Shark典型案例
-![](http://dl.iteye.com/upload/picture/pic/135355/d3ccd47d-b781-3494-ae4c-be94cfd71809.jpg)
 
 ----------
