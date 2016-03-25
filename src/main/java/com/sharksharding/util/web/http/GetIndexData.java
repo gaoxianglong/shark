@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.alibaba.fastjson.JSONObject;
 import com.sharksharding.core.shard.SharkJdbcTemplate;
+import com.sharksharding.util.LoadVersion;
 
 /**
  * 获取index首页数据
@@ -46,7 +47,7 @@ public abstract class GetIndexData {
 	 */
 	protected static String getData(SharkJdbcTemplate jdbcTemplate) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sharkVersion", "1.4.0");
+		jsonObj.put("sharkVersion", LoadVersion.getVersion());
 		jsonObj.put("osName", System.getProperty("os.name"));
 		jsonObj.put("javaVersion", System.getProperty("java.version"));
 		jsonObj.put("JvmName", System.getProperty("java.vm.name"));

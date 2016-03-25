@@ -50,6 +50,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.sharksharding.util.ConfigValidate;
 import com.sharksharding.util.LoadSharkLogo;
+import com.sharksharding.util.LoadVersion;
 
 /**
  * shark的 JdbcTemplate,扩展自org.springframework.jdbc.core.JdbcTemplate
@@ -89,7 +90,8 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 		sharkInfo.setDbRuleArray(this.getDbRuleArray());
 		sharkInfo.setTbRuleArray(this.getTbRuleArray());
 		sharkInfo.setTbSuffix(this.getTbSuffix());
-		final String sharkinfo = LoadSharkLogo.load().replaceFirst("\\[shark_version\\]", "[1.4.0]")
+		final String sharkinfo = LoadSharkLogo.load()
+				.replaceFirst("\\[shark_version\\]", "[" + LoadVersion.getVersion() + "]")
 				.replaceAll("\\[wr_index\\]", "[" + wr_index + "]").replaceAll("\\[is_shard\\]", "[" + isShard + "]")
 				.replaceAll("\\[shard_mode\\]", "[" + shardMode + "]")
 				.replaceAll("\\[consistent\\]", "[" + consistent + "]")
@@ -623,26 +625,6 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 
 		return super.update(sql, args);
 	}
-
-	// /**
-	// * 除了此方法外,其余的update方法都由 SwitchDataSourceAop动态对数据源进行切换
-	// *
-	// * @author gaoxianglong
-	// *
-	// * @param sql
-	// * 执行之前的sql语句
-	// *
-	// * @param args
-	// * 参数集合
-	// *
-	// * @throws DataAccessException
-	// *
-	// * @return int 执行结果
-	// */
-	// public int haha(String sql, Object... args) throws DataAccessException {
-	// //String newSql = handSwitchDataSource.executeQuery(sql);
-	// return super.update(sql, args);
-	// }
 
 	@Override
 	public int[] batchUpdate(String sql, BatchPreparedStatementSetter pss) throws DataAccessException {
