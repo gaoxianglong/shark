@@ -1,7 +1,7 @@
 ![](http://dl.iteye.com/upload/picture/pic/135281/e0f25517-ae0c-3af9-a910-b8c05b4436ff.jpg)
 ## Shark简介 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) [![Join the chat at https://gitter.im/gaoxianglong/shark](https://badges.gitter.im/gaoxianglong/shark.svg)](https://gitter.im/gaoxianglong/shark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub release](https://img.shields.io/github/release/gaoxianglong/shark.svg)](https://github.com/gaoxianglong/shark/releases) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.sharksharding/shark/badge.svg)](http://search.maven.org/#artifactdetails%7Ccom.sharksharding%7Cshark%7C1.3.8%7Cjar/)
 
-轻量级分布式mysql分库分表(sharding)中间件，丰富的sharding算法支持(2类4种分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
+轻量级的分布式mysql分库分表(sharding)中间件，丰富的sharding算法支持(2类4种分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
 
 - [使用指南](https://github.com/gaoxianglong/shark/wiki/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)<br>
 - [常见问题](https://github.com/gaoxianglong/shark/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)<br>
