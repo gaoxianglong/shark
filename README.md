@@ -57,3 +57,8 @@
 - email：gao_xianglong@sharksharding.com
 
 ----------
+
+## Shark典型案例
+![](http://dl.iteye.com/upload/picture/pic/135355/d3ccd47d-b781-3494-ae4c-be94cfd71809.jpg)
+
+----------
