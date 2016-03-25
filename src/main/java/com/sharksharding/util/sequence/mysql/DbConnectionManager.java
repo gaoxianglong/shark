@@ -17,8 +17,7 @@ package com.sharksharding.util.sequence.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
-import com.sharksharding.exception.DbConnectionException;
+import com.sharksharding.exception.ConnectionException;
 
 /**
  * 数据源链接管理
@@ -65,17 +64,17 @@ public class DbConnectionManager {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @exception ClassNotFoundException
+	 * @throws ConnectionException
 	 * 
 	 * @return Connection 数据库会话链接
 	 */
-	public static Connection getConn() {
+	public static Connection getConn() throws ConnectionException {
 		Connection conn = null;
 		try {
 			Class.forName(getDriverClass());
 			conn = DriverManager.getConnection(getJdbcUrl(), getName(), getPassword());
 		} catch (Exception e) {
-			throw new DbConnectionException("与数据库链接发生异常[" + e.toString() + "]");
+			throw new ConnectionException(e.toString());
 		}
 		return conn;
 	}

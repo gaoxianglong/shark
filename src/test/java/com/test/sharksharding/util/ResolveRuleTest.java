@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.sharksharding.util.ResolveRule;
+import com.sharksharding.core.shard.ResolveRule;
 
 import junit.framework.Assert;
 

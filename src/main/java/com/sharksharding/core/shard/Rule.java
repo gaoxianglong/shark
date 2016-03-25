@@ -28,6 +28,9 @@ public interface Rule {
 	 * 
 	 * @author gaoxianglong
 	 * 
+	 * @param shardMode
+	 *            分表模式
+	 * 
 	 * @param routeValue
 	 *            路由条件
 	 * 
@@ -39,4 +42,6 @@ public interface Rule {
 	 * @return int 库索引/表索引
 	 */
 	public int getIndex(long routeValue, String ruleArray);
+	
+	public void setShardMode(boolean shardMode);
 }

@@ -16,7 +16,7 @@
 package com.sharksharding.core.shard;
 
 /**
- * 从zookeeper配置中心读取到相关配置后,
+ * 从zookeeper、redis等配置中心读取到相关配置后,
  * 从此类中获取SharkJdbcTemplate实例,避免watcher监听到事件后重新注册相关bean时,应用持有的还是之前引用
  * 
  * @author gaoxianglong

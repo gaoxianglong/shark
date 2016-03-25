@@ -20,9 +20,12 @@ import javax.annotation.Resource;
 import org.apache.zookeeper.ZooKeeper;
 import org.springframework.stereotype.Component;
 
+import com.sharksharding.exception.ConnectionException;
 import com.sharksharding.exception.ResourceException;
+import com.sharksharding.factory.ZookeeperWatcherFactory;
 import com.sharksharding.resources.conn.DataSourceBean;
 import com.sharksharding.resources.register.bean.RegisterBean;
+import com.sharksharding.resources.register.bean.RegisterDataSource;
 import com.sharksharding.resources.watcher.ZookeeperWatcher;
 
 /**
@@ -32,13 +35,12 @@ import com.sharksharding.resources.watcher.ZookeeperWatcher;
  * 
  * @version 1.3.7
  */
-@Component
 public class RegisterDataSourceNode implements RegisterNode {
-	@Resource
 	private ZookeeperWatcher zookeeperWatcher;
 
-	@Resource(name = "registerDataSource")
-	private RegisterBean registerBean;
+	public RegisterDataSourceNode() {
+		zookeeperWatcher = ZookeeperWatcherFactory.getZookeeperWatcher();
+	}
 
 	@Override
 	public void register(ZooKeeper zk_client, DataSourceBean dataSourceBean) {
@@ -55,9 +57,9 @@ public class RegisterDataSourceNode implements RegisterNode {
 				if (null != zk_client.exists(nodePath, zookeeperWatcher))
 					nodePathValeu = new String(zk_client.getData(nodePath, false, null));
 				/* 动态向spring的ioc容器中注册相关bean */
-				registerBean.register(nodePathValeu, "zookeeper");
+				RegisterDataSource.register(nodePathValeu, "zookeeper");
 			} catch (Exception e) {
-				throw new ResourceException("zookeeper配置中心发生错误[" + e.toString() + "]");
+				throw new ConnectionException(e.toString());
 			}
 		}
 	}

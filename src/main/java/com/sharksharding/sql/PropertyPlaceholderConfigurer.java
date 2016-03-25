@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,9 +69,9 @@ public class PropertyPlaceholderConfigurer {
 				} else {
 					properties.load(in);
 				}
-				logger.info("成功加载sql配置文件...");
+				logger.info("load sql file success");
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				throw new com.sharksharding.exception.FileNotFoundException(e.toString());
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {

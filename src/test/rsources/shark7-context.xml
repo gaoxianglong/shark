@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+			http://www.springframework.org/schema/task 
+			http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+	<task:annotation-driven />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<context:component-scan base-package="com.sharksharding">
+		<context:include-filter type="annotation"
+			expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
+	<context:property-placeholder location="classpath*:properties/*.properties" />
+	<bean class="com.sharksharding.resources.register.bean.RegisterDataSource" />
+	<bean id="redisWatcher" class="com.sharksharding.resources.watcher.RedisWatcher" />
+	<bean class="com.sharksharding.resources.conn.RedisConnectionManager"
+		init-method="init">
+		<constructor-arg index="0" value="${redis.key}" />
+		<constructor-arg index="1" ref="jedisCluster" />
+		<!-- 0使用版本号比对,1使用MD5校验,缺省为0 -->
+		<constructor-arg index="2" value="1" />
+		<property name="redisWatcher" ref="redisWatcher" />
+	</bean>
+	<!-- 配置redis连接池 -->
+	<bean id="jedisPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+		<property name="maxTotal" value="${redis.pool.maxTotal}" />
+		<property name="minIdle" value="${redis.pool.minIdle}" />
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="maxWaitMillis" value="${redis.pool.maxWait}" />
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+		<property name="testOnReturn" value="${redis.pool.testOnReturn}" />
+	</bean>
+	<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
+		<constructor-arg index="0">
+			<list>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg index="0" value="${redis.host}" />
+					<constructor-arg index="1" value="${redis.port}" />
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg index="1" ref="jedisPoolConfig" />
+	</bean>
+</beans>

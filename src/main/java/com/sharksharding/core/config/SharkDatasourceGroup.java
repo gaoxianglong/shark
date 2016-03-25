@@ -15,10 +15,10 @@
  */
 package com.sharksharding.core.config;
 
-import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import com.sharksharding.factory.DataSourceHolderFactory;
 
 /**
  * shark数据源路由实现，持有多数据源
@@ -31,12 +31,10 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  * @version 1.3.5
  */
 public class SharkDatasourceGroup extends AbstractRoutingDataSource implements DataSource {
-	private Logger logger = LoggerFactory.getLogger(SharkDatasourceGroup.class);
-	@Resource(name = "sharkDataSourceHolder")
 	private DataSourceHolder dataSourceHolder;
 
 	private SharkDatasourceGroup() {
-		logger.info("动态数据源已经初始化完成...");
+		dataSourceHolder = DataSourceHolderFactory.getDataSourceHolder();
 	}
 
 	@Override

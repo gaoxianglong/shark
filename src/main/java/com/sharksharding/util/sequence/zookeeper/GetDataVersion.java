@@ -19,7 +19,6 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
-
 import com.sharksharding.exception.ResourceException;
 
 /**
@@ -30,7 +29,7 @@ import com.sharksharding.exception.ResourceException;
  * @version 1.3.7
  */
 public class GetDataVersion {
-	protected static int getVersion(String rootPath, ZooKeeper zk_client, String nodePath) {
+	protected static int getVersion(String rootPath, ZooKeeper zk_client, String nodePath) throws ResourceException {
 		int version = -1;
 		if (null != zk_client && null != rootPath && null != nodePath) {
 			final String PATH = rootPath + nodePath;
@@ -45,7 +44,7 @@ public class GetDataVersion {
 				Stat stat = zk_client.setData(PATH, new byte[] {}, -1);
 				version = stat.getVersion();
 			} catch (Exception e) {
-				throw new ResourceException("zookeeper配置中心发生错误[" + e.toString() + "]");
+				throw new ResourceException("zookeeper error," + e.getMessage());
 			}
 		}
 		return version;

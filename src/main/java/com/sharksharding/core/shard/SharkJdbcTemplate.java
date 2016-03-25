@@ -1,11 +1,11 @@
 /*
- * Copyright 2015-2101 gaoxianglong
+ * Copyright 2015=2101 gaoxianglong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE=2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,17 +47,18 @@ import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Component;
+
+import com.sharksharding.util.ConfigValidate;
+import com.sharksharding.util.LoadSharkLogo;
 
 /**
- * shark的 JdbcTemplate，扩展自Spring JdbcTemplate
+ * shark的 JdbcTemplate,扩展自org.springframework.jdbc.core.JdbcTemplate
  * 
  * @author gaoxianglong
  * 
  * @version 1.3.5
  */
 public class SharkJdbcTemplate extends JdbcTemplate {
-	private Logger logger = LoggerFactory.getLogger(SharkJdbcTemplate.class);
 	/* master/slave读写的起始索引 */
 	private String wr_index = "r0w0";
 	/* 分库分表开关 */
@@ -72,16 +73,33 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 	private String tbRuleArray;
 	/* 分表后缀 */
 	private String tbSuffix = "_0000";
+	private SharkInfo sharkInfo;
+	private Logger logger = LoggerFactory.getLogger(SharkJdbcTemplate.class);
 
 	public SharkJdbcTemplate() {
+		sharkInfo = SharkInfo.getShardInfo();
 	}
 
-	public SharkJdbcTemplate(boolean isShard) {
-		logger.info("shark正在初始化...");
-		if (isShard) {
-			logger.info("shark的sharding开关已经打开...");
-		}
-		setIsShard(isShard);
+	public void init() {
+		logger.info("shark initializeing");
+		sharkInfo.setWr_index(this.getWr_index());
+		sharkInfo.setIsShard(this.isShard());
+		sharkInfo.setShardMode(this.isShardMode());
+		sharkInfo.setConsistent(this.isConsistent());
+		sharkInfo.setDbRuleArray(this.getDbRuleArray());
+		sharkInfo.setTbRuleArray(this.getTbRuleArray());
+		sharkInfo.setTbSuffix(this.getTbSuffix());
+		final String sharkinfo = LoadSharkLogo.load().replaceFirst("\\[shark_version\\]", "[1.4.0]")
+				.replaceAll("\\[wr_index\\]", "[" + wr_index + "]").replaceAll("\\[is_shard\\]", "[" + isShard + "]")
+				.replaceAll("\\[shard_mode\\]", "[" + shardMode + "]")
+				.replaceAll("\\[consistent\\]", "[" + consistent + "]")
+				.replaceAll("\\[db_rulearray\\]", "[" + dbRuleArray + "]")
+				.replaceAll("\\[tb_rulearray\\]", "[" + tbRuleArray + "]")
+				.replaceAll("\\[tb_suffix\\]", "[" + tbSuffix + "]");
+		logger.info("\n===============================shark config info===============================\n" + sharkinfo
+				+ "\n===============================================================================");
+		/* 进行配置合法性验证 */
+		new ConfigValidate(sharkInfo).validate();
 	}
 
 	public String getWr_index() {
@@ -92,23 +110,15 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 		this.wr_index = wr_index;
 	}
 
-	public String getTbSuffix() {
-		return tbSuffix;
+	public boolean isShard() {
+		return isShard;
 	}
 
-	public void setTbSuffix(String tbSuffix) {
-		this.tbSuffix = tbSuffix;
+	public void setIsShard(boolean isShard) {
+		this.isShard = isShard;
 	}
 
-	public boolean getConsistent() {
-		return consistent;
-	}
-
-	public void setConsistent(boolean consistent) {
-		this.consistent = consistent;
-	}
-
-	public boolean getShardMode() {
+	public boolean isShardMode() {
 		return shardMode;
 	}
 
@@ -116,12 +126,12 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 		this.shardMode = shardMode;
 	}
 
-	public boolean getIsShard() {
-		return isShard;
+	public boolean isConsistent() {
+		return consistent;
 	}
 
-	public void setIsShard(boolean isShard) {
-		this.isShard = isShard;
+	public void setConsistent(boolean consistent) {
+		this.consistent = consistent;
 	}
 
 	public String getDbRuleArray() {
@@ -144,6 +154,14 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 
 	public void setTbRuleArray(String tbRuleArray) {
 		this.tbRuleArray = tbRuleArray;
+	}
+
+	public String getTbSuffix() {
+		return tbSuffix;
+	}
+
+	public void setTbSuffix(String tbSuffix) {
+		this.tbSuffix = tbSuffix;
 	}
 
 	@Override

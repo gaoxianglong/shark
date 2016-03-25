@@ -1,0 +1,15 @@
+﻿#################################################################################
+【版本号】
+	1.4.0
+【功能改动】
+	a、shark整体项目重构;
+	b、降低与spring的整体依赖;
+	c、修复基于zookeeper、redis3cluster作为集中式配置中心的bug;
+	d、调整目录结构，删除src/main/resources，将web.http.resources目录下的html
+		移至src/main/java,修复加载html文件失败bug;
+	e、修复GetIndexData类中的输出页面的json值bug;
+	f、将ResolveRoute类中包含的kratos替换为shark;
+	g、新增部分测试用例;
+【发布日期】
+	未发版
+#################################################################################

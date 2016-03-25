@@ -17,9 +17,6 @@ package com.sharksharding.util.sequence.mysql;
 
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sharksharding.exception.SequenceIdException;
 
 /**
@@ -36,7 +33,6 @@ public class CreateSequenceIdService {
 	private ConcurrentHashMap<Integer, Long> useDataMap;
 	private ConcurrentHashMap<Integer, Integer> surplusDataMap;
 	private long memData;
-	private static final Logger log = LoggerFactory.getLogger(CreateSequenceIdService.class);
 
 	public static CreateSequenceIdService createSequenceIdService() {
 		return createSequenceId;
@@ -134,22 +130,23 @@ public class CreateSequenceIdService {
 						/* 根据指定规则创建唯一的SequenceId */
 						sequenceId = createSequenceId(useData - surplusData, idcNum, type);
 					}
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					try {
 						if (null != CreateSequenceIdDaoImpl.conn && !CreateSequenceIdDaoImpl.conn.isClosed()) {
 							CreateSequenceIdDaoImpl.conn.rollback();
 						}
 					} catch (SQLException e1) {
-						log.error("生成SequenceId回滚数据失败", e1);
+						e1.printStackTrace();
 					}
-					throw new SequenceIdException("生成sequenceId失败...");
+					e.printStackTrace();
+					throw new SequenceIdException("create sequenceid fail");
 				} finally {
 					try {
 						if (null != CreateSequenceIdDaoImpl.conn && !CreateSequenceIdDaoImpl.conn.isClosed()) {
 							CreateSequenceIdDaoImpl.conn.close();
 						}
 					} catch (SQLException e) {
-						log.error("生成SequenceId关闭连接失败", e);
+						e.printStackTrace();
 					}
 				}
 			}
@@ -162,16 +159,12 @@ public class CreateSequenceIdService {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @exception SQLException
+	 * @throws SQLException
 	 * 
 	 * @return void
 	 */
-	protected void transactionManager() {
-		try {
-			CreateSequenceIdDaoImpl.conn.commit();
-		} catch (SQLException e) {
-			log.error("生成SequenceId事物管理失败", e);
-		}
+	protected void transactionManager() throws SQLException {
+		CreateSequenceIdDaoImpl.conn.commit();
 	}
 
 	/**
@@ -205,7 +198,7 @@ public class CreateSequenceIdService {
 			str.insert(getIndex(idcNum), type < 10 ? "0" + type : type);
 			sequenceId = Long.parseLong(str.toString());
 		} else {
-			throw new SequenceIdException("IDC机房编码不能够超过3位数字长度,type不能够超过2位数字长度");
+			throw new SequenceIdException("idc length can not exceed 3,type length can not exceed 2");
 		}
 		return sequenceId;
 	}
@@ -215,11 +208,11 @@ public class CreateSequenceIdService {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @throws SQLException
+	 * @throws Exception
 	 * 
 	 * @return long 返回生成的当前占位数据
 	 */
-	protected long createUseData() throws SQLException {
+	protected long createUseData() throws Exception {
 		/* 获取当前最大的占位数据 */
 		Long useData = createUserNameDao.queryMaxUseData();
 		return null != useData ? useData += memData : memData;

@@ -25,6 +25,7 @@ import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sharksharding.exception.ConnectionException;
 import com.sharksharding.exception.ResourceException;
 
 /**
@@ -44,40 +45,47 @@ public class ZookeeperConnectionManager {
 	/**
 	 * 初始化方法
 	 *
-	 * @author JohnGao
+	 * @author gaoxianglong
 	 */
 	public static void init(String zk_address, int zk_session_timeout) {
 		setZk_address(zk_address);
 		setZk_session_timeout(zk_session_timeout);
 		countDownLatch = new CountDownLatch(1);
-		connection();
+		try {
+			connection();
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * 连接zookeeper
 	 * 
-	 * @author JohnGao
+	 * @author gaoxianglong
+	 * 
+	 * @throws ConnectionException
+	 * 
+	 * @return void
 	 */
-	private static void connection() {
+	private static void connection() throws ConnectionException {
 		try {
 			zk_client = new ZooKeeper(zk_address, zk_session_timeout, new Watcher() {
 				@Override
 				public void process(WatchedEvent event) {
 					final KeeperState STATE = event.getState();
-					final String VALUE = "与zookeeper配置中心[" + zk_address + "]";
 					switch (STATE) {
 					case SyncConnected:
 						countDownLatch.countDown();
-						logger.info(VALUE + "建立会话");
+						logger.info("connection zookeeper success");
 						break;
 					case Disconnected:
-						logger.warn(VALUE + "断开会话");
+						logger.warn("zookeeper connection is disconnected");
 						break;
 					case Expired:
-						logger.error(VALUE + "建立的会话已经失效");
+						logger.error("zookeeper session expired");
 						break;
 					case AuthFailed:
-						logger.error(VALUE + "建立会话时ACL认证失败");
+						logger.error("authentication failure");
 					default:
 						break;
 					}
@@ -85,10 +93,8 @@ public class ZookeeperConnectionManager {
 			});
 			countDownLatch.await();
 			setZk_client(zk_client);
-		} catch (IOException e) {
-			throw new ResourceException("与zookeeper建立会话失败[" + e.toString() + "]");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (IOException | InterruptedException e) {
+			throw new ConnectionException(e.toString());
 		}
 	}
 

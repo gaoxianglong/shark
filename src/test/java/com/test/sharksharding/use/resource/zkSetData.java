@@ -33,8 +33,8 @@ import org.slf4j.LoggerFactory;
  * 
  * @version 1.3.7
  */
-public class zkSetData {
-	private Logger logger = LoggerFactory.getLogger(zkSetData.class);
+public class ZkSetData {
+	private Logger logger = LoggerFactory.getLogger(ZkSetData.class);
 
 	public @Test void testSetData() {
 		try (BufferedReader reader = new BufferedReader(new FileReader("c:/shark-datasource.xml"))) {
@@ -52,16 +52,16 @@ public class zkSetData {
 							switch (STATE) {
 							case SyncConnected:
 								countDownLatch.countDown();
-								logger.info("成功连接zookeeper服务器");
+								logger.info("connection zookeeper success");
 								break;
 							case Disconnected:
-								logger.warn("与zookeeper服务器断开连接");
+								logger.warn("zookeeper connection is disconnected");
 								break;
 							case Expired:
-								logger.error("session会话失效...");
+								logger.error("zookeeper session expired");
 								break;
 							case AuthFailed:
-								logger.error("ACL认证失败...");
+								logger.error("authentication failure");
 							default:
 								break;
 							}

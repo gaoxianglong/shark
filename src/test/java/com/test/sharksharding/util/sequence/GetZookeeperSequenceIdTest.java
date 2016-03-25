@@ -22,6 +22,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.sharksharding.exception.ResourceException;
 import com.sharksharding.util.sequence.SequenceIDManger;
 
 /**
@@ -49,7 +50,11 @@ public class GetZookeeperSequenceIdTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void getSequenceId() {
-		System.out.println(SequenceIDManger.getSequenceId(PATH, 1, 1));
+		try {
+			System.out.println(SequenceIDManger.getSequenceId(PATH, 1, 1));
+		} catch (ResourceException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -59,7 +64,11 @@ public class GetZookeeperSequenceIdTest {
 	 */
 	public @Test void getSequenceId2() {
 		for (int i = 0; i < 10; i++) {
-			System.out.println(SequenceIDManger.getSequenceId(PATH, 1, 1));
+			try {
+				System.out.println(SequenceIDManger.getSequenceId(PATH, 1, 1));
+			} catch (ResourceException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -76,7 +85,11 @@ public class GetZookeeperSequenceIdTest {
 		new Thread() {
 			public void run() {
 				for (int i = 0; i < size; i++) {
-					id1.add(SequenceIDManger.getSequenceId(PATH, 1, 1));
+					try {
+						id1.add(SequenceIDManger.getSequenceId(PATH, 1, 1));
+					} catch (ResourceException e) {
+						e.printStackTrace();
+					}
 				}
 				count.countDown();
 			}
@@ -84,7 +97,11 @@ public class GetZookeeperSequenceIdTest {
 		new Thread() {
 			public void run() {
 				for (int i = 0; i < size; i++) {
-					id2.add(SequenceIDManger.getSequenceId(PATH, 1, 1));
+					try {
+						id2.add(SequenceIDManger.getSequenceId(PATH, 1, 1));
+					} catch (ResourceException e) {
+						e.printStackTrace();
+					}
 				}
 				count.countDown();
 			}

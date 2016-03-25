@@ -16,7 +16,6 @@
 package com.sharksharding.util;
 
 import java.security.MessageDigest;
-
 import com.sharksharding.exception.UtilsRuntimeException;
 
 /**

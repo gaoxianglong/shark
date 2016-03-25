@@ -22,16 +22,20 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
 import java.util.Set;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import com.alibaba.fastjson.JSONObject;
 import com.sharksharding.core.shard.SharkJdbcTemplate;
+import com.sharksharding.exception.FileNotFoundException;
 
 /**
  * shark的sql执行视图控制器
@@ -151,7 +155,7 @@ public class QueryViewServlet extends HttpServlet {
 			value = new byte[reader.available()];
 			reader.read(value);
 		} catch (IOException e) {
-			logger.error("无法成功加载到shark相关的配置文件信息", e);
+			throw new FileNotFoundException("can not find config");
 		} finally {
 			if (null != reader) {
 				try {

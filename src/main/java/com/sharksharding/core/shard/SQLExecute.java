@@ -15,32 +15,31 @@
  */
 package com.sharksharding.core.shard;
 
-import javax.annotation.Resource;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.util.ResolveRWIndex;
+import com.sharksharding.core.config.DataSourceHolder;
+import com.sharksharding.factory.DataSourceHolderFactory;
+import com.sharksharding.factory.RouteFacadeFactory;
 
 /**
- * 在SQL执行之前进行数据路由
+ * 在sql执行之前进行数据路由
  * 
  * @author gaoxianglong
  * 
  * @version 1.3.5
  */
-@Component
 public class SQLExecute {
+	private SharkInfo sharkInfo;
+	private DataSourceHolder dataSourceHolder;
+	private Route route;
 	private static Logger logger = LoggerFactory.getLogger(SQLExecute.class);
 
-	@Resource
-	private SharkJdbcTemplate jdbcTemplate;
-	@Resource
-	private SetDataSource setDataSource;
-	@Resource(name = "dbRouteFacade")
-	private Route route;
+	public SQLExecute() {
+		sharkInfo = SharkInfo.getShardInfo();
+		dataSourceHolder = DataSourceHolderFactory.getDataSourceHolder();
+		route = RouteFacadeFactory.getRoute();
+	}
 
 	/**
 	 * 选择路由方式后,进行数据路由
@@ -58,7 +57,6 @@ public class SQLExecute {
 	 * @return Object
 	 */
 	protected Object execute(ProceedingJoinPoint proceedingJoinPoint, boolean indexType) {
-		long befor = System.currentTimeMillis();
 		Object obj = null;
 		if (null != proceedingJoinPoint) {
 			Object[] params = proceedingJoinPoint.getArgs();
@@ -71,24 +69,24 @@ public class SQLExecute {
 			 */
 			if (param instanceof String) {
 				String sql = param.toString();
-				logger.info("sharding之前的SQL-->" + sql);
-				if (jdbcTemplate.getIsShard()) {
-					if (jdbcTemplate.getShardMode()) {
+				logger.info("before sql-->" + sql);
+				/* 检查sharding开关是否打开 */
+				if (sharkInfo.getIsShard()) {
+					if (sharkInfo.getShardMode()) {
 						params = route.dbRouteByOne(sql, params, indexType);
 					} else {
 						params = route.dbRouteByMany(sql, params, indexType);
 					}
 					sql = params[0].toString();
-					logger.info("sharding之后的SQL-->" + sql);
 				} else {
 					/* 获取master/slave的数据源启始索引 */
-					final int INDEX = ResolveRWIndex.getIndex(jdbcTemplate.getWr_index(), indexType);
-					setDataSource.setIndex(INDEX);
+					final int index = ResolveIndex.getIndex(sharkInfo.getWr_index(), indexType);
+					SetDatasource.setIndex(index, dataSourceHolder);
 				}
+				logger.info("after sql-->" + sql);
 			}
 			try {
 				obj = proceedingJoinPoint.proceed(params);
-				logger.debug("执行耗时->" + (System.currentTimeMillis() - befor) + "ms");
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}

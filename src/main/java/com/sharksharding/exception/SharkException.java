@@ -16,14 +16,14 @@
 package com.sharksharding.exception;
 
 /**
- * kratos非运行时异常超类
+ * shark顶层异常超类
  * 
  * @author gaoxianglong
  * 
  * @version 1.3.5
  */
 public class SharkException extends Exception {
-	private static final long serialVersionUID = -6153893412860260199L;
+	private static final long serialVersionUID = -3575632318894603437L;
 
 	public SharkException(String str) {
 		super(str);

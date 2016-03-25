@@ -17,8 +17,6 @@ package com.sharksharding.core.shard;
 
 import java.util.List;
 
-import com.sharksharding.util.ResolveRule;
-
 /**
  * 路由规则接口实现
  * 
@@ -30,6 +28,10 @@ public abstract class RuleImpl implements Rule {
 	@Override
 	public int getIndex(long route, String ruleArray) {
 		return -1;
+	}
+
+	@Override
+	public void setShardMode(boolean shardMode) {
 	}
 
 	/**

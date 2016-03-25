@@ -17,6 +17,7 @@ package com.sharksharding.util.sequence.zookeeper;
 
 import org.apache.zookeeper.ZooKeeper;
 
+import com.sharksharding.exception.ResourceException;
 import com.sharksharding.exception.SequenceIdException;
 
 /**
@@ -56,9 +57,11 @@ public class CreateSequenceIdService {
 	 * @param type
 	 *            业务类别,1-6位数字长度
 	 * 
+	 * @throws ResourceException
+	 * 
 	 * @return long 返回生成的12-19位数字长度的sequenceId
 	 */
-	public long getSequenceId(String rootPath, int idcNum, int type) {
+	public long getSequenceId(String rootPath, int idcNum, int type) throws ResourceException {
 		long sequenceId = -1;
 		/* 避免在并发环境下出现线程安全，则添加排他锁 */
 		synchronized (this) {
@@ -70,7 +73,7 @@ public class CreateSequenceIdService {
 					if (null != str)
 						str.delete(0, str.length());
 					final String nodePath = "/" + String.valueOf(idcNum) + String.valueOf(type);
-					final int version = GetDataVersion.getVersion(rootPath, zk_client, nodePath);
+					int version = GetDataVersion.getVersion(rootPath, zk_client, nodePath);
 					if (-1 != version) {
 						/* 如果数据长度不足10位,高位补0 */
 						for (int i = 0; i < (10 - String.valueOf(version).length()); i++)
@@ -81,7 +84,7 @@ public class CreateSequenceIdService {
 					}
 				}
 			} else {
-				throw new SequenceIdException("IDC机房编码不能够超过3位数字长度,type不能够超过6位数字长度");
+				throw new SequenceIdException("idc length can not exceed 3,type length can not exceed 6");
 			}
 		}
 		return sequenceId;

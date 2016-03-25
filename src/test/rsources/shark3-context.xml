@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<import resource="datasource2-context.xml" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!-- 自动扫描 -->
+	<context:component-scan
+		base-package="com.sharksharding.core,com.test.sharksharding.use1">
+		<context:include-filter type="annotation"
+			expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
+	<!-- 非片名连续的库内分片配置 -->
+	<bean id="jdbcTemplate" class="com.sharksharding.core.shard.SharkJdbcTemplate"
+		init-method="init">
+		<property name="isShard" value="true" />
+		<property name="dataSource" ref="dataSourceGroup" />
+		<property name="wr_index" value="r0w0" />
+		<!-- 分片模式,false为库内分片模式,true为一库一表分片模式 -->
+		<property name="shardMode" value="false" />
+		<!-- 片名是否连续,true为片名连续,false为非片名连续 -->
+		<property name="consistent" value="false" />
+		<property name="dbRuleArray" value="#uid|email_hash# % 4 / 2" />
+		<property name="tbRuleArray" value="#uid|email_hash# % 4 % 2" />
+		<property name="tbSuffix" value="_0000" />
+	</bean>
+	<bean id="dataSourceGroup" class="com.sharksharding.core.config.SharkDatasourceGroup">
+		<property name="targetDataSources">
+			<map key-type="java.lang.Integer">
+				<entry key="0" value-ref="dataSource1" />
+				<entry key="1" value-ref="dataSource2" />
+			</map>
+		</property>
+	</bean>
+	<bean class="com.sharksharding.sql.PropertyPlaceholderConfigurer">
+		<constructor-arg name="path"
+			value="classpath:properties/sql.properties" />
+	</bean>
+</beans>

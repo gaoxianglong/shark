@@ -46,17 +46,17 @@ public abstract class GetIndexData {
 	 */
 	protected static String getData(SharkJdbcTemplate jdbcTemplate) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sharkVersion", "1.3.8");
+		jsonObj.put("sharkVersion", "1.4.0");
 		jsonObj.put("osName", System.getProperty("os.name"));
 		jsonObj.put("javaVersion", System.getProperty("java.version"));
 		jsonObj.put("JvmName", System.getProperty("java.vm.name"));
 		jsonObj.put("JavaPath", System.getProperty("java.home"));
 		String shardType = null;
-		if (jdbcTemplate.getIsShard()) {
-			if (jdbcTemplate.getShardMode()) {
-				shardType = jdbcTemplate.getConsistent() ? "片名连续的一库一片模式" : "非片名连续的一库一片模式";
+		if (jdbcTemplate.isShard()) {
+			if (jdbcTemplate.isShardMode()) {
+				shardType = jdbcTemplate.isConsistent() ? "片名连续的一库一片模式" : "非片名连续的一库一片模式";
 			} else {
-				shardType = jdbcTemplate.getConsistent() ? "片名连续的库内分片模式" : "非片名连续的库内分片模式";
+				shardType = jdbcTemplate.isConsistent() ? "片名连续的库内分片模式" : "非片名连续的库内分片模式";
 			}
 			jsonObj.put("shardType", shardType);
 			String dbKeyName = jdbcTemplate.getDbRuleArray().split("\\#")[1];

@@ -15,18 +15,17 @@
  */
 package com.sharksharding.resources.watcher;
 
-import javax.annotation.Resource;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
+import com.sharksharding.exception.ConnectionException;
 import com.sharksharding.exception.ResourceException;
 import com.sharksharding.resources.conn.DataSourceBean;
-import com.sharksharding.resources.register.bean.RegisterBean;
+import com.sharksharding.resources.register.bean.RegisterDataSource;
 
 /**
  * sharding、数据源相关的zookeeper节点watcher
@@ -35,10 +34,7 @@ import com.sharksharding.resources.register.bean.RegisterBean;
  * 
  * @version 1.3.7
  */
-@Component
 public class ZookeeperWatcher implements Watcher {
-	@Resource(name = "registerDataSource")
-	private RegisterBean registerBean;
 	private ZooKeeper zk_client;
 	private DataSourceBean dataSourceBean;
 	private String nodePath;
@@ -62,26 +58,23 @@ public class ZookeeperWatcher implements Watcher {
 			/* 重新注册节点 */
 			zk_client.exists(nodePath, this);
 			EventType eventType = event.getType();
-			final String VALUE = "zookeeper配置中心";
 			switch (eventType) {
 			case NodeCreated:
-				logger.info(VALUE + "节点[" + event.getPath() + "]被创建");
+				logger.info("create node-->" + event.getPath());
 				break;
 			case NodeDataChanged:
-				String nodePathValue = new String(zk_client.getData(nodePath, false, null));
-				registerBean.register(nodePathValue, "zookeeper");
-				logger.info(VALUE + "节点[" + event.getPath() + "]下的数据发生变化");
+				final String nodePathValue = new String(zk_client.getData(nodePath, false, null));
+				RegisterDataSource.register(nodePathValue, "zookeeper");
+				logger.info("change node data-->" + event.getPath());
 				break;
 			case NodeChildrenChanged:
-				logger.info(VALUE + "节点[" + event.getPath() + "]下的子节点发生变更");
 				break;
 			case NodeDeleted:
-				logger.info(VALUE + "节点[" + event.getPath() + "]被删除");
 			default:
 				break;
 			}
 		} catch (Exception e) {
-			throw new ResourceException("zookeeper配置中心发生错误[" + e.toString() + "]");
+			throw new ConnectionException(e.toString());
 		}
 	}
 }

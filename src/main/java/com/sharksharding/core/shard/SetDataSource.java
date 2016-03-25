@@ -15,11 +15,8 @@
  */
 package com.sharksharding.core.shard;
 
-import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
 import com.sharksharding.core.config.DataSourceHolder;
 
 /**
@@ -29,12 +26,8 @@ import com.sharksharding.core.config.DataSourceHolder;
  * 
  * @version 1.3.5
  */
-@Component
-public class SetDataSource {
-	private Logger logger = LoggerFactory.getLogger(SetDataSource.class);
-
-	@Resource(name = "sharkDataSourceHolder")
-	private DataSourceHolder dataSourceHolder;
+public class SetDatasource {
+	private static Logger logger = LoggerFactory.getLogger(SetDatasource.class);
 
 	/**
 	 * 切换数据源路由索引
@@ -44,10 +37,13 @@ public class SetDataSource {
 	 * @param index
 	 *            数据库索引
 	 * 
+	 * @param dataSourceHolder
+	 *            数据源路由选择器接口
+	 * 
 	 * @return void
 	 */
-	protected void setIndex(int index) {
+	protected static void setIndex(int index, DataSourceHolder dataSourceHolder) {
 		dataSourceHolder.setIndex(index);
-		logger.info("shark成功切换数据源,当前所持有的数据源索引为-->" + index);
+		logger.info("set datasource success,dbindex-->" + index);
 	}
 }

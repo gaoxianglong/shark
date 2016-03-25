@@ -16,16 +16,16 @@
 package com.sharksharding.exception;
 
 /**
- * Sql解析异常
+ * sql解析异常
  * 
  * @author gaoxianglong
  * 
- * @version 1.3.5
+ * @version 1.4.0
  */
 public class SqlParserException extends SharkRuntimeException {
-	private static final long serialVersionUID = -3043258158329700507L;
+	private static final long serialVersionUID = -3671607184598679934L;
 
-	public SqlParserException(String str){
+	public SqlParserException(String str) {
 		super(str);
 	}
 }

@@ -15,10 +15,6 @@
  */
 package com.sharksharding.core.shard;
 
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.exception.ShardException;
-
 /**
  * 解析分表规则后计算分表索引
  * 
@@ -26,7 +22,6 @@ import com.sharksharding.exception.ShardException;
  * 
  * @version 1.3.5
  */
-@Component
 public class TabRule extends RuleImpl {
 	@Override
 	public int getIndex(long routeValue, String ruleArray) {

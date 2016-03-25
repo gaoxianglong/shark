@@ -33,7 +33,7 @@ public interface CreateSequenceIdDao {
 	 * @param type
 	 *            类别
 	 * 
-	 * @throws SQLException
+	 * @throws Exception
 	 * 
 	 * @return Long 返回当前占位数量
 	 */
@@ -50,7 +50,7 @@ public interface CreateSequenceIdDao {
 	 * @param useData
 	 *            申请占位数量
 	 * 
-	 * @throws SQLException
+	 * @throws Exception
 	 * 
 	 * @return void
 	 */
@@ -61,7 +61,7 @@ public interface CreateSequenceIdDao {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @throws SQLException
+	 * @throws Exception
 	 * 
 	 * @return Long 返回最大的占位边界
 	 */
@@ -78,7 +78,7 @@ public interface CreateSequenceIdDao {
 	 * @param useData
 	 *            申请占位数量
 	 * 
-	 * @throws SQLException
+	 * @throws Exception
 	 * 
 	 * @return void
 	 */

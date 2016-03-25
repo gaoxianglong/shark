@@ -15,11 +15,6 @@
  */
 package com.sharksharding.core.shard;
 
-import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.core.shard.SharkJdbcTemplate;
-
 /**
  * 解析分库规则后计算数据源索引
  * 
@@ -27,19 +22,22 @@ import com.sharksharding.core.shard.SharkJdbcTemplate;
  * 
  * @version 1.3.5
  */
-@Component
 public class DbRule extends RuleImpl {
-	@Resource
-	private SharkJdbcTemplate jdbcTemplate;
+	private boolean shardMode;
 
 	@Override
 	public int getIndex(long routeValue, String ruleArray) {
 		int dbIndex = -1;
-		if (jdbcTemplate.getShardMode()) {
-			dbIndex = getDbIndexbyOne(routeValue, ruleArray);
+		if (shardMode) {
+			dbIndex = super.getDbIndexbyOne(routeValue, ruleArray);
 		} else {
-			dbIndex = getDbIndex(routeValue, ruleArray);
+			dbIndex = super.getDbIndex(routeValue, ruleArray);
 		}
 		return dbIndex;
+	}
+
+	@Override
+	public void setShardMode(boolean shardMode) {
+		this.shardMode = shardMode;
 	}
 }

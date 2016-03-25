@@ -15,17 +15,12 @@
  */
 package com.sharksharding.resources.watcher;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import com.sharksharding.exception.ResourceException;
-import com.sharksharding.resources.register.bean.RegisterBean;
+import com.sharksharding.resources.register.bean.RegisterDataSource;
 import com.sharksharding.util.MD5Util;
-
 import redis.clients.jedis.JedisCluster;
 
 /**
@@ -35,10 +30,7 @@ import redis.clients.jedis.JedisCluster;
  * 
  * @version 1.3.7
  */
-@Component
 public class RedisWatcher {
-	@Resource
-	private RegisterBean registerBean;
 	private JedisCluster jedisCluster;
 	private String key;
 	private int type;
@@ -76,13 +68,13 @@ public class RedisWatcher {
 	 */
 	private void versionCheck() {
 		if (null != jedisCluster && null != key) {
-			logger.debug("redisWatch执行中...");
+			logger.debug("redisWatch run...");
 			final String[] values = jedisCluster.get(key).split("(%@%)");
 			final int version = Integer.valueOf(values[0]);
 			final String resource = values[1];
 			if (RedisWatcher.getVersion() != version) {
 				/* 如果版本发生变化，则重新向ioc容器中注册相关bean实例 */
-				registerBean.register(resource, resourceType);
+				RegisterDataSource.register(resource, resourceType);
 				RedisWatcher.setVersion(version);
 				logger.debug("resource version-->" + version);
 			}
@@ -103,7 +95,7 @@ public class RedisWatcher {
 			final String md5Code = MD5Util.toMd5Code(value);
 			if (!md5Code.equals(RedisWatcher.getMd5Code())) {
 				/* 如果版本发生变化，则重新向ioc容器中注册相关bean实例 */
-				registerBean.register(value, resourceType);
+				RegisterDataSource.register(value, resourceType);
 				RedisWatcher.setMd5Code(md5Code);
 				logger.debug("md5 code-->" + md5Code);
 			}

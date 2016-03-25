@@ -34,9 +34,9 @@ import redis.clients.jedis.JedisCluster;
  * 
  * @version 1.3.7
  */
-public class redisSetData {
+public class RedisSetData {
 	private static JedisCluster jedis;
-	private Logger logger = LoggerFactory.getLogger(redisSetData.class);
+	private Logger logger = LoggerFactory.getLogger(RedisSetData.class);
 
 	public @BeforeClass static void init() {
 		GenericObjectPoolConfig cfg = new GenericObjectPoolConfig();

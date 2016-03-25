@@ -15,11 +15,10 @@
  */
 package com.sharksharding.core.shard;
 
-import javax.annotation.Resource;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import com.sharksharding.factory.SQLExecuteFactory;
 
 /**
  * 数据路由入口
@@ -30,11 +29,15 @@ import org.aspectj.lang.annotation.Aspect;
  */
 @Aspect
 public class SQLExecuterInterceptor {
-	@Resource
 	private SQLExecute sqlExecute;
 
+	private SQLExecuterInterceptor() {
+		sqlExecute = SQLExecuteFactory.getSQLExecute();
+	}
+
 	/**
-	 * 基于SpringAop的方式对org.springframework.jdbc.core.JdbcTemplate下所有的update()方法进行拦截
+	 * 基于SpringAop的方式对org.springframework.jdbc.core.JdbcTemplate下所有的update()
+	 * 方法进行拦截
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -51,7 +54,8 @@ public class SQLExecuterInterceptor {
 	}
 
 	/**
-	 * 基于SpringAop的方式对org.springframework.jdbc.core.JdbcTemplate下所有的query()方法进行拦截
+	 * 基于SpringAop的方式对org.springframework.jdbc.core.JdbcTemplate下所有的query()
+	 * 方法进行拦截
 	 * 
 	 * @author gaoxianglong
 	 * 

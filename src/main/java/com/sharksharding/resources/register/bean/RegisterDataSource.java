@@ -17,6 +17,7 @@ package com.sharksharding.resources.register.bean;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -25,10 +26,10 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.stereotype.Component;
+
 import com.sharksharding.core.shard.GetJdbcTemplate;
 import com.sharksharding.core.shard.SharkJdbcTemplate;
-import com.sharksharding.exception.ResourceException;
+import com.sharksharding.exception.RegisterBeanException;
 import com.sharksharding.util.TmpManager;
 
 /**
@@ -38,22 +39,34 @@ import com.sharksharding.util.TmpManager;
  * 
  * @version 1.3.7
  */
-@Component
 public class RegisterDataSource implements RegisterBean {
-	public ApplicationContext aContext;
-	private Logger logger = LoggerFactory.getLogger(RegisterDataSource.class);
+	private static ApplicationContext aContext;
+	private static Logger logger = LoggerFactory.getLogger(RegisterDataSource.class);
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.aContext = applicationContext;
 	}
 
-	@Override
-	public void register(String nodePathValue, String resourceType) {
+	/**
+	 * 注册bean
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param nodePathValue
+	 *            zookeeper注册中心的节点value
+	 * 
+	 * @param resourceType
+	 *            注册中心类型
+	 * 
+	 * @return void
+	 */
+	public static void register(String nodePathValue, String resourceType) {
+		if (null == aContext)
+			return;
 		final String tmpdir = TmpManager.createTmp();
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(tmpdir))) {
 			if (null != nodePathValue) {
-				logger.debug("从" + resourceType + "配置中心中获取的配置信息存储位置-->" + tmpdir);
 				out.write(nodePathValue);
 				out.flush();
 				FileSystemResource resource = new FileSystemResource(tmpdir);
@@ -62,7 +75,7 @@ public class RegisterDataSource implements RegisterBean {
 				/* 验证jdbcTemplate是否已经存在 */
 				if (beanfactory.isBeanNameInUse("jdbcTemplate")) {
 					beanfactory.removeBeanDefinition("jdbcTemplate");
-					logger.debug("从ioc容器中删除bean-->jdbcTemplate");
+					logger.debug("delete bean-->jdbcTemplate");
 				}
 				/* 将配置中心获取的配置信息与当前上下文中的ioc容器进行合并 */
 				new XmlBeanDefinitionReader(beanfactory).loadBeanDefinitions(resource);
@@ -70,7 +83,7 @@ public class RegisterDataSource implements RegisterBean {
 				GetJdbcTemplate.setSharkJdbcTemplate((SharkJdbcTemplate) beanfactory.getBean("jdbcTemplate"));
 			}
 		} catch (Exception e) {
-			throw new ResourceException(resourceType + "配置中心发生错误[" + e.toString() + "]");
+			throw new RegisterBeanException(e.toString());
 		} finally {
 			TmpManager.deleteTmp(tmpdir);
 		}

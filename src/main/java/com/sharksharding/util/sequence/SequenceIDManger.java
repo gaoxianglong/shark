@@ -15,6 +15,7 @@
  */
 package com.sharksharding.util.sequence;
 
+import com.sharksharding.exception.ResourceException;
 import com.sharksharding.util.sequence.mysql.DbConnectionManager;
 import com.sharksharding.util.sequence.zookeeper.ZookeeperConnectionManager;
 
@@ -86,8 +87,8 @@ public class SequenceIDManger {
 	 * @return long 返回生成的17-19位数字长度的sequenceId
 	 */
 	public static long getSequenceId(int idcNum, int type, long memData) {
-		return com.sharksharding.util.sequence.mysql.CreateSequenceIdService.createSequenceIdService().getSequenceId(idcNum,
-				type, memData);
+		return com.sharksharding.util.sequence.mysql.CreateSequenceIdService.createSequenceIdService()
+				.getSequenceId(idcNum, type, memData);
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class SequenceIDManger {
 	 * 
 	 * @return long 返回生成的12-19位数字长度的sequenceId
 	 */
-	public static long getSequenceId(String rootPath, int idcNum, int type) {
+	public static long getSequenceId(String rootPath, int idcNum, int type) throws ResourceException {
 		return com.sharksharding.util.sequence.zookeeper.CreateSequenceIdService.createSequenceIdService()
 				.getSequenceId(rootPath, idcNum, type);
 	}

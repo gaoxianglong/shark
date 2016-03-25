@@ -16,14 +16,14 @@
 package com.sharksharding.exception;
 
 /**
- * kratos的utils运行时异常超类
+ * 工具类异常信息
  * 
  * @author gaoxianglong
  * 
- * @version 1.3.5
+ * @version 1.3.8
  */
-public class UtilsRuntimeException extends RuntimeException {
-	private static final long serialVersionUID = 454913616783864156L;
+public class UtilsRuntimeException extends SharkRuntimeException {
+	private static final long serialVersionUID = 6348430020433825158L;
 
 	public UtilsRuntimeException(String str) {
 		super(str);

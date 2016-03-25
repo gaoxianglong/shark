@@ -15,13 +15,10 @@
  */
 package com.sharksharding.resources.conn;
 
-import javax.annotation.Resource;
-
-import com.sharksharding.exception.ResourceException;
-import com.sharksharding.resources.register.bean.RegisterBean;
+import com.sharksharding.exception.ValidateException;
+import com.sharksharding.resources.register.bean.RegisterDataSource;
 import com.sharksharding.resources.watcher.RedisWatcher;
 import com.sharksharding.util.MD5Util;
-
 import redis.clients.jedis.JedisCluster;
 
 /**
@@ -32,11 +29,16 @@ import redis.clients.jedis.JedisCluster;
  * @version 1.3.7
  */
 public class RedisConnectionManager {
-	@Resource(name = "registerDataSource")
-	private RegisterBean registerBean;
-
-	@Resource
 	private RedisWatcher redisWatcher;
+
+	public RedisWatcher getRedisWatcher() {
+		return redisWatcher;
+	}
+
+	public void setRedisWatcher(RedisWatcher redisWatcher) {
+		this.redisWatcher = redisWatcher;
+	}
+
 	private String key;
 	/* 0使用版本号比对,1使用MD5校验 */
 	private static int type = 0;
@@ -54,7 +56,7 @@ public class RedisConnectionManager {
 		this.key = key;
 		this.jedisCluster = jedisCluster;
 		if (!(type >= 0 && type <= 1)) {
-			throw new ResourceException("redis配置中心客户端的检查配置变更参数type值仅限于0或者1");
+			throw new ValidateException("type configuration error");
 		} else {
 			this.type = type;
 		}
@@ -93,7 +95,7 @@ public class RedisConnectionManager {
 		if (null != value) {
 			redisWatcher.init(jedisCluster, key, type);
 			/* 向ioc容器中动态注册相关bean实例 */
-			registerBean.register(value, "redis");
+			RegisterDataSource.register(value, "redis");
 		}
 	}
 }

@@ -15,10 +15,8 @@
  */
 package com.sharksharding.core.shard;
 
-import com.sharksharding.exception.ShardException;
-
 /**
- * 路由模式接口
+ * 数据路由模式接口
  * 
  * @author gaoxianglong
  * 
@@ -26,7 +24,7 @@ import com.sharksharding.exception.ShardException;
  */
 public interface Route {
 	/**
-	 * 一库一片模式
+	 * 一库一片路由模式
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -37,16 +35,14 @@ public interface Route {
 	 *            委托对象的方法入参
 	 * 
 	 * @param indexType
-	 *            true为master启始索引，false为slave启始索引
-	 * 
-	 * @exception ShardException
+	 *            true为master启始索引,false为slave启始索引
 	 * 
 	 * @return Object[] 重写后的委托对象的上下文信息
 	 */
 	public Object[] dbRouteByOne(String sql, Object[] params, boolean indexType);
 
 	/**
-	 * 库内分片模式
+	 * 库内分片路由模式
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -57,9 +53,7 @@ public interface Route {
 	 *            委托对象的方法入参
 	 * 
 	 * @param indexType
-	 *            true为master启始索引，false为slave启始索引
-	 * 
-	 * @exception ShardException
+	 *            true为master启始索引,false为slave启始索引
 	 * 
 	 * @return Object[] 重写后的委托对象的上下文信息
 	 */

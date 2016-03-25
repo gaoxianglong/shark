@@ -15,8 +15,6 @@
  */
 package com.sharksharding.core.config;
 
-import org.springframework.stereotype.Component;
-
 /**
  * master数据源路由选择器
  * 
@@ -24,7 +22,6 @@ import org.springframework.stereotype.Component;
  * 
  * @version 1.3.5
  */
-@Component
 public class SharkDataSourceHolder implements DataSourceHolder {
 	private static final ThreadLocal<Integer> holder;
 

@@ -18,10 +18,11 @@ package com.sharksharding.util.xml;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-import com.sharksharding.util.ResolveDbName;
+import com.sharksharding.core.shard.ResolveDbname;
 
 /**
  * 生成基于druid的数据源配置文件
@@ -98,7 +99,7 @@ public class CreateDruidXml implements CreateDSXml {
 				password.setValue(this.getPassword());
 				Property url = new Property();
 				url.setName("url");
-				url.setValue(ResolveDbName.getNewDbName(i, this.getUrl(), tbSuffix));
+				url.setValue(ResolveDbname.getNewDbName(i, this.getUrl(), tbSuffix));
 				Property initialSize = new Property();
 				initialSize.setName("initialSize");
 				initialSize.setValue(this.getInitialSize());
