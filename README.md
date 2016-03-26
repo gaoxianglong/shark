@@ -3,7 +3,7 @@
 
 轻量级的分布式mysql分库分表中间件，丰富的sharding算法支持(2类4种分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
 
-- [使用指南](https://github.com/gaoxianglong/shark/wiki/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)<br>
+- [用户指南](https://github.com/gaoxianglong/shark/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97)<br>
 - [常见问题](https://github.com/gaoxianglong/shark/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)<br>
 - [基准测试](https://github.com/gaoxianglong/shark/wiki/shark-benchmark-result)<br>
 
