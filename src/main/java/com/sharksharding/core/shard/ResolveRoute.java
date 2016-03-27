@@ -95,7 +95,7 @@ public final class ResolveRoute {
 	}
 
 	/**
-	 * 检测sql语句中的第一个字段是否是分库分表条件字段
+	 * 检测sql语句中的第一个字段是否是shardkey
 	 *
 	 * @author gaoxianglong
 	 * 
@@ -115,7 +115,7 @@ public final class ResolveRoute {
 		boolean result = true;
 		if (!rules.contains(firstParam)) {
 			result = false;
-			throw new SqlParserException("can not find shard key,sql-->" + sql);
+			throw new SqlParserException("can not find shardkey,sql-->" + sql);
 		}
 		return result;
 	}
