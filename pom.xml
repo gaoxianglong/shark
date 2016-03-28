@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sharksharding</groupId>
 	<artifactId>shark</artifactId>
-	<version>1.4.0</version>
+	<version>1.4.0-RELEASE</version>
 	<packaging>jar</packaging>
 	<name>shark</name>
 	<url>http://maven.apache.org</url>
