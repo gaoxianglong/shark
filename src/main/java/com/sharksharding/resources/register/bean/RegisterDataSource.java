@@ -65,6 +65,7 @@ public class RegisterDataSource implements RegisterBean {
 		if (null == aContext)
 			return;
 		final String tmpdir = TmpManager.createTmp();
+		logger.debug("tmpdir-->" + tmpdir);
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(tmpdir))) {
 			if (null != nodePathValue) {
 				out.write(nodePathValue);
@@ -85,7 +86,7 @@ public class RegisterDataSource implements RegisterBean {
 		} catch (Exception e) {
 			throw new RegisterBeanException(e.toString());
 		} finally {
-			TmpManager.deleteTmp(tmpdir);
+			// TmpManager.deleteTmp(tmpdir);
 		}
 	}
 

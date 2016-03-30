@@ -12,6 +12,10 @@
 	<logger name="com.test.sharksharding">
 		<level value="info" />
 	</logger>
+	<!-- 避免druid抛出javax.management.InstanceAlreadyExistsException异常 -->
+	<logger name="com.alibaba.druid.stat.DruidDataSourceStatManager">
+		<level value="off" />
+	</logger>
 	<logger name="com.sharksharding">
 		<level value="info" />
 	</logger>
