@@ -47,6 +47,11 @@
 
 ----------
 
+## Shark总体架构
+![](http://dl.iteye.com/upload/picture/pic/135419/0cd4a534-3a06-36d7-9aef-9ce469d3e8c7.jpg) <br>
+
+----------
+
 ## Shark与其它Sharding中间件功能对比
 | 功能                 | Cobar         | Mycat         | TDDL        | Shark          |
 | ------------- |:-------------:| -------------:| -----------:|---------------:|
