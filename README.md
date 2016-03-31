@@ -1,7 +1,7 @@
 ![](http://dl.iteye.com/upload/picture/pic/135281/e0f25517-ae0c-3af9-a910-b8c05b4436ff.jpg)
 ## Shark简介 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) [![Join the chat at https://gitter.im/gaoxianglong/shark](https://badges.gitter.im/gaoxianglong/shark.svg)](https://gitter.im/gaoxianglong/shark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub release](https://img.shields.io/github/release/gaoxianglong/shark.svg)](https://github.com/gaoxianglong/shark/releases) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.sharksharding/shark/badge.svg)](http://search.maven.org/#artifactdetails%7Ccom.sharksharding%7Cshark%7C1.3.8%7Cjar/)
 
-轻量级的分布式mysql分库分表中间件，丰富的sharding算法支持(2类4种分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
+轻量级的分布式mysql分库分表中间件，丰富、灵活的sharding路由算法支持，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br>
 
 - [用户指南](https://github.com/gaoxianglong/shark/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97)<br>
 - [基准测试](https://github.com/gaoxianglong/shark/wiki/shark-benchmark-result)<br>
@@ -17,8 +17,8 @@
 - 友好支持mysql数据库；<br>
 - 非proxy架构，与应用集成，应用直连数据库，降低外围系统依赖所带来的宕机风险；<br>
 - 使用简单，侵入性低，站在巨人的肩膀上，依赖于springjdbc、druid；<br>
-- 基于淘宝druid的sqlparser完成sql解析任务，解析性能高效、稳定；<br>
-- 分库分表路由算法支持2类4种分片模式，库内分片/一库一片；<br>
+- 基于druid的sqlparser完成sql解析任务，解析性能高效、稳定；<br>
+- sharding路由算法支持2类4种分片模式，库内分片/一库一片；<br>
 - 提供自动生成全局唯一的sequenceid的API支持；<br>
 - 支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
 - 提供自动生成配置文件的支持，降低配置出错率；<br>
@@ -54,15 +54,16 @@ Shark采用应用集成架构，其领域模型位于持久层(JdbcTemplate)和J
 ----------
 
 ## Shark与其它Sharding中间件功能对比
-| 功能                 | Cobar         | Mycat         | TDDL        | Shark          |
-| ------------- |:-------------:| -------------:| -----------:|---------------:|
-| 是否开源          | 开源          | 开源          | 部分开源      | 开源           |
-| 架构模型          | Proxy架构         | Proxy架构         | 应用集成架构    | 应用集成架构       |
-| 路由算法      | 单一          | 单一          | 单一        | 丰富           |
-| 数据库支持    | MySQL         | 任意          | 任意        | MySQL          |
-| 外围依赖      | 无            | 无            | Diamond     | 无             |
-| 使用复杂度        | 一般          | 一般          | 复杂        | 简单           |
-| 技术文档支持      | 一般          | 付费          | 无          | 完善           |
+我们从来不认为Shark是最优秀的，但却始终坚信Shark是最好用的。
+| 功能          | Cobar         | Mycat         | Heisenberg     | TDDL           |Sharding-JDBC  |Shark          |
+| ------------- |:-------------:| -------------:| --------------:| --------------:| -------------:| -------------:|
+| 是否开源      | 开源          | 开源          | 开源           | 部分开源       | 开源          | 开源          |
+| 架构模型      | Proxy架构     | Proxy架构     | Proxy架构      | 应用集成架构   | 应用集成架构  | 应用集成架构  |
+| 分布式分片    | 支持          | 支持          | 支持           | 支持           | 支持          | 支持          |
+| 数据库支持    | MySQL         | 任意          | 任意           | 任意           | MySQL         | MySQL         |
+| 外围依赖      | 无            | 无            | Diamond        | 无             | 无            | 无            |
+| 使用复杂度    | 一般          | 一般          | 一般           | 复杂           | 一般          | 简单          |
+| 技术文档支持  | 较少          | 付费          | 较少           | 无             | 一般          | 丰富          |
 
 ----------
 
