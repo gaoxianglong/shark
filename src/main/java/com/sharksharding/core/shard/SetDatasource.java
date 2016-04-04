@@ -15,8 +15,6 @@
  */
 package com.sharksharding.core.shard;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.sharksharding.core.config.DataSourceHolder;
 
 /**
@@ -27,8 +25,6 @@ import com.sharksharding.core.config.DataSourceHolder;
  * @version 1.3.5
  */
 public class SetDatasource {
-	private static Logger logger = LoggerFactory.getLogger(SetDatasource.class);
-
 	/**
 	 * 切换数据源路由索引
 	 * 
@@ -44,6 +40,5 @@ public class SetDatasource {
 	 */
 	protected static void setIndex(int index, DataSourceHolder dataSourceHolder) {
 		dataSourceHolder.setIndex(index);
-		logger.info("set datasource success,dbindex-->" + index);
 	}
 }

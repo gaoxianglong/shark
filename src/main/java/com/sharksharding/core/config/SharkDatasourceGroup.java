@@ -32,6 +32,7 @@ import com.sharksharding.factory.DataSourceHolderFactory;
  */
 public class SharkDatasourceGroup extends AbstractRoutingDataSource implements DataSource {
 	private DataSourceHolder dataSourceHolder;
+	private static Logger logger = LoggerFactory.getLogger(SharkDatasourceGroup.class);
 
 	private SharkDatasourceGroup() {
 		dataSourceHolder = DataSourceHolderFactory.getDataSourceHolder();
@@ -40,8 +41,10 @@ public class SharkDatasourceGroup extends AbstractRoutingDataSource implements D
 	@Override
 	protected Object determineCurrentLookupKey() {
 		int index = -1;
-		if (null != dataSourceHolder)
+		if (null != dataSourceHolder) {
 			index = dataSourceHolder.getIndex();
+			logger.info("set datasource success,dbindex-->" + index);
+		}
 		return index;
 	}
 }

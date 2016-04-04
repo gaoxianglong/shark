@@ -23,22 +23,28 @@ import junit.framework.Assert;
 
 public class ResolveTableNameTest {
 	public @Test void getTabNamebySelect() {
-		final String SQL = "SELECT * FROM userinfo_test WHERE uid = 10000 AND name = gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(SQL));
+		String sql = "SELECT * FROM userinfo_test WHERE uid = 10000 AND name = gaoxianglong";
+		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		sql = "SELECT * FROM userinfo_test u WHERE u.uid = 10000 AND u.name = gaoxianglong";
+		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
 	}
 
 	public @Test void getTabNamebyInsert() {
-		final String SQL = "INSERT INTO userinfo_test(uid,name) VALUES(10000,gaoxianglong)";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(SQL));
+		String sql = "INSERT INTO userinfo_test(uid,name) VALUES(10000,gaoxianglong)";
+		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
 	}
 
 	public @Test void getTabNamebyUpdate() {
-		final String SQL = "UPDATE userinfo_test SET sex = ? WHERE uid=10000 AND name=gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(SQL));
+		String sql = "UPDATE userinfo_test SET sex = ? WHERE uid=10000 AND name=gaoxianglong";
+		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		sql = "UPDATE userinfo_test u SET u.sex = ? WHERE u.uid=10000 AND u.name=gaoxianglong";
+		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
 	}
 
 	public @Test void getTabNamebyDelete() {
-		final String SQL = "DELETE FROM userinfo_test WHERE uid=10000 AND name=gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(SQL));
+		String sql = "DELETE FROM userinfo_test WHERE uid=10000 AND name=gaoxianglong";
+		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		sql = "DELETE FROM userinfo_test u WHERE u.uid=10000 AND u.name=gaoxianglong";
+		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
 	}
 }

@@ -30,7 +30,7 @@ import com.sharksharding.sql.parser.SQLStatementParser;
 import com.sharksharding.sql.visitor.SQLASTOutputVisitor;
 
 /**
- * 使用Druid的SqlParser解析数据库表名
+ * 解析数据库表名
  * 
  * @author gaoxianglong
  * 
@@ -71,7 +71,7 @@ public final class ResolveTabname {
 				updateStatement.getTableName().accept(outputVisitor);
 			}
 		}
-		return tabName.toString();
+		return tabName.toString().split("\\s")[0];
 	}
 
 	public static String getNewTabName(int index, String tabName, String tbSuffix) {

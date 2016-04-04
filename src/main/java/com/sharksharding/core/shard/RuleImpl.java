@@ -39,7 +39,7 @@ public abstract class RuleImpl implements Rule {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @param routeValue
+	 * @param shardKey
 	 *            路由条件
 	 * 
 	 * @param dbRuleArray
@@ -47,11 +47,16 @@ public abstract class RuleImpl implements Rule {
 	 * 
 	 * @return int 数据源索引
 	 */
-	public static int getDbIndex(long routeValue, String dbRuleArray) {
+	public static int getDbIndex(long shardKey, String dbRuleArray) {
+		int index = -1;
 		List<Integer> list = ResolveRule.resolveDbRule(dbRuleArray);
-		final int TAB_SIZE = list.get(0);
-		final int DB_SIZE = list.get(1);
-		return (int) (routeValue % TAB_SIZE / DB_SIZE);
+		if (!list.isEmpty()) {
+			final int tbSize = list.get(0);
+			final int dbSize = list.get(1);
+			/* shardKey % tbSize / dbSize */
+			index = (int) ((shardKey & (tbSize - 1)) / dbSize);
+		}
+		return index;
 	}
 
 	/**
@@ -59,7 +64,7 @@ public abstract class RuleImpl implements Rule {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @param routeValue
+	 * @param shardKey
 	 *            路由条件
 	 * 
 	 * @param tbRuleArray
@@ -67,11 +72,16 @@ public abstract class RuleImpl implements Rule {
 	 * 
 	 * @return int 片索引
 	 */
-	public static int getTabIndex(long routeValue, String tbRuleArray) {
+	public static int getTabIndex(long shardKey, String tbRuleArray) {
+		int index = -1;
 		List<Integer> list = ResolveRule.resolveTabRule(tbRuleArray);
-		final int TAB_SIZE = list.get(0);
-		final int DB_SIZE = list.get(1);
-		return (int) (routeValue % TAB_SIZE % DB_SIZE);
+		if (!list.isEmpty()) {
+			final int tbSize = list.get(0);
+			final int dbSize = list.get(1);
+			/* shardKey % tbSize % dbSize */
+			return (int) (shardKey & (tbSize - 1) & (dbSize - 1));
+		}
+		return index;
 	}
 
 	/**
@@ -79,7 +89,7 @@ public abstract class RuleImpl implements Rule {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @param routeValue
+	 * @param shardKey
 	 *            路由条件
 	 * 
 	 * @param dbRuleArray
@@ -87,9 +97,14 @@ public abstract class RuleImpl implements Rule {
 	 * 
 	 * @return int 数据源索引
 	 */
-	public static int getDbIndexbyOne(long routeValue, String dbRuleArray) {
+	public static int getDbIndexbyOne(long shardKey, String dbRuleArray) {
+		int index = -1;
 		List<Integer> list = ResolveRule.resolveDbRulebyOne(dbRuleArray);
-		final int DB_SIZE = list.get(0);
-		return (int) (routeValue % DB_SIZE);
+		if (!list.isEmpty()) {
+			final int dbSize = list.get(0);
+			/* shardKey % dbSize */
+			index = (int) (shardKey & (dbSize - 1));
+		}
+		return index;
 	}
 }

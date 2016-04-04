@@ -113,6 +113,15 @@ public final class ResolveRoute {
 	 */
 	private static boolean isRoute(String firstParam, List<String> rules, String sql) {
 		boolean result = true;
+		String[] values = firstParam.split("\\.");
+		/* 验证是否使用有别名 */
+		switch (values.length) {
+		case 2:
+			firstParam = values[1];
+			break;
+		default:
+			firstParam = values[0];
+		}
 		if (!rules.contains(firstParam)) {
 			result = false;
 			throw new SqlParserException("can not find shardkey,sql-->" + sql);

@@ -29,13 +29,19 @@ import junit.framework.Assert;
 public class RuleTest {
 	public @Test void testGetDbIndex() {
 		Assert.assertEquals(10000 % 1024 / 32, RuleImpl.getDbIndex(10000, "#10000#%1024/32"));
+		Assert.assertEquals(10000 % 2048 / 64, RuleImpl.getDbIndex(10000, "#10000#%2048/64"));
+		Assert.assertEquals((10000 & (2048 - 1)) / 64, RuleImpl.getDbIndex(10000, "#10000#%2048/64"));
 	}
 
-	public @Test void testTbResolver() {
+	public @Test void testGetTabIndex() {
 		Assert.assertEquals(10000 % 1024 % 32, RuleImpl.getTabIndex(10000, "#10000#%1024%32"));
+		Assert.assertEquals(10000 % 2048 % 64, RuleImpl.getTabIndex(10000, "#10000#%2048%64"));
+		Assert.assertEquals(10000 & (2048 - 1) & (64 - 1), RuleImpl.getTabIndex(10000, "#10000#%2048%64"));
 	}
 
-	public @Test void testDbResolver_oneTb() {
+	public @Test void testGetDbIndexbyOne() {
 		Assert.assertEquals(10000 % 32, RuleImpl.getDbIndexbyOne(10000, "#10000#%32"));
+		Assert.assertEquals(10000 % 64, RuleImpl.getDbIndexbyOne(10000, "#10000#%64"));
+		Assert.assertEquals(10000 & (128 - 1), RuleImpl.getDbIndexbyOne(10000, "#10000#%128"));
 	}
 }
