@@ -7,7 +7,7 @@
   b、自动对spring mapper进行赋值映射操作；
   c、基于zookeeper生成全局唯一的sequenceid算法更新；
   d、解析sql语句时，开始支持数据库别名；
-  e、解析分库分表索引时将%运算替换为&运算；
+  e、底层解析分库分表索引时将%运算替换为&运算；
   f、将切换数据源动作的日志记录调整到SharkDatasourceGroup.
      determineCurrentLookupKey()方法中；
   g、增加部分测试用例；
