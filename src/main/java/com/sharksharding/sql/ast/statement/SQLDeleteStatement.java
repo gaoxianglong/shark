@@ -18,6 +18,7 @@ package com.sharksharding.sql.ast.statement;
 import java.util.Arrays;
 import java.util.List;
 
+import com.sharksharding.exception.SqlParserException;
 import com.sharksharding.sql.ast.SQLExpr;
 import com.sharksharding.sql.ast.SQLName;
 import com.sharksharding.sql.ast.SQLStatementImpl;
@@ -76,9 +77,19 @@ public class SQLDeleteStatement extends SQLStatementImpl {
 	 * 通过正则表达式拆分where后的数据
 	 * 
 	 * @author gaoxianglong
+	 * 
+	 * @throws SqlParserException
+	 * 
+	 * @return List<String> columns
 	 */
 	public List<String> getWhere_() {
-		return Arrays.asList(where.toString().split("\\s"));
+		List<String> columns = null;
+		if (null == where) {
+			throw new SqlParserException("no condition");
+		} else {
+			columns = Arrays.asList(where.toString().split("\\s"));
+		}
+		return columns;
 	}
 
 	public void setWhere(SQLExpr where) {

@@ -103,11 +103,14 @@ public class PropertyPlaceholderConfigurer {
 		String sql = null;
 		if (null != properties) {
 			sql = properties.getProperty(key);
-			if (-1 != sql.indexOf("update") || -1 != sql.indexOf("UPDATE")) {
-				String value[] = sql.split("(where|WHERE)");
-				sql = value[0] + "WHERE" + value[1].replaceFirst("\\?", String.valueOf(routeKey));
-			} else {
-				sql = sql.replaceFirst("\\?", String.valueOf(routeKey));
+			/* 验证SQL语句WHERE条件后面是否带参数 */
+			if (SQLIsWhereColumn.isColumn(sql)) {
+				if (-1 != sql.indexOf("update") || -1 != sql.indexOf("UPDATE")) {
+					String value[] = sql.split("(where|WHERE)");
+					sql = value[0] + "WHERE" + value[1].replaceFirst("\\?", String.valueOf(routeKey));
+				} else {
+					sql = sql.replaceFirst("\\?", String.valueOf(routeKey));
+				}
 			}
 		}
 		return sql;
