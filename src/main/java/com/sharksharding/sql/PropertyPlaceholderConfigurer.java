@@ -103,7 +103,12 @@ public class PropertyPlaceholderConfigurer {
 		String sql = null;
 		if (null != properties) {
 			sql = properties.getProperty(key);
-			sql = sql.replaceFirst("\\?", String.valueOf(routeKey));
+			if (-1 != sql.indexOf("update") || -1 != sql.indexOf("UPDATE")) {
+				String value[] = sql.split("(where|WHERE)");
+				sql = value[0] + "WHERE" + value[1].replaceFirst("\\?", String.valueOf(routeKey));
+			} else {
+				sql = sql.replaceFirst("\\?", String.valueOf(routeKey));
+			}
 		}
 		return sql;
 	}

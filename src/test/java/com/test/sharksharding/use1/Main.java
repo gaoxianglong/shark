@@ -109,4 +109,21 @@ public class Main {
 			logger.error("query data fail", e);
 		}
 	}
+
+	/**
+	 * 更新主表数据
+	 * 
+	 * @author gaoxianglong
+	 */
+	public @Test void testUpdate() {
+		try {
+			UserInfo userInfo = new UserInfo();
+			userInfo.setUid(sequenceid);
+			userInfo.setUserName("gaoxianglong88888");
+			userDao.changeUserInfo(userInfo);
+			logger.info("update table:userinfo_test success");
+		} catch (Exception e) {
+			logger.error("update data fail", e);
+		}
+	}
 }

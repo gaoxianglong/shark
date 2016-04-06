@@ -16,9 +16,13 @@
 package com.test.sharksharding.use1;
 
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Repository;
+
 import com.sharksharding.core.shard.SharkJdbcTemplate;
+import com.sharksharding.sql.PropertyPlaceholderConfigurer;
 
 /**
  * 用户信息Dao接口实现
@@ -33,6 +37,9 @@ public class UserDaoImpl implements UserDao {
 	@Resource
 	private UserInfoMapper userInfoMapper;
 
+	@Resource
+	private PropertyPlaceholderConfigurer propertyPlaceholderConfigurer;
+
 	@Override
 	public void setUserInfo(UserInfo user) throws Exception {
 		final String SQL = "insert into userinfo_test(uid,userName) values(" + user.getUid() + ",?)";
@@ -43,5 +50,11 @@ public class UserDaoImpl implements UserDao {
 	public List<UserInfo> getUserInfo(long uid) throws Exception {
 		final String SQL = "select username from userinfo_test where uid = " + uid + "";
 		return jdbcTemplate.query(SQL, userInfoMapper);
+	}
+
+	@Override
+	public void changeUserInfo(UserInfo user) throws Exception {
+		final String sql = propertyPlaceholderConfigurer.getSql("changeUserInfo", user.getUid());
+		jdbcTemplate.update(sql, new Object[] { user.getUserName() });
 	}
 }

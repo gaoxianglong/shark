@@ -26,4 +26,6 @@ public interface UserDao {
 	public void setUserInfo(UserInfo user) throws Exception;
 
 	public List<UserInfo> getUserInfo(long uid) throws Exception;
+
+	public void changeUserInfo(UserInfo user) throws Exception;
 }
