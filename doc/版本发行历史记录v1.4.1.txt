@@ -12,7 +12,8 @@
      determineCurrentLookupKey()方法中；
   g、修复PropertyPlaceholderConfigurer类中update语句占位符“？”替换的bug；
   h、增加部分测试用例；
-  i、降低shark的pom.xml文件中与其它构件的依赖
+  i、降低shark的pom.xml文件中与其它构件的依赖；
+  j、解析SQL语句WHERE条件后面是否带参数；
 【发布日期】
 	未发版
 #################################################################################
