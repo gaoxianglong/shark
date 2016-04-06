@@ -10,7 +10,8 @@
   e、底层解析分库分表索引时将%运算替换为&运算；
   f、将切换数据源动作的日志记录调整到SharkDatasourceGroup.
      determineCurrentLookupKey()方法中；
-  g、增加部分测试用例；
+  g、修复PropertyPlaceholderConfigurer类中update语句占位符“？”替换的bug；
+  h、增加部分测试用例；
 【发布日期】
 	未发版
 #################################################################################
