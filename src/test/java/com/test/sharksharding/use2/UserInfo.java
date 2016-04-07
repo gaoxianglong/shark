@@ -17,11 +17,16 @@ package com.test.sharksharding.use2;
 
 import org.springframework.stereotype.Component;
 
+import com.sharksharding.util.mapper.AutoColumn;
+import com.sharksharding.util.mapper.Mapper;
+
 /**
  * 对应数据库表[userinfo_test]
  *
  * @author JohnGao
  */
+@Mapper
+@AutoColumn
 @Component
 public class UserInfo {
 	private long uid;

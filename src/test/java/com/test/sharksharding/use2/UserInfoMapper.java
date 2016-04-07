@@ -20,6 +20,8 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import com.sharksharding.util.mapper.BeanMapper;
+
 /**
  * UserInfo实体映射类
  * 
@@ -30,7 +32,7 @@ public class UserInfoMapper implements RowMapper<UserInfo> {
 	@Override
 	public UserInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserInfo user = new UserInfo();
-		user.setUserName(rs.getString("userName"));
+		BeanMapper.mapper(user, rs);
 		return user;
 	}
 }

@@ -47,7 +47,8 @@ public class Main {
 	 */
 	public @BeforeClass static void init() {
 		SequenceIDManger.init(NAME, PWD, URL, DRIVER);
-		sequenceid = SequenceIDManger.getSequenceId(1, 1, 5000);
+		/* 生产建议memData设置为5000 */
+		sequenceid = SequenceIDManger.getSequenceId(1, 1, 100);
 		logger.info("sequenceid-->" + sequenceid);
 	}
 
@@ -78,6 +79,24 @@ public class Main {
 			if (!users.isEmpty()) {
 				UserInfo user = users.get(0);
 				logger.info("userName-->" + user.getUserName());
+			}
+		} catch (Exception e) {
+			logger.error("query data fail", e);
+		}
+	}
+
+	/**
+	 * 拉取所有测试
+	 *
+	 * @author gaoxianglong
+	 */
+	public @Test void testQuerys() {
+		try {
+			List<UserInfo> users = userDao.getUserInfos();
+			if (!users.isEmpty()) {
+				for (UserInfo user : users) {
+					logger.info("uid-->" + user.getUid() + "\tuserName-->" + user.getUserName());
+				}
 			}
 		} catch (Exception e) {
 			logger.error("query data fail", e);

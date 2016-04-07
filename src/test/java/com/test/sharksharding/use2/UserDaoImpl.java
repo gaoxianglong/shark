@@ -16,8 +16,11 @@
 package com.test.sharksharding.use2;
 
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Repository;
+
 import com.sharksharding.core.shard.SharkJdbcTemplate;
 
 /**
@@ -41,7 +44,13 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<UserInfo> getUserInfo(long uid) throws Exception {
-		final String SQL = "select username from userinfo_test where uid = " + uid + "";
+		final String SQL = "select * from userinfo_test t where t.uid = " + uid + "";
+		return jdbcTemplate.query(SQL, userInfoMapper);
+	}
+
+	@Override
+	public List<UserInfo> getUserInfos() throws Exception {
+		final String SQL = "select * from userinfo_test";
 		return jdbcTemplate.query(SQL, userInfoMapper);
 	}
 }
