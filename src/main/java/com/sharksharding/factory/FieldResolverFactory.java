@@ -13,26 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.test.sharksharding.use1;
+package com.sharksharding.factory;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.util.mapper.BeanMapper;
+import com.sharksharding.util.mapper.FieldResolver;
+import com.sharksharding.util.mapper.SharkAnnotationResolver;
 
 /**
- * Email实体映射类
+ * 字段注解解析器工厂类
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.4.1
  */
-@Component
-public class EmailInfoMapper implements RowMapper<EmailInfo> {
+public class FieldResolverFactory implements SharkAnnotationResolverFactory {
+	private static SharkAnnotationResolver sharkAnnotationResolver;
+
+	static {
+		sharkAnnotationResolver = new FieldResolver();
+	}
+
 	@Override
-	public EmailInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-		EmailInfo email = new EmailInfo();
-		BeanMapper.mapper(email, rs);
-		return email;
+	public SharkAnnotationResolver getSharkAnnotationResolver() {
+		return sharkAnnotationResolver;
 	}
 }

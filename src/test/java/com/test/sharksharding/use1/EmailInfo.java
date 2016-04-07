@@ -17,15 +17,24 @@ package com.test.sharksharding.use1;
 
 import org.springframework.stereotype.Component;
 
+import com.sharksharding.util.mapper.AutoColumn;
+import com.sharksharding.util.mapper.Column;
+import com.sharksharding.util.mapper.Mapper;
+
 /**
  * 对应数据库表[email_test]
  *
  * @author JohnGao
  */
+
+@Mapper
 @Component
 public class EmailInfo {
+	@Column(name = "email")
 	private String email;
+	@Column
 	private long email_hash;
+	@Column
 	private long uid;
 
 	public long getUid() {

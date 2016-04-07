@@ -17,6 +17,7 @@ package com.sharksharding.core.shard;
 
 import java.util.Arrays;
 import java.util.List;
+
 import com.sharksharding.factory.DataSourceHolderFactory;
 import com.sharksharding.factory.DbRuleFactory;
 import com.sharksharding.factory.RuleFactory;
@@ -45,7 +46,7 @@ public class RouteFacade implements Route {
 			return null;
 		/* 解析sql语句中的路由条件 */
 		long shardValue = ResolveRoute.getRoute(sql, keyNames);
-		Rule dbRule = new DbRuleFactory().getRule();
+		Rule dbRule = getDbRule();
 		dbRule.setShardMode(sharkInfo.getShardMode());
 		int dbIndex = dbRule.getIndex(shardValue, dbRuleArray);
 		if (sharkInfo.getConsistent()) {
@@ -72,10 +73,10 @@ public class RouteFacade implements Route {
 			return null;
 		/* 解析sql语句中的路由条件 */
 		long shardValue = ResolveRoute.getRoute(sql, keyNames);
-		Rule dbRule = new DbRuleFactory().getRule();
+		Rule dbRule = getDbRule();
 		dbRule.setShardMode(sharkInfo.getShardMode());
 		int dbIndex = dbRule.getIndex(shardValue, dbRuleArray);
-		Rule tabRule = new TabRuleFactory().getRule();
+		Rule tabRule = getTabRule();
 		int tbIndex = tabRule.getIndex(shardValue, tbRuleArray);
 		/* 解析配置文件中数据库和数据库表的数量 */
 		String values[] = tbRuleArray.split("[\\%]");
@@ -109,5 +110,15 @@ public class RouteFacade implements Route {
 		List<Object> newParams = Arrays.asList(params);
 		newParams.set(0, newSQL);
 		return newParams.toArray();
+	}
+
+	public Rule getDbRule() {
+		RuleFactory dbRuleFactory = new DbRuleFactory();
+		return dbRuleFactory.getRule();
+	}
+
+	public Rule getTabRule() {
+		RuleFactory tabRuleFactory = new TabRuleFactory();
+		return tabRuleFactory.getRule();
 	}
 }

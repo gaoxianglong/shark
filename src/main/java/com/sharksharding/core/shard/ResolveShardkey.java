@@ -25,7 +25,7 @@ import java.util.List;
  * 
  * @version 1.4.0
  */
-public final class ResolveShardkey {
+public class ResolveShardkey {
 	/**
 	 * 解析并获取配置文件中的分库分表关键字
 	 * 

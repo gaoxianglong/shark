@@ -99,6 +99,8 @@ public class Main {
 				EmailInfo email = emails.get(0);
 				long uid = email.getUid();
 				System.out.println("uid-->" + uid);
+				// System.out.println("email-->" + email.getEmail());
+				// System.out.println("email_hash-->" + email.getEmail_hash());
 				List<UserInfo> users = userDao.getUserInfo(uid);
 				if (!users.isEmpty()) {
 					UserInfo user = users.get(0);

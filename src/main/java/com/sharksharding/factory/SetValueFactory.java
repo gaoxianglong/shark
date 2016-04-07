@@ -13,26 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.test.sharksharding.use1;
+package com.sharksharding.factory;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.util.mapper.BeanMapper;
+import com.sharksharding.util.mapper.SetValue;
 
 /**
- * Email实体映射类
+ * 字段赋值操作工厂类
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.4.1
  */
-@Component
-public class EmailInfoMapper implements RowMapper<EmailInfo> {
-	@Override
-	public EmailInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-		EmailInfo email = new EmailInfo();
-		BeanMapper.mapper(email, rs);
-		return email;
+public class SetValueFactory {
+	private static SetValue setValue;
+
+	static {
+		setValue = new SetValue();
+	}
+
+	public static SetValue getSetValue() {
+		return setValue;
 	}
 }

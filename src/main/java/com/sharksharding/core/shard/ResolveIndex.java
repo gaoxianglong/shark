@@ -22,7 +22,7 @@ package com.sharksharding.core.shard;
  * 
  * @version 1.3.5
  */
-public final class ResolveIndex {
+public class ResolveIndex {
 	/**
 	 * 获取master/slave的数据源启始索引
 	 * 

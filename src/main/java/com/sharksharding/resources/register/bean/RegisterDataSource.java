@@ -86,7 +86,7 @@ public class RegisterDataSource implements RegisterBean {
 		} catch (Exception e) {
 			throw new RegisterBeanException(e.toString());
 		} finally {
-			// TmpManager.deleteTmp(tmpdir);
+			TmpManager.deleteTmp(tmpdir);
 		}
 	}
 

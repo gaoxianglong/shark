@@ -13,26 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.test.sharksharding.use1;
+package com.sharksharding.util.mapper;
 
+import java.lang.reflect.Field;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.util.mapper.BeanMapper;
 
 /**
- * Email实体映射类
- * 
+ * shark注解解析器接口实现
+ *
  * @author gaoxianglong
+ * 
+ * @version 1.4.1
  */
-@Component
-public class EmailInfoMapper implements RowMapper<EmailInfo> {
+public abstract class SharkAnnotationResolverImpl implements SharkAnnotationResolver {
 	@Override
-	public EmailInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-		EmailInfo email = new EmailInfo();
-		BeanMapper.mapper(email, rs);
-		return email;
+	public <T> void fieldResolver(T goalObject, ResultSet rs) {
+	}
+
+	@Override
+	public <T> boolean classResolver(T goalObject) {
+		return false;
 	}
 }

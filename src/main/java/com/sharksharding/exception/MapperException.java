@@ -13,26 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.test.sharksharding.use1;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.util.mapper.BeanMapper;
+package com.sharksharding.exception;
 
 /**
- * Email实体映射类
+ * 自动映射失败异常
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.4.1
  */
-@Component
-public class EmailInfoMapper implements RowMapper<EmailInfo> {
-	@Override
-	public EmailInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-		EmailInfo email = new EmailInfo();
-		BeanMapper.mapper(email, rs);
-		return email;
+public class MapperException extends SharkRuntimeException {
+	private static final long serialVersionUID = -8301606060406419061L;
+
+	public MapperException(String str) {
+		super(str);
 	}
 }

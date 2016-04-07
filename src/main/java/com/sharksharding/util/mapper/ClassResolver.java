@@ -13,26 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.test.sharksharding.use1;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-
-import com.sharksharding.util.mapper.BeanMapper;
+package com.sharksharding.util.mapper;
 
 /**
- * Email实体映射类
+ * 类型注解解析器，用于解析标记了@Mapper的类型
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.4.1
  */
-@Component
-public class EmailInfoMapper implements RowMapper<EmailInfo> {
-	@Override
-	public EmailInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-		EmailInfo email = new EmailInfo();
-		BeanMapper.mapper(email, rs);
-		return email;
+public class ClassResolver extends SharkAnnotationResolverImpl {
+	public <T> boolean classResolver(T goalObject) {
+		/* 检测目标对象是否标记有@Mapper注解 */
+		return goalObject.getClass().isAnnotationPresent(Mapper.class);
 	}
 }

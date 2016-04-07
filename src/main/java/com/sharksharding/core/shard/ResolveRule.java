@@ -25,7 +25,7 @@ import java.util.List;
  * 
  * @version 1.3.5
  */
-public final class ResolveRule {
+public class ResolveRule {
 	public static List<Integer> resolveDbRule(String dbRuleArray) {
 		List<Integer> list = new ArrayList<Integer>();
 		final int TAB_SIZE = Integer

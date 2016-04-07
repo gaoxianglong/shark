@@ -36,7 +36,7 @@ import com.sharksharding.sql.visitor.SQLASTOutputVisitor;
  * 
  * @version 1.3.5
  */
-public final class ResolveTabname {
+public class ResolveTabname {
 	/**
 	 * 解析数据库表名
 	 *

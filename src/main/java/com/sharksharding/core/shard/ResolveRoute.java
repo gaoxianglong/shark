@@ -34,7 +34,7 @@ import com.sharksharding.sql.parser.SQLStatementParser;
  * 
  * @version 1.3.5
  */
-public final class ResolveRoute {
+public class ResolveRoute {
 	/**
 	 * 解析sql语句中的路由条件
 	 * 

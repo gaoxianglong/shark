@@ -24,7 +24,7 @@ import com.sharksharding.core.shard.ResolveTabname;
  * 
  * @version 1.3.5
  */
-public final class ResolveDbname {
+public class ResolveDbname {
 	public static String getNewDbName(int index, String dbName, String tbSuffix) {
 		return ResolveTabname.getNewTabName(index, dbName, tbSuffix);
 	}
