@@ -69,12 +69,11 @@ Shark采用应用集成架构，其领域模型位于持久层(JdbcTemplate)和J
 ----------
 
 ## 学习 & 联系我们
-- 项目主页：https://github.com/gaoxianglong/shark
 - wiki：https://github.com/gaoxianglong/shark/wiki
 - issues：https://github.com/gaoxianglong/shark/issues
 - blog：http://gao-xianglong.iteye.com
 - email：gao_xianglong@sharksharding.com
-- ![](http://dl.iteye.com/upload/picture/pic/134683/97e5d3af-cb7b-3115-97c1-230cbf6ad081.png): QQ Group:150445731
+- ![](http://dl.iteye.com/upload/picture/pic/134683/97e5d3af-cb7b-3115-97c1-230cbf6ad081.png): qq group:150445731
 
 ----------
 
