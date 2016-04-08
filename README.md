@@ -18,7 +18,7 @@
 - 使用简单，侵入性低，站在巨人的肩膀上，依赖于springjdbc、druid；<br>
 - 基于druid的sqlparser完成sql解析任务，解析性能高效、稳定；<br>
 - 对springjdbc进行功能增强，大幅度提升编码效率；<br>
-- 提供多机sequenceid的API支持，解决多机sequenceid难题<br>
+- 提供多机sequenceid的API支持，解决多机sequenceid难题；<br>
 - 支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
 - sql独立配置，与业务逻辑代码解耦；<br>
 - 提供内置验证页面，方便开发、测试及运维人员对执行后的sql进行验证；<br>
