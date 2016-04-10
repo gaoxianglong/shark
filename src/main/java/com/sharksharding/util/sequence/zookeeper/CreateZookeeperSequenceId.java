@@ -19,6 +19,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 import com.sharksharding.exception.ResourceException;
 import com.sharksharding.exception.SequenceIdException;
+import com.sharksharding.util.sequence.CreateSequenceIdServiceImpl;
 
 /**
  * 生成SequenceId
@@ -27,40 +28,14 @@ import com.sharksharding.exception.SequenceIdException;
  * 
  * @version 1.3.7
  */
-public class CreateSequenceIdService {
+public class CreateZookeeperSequenceId extends CreateSequenceIdServiceImpl {
 	private StringBuffer str;
-	private static CreateSequenceIdService createSequenceId;
 
-	public static CreateSequenceIdService createSequenceIdService() {
-		return createSequenceId;
-	}
-
-	static {
-		createSequenceId = new CreateSequenceIdService();
-	}
-
-	private CreateSequenceIdService() {
+	public CreateZookeeperSequenceId() {
 		str = new StringBuffer();
 	}
 
-	/**
-	 * 根据指定规则创建唯一的userName
-	 * 
-	 * @author gaoxianglong
-	 * 
-	 * @param rootPath
-	 *            znode根目录
-	 * 
-	 * @param idcNum
-	 *            IDC机房编码, 用于区分不同的IDC机房,1-3位数字长度
-	 * 
-	 * @param type
-	 *            业务类别,1-6位数字长度
-	 * 
-	 * @throws ResourceException
-	 * 
-	 * @return long 返回生成的12-19位数字长度的sequenceId
-	 */
+	@Override
 	public long getSequenceId(String rootPath, int idcNum, int type) throws ResourceException {
 		long sequenceId = -1;
 		/* 避免在并发环境下出现线程安全，则添加排他锁 */

@@ -18,53 +18,30 @@ package com.sharksharding.util.sequence.mysql;
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
 import com.sharksharding.exception.SequenceIdException;
+import com.sharksharding.util.sequence.CreateSequenceIdServiceImpl;
 
 /**
- * 生成SequenceId
+ * 生成基于Mysql的SequenceId
  * 
  * @author JohnGao
  * 
  * @version 1.3.5
  */
-public class CreateSequenceIdService {
-	private static CreateSequenceIdService createSequenceId;
+public class CreateMysqlSequenceId extends CreateSequenceIdServiceImpl {
 	private CreateSequenceIdDao createUserNameDao;
 	private StringBuffer str;
 	private ConcurrentHashMap<Integer, Long> useDataMap;
 	private ConcurrentHashMap<Integer, Integer> surplusDataMap;
 	private long memData;
 
-	public static CreateSequenceIdService createSequenceIdService() {
-		return createSequenceId;
-	}
-
-	static {
-		createSequenceId = new CreateSequenceIdService();
-	}
-
-	private CreateSequenceIdService() {
+	public CreateMysqlSequenceId() {
 		str = new StringBuffer();
 		useDataMap = new ConcurrentHashMap<Integer, Long>();
 		surplusDataMap = new ConcurrentHashMap<Integer, Integer>();
 		createUserNameDao = new CreateSequenceIdDaoImpl();
 	}
 
-	/**
-	 * 生成用户唯一的sequenceId
-	 * 
-	 * @author gaoxianglong
-	 * 
-	 * @param idcNum
-	 *            IDC机房编码, 用于区分不同的IDC机房
-	 * 
-	 * @param type
-	 *            业务类别
-	 * 
-	 * @param memData
-	 *            内存占位数量
-	 * 
-	 * @return long 根据指定规则生成的sequenceId
-	 */
+	@Override
 	public long getSequenceId(int idcNum, int type, long memData) {
 		long sequenceId = -1;
 		/* 避免在并发环境下出现线程安全，则添加同步对象锁 */
@@ -93,7 +70,7 @@ public class CreateSequenceIdService {
 								useData = useDataMap.get(type);
 							}
 							/* 根据指定规则创建唯一的SequenceId */
-							sequenceId = createSequenceId(useData - surplusData, idcNum, type);
+							sequenceId = createSequenceId(str, useData - surplusData, idcNum, type);
 						} else {
 							/* 生成当前占位数据 */
 							Long useData = createUseData();
@@ -108,7 +85,7 @@ public class CreateSequenceIdService {
 							/* 进行事物传播特性控制的事物管理 */
 							transactionManager();
 							/* 根据指定规则创建唯一的SequenceId */
-							sequenceId = createSequenceId(useData - surplusData, idcNum, type);
+							sequenceId = createSequenceId(str, useData - surplusData, idcNum, type);
 						}
 					} else {
 						/* 生成当前占位数据 */
@@ -128,7 +105,7 @@ public class CreateSequenceIdService {
 						/* 进行事物传播特性控制的事物管理 */
 						transactionManager();
 						/* 根据指定规则创建唯一的SequenceId */
-						sequenceId = createSequenceId(useData - surplusData, idcNum, type);
+						sequenceId = createSequenceId(str, useData - surplusData, idcNum, type);
 					}
 				} catch (Exception e) {
 					try {
@@ -163,8 +140,23 @@ public class CreateSequenceIdService {
 	 * 
 	 * @return void
 	 */
-	protected void transactionManager() throws SQLException {
+	private void transactionManager() throws SQLException {
 		CreateSequenceIdDaoImpl.conn.commit();
+	}
+
+	/**
+	 * 生成当前占位数据
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @throws Exception
+	 * 
+	 * @return long 返回生成的当前占位数据
+	 */
+	private long createUseData() throws Exception {
+		/* 获取当前最大的占位数据 */
+		Long useData = createUserNameDao.queryMaxUseData();
+		return null != useData ? useData += memData : memData;
 	}
 
 	/**
@@ -183,7 +175,7 @@ public class CreateSequenceIdService {
 	 * 
 	 * @return long 返回生成的17-19位数字长度的sequenceId
 	 */
-	protected long createSequenceId(Long id, int idcNum, int type) {
+	private long createSequenceId(StringBuffer str, Long id, int idcNum, int type) {
 		long sequenceId = -1;
 		/* IDC机房编码不能够超过3位数字长度,type不能够超过2位数字长度 */
 		if (idcNum < 1000 && type < 100) {
@@ -204,21 +196,6 @@ public class CreateSequenceIdService {
 	}
 
 	/**
-	 * 生成当前占位数据
-	 * 
-	 * @author gaoxianglong
-	 * 
-	 * @throws Exception
-	 * 
-	 * @return long 返回生成的当前占位数据
-	 */
-	protected long createUseData() throws Exception {
-		/* 获取当前最大的占位数据 */
-		Long useData = createUserNameDao.queryMaxUseData();
-		return null != useData ? useData += memData : memData;
-	}
-
-	/**
 	 * 计算预留字段的占位索引
 	 * 
 	 * @author EX-GAOXIANGLONG001
@@ -228,7 +205,7 @@ public class CreateSequenceIdService {
 	 * 
 	 * @return int 返回占位索引
 	 */
-	protected int getIndex(int idcNum) {
+	private int getIndex(int idcNum) {
 		int index = 1;
 		if (idcNum >= 100)
 			index = 3;
