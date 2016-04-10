@@ -70,7 +70,7 @@ public class CreateMysqlSequenceId extends CreateSequenceIdServiceImpl {
 								useData = useDataMap.get(type);
 							}
 							/* 根据指定规则创建唯一的SequenceId */
-							sequenceId = createSequenceId(str, useData - surplusData, idcNum, type);
+							sequenceId = createSequenceId(useData - surplusData, idcNum, type);
 						} else {
 							/* 生成当前占位数据 */
 							Long useData = createUseData();
@@ -85,7 +85,7 @@ public class CreateMysqlSequenceId extends CreateSequenceIdServiceImpl {
 							/* 进行事物传播特性控制的事物管理 */
 							transactionManager();
 							/* 根据指定规则创建唯一的SequenceId */
-							sequenceId = createSequenceId(str, useData - surplusData, idcNum, type);
+							sequenceId = createSequenceId(useData - surplusData, idcNum, type);
 						}
 					} else {
 						/* 生成当前占位数据 */
@@ -105,7 +105,7 @@ public class CreateMysqlSequenceId extends CreateSequenceIdServiceImpl {
 						/* 进行事物传播特性控制的事物管理 */
 						transactionManager();
 						/* 根据指定规则创建唯一的SequenceId */
-						sequenceId = createSequenceId(str, useData - surplusData, idcNum, type);
+						sequenceId = createSequenceId(useData - surplusData, idcNum, type);
 					}
 				} catch (Exception e) {
 					try {
@@ -175,7 +175,7 @@ public class CreateMysqlSequenceId extends CreateSequenceIdServiceImpl {
 	 * 
 	 * @return long 返回生成的17-19位数字长度的sequenceId
 	 */
-	private long createSequenceId(StringBuffer str, Long id, int idcNum, int type) {
+	private long createSequenceId(Long id, int idcNum, int type) {
 		long sequenceId = -1;
 		/* IDC机房编码不能够超过3位数字长度,type不能够超过2位数字长度 */
 		if (idcNum < 1000 && type < 100) {
