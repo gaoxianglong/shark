@@ -20,7 +20,7 @@
 - 对springjdbc进行功能增强，大幅度提升编码效率；<br>
 - 提供多机sequenceid的API支持，解决多机sequenceid难题；<br>
 - 支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
-- sql独立配置，与业务逻辑代码解耦；<br>
+- 基于velocity模板引擎渲染内容,sql独立配置，与业务逻辑代码解耦；<br>
 - 提供内置验证页面，方便开发、测试及运维人员对执行后的sql进行验证；<br>
 - 单线程读重试(取决于的数据库连接池是否支持)；<br>
 - 提供自动生成配置文件的API支持，降低配置出错率；<br>
