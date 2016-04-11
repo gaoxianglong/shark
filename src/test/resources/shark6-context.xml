@@ -17,11 +17,14 @@
 			expression="org.aspectj.lang.annotation.Aspect" />
 	</context:component-scan>
 	<context:property-placeholder location="classpath*:properties/*.properties" />
-	<bean class="com.sharksharding.resources.register.bean.RegisterDataSource"/>
+	<bean class="com.sharksharding.resources.register.bean.RegisterDataSource" />
 	<bean class="com.sharksharding.resources.conn.ZookeeperConnectionManager"
 		init-method="init">
 		<constructor-arg index="0" value="${address}" />
 		<constructor-arg index="1" value="${session.timeout}" />
 		<constructor-arg index="2" value="${nodepath}" />
+	</bean>
+	<bean id="sqlTemplate" class="com.sharksharding.sql.SQLTemplate">
+		<constructor-arg name="path" value="classpath:properties/sql.xml" />
 	</bean>
 </beans>

@@ -16,6 +16,7 @@
 package com.test.sharksharding.use1;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sharksharding.core.shard.SharkJdbcTemplate;
 import com.sharksharding.sql.PropertyPlaceholderConfigurer;
+import com.sharksharding.sql.SQLTemplate;
 
 /**
  * 用户信息Dao接口实现
@@ -37,24 +39,44 @@ public class UserDaoImpl implements UserDao {
 	@Resource
 	private UserInfoMapper userInfoMapper;
 
-	@Resource
+	// @Resource
 	private PropertyPlaceholderConfigurer propertyPlaceholderConfigurer;
+	@Resource
+	private SQLTemplate sqlTemplate;
 
 	@Override
 	public void setUserInfo(UserInfo user) throws Exception {
-		final String SQL = "insert into userinfo_test(uid,userName) values(" + user.getUid() + ",?)";
-		jdbcTemplate.update(SQL, new Object[] { user.getUserName() });
+		final String sql = "insert into userinfo_test(uid,userName) values(" + user.getUid() + ",?)";
+		jdbcTemplate.update(sql, new Object[] { user.getUserName() });
 	}
 
 	@Override
 	public List<UserInfo> getUserInfo(long uid) throws Exception {
-		final String SQL = "select username from userinfo_test where uid = " + uid + "";
-		return jdbcTemplate.query(SQL, userInfoMapper);
+		final String sql = "select username from userinfo_test where uid = " + uid + "";
+		return jdbcTemplate.query(sql, userInfoMapper);
 	}
 
 	@Override
 	public void changeUserInfo(UserInfo user) throws Exception {
 		final String sql = propertyPlaceholderConfigurer.getSql("changeUserInfo", user.getUid());
 		jdbcTemplate.update(sql, new Object[] { user.getUserName() });
+	}
+
+	@Override
+	public void setUserInfo(Map<String, Object> params) throws Exception {
+		final String sql = sqlTemplate.getSql("setUserInfo", params);
+		jdbcTemplate.update(sql);
+	}
+
+	@Override
+	public List<UserInfo> getUserInfo(Map<String, Object> params) throws Exception {
+		final String sql = sqlTemplate.getSql("getUserInfo", params);
+		return jdbcTemplate.query(sql, userInfoMapper);
+	}
+
+	@Override
+	public void changeUserInfo(Map<String, Object> params) throws Exception {
+		final String sql = sqlTemplate.getSql("changeUserInfo", params);
+		jdbcTemplate.update(sql);
 	}
 }

@@ -15,9 +15,13 @@ package com.test.sharksharding.use1;
  * limitations under the License.
  */
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
 import javax.annotation.Resource;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import com.sharksharding.util.sequence.SequenceIDManger;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -71,14 +76,16 @@ public class Main {
 	 */
 	public @Test void testInsert() {
 		try {
-			emailInfo.setEmail(email);
-			emailInfo.setEmail_hash(Math.abs(emailInfo.getEmail().hashCode()));
-			emailInfo.setUid(sequenceid);
-			emailDao.setEmail(emailInfo);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("email", email);
+			params.put("email_hash", Math.abs(email.hashCode()));
+			params.put("uid", sequenceid);
+			emailDao.setEmail(params);
 			logger.info("insert table:email_test success");
-			user.setUserName("gaoxianglong");
-			user.setUid(sequenceid);
-			userDao.setUserInfo(user);
+			params = new HashMap<String, Object>();
+			params.put("uid", sequenceid);
+			params.put("userName", "gaoxianglong");
+			userDao.setUserInfo(params);
 			logger.info("insert table:userinfo_test success");
 		} catch (Exception e) {
 			logger.error("insert data fail", e);
@@ -92,16 +99,17 @@ public class Main {
 	 */
 	public @Test void testQuery() {
 		try {
-			emailInfo.setEmail(email);
-			emailInfo.setEmail_hash(Math.abs(emailInfo.getEmail().hashCode()));
-			List<EmailInfo> emails = emailDao.getEmail(emailInfo);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("email", email);
+			params.put("email_hash", Math.abs(email.hashCode()));
+			List<EmailInfo> emails = emailDao.getEmail(params);
 			if (!emails.isEmpty()) {
 				EmailInfo email = emails.get(0);
 				long uid = email.getUid();
 				System.out.println("uid-->" + uid);
-				// System.out.println("email-->" + email.getEmail());
-				// System.out.println("email_hash-->" + email.getEmail_hash());
-				List<UserInfo> users = userDao.getUserInfo(uid);
+				params = new HashMap<String, Object>();
+				params.put("uid", sequenceid);
+				List<UserInfo> users = userDao.getUserInfo(params);
 				if (!users.isEmpty()) {
 					UserInfo user = users.get(0);
 					System.out.println("userName-->" + user.getUserName());
@@ -119,10 +127,10 @@ public class Main {
 	 */
 	public @Test void testUpdate() {
 		try {
-			UserInfo userInfo = new UserInfo();
-			userInfo.setUid(sequenceid);
-			userInfo.setUserName("gaoxianglong88888");
-			userDao.changeUserInfo(userInfo);
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("uid", sequenceid);
+			params.put("userName", "gaoxianglong7777");
+			userDao.changeUserInfo(params);
 			logger.info("update table:userinfo_test success");
 		} catch (Exception e) {
 			logger.error("update data fail", e);

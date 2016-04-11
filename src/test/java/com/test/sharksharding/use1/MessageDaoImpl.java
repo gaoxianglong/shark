@@ -29,7 +29,7 @@ public class MessageDaoImpl implements MessageDao {
 	@Resource
 	private SharkJdbcTemplate jdbcTemplate;
 
-	@Resource
+	//@Resource
 	private PropertyPlaceholderConfigurer property;
 
 	@Resource

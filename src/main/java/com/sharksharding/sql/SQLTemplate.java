@@ -19,31 +19,39 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
-
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.sharksharding.exception.XmlResolveException;
 
 /**
- * 加载sql.properties配置文件中的sql信息
+ * 动态拼接sql的模板类
  * 
  * @author gaoxianglong
  * 
- * @version 1.3.5
+ * @version 1.4.1
  */
-public class PropertyPlaceholderConfigurer {
-	private Logger logger = LoggerFactory.getLogger(PropertyPlaceholderConfigurer.class);
-	private Properties properties;
+public class SQLTemplate {
 	private String path;
+	private Map<String, String> sqlMap;
+	private final String xpathExpression = "//sql";
+	private final String name = "name";
+	private Logger logger = LoggerFactory.getLogger(SQLTemplate.class);
 
-	private PropertyPlaceholderConfigurer(String path) {
+	private SQLTemplate(String path) {
 		this.path = path;
-		properties = new Properties();
+		sqlMap = new ConcurrentHashMap<String, String>();
 		load();
 	}
 
 	/**
-	 * 根据指定的路径加载sql.properties配置文件
+	 * 根据指定的路径加载sql.xml模板文件
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -54,7 +62,7 @@ public class PropertyPlaceholderConfigurer {
 	 * @return void
 	 */
 	private void load() {
-		if (null != properties) {
+		if (null != path) {
 			InputStream in = null;
 			try {
 				/* 检测是否需要从classpath下进行sql配置文件的读取 */
@@ -65,15 +73,13 @@ public class PropertyPlaceholderConfigurer {
 				if (null == in) {
 					/* 从文件路径获取sql配置文件 */
 					in = new FileInputStream(path);
-					properties.load(in);
+					resolveXml(in);
 				} else {
-					properties.load(in);
+					resolveXml(in);
 				}
 				logger.info("load sql file success");
 			} catch (FileNotFoundException e) {
 				throw new com.sharksharding.exception.FileNotFoundException(e.toString());
-			} catch (IOException e) {
-				e.printStackTrace();
 			} finally {
 				if (null != in) {
 					try {
@@ -87,6 +93,40 @@ public class PropertyPlaceholderConfigurer {
 	}
 
 	/**
+	 * 使用dom4j解析xml文件
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param in
+	 *            字节输入流
+	 * 
+	 * @exception XmlResolveException
+	 * 
+	 * @return void
+	 */
+	@SuppressWarnings("unchecked")
+	private void resolveXml(InputStream in) {
+		if (null == in)
+			return;
+		String sql = null;
+		Document document = null;
+		SAXReader saxReader = new SAXReader();
+		try {
+			document = saxReader.read(in);
+		} catch (DocumentException e) {
+			throw new XmlResolveException("xml resolve fail");
+		}
+		Element root = document.getRootElement();
+		List<Element> elements = root.selectNodes(xpathExpression);
+		if (!elements.isEmpty()) {
+			for (Element element : elements) {
+				sql = element.attribute(name).getValue();
+				sqlMap.put(sql, element.getText());
+			}
+		}
+	}
+
+	/**
 	 * 通过定义在配置文件中的持久层方法名称获取指定的sql信息
 	 * 
 	 * @author gaoxianglong
@@ -94,25 +134,14 @@ public class PropertyPlaceholderConfigurer {
 	 * @param key
 	 *            sql配置文件的检索条件
 	 * 
-	 * @param routeKey
-	 *            路由条件
+	 * @param params
+	 *            参数集合
 	 * 
 	 * @return String 指定的sql语句
 	 */
-	public String getSql(String key, long routeKey) {
-		String sql = null;
-		if (null != properties) {
-			sql = properties.getProperty(key);
-			/* 验证SQL语句WHERE条件后面是否带参数 */
-			if (SQLIsWhereColumn.isColumn(sql)) {
-				if (-1 != sql.indexOf("update") || -1 != sql.indexOf("UPDATE")) {
-					String value[] = sql.split("(where|WHERE)");
-					sql = value[0] + "WHERE" + value[1].replaceFirst("\\?", String.valueOf(routeKey));
-				} else {
-					sql = sql.replaceFirst("\\?", String.valueOf(routeKey));
-				}
-			}
-		}
-		return sql;
+	public String getSql(String key, Map<String, ?> params) {
+		final String sql = RenderSQLTemplate.render(sqlMap.get(key), params);
+		/* 验证SQL语句WHERE条件后面是否带参数 */
+		return SQLIsWhereColumn.isColumn(sql) ? sql : null;
 	}
 }

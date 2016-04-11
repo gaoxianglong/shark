@@ -13,26 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.test.sharksharding.use1;
-
-import java.util.List;
-import java.util.Map;
+package com.sharksharding.exception;
 
 /**
- * 用户信息Dao接口
+ * 渲染sql.xml模板异常
  * 
  * @author gaoxianglong
+ * 
+ * @version 1.4.1
  */
-public interface UserDao {
-	public void setUserInfo(UserInfo user) throws Exception;
+public class RenderException extends SharkRuntimeException {
+	private static final long serialVersionUID = -2422454821632859357L;
 
-	public void setUserInfo(Map<String, Object> params) throws Exception;
-
-	public List<UserInfo> getUserInfo(long uid) throws Exception;
-
-	public List<UserInfo> getUserInfo(Map<String, Object> params) throws Exception;
-
-	public void changeUserInfo(UserInfo user) throws Exception;
-
-	public void changeUserInfo(Map<String, Object> params) throws Exception;
+	public RenderException(String str) {
+		super(str);
+	}
 }

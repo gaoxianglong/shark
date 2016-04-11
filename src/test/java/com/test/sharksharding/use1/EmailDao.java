@@ -16,6 +16,7 @@
 package com.test.sharksharding.use1;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * email反向索引表Dao接口
@@ -25,5 +26,9 @@ import java.util.List;
 public interface EmailDao {
 	public void setEmail(EmailInfo email) throws Exception;
 
+	public void setEmail(Map<String, Object> params) throws Exception;
+
 	public List<EmailInfo> getEmail(EmailInfo email) throws Exception;
+
+	public List<EmailInfo> getEmail(Map<String, Object> params) throws Exception;
 }

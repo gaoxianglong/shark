@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql name="setEmail">
+		<![CDATA[
+			INSERT INTO email_test(email_hash,email,uid) VALUES(${email_hash},'${email}',${uid})
+		]]>
+	</sql>
+	<sql name="getEmail">
+		<![CDATA[
+			SELECT e.email_hash,e.email,e.uid FROM email_test e WHERE e.email_hash=${email_hash} AND e.email='${email}'
+		]]>
+	</sql>
+	<sql name="changeUserInfo">
+		<![CDATA[
+			UPDATE userinfo_test u SET u.username='${userName}' WHERE u.uid = ${uid}
+		]]>
+	</sql>
+	<sql name="setUserInfo">
+		<![CDATA[
+			INSERT INTO userinfo_test(uid,userName) values(${uid},'${userName}')
+		]]>
+	</sql>
+	<sql name="getUserInfo">
+		<![CDATA[
+			SELECT * FROM userinfo_test u 
+			#if(${uid})
+				WHERE u.uid = ${uid} 
+			#end
+			#if(${userName})
+				AND u.userName = '${userName}'
+			#end
+		]]>
+	</sql>
+</sqls>

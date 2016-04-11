@@ -38,19 +38,19 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void setUserInfo(UserInfo user) throws Exception {
-		final String SQL = "insert into userinfo_test(uid,userName) values(" + user.getUid() + ",?)";
-		jdbcTemplate.update(SQL, new Object[] { user.getUserName() });
+		final String sql = "insert into userinfo_test(uid,userName) values(" + user.getUid() + ",?)";
+		jdbcTemplate.update(sql, new Object[] { user.getUserName() });
 	}
 
 	@Override
 	public List<UserInfo> getUserInfo(long uid) throws Exception {
-		final String SQL = "select * from userinfo_test t where t.uid = " + uid + "";
-		return jdbcTemplate.query(SQL, userInfoMapper);
+		final String sql = "select * from userinfo_test t where t.uid = " + uid + "";
+		return jdbcTemplate.query(sql, userInfoMapper);
 	}
 
 	@Override
 	public List<UserInfo> getUserInfos() throws Exception {
-		final String SQL = "select * from userinfo_test";
-		return jdbcTemplate.query(SQL, userInfoMapper);
+		final String sql = "select * from userinfo_test";
+		return jdbcTemplate.query(sql, userInfoMapper);
 	}
 }

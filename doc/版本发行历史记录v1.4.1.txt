@@ -2,7 +2,7 @@
 【版本号】
 	1.4.1
 【功能改动】
-  a、支持velocity模板引擎，类似mybatis的sql配置方式(与shark目前的properties方式
+  a、基于velocity模板引擎渲染内容,支持动态拼接sql,类似mybatis的sql配置方式(与shark目前的properties方式
      并存)，支持表达式；
   b、自动对spring mapper进行赋值映射操作；
   c、调整生成全局唯一的sequenceid算法API；

@@ -32,4 +32,8 @@
 			</map>
 		</property>
 	</bean>
+	<bean class="com.sharksharding.sql.PropertyPlaceholderConfigurer">
+		<constructor-arg name="path"
+			value="classpath:properties/sql.properties" />
+	</bean>
 </beans>

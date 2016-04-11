@@ -16,10 +16,15 @@
 package com.test.sharksharding.use1;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Repository;
+
 import com.sharksharding.core.shard.SharkJdbcTemplate;
 import com.sharksharding.sql.PropertyPlaceholderConfigurer;
+import com.sharksharding.sql.SQLTemplate;
 
 /**
  * email反向索引表Dao接口
@@ -31,21 +36,36 @@ public class EmailDaoImpl implements EmailDao {
 	@Resource
 	private SharkJdbcTemplate jdbcTemplate;
 
-	@Resource
+	// @Resource
 	private PropertyPlaceholderConfigurer property;
+
+	@Resource
+	private SQLTemplate sqlTemplate;
 
 	@Resource
 	private EmailInfoMapper emailMapper;
 
 	@Override
 	public void setEmail(EmailInfo email) throws Exception {
-		final String SQL = property.getSql("insertEmail", email.getEmail_hash());
-		jdbcTemplate.update(SQL, new Object[] { email.getEmail(), email.getUid() });
+		final String sql = property.getSql("insertEmail", email.getEmail_hash());
+		jdbcTemplate.update(sql, new Object[] { email.getEmail(), email.getUid() });
 	}
 
 	@Override
 	public List<EmailInfo> getEmail(EmailInfo email) throws Exception {
-		final String SQL = property.getSql("queryEmail", email.getEmail_hash());
-		return jdbcTemplate.query(SQL, new Object[] { email.getEmail() }, emailMapper);
+		final String sql = property.getSql("queryEmail", email.getEmail_hash());
+		return jdbcTemplate.query(sql, new Object[] { email.getEmail() }, emailMapper);
+	}
+
+	@Override
+	public void setEmail(Map<String, Object> params) throws Exception {
+		final String sql = sqlTemplate.getSql("setEmail", params);
+		jdbcTemplate.update(sql);
+	}
+
+	@Override
+	public List<EmailInfo> getEmail(Map<String, Object> params) throws Exception {
+		final String sql = sqlTemplate.getSql("getEmail", params);
+		return jdbcTemplate.query(sql, emailMapper);
 	}
 }

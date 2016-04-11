@@ -38,8 +38,7 @@
 			</map>
 		</property>
 	</bean>
-	<bean class="com.sharksharding.sql.PropertyPlaceholderConfigurer">
-		<constructor-arg name="path"
-			value="classpath:properties/sql.properties" />
+	<bean id="sqlTemplate" class="com.sharksharding.sql.SQLTemplate">
+		<constructor-arg name="path" value="classpath:properties/sql.xml" />
 	</bean>
 </beans>
