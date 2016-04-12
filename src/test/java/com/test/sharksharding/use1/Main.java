@@ -87,6 +87,7 @@ public class Main {
 			params.put("userName", "gaoxianglong");
 			userDao.setUserInfo(params);
 			logger.info("insert table:userinfo_test success");
+			testQuery();
 		} catch (Exception e) {
 			logger.error("insert data fail", e);
 		}
@@ -97,7 +98,7 @@ public class Main {
 	 * 
 	 * @author gaoxianglong
 	 */
-	public @Test void testQuery() {
+	public void testQuery() {
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("email", email);

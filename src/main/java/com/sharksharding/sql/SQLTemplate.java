@@ -108,7 +108,6 @@ public class SQLTemplate {
 	private void resolveXml(InputStream in) {
 		if (null == in)
 			return;
-		String sql = null;
 		Document document = null;
 		SAXReader saxReader = new SAXReader();
 		try {
@@ -120,9 +119,11 @@ public class SQLTemplate {
 		List<Element> elements = root.selectNodes(xpathExpression);
 		if (!elements.isEmpty()) {
 			for (Element element : elements) {
-				sql = element.attribute(name).getValue();
+				final String sql = element.attribute(name).getValue();
 				sqlMap.put(sql, element.getText());
 			}
+		} else {
+			throw new XmlResolveException("element <sql/> not found");
 		}
 	}
 

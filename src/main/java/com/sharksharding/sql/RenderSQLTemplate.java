@@ -58,7 +58,6 @@ public class RenderSQLTemplate {
 			Velocity.evaluate(velocityContext, result, "", template);
 			sql = result.toString().replaceAll("\n", "").replaceAll("\t", "");
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RenderException("render fail");
 		}
 		return sql;
