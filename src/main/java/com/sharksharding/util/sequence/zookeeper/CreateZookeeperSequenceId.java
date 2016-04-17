@@ -27,7 +27,7 @@ import com.sharksharding.util.sequence.CreateSequenceIdServiceImpl;
  * 
  * @author JohnGao
  * 
- * @version 1.3.7
+ * @version 1.4.1
  */
 public class CreateZookeeperSequenceId extends CreateSequenceIdServiceImpl {
 	private StringBuffer str;
@@ -35,28 +35,28 @@ public class CreateZookeeperSequenceId extends CreateSequenceIdServiceImpl {
 	private ZooKeeper zk_client;
 	private ConcurrentHashMap<Integer, Long> useDataMap;
 	private ConcurrentHashMap<Integer, Integer> surplusDataMap;
-	private ConcurrentHashMap<String, Integer> versionMap;
-	private NodeService nodeService;
+	public static ConcurrentHashMap<String, Integer> versionMap;
+	private ZnodeService znodeService;
 
 	public CreateZookeeperSequenceId() {
 		str = new StringBuffer();
-		nodeService = new NodeService();
+		znodeService = new ZnodeService();
 		useDataMap = new ConcurrentHashMap<Integer, Long>();
 		surplusDataMap = new ConcurrentHashMap<Integer, Integer>();
 		versionMap = new ConcurrentHashMap<String, Integer>();
 	}
 
 	@Override
-	public long getSequenceId(String rootPath, int idcNum, int type, long memData) {
+	public long getSequenceId(String rootNodePath, int idcNum, int type, long memData) {
 		long sequenceId = -1;
 		/* 避免在并发环境下出现线程安全，则添加排他锁 */
 		synchronized (this) {
 			zk_client = ZookeeperConnectionManager.getZk_client();
 			if (null != zk_client) {
 				this.memData = memData;
-				final String nodePath = String.valueOf(type);
+				final String childrenNodePath = String.valueOf(type);
 				/* idc机房编码数据长度必须为3位,type数据长度必须为6位 */
-				if (3 == String.valueOf(100).length() && 6 == nodePath.length()) {
+				if (3 == String.valueOf(100).length() && 6 == childrenNodePath.length()) {
 					try {
 						/* 根据指定的类别从内存中获取剩余的占位数量 */
 						Integer surplusData = surplusDataMap.get(type);
@@ -65,34 +65,37 @@ public class CreateZookeeperSequenceId extends CreateSequenceIdServiceImpl {
 								surplusDataMap.put(type, --surplusData);
 								Long useData = useDataMap.get(type);
 								if (null == useData) {
-									useData = nodeService.getUseData(zk_client, rootPath, nodePath, memData);
+									useData = znodeService.getUseData(zk_client, rootNodePath, childrenNodePath,
+											memData);
 									useDataMap.put(type, useData);
 								}
 								sequenceId = createSequenceId(useData - surplusData, idcNum, type);
 							} else {
 								/* 生成当前占位数 */
-								Long useData = createUseData(zk_client, rootPath);
+								Long useData = createUseData(zk_client, rootNodePath);
 								surplusData = (int) memData;
-								Integer version = versionMap.get(nodePath);
+								Integer version = versionMap.get(childrenNodePath);
 								if (null == version)
 									version = 1;
 								/* 根据指定的类别更新当前占位数量 */
-								nodeService.changeUseData(zk_client, rootPath, nodePath, useData, memData, version);
-								version = NodeService.version;
-								versionMap.put(nodePath, version);
+								znodeService.changeUseData(zk_client, rootNodePath, childrenNodePath, useData, memData,
+										version);
+								version = ZnodeService.zk_version;
+								versionMap.put(childrenNodePath, version);
 								surplusDataMap.put(type, --surplusData);
 								useDataMap.put(type, useData);
 								sequenceId = createSequenceId(useData - surplusData, idcNum, type);
 							}
 						} else {
-							Long useData = createUseData(zk_client, rootPath);
+							Long useData = createUseData(zk_client, rootNodePath);
 							surplusData = (int) memData;
-							Integer version = versionMap.get(nodePath);
+							Integer version = versionMap.get(childrenNodePath);
 							if (null == version)
 								version = 1;
-							nodeService.changeUseData(zk_client, rootPath, nodePath, useData, memData, version);
-							version = NodeService.version;
-							versionMap.put(nodePath, version);
+							znodeService.changeUseData(zk_client, rootNodePath, childrenNodePath, useData, memData,
+									version);
+							version = ZnodeService.zk_version;
+							versionMap.put(childrenNodePath, version);
 							surplusDataMap.put(type, --surplusData);
 							useDataMap.put(type, useData);
 							sequenceId = createSequenceId(useData - surplusData, idcNum, type);
@@ -145,16 +148,16 @@ public class CreateZookeeperSequenceId extends CreateSequenceIdServiceImpl {
 	 * @param zk_client
 	 *            session会话
 	 * 
-	 * @param rootPath
-	 *            根目录
+	 * @param rootNodePath
+	 *            zk根节点
 	 * 
 	 * @throws Exception
 	 * 
 	 * @return long 返回生成的当前占位数据
 	 */
-	private long createUseData(ZooKeeper zk_client, String rootPath) throws Exception {
+	private long createUseData(ZooKeeper zk_client, String rootNodePath) throws Exception {
 		/* 获取当前最大的占位数据 */
-		Long useData = nodeService.maxUseData(zk_client, rootPath);
+		Long useData = znodeService.maxUseData(zk_client, rootNodePath);
 		return null != useData ? useData += memData : memData;
 	}
 }

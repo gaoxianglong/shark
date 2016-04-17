@@ -29,7 +29,7 @@ public abstract class CreateSequenceIdServiceImpl implements CreateSequenceIdSer
 	}
 
 	@Override
-	public long getSequenceId(String rootPath, int idcNum, int type, long memData) {
+	public long getSequenceId(String rootNodePath, int idcNum, int type, long memData) {
 		return -1L;
 	}
 }

@@ -46,8 +46,8 @@ public interface CreateSequenceIdService {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @param rootPath
-	 *            znode根目录
+	 * @param rootNodePath
+	 *            zk根节点
 	 * 
 	 * @param idcNum
 	 *            IDC机房编码, 用于区分不同的IDC机房,3位数字长度
@@ -60,5 +60,5 @@ public interface CreateSequenceIdService {
 	 * 
 	 * @return long 返回生成的19位数字长度的sequenceId
 	 */
-	public long getSequenceId(String rootPath, int idcNum, int type, long memData);
+	public long getSequenceId(String rootNodePath, int idcNum, int type, long memData);
 }
