@@ -15,8 +15,6 @@
  */
 package com.sharksharding.util.sequence;
 
-import com.sharksharding.exception.ResourceException;
-
 /**
  * 生成SequenceId服务实现
  * 
@@ -31,7 +29,7 @@ public abstract class CreateSequenceIdServiceImpl implements CreateSequenceIdSer
 	}
 
 	@Override
-	public long getSequenceId(String rootPath, int idcNum, int type) throws ResourceException {
+	public long getSequenceId(String rootPath, int idcNum, int type, long memData) {
 		return -1L;
 	}
 }

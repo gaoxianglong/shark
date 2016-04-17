@@ -5,7 +5,7 @@
   a、基于velocity模板引擎渲染内容,支持动态拼接sql,类似mybatis的sql配置方式(与shark目前的properties方式
      并存)，支持表达式；
   b、自动对spring mapper进行赋值映射操作；
-  c、调整生成全局唯一的sequenceid算法API；
+  c、调整基于zookeeper生成全局唯一的sequenceid算法；
   d、解析sql语句时，开始支持数据库别名；
   e、底层解析分库分表索引时将%运算替换为&运算；
   f、将切换数据源动作的日志记录调整到SharkDatasourceGroup.

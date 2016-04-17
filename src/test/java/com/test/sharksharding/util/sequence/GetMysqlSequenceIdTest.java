@@ -49,7 +49,7 @@ public class GetMysqlSequenceIdTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void getSequenceId() {
-		System.out.println(SequenceIDManger.getSequenceId(1, 1, 5000));
+		System.out.println(SequenceIDManger.getSequenceId(100, 10, 5000));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class GetMysqlSequenceIdTest {
 	 */
 	public @Test void getSequenceId2() {
 		for (int i = 0; i < 1000; i++) {
-			System.out.println(SequenceIDManger.getSequenceId(1, 1, 5000));
+			System.out.println(SequenceIDManger.getSequenceId(100, 10, 5000));
 		}
 	}
 
@@ -76,7 +76,7 @@ public class GetMysqlSequenceIdTest {
 		new Thread() {
 			public void run() {
 				for (int i = 0; i < size; i++) {
-					id1.add(SequenceIDManger.getSequenceId(1, 1, 5000));
+					id1.add(SequenceIDManger.getSequenceId(100, 10, 5000));
 				}
 				count.countDown();
 			}
@@ -84,7 +84,7 @@ public class GetMysqlSequenceIdTest {
 		new Thread() {
 			public void run() {
 				for (int i = 0; i < size; i++) {
-					id2.add(SequenceIDManger.getSequenceId(1, 1, 5000));
+					id2.add(SequenceIDManger.getSequenceId(100, 10, 5000));
 				}
 				count.countDown();
 			}

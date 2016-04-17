@@ -86,15 +86,15 @@ public class SequenceIDManger {
 	 * @author gaoxianglong
 	 * 
 	 * @param idcNum
-	 *            IDC机房编码, 用于区分不同的IDC机房,1-3位数字长度
+	 *            IDC机房编码, 用于区分不同的IDC机房,3位数字长度
 	 * 
 	 * @param type
-	 *            业务类别,1-2位数字长度
+	 *            业务类别,2位数字长度
 	 * 
 	 * @param memData
 	 *            内存占位数量
 	 * 
-	 * @return long 返回生成的17-19位数字长度的sequenceId
+	 * @return long 返回生成的19位数字长度的sequenceId
 	 */
 	public static long getSequenceId(int idcNum, int type, long memData) {
 		return createMysqlSequenceIdFactory.getCreateSequenceIdService().getSequenceId(idcNum, type, memData);
@@ -109,17 +109,18 @@ public class SequenceIDManger {
 	 *            znode根目录
 	 * 
 	 * @param idcNum
-	 *            IDC机房编码, 用于区分不同的IDC机房,1-3位数字长度
+	 *            IDC机房编码, 用于区分不同的IDC机房,3位数字长度
 	 * 
 	 * @param type
-	 *            业务类别,1-6位数字长度
+	 *            业务类别,6位数字长度
 	 * 
 	 * @param memData
 	 *            内存占位数量
 	 * 
-	 * @return long 返回生成的12-19位数字长度的sequenceId
+	 * @return long 返回生成的19位数字长度的sequenceId
 	 */
-	public static long getSequenceId(String rootPath, int idcNum, int type) throws ResourceException {
-		return createZookeeperSequenceIdFactory.getCreateSequenceIdService().getSequenceId(rootPath, idcNum, type);
+	public static long getSequenceId(String rootPath, int idcNum, int type, long memData) {
+		return createZookeeperSequenceIdFactory.getCreateSequenceIdService().getSequenceId(rootPath, idcNum, type,
+				memData);
 	}
 }

@@ -22,7 +22,7 @@ package com.sharksharding.exception;
  * 
  * @version 1.3.7
  */
-public class ResourceException extends SharkException {
+public class ResourceException extends SharkRuntimeException {
 	private static final long serialVersionUID = -1280572478348303040L;
 
 	public ResourceException(String str) {

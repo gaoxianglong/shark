@@ -21,8 +21,6 @@ import java.util.concurrent.CountDownLatch;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.sharksharding.exception.ResourceException;
 import com.sharksharding.util.sequence.SequenceIDManger;
 
 /**
@@ -50,11 +48,7 @@ public class GetZookeeperSequenceIdTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void getSequenceId() {
-		try {
-			System.out.println(SequenceIDManger.getSequenceId(PATH, 1, 1));
-		} catch (ResourceException e) {
-			e.printStackTrace();
-		}
+		System.out.println(SequenceIDManger.getSequenceId(PATH, 100, 100000, 5000));
 	}
 
 	/**
@@ -63,12 +57,8 @@ public class GetZookeeperSequenceIdTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void getSequenceId2() {
-		for (int i = 0; i < 10; i++) {
-			try {
-				System.out.println(SequenceIDManger.getSequenceId(PATH, 1, 1));
-			} catch (ResourceException e) {
-				e.printStackTrace();
-			}
+		for (int i = 0; i < 1000; i++) {
+			System.out.println(SequenceIDManger.getSequenceId(PATH, 100, 100000, 5000));
 		}
 	}
 
@@ -81,15 +71,11 @@ public class GetZookeeperSequenceIdTest {
 		final CountDownLatch count = new CountDownLatch(2);
 		final List<Long> id1 = new ArrayList<Long>();
 		final List<Long> id2 = new ArrayList<Long>();
-		final int size = 20;
+		final int size = 10000;
 		new Thread() {
 			public void run() {
 				for (int i = 0; i < size; i++) {
-					try {
-						id1.add(SequenceIDManger.getSequenceId(PATH, 1, 1));
-					} catch (ResourceException e) {
-						e.printStackTrace();
-					}
+					id1.add(SequenceIDManger.getSequenceId(PATH, 100, 100000, 5000));
 				}
 				count.countDown();
 			}
@@ -97,11 +83,7 @@ public class GetZookeeperSequenceIdTest {
 		new Thread() {
 			public void run() {
 				for (int i = 0; i < size; i++) {
-					try {
-						id2.add(SequenceIDManger.getSequenceId(PATH, 1, 1));
-					} catch (ResourceException e) {
-						e.printStackTrace();
-					}
+					id2.add(SequenceIDManger.getSequenceId(PATH, 100, 200000, 5000));
 				}
 				count.countDown();
 			}
