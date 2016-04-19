@@ -47,7 +47,8 @@ public class CreateXmlTest {
 		c_xml.setConsistent("false");
 		c_xml.setDbRuleArray("#userinfo_id|email_hash# % 1024 / 32");
 		c_xml.setTbRuleArray("#userinfo_id|email_hash# % 1024 % 32");
-		c_xml.setSqlPath("classpath:properties/sqlFile.properties");
+		c_xml.setSqlPath("classpath:properties/sql.xml");
+		c_xml.setTbSuffix("_0000");
 		/* 执行配置文件输出 */
 		Assert.assertTrue(c_xml.createCoreXml(new File("e:/shark-context.xml")));
 	}

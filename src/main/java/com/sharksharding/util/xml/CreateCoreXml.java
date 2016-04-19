@@ -39,6 +39,7 @@ public class CreateCoreXml {
 	private String shardMode;
 	private String sqlPath;
 	private boolean isShow;
+	private String tbSuffix;
 	private Marshaller marshaller;
 
 	public CreateCoreXml() {
@@ -68,11 +69,15 @@ public class CreateCoreXml {
 			/* 创建<bean/>子标签 */
 			Bean bean1 = new Bean();
 			bean1.setId("jdbcTemplate");
-			bean1.setClass_("com.sharksharding.core.shard.KratosJdbcTemplate");
+			bean1.setClass_("com.sharksharding.core.shard.SharkJdbcTemplate");
+			bean1.setInit_method("init");
 			/* 创建<property/>子标签 */
+			Property isShard = new Property();
+			isShard.setName("isShard");
+			isShard.setRef("true");
 			Property dataSource = new Property();
 			dataSource.setName("dataSource");
-			dataSource.setRef("kDataSourceGroup");
+			dataSource.setRef("dataSourceGroup");
 			Property wr_index = new Property();
 			wr_index.setName("wr_index");
 			wr_index.setValue(this.getWr_index());
@@ -88,23 +93,28 @@ public class CreateCoreXml {
 			Property tbRuleArray = new Property();
 			tbRuleArray.setName("tbRuleArray");
 			tbRuleArray.setValue(this.getTbRuleArray());
+			Property tbSuffix = new Property();
+			tbSuffix.setName("tbSuffix");
+			tbSuffix.setValue(this.getTbSuffix());
 			List<Property> propertys = new ArrayList<Property>();
+			propertys.add(isShard);
 			propertys.add(dataSource);
 			propertys.add(wr_index);
 			propertys.add(shardMode);
 			propertys.add(consistent);
 			propertys.add(dbRuleArray);
 			propertys.add(tbRuleArray);
+			propertys.add(tbSuffix);
 			bean1.setProperty(propertys);
 			/* 创建<constructor_arg/>子标签 */
-			ConstructorArg constructor_arg = new ConstructorArg();
-			constructor_arg.setName("isShard");
-			constructor_arg.setValue(this.isShard());
-			bean1.setConstructor_arg(constructor_arg);
+			// ConstructorArg constructor_arg = new ConstructorArg();
+			// constructor_arg.setName("isShard");
+			// constructor_arg.setValue(this.isShard());
+			// bean1.setConstructor_arg(constructor_arg);
 			/* 创建<bean/>子标签 */
 			Bean bean2 = new Bean();
 			bean2.setId("dataSourceGroup");
-			bean2.setClass_("com.sharksharding.core.config.KratosDatasourceGroup");
+			bean2.setClass_("com.sharksharding.core.config.SharkDatasourceGroup");
 			/* 创建<property/>子标签 */
 			Property targetDataSources = new Property();
 			targetDataSources.setName("targetDataSources");
@@ -126,8 +136,8 @@ public class CreateCoreXml {
 			bean2.setProperty(propertys);
 			/* 创建<bean/>子标签 */
 			Bean bean3 = new Bean();
-			bean3.setId("property");
-			bean3.setClass_("com.sharksharding.sql.PropertyPlaceholderConfigurer");
+			bean3.setId("sqlTemplate");
+			bean3.setClass_("com.sharksharding.sql.SQLTemplate");
 			/* 创建<constructor_arg/>子标签 */
 			ConstructorArg constructor_arg1 = new ConstructorArg();
 			constructor_arg1.setName("path");
@@ -226,5 +236,13 @@ public class CreateCoreXml {
 
 	public void setWr_index(String wr_index) {
 		this.wr_index = wr_index;
+	}
+
+	public String getTbSuffix() {
+		return tbSuffix;
+	}
+
+	public void setTbSuffix(String tbSuffix) {
+		this.tbSuffix = tbSuffix;
 	}
 }
