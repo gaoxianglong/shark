@@ -65,7 +65,7 @@ public class Main {
 	 */
 	public @BeforeClass static void init() {
 		SequenceIDManger.init(NAME, PWD, URL, DRIVER);
-		sequenceid = SequenceIDManger.getSequenceId(1, 1, 100);
+		sequenceid = SequenceIDManger.getSequenceId(100, 10, 100);
 		logger.info("sequenceid-->" + sequenceid);
 	}
 

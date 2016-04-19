@@ -74,7 +74,7 @@ public class CreateCoreXml {
 			/* 创建<property/>子标签 */
 			Property isShard = new Property();
 			isShard.setName("isShard");
-			isShard.setRef("true");
+			isShard.setValue("true");
 			Property dataSource = new Property();
 			dataSource.setName("dataSource");
 			dataSource.setRef("dataSourceGroup");
