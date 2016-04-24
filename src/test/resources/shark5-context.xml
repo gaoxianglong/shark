@@ -17,7 +17,7 @@
 		<context:include-filter type="annotation"
 			expression="org.aspectj.lang.annotation.Aspect" />
 	</context:component-scan>
-	<!-- 片名连续的一库一片配置 -->
+	<!-- 非片名连续的一库一片配置 -->
 	<bean id="jdbcTemplate" class="com.sharksharding.core.shard.SharkJdbcTemplate"
 		init-method="init">
 		<property name="isShard" value="true" />
