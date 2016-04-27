@@ -23,7 +23,7 @@
 <a id="目录" class="anchor" href="#%E7%9B%AE%E5%BD%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>目录</h2>
 
 <ul>
-<li>1、shark入门<br>
+<li>1 shark入门<br>
 
 <ul>
 <li>1.1 dataBase架构演变史<br>
@@ -55,7 +55,7 @@
 </li>
 </ul>
 </li>
-<li>2、配置读写分离操作<br>
+<li>2 配置读写分离操作<br>
 
 <ul>
 <li>2.1、sql编写注意事项<br>
@@ -64,7 +64,7 @@
 </li>
 </ul>
 </li>
-<li>3、配置sharding操作<br>
+<li>3 配置sharding操作<br>
 
 <ul>
 <li>3.1 数据库sharding后带来的影响<br>
@@ -112,7 +112,7 @@
 </li>
 </ul>
 </li>
-<li>4、使用配置中心<br>
+<li>4 使用配置中心<br>
 
 <ul>
 <li>4.1 基于zookeeper的资源配置中心<br>
@@ -126,16 +126,18 @@
 </li>
 </ul>
 </li>
+<li>4.3 配置中心使用注意<br>
+</li>
 </ul>
 </li>
-<li>5、运维监控<br>
+<li>5 运维监控<br>
 
 <ul>
 <li>5.1 配置shark内置验证页面<br>
 </li>
 </ul>
 </li>
-<li>6、HA方案<br>
+<li>6 HA方案<br>
 
 <ul>
 <li>6.1 基于配置中心实现HA<br>
@@ -146,7 +148,7 @@
 </li>
 </ul>
 </li>
-<li>7、增强Spring Jdbc<br>
+<li>7 增强Spring Jdbc<br>
 
 <ul>
 <li>7.1 mapper自动映射<br>
@@ -168,7 +170,7 @@
 </ul>
 
 <h2>
-<a id="1shark入门" class="anchor" href="#1shark%E5%85%A5%E9%97%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1、shark入门</h2>
+<a id="1-shark入门" class="anchor" href="#1-shark%E5%85%A5%E9%97%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1 shark入门</h2>
 
 <p>本篇作为本文的开篇，笔者衷心希望能够用干练的语句将shark的各个技术点尽可能的阐述清楚。同时为了保证你能够尽快上手shark，那么请仔细阅读用户指南的每一个章节。</p>
 
@@ -391,7 +393,7 @@ mvn test-compile</pre></div>
 </ul>
 
 <h2>
-<a id="2配置读写分离操作" class="anchor" href="#2%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2、配置读写分离操作</h2>
+<a id="2-配置读写分离操作" class="anchor" href="#2-%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2 配置读写分离操作</h2>
 
 <p>com.sharksharding.core.shard.SharkJdbcTemplate是Shark提供jdbc模板，继承自org.springframework.jdbc.core.JdbcTemplate。简单来说，SharkJdbcTemplate支持除批量操作外JdbcTemplate的所有原生方法。对于开发人员而言，只需要将Spring的JdbcTemplate替换为Shark的SharkJdbcTemplate即可，除此之外，业务逻辑代码中不再有任何的侵入。</p>
 
@@ -439,7 +441,7 @@ mvn test-compile</pre></div>
 <img src="http://dl.iteye.com/upload/picture/pic/135381/a9d5b910-34eb-364c-9dbe-e115405530ca.jpg" alt=""></p>
 
 <h2>
-<a id="21sql编写注意事项" class="anchor" href="#21sql%E7%BC%96%E5%86%99%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.1、sql编写注意事项</h2>
+<a id="21-sql编写注意事项" class="anchor" href="#21-sql%E7%BC%96%E5%86%99%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.1 sql编写注意事项</h2>
 
 <p>sql语句的第一个参数必须是shardkey。耦合在业务代码中的sql语句，如下所示：</p>
 
@@ -452,7 +454,7 @@ mvn test-compile</pre></div>
 <p>也就是说，第一个参数不允许是占位符，而必须是实际参数。在某些情况下，我们可能不太希望将sql耦合在我们的业务代码中，这种情况下，shark提供有类似于mybatis的做法，将sql定义在配置文件中。详情请见3.1小结。</p>
 
 <h2>
-<a id="22sql别名支持" class="anchor" href="#22sql%E5%88%AB%E5%90%8D%E6%94%AF%E6%8C%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.2、sql别名支持</h2>
+<a id="22-sql别名支持" class="anchor" href="#22-sql%E5%88%AB%E5%90%8D%E6%94%AF%E6%8C%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.2 sql别名支持</h2>
 
 <p>在shark1.4.1版本之前，sql语句中是不允许带别名的，因为别名的应用场景更多是集中在多表查询中，因此shark早期版本并不打算支持别名，但是shark1.4.1及后续版本中，将正式开始支持，如下所示：</p>
 
@@ -462,7 +464,7 @@ mvn test-compile</pre></div>
 <span class="pl-k">select</span> <span class="pl-k">*</span> <span class="pl-k">from</span> tab <span class="pl-k">where</span> c1<span class="pl-k">=</span>? <span class="pl-k">and</span> c2<span class="pl-k">=</span>?</pre></div>
 
 <h2>
-<a id="3配置sharding操作" class="anchor" href="#3%E9%85%8D%E7%BD%AEsharding%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3、配置sharding操作</h2>
+<a id="3-配置sharding操作" class="anchor" href="#3-%E9%85%8D%E7%BD%AEsharding%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3 配置sharding操作</h2>
 
 <p>如果你觉得使用shark配置读写分离后并不能够满足场景需要，那么你可以使用本节的sharding配置。</p>
 
@@ -922,12 +924,12 @@ logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"<
 <p><img src="http://dl.iteye.com/upload/picture/pic/134665/824666f0-3902-3709-9dd1-9bb1b960e81d.png" alt=""></p>
 
 <h2>
-<a id="4使用配置中心" class="anchor" href="#4%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4、使用配置中心</h2>
+<a id="4-使用配置中心" class="anchor" href="#4-%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4 使用配置中心</h2>
 
 <p>如果项目采用分布式架构进行部署后，配置文件始终是个大问题。开发人员往往希望当配置发生改变后，可以不重新启动程序便可动态加载。目前shark支持基于zookeeper、redis3.x cluster作为集中式资源配置中心，一旦相关配置发生改变后，shark所持有的信息确保将是最新的，相对于本地配置文件，集中式资源配置中心将会大大降低维护成本和部署成本。</p>
 
 <h2>
-<a id="41基于zookeeper的资源配置中心" class="anchor" href="#41%E5%9F%BA%E4%BA%8Ezookeeper%E7%9A%84%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.1、基于zookeeper的资源配置中心</h2>
+<a id="41-基于zookeeper的资源配置中心" class="anchor" href="#41-%E5%9F%BA%E4%BA%8Ezookeeper%E7%9A%84%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.1 基于zookeeper的资源配置中心</h2>
 
 <p>一旦使用资源配置中心，那么程序中将不再需要将sharding信息和数据源信息配置在本地配置文件中，而是配置在资源配置中心。配置信息，如下所示：</p>
 
@@ -947,11 +949,6 @@ logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"<
 
 <p>上述程序示例中，RegisterDataSource会动态向spring的ioc容器中注册bean实例。而ZookeeperConnectionManager中，我们需要配置一系列zookeeper相关的信息，其中包括资源文件所在的nodepath。</p>
 
-<p>使用配置中心后，不能继续使用Spring自动装配后的SharkJdbcTemplate，因为当配置中心发生改变后，应用持有的仍然是之前引用，因此必须通过GetJdbcTemplate.getSharkJdbcTemplate()方法获取SharkJdbcTemplate实例，如下所示：</p>
-
-<div class="highlight highlight-source-java"><pre><span class="pl-c">/* 获取SharkJdbcTemplate实例 */</span>
-<span class="pl-smi">SharkJdbcTemplate</span> jdbcTemlate <span class="pl-k">=</span> <span class="pl-smi">GetJdbcTemplate</span><span class="pl-k">.</span>getSharkJdbcTemplate();</pre></div>
-
 <p>如果使用配置中心，那么建议在客户端的log4j.xml配置文件中关闭如下日志输出：</p>
 
 <div class="highlight highlight-text-xml"><pre><span class="pl-c">&lt;!-- 避免druid抛出javax.management.InstanceAlreadyExistsException异常 --&gt;</span>
@@ -960,7 +957,7 @@ logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"<
 &lt;/<span class="pl-ent">logger</span>&gt;</pre></div>
 
 <h2>
-<a id="42基于redis3-cluster的资源配置中心" class="anchor" href="#42%E5%9F%BA%E4%BA%8Eredis3-cluster%E7%9A%84%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.2、基于redis3 cluster的资源配置中心</h2>
+<a id="42-基于redis3-cluster的资源配置中心" class="anchor" href="#42-%E5%9F%BA%E4%BA%8Eredis3-cluster%E7%9A%84%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.2 基于redis3 cluster的资源配置中心</h2>
 
 <p>shark除了支持基于zookeeper作为资源配置中心外，同时也支持基于redis3 cluster作为资源配置中心。配置信息，如下所示：</p>
 
@@ -996,7 +993,15 @@ logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"<
 <p>如果RedisConnectionManager中使用md5码比对资源差异，那么RedisWatcher每隔10s会自动向配置中心获取一次资源数据。如果配置中心的配置信息的md5码与shark的配置中心客户端持有的md5码不一致，则认为配置中心发生了改变。</p>
 
 <h2>
-<a id="5运维监控" class="anchor" href="#5%E8%BF%90%E7%BB%B4%E7%9B%91%E6%8E%A7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5、运维监控</h2>
+<a id="43-配置中心使用注意" class="anchor" href="#43-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.3 配置中心使用注意</h2>
+
+<p>使用配置中心后，不能继续使用Spring自动装配后的SharkJdbcTemplate，因为当配置中心发生改变后，应用持有的仍然是之前引用，因此必须通过GetJdbcTemplate.getSharkJdbcTemplate()方法获取SharkJdbcTemplate实例，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-c">/* 获取SharkJdbcTemplate实例 */</span>
+<span class="pl-smi">SharkJdbcTemplate</span> jdbcTemlate <span class="pl-k">=</span> <span class="pl-smi">GetJdbcTemplate</span><span class="pl-k">.</span>getSharkJdbcTemplate();</pre></div>
+
+<h2>
+<a id="5-运维监控" class="anchor" href="#5-%E8%BF%90%E7%BB%B4%E7%9B%91%E6%8E%A7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5 运维监控</h2>
 
 <p>在进行sharding后，shark提供有一个sql验证页面，能够方便开发、测试、运维人员对落盘后的数据信息进行验证。</p>
 
@@ -1021,7 +1026,7 @@ logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"<
 <p>考虑到测试环境、生产环境的安全性，内置验证页面缺省是只支持query操作，而其他写入操作将不支持。 </p>
 
 <h2>
-<a id="6ha方案" class="anchor" href="#6ha%E6%96%B9%E6%A1%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6、HA方案</h2>
+<a id="6-ha方案" class="anchor" href="#6-ha%E6%96%B9%E6%A1%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6 HA方案</h2>
 
 <p>shark缺省并没有提供HA机制，但是可以在生产或测试环境中，使用Keepalived、MHA、配置中心等方式来实现高可用。如果业务场景不允许在主从切换过程中出现少量数据的丢失，那么建议使用MHA等方式。</p>
 
@@ -1041,7 +1046,7 @@ logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"<
 <p>基于MHA实现HA，理论上是不会丢失数据信息的，而6.1和6.2小节的HA方案都会丢失数据，因此如果不希望生产丢失数据，建议使用MHA实现HA。</p>
 
 <h2>
-<a id="7增强spring-jdbc" class="anchor" href="#7%E5%A2%9E%E5%BC%BAspring-jdbc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7、增强Spring Jdbc</h2>
+<a id="7-增强spring-jdbc" class="anchor" href="#7-%E5%A2%9E%E5%BC%BAspring-jdbc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7 增强Spring Jdbc</h2>
 
 <p>shark之所以会在springjdbc的现有功能上进行增强，主要是为了提升开发人员的编码效率，给予最大程度上得实惠，增强功能在shark1.4.1及后续版本开始提供支持。</p>
 
