@@ -19,102 +19,189 @@
     </section>
 
     <section class="main-content">
-      <p><img src="http://dl.iteye.com/upload/picture/pic/135281/e0f25517-ae0c-3af9-a910-b8c05b4436ff.jpg" alt=""></p>
-
-<h2>
-<a id="shark简介----" class="anchor" href="#shark%E7%AE%80%E4%BB%8B----" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark简介 <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg" alt="License"></a> <a href="https://gitter.im/gaoxianglong/shark?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/gaoxianglong/shark.svg" alt="Join the chat at https://gitter.im/gaoxianglong/shark"></a> <a href="https://github.com/gaoxianglong/shark/releases"><img src="https://img.shields.io/github/release/gaoxianglong/shark.svg" alt="GitHub release"></a> <a href="http://search.maven.org/#artifactdetails%7Ccom.sharksharding%7Cshark%7C1.3.8%7Cjar/"><img src="https://maven-badges.herokuapp.com/maven-central/com.sharksharding/shark/badge.svg" alt="Maven Central"></a>
-</h2>
-
-<p>轻量级的分布式mysql分库分表中间件，丰富、灵活的sharding路由算法支持，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br></p>
+      <h2>
+<a id="目录" class="anchor" href="#%E7%9B%AE%E5%BD%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>目录</h2>
 
 <ul>
-<li>
-<a href="https://github.com/gaoxianglong/shark/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97">用户指南</a><br>
+<li>1、shark入门<br>
+
+<ul>
+<li>1.1 dataBase架构演变史<br>
 </li>
-<li>
-<a href="https://github.com/gaoxianglong/shark/wiki/shark-benchmark-result">基准测试</a><br>
+<li>1.2 sharding与cluster的区别<br>
+</li>
+<li>1.3 shark简介<br>
+</li>
+<li>1.4 常见的sharding中间件对比<br>
+</li>
+<li>1.5 从maven中央仓库下载shark的构件<br>
+</li>
+<li>1.6 shark依赖的其它构件<br>
+
+<ul>
+<li>1.6.1 版本注意<br>
+</li>
+</ul>
+</li>
+<li>1.7 下载并编译shark源码<br>
+</li>
+<li>1.8 shark的架构模型<br>
+</li>
+<li>1.9 shark的分片算法<br>
+</li>
+<li>1.10 单表查询支持的sql模板<br>
+</li>
+<li>1.11 shark使用过程中的一些注意事项<br>
+</li>
+</ul>
+</li>
+<li>2、配置读写分离操作<br>
+
+<ul>
+<li>2.1、sql编写注意事项<br>
+</li>
+<li>2.2、sql别名支持<br>
+</li>
+</ul>
+</li>
+<li>3、配置sharding操作<br>
+
+<ul>
+<li>3.1 数据库sharding后带来的影响<br>
+</li>
+<li>3.2 配置sql文件与逻辑代码结构<br>
+</li>
+<li>3.3 一库一片算法<br>
+
+<ul>
+<li>3.3.1 片名连续的一库一片操作<br>
+</li>
+<li>3.3.2 非片名连续的一库一片操作<br>
+</li>
+</ul>
+</li>
+<li>3.4 库内分片算法<br>
+
+<ul>
+<li>3.4.1 片名连续的库内分片操作<br>
+</li>
+<li>3.4.2 非片名连续的库内分片操作<br>
+</li>
+</ul>
+</li>
+<li>3.5 自动生成数据源文件<br>
+
+<ul>
+<li>3.5.1 自动生成sharding配置文件</li>
+<li>3.5.2 自动生成c3p0数据源文件<br>
+</li>
+<li>3.5.3 自动生成druid数据源文件<br>
+</li>
+</ul>
+</li>
+<li>3.6 多机sequenceid解决方案<br>
+
+<ul>
+<li>3.6.1 基于mysql生成全局唯一sequenceid<br>
+</li>
+<li>3.6.2 基于zookeeper生成全局唯一sequenceid<br>
+</li>
+</ul>
+</li>
+<li>3.7 事物功能矩阵<br>
+</li>
+</ul>
+</li>
+<li>4、使用配置中心<br>
+
+<ul>
+<li>4.1 基于zookeeper的资源配置中心<br>
+</li>
+<li>4.2 基于redis3 cluster的资源配置中心<br>
+
+<ul>
+<li>4.2.1 使用版本号比对资源差异<br>
+</li>
+<li>4.2.2 使用md5码比对资源差异<br>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>5、运维监控<br>
+
+<ul>
+<li>5.1 配置shark内置验证页面<br>
+</li>
+</ul>
+</li>
+<li>6、HA方案<br>
+
+<ul>
+<li>6.1 基于配置中心实现HA<br>
+</li>
+<li>6.2 基于keepalive实现HA<br>
+</li>
+<li>6.3 基于MHA实现HA<br>
+</li>
+</ul>
+</li>
+<li>7、增强Spring Jdbc<br>
+
+<ul>
+<li>7.1 mapper自动映射<br>
+
+<ul>
+<li>7.1.1 @AutoColumn和<a href="https://github.com/Column" class="user-mention">@Column</a>的执行优先级<br>
+</li>
+</ul>
+</li>
+<li>7.2 sql语句文件独立配置<br>
+
+<ul>
+<li>7.2.1 动态sql拼接<br>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 
-<hr>
+<h2>
+<a id="1shark入门" class="anchor" href="#1shark%E5%85%A5%E9%97%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1、shark入门</h2>
+
+<p>本篇作为本文的开篇，笔者衷心希望能够用干练的语句将shark的各个技术点尽可能的阐述清楚。同时为了保证你能够尽快上手shark，那么请仔细阅读用户指南的每一个章节。</p>
 
 <h2>
-<a id="shark的优点" class="anchor" href="#shark%E7%9A%84%E4%BC%98%E7%82%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark的优点</h2>
+<a id="11-database架构演变史" class="anchor" href="#11-database%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98%E5%8F%B2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.1 dataBase架构演变史</h2>
+
+<p>对于刚上线的互联网项目来说，由于前期用户活跃度并不大，并发量相对较小，因此企业一般都会选择将所有数据信息存放在单库中进行读/写操作。随着用户活跃度的不断提升，单库逐渐力不从心，这时DBA就会将数据库设置为读写分离状态(一主一从/一主多从)，Master负责写，Slave负责读。按照二八定律，80%的操作更多是读，那么剩下的20%则为写，读写分离后，大大提升了单库无法支撑的负载压力。不过光靠读写分离并不能一劳永逸，随着用户活跃度再次提升，必然会遇见读/写瓶颈，因此到了这个阶段，DBA就需要实现垂直分库。</p>
+
+<p>所谓垂直分库，就是根据业务划分将原本冗余在单库中的数据表分拆，落到不同的业务库中，实现分而治之。垂直分库能够有效提升数据库的并行处理能力，但是单一业务的数据信息仍然落盘在单表中，理论上Mysql单表超过500W行时，读操作就会成为瓶颈，哪怕重建索引，也无法解决数据暴增带来的检索效率低下等问题。这其实也是RDBMS等类型数据库的特点，相对于Nosql数据库而言，由于底层存储架构不同，所以自然无法相提并论。因此到了这个阶段，DBA就需要在垂直分库的基础上实现水平分区，也就是大家常说的数据sharding操作。</p>
+
+<p>所谓水平分区，就是将原本冗余在单库中的单表分拆为N个“逻辑相连”的子表(比如tab_0000、tab_0001、tab_N...)，比如tab_0000存储1-10000区间的数据信息，而tab_0001存储10001-20000区间的数据信息。如果希望采用分布式分片，则可以将单库也拆分为N个“逻辑相连”的子库(比如db_0000、db_0001、db_n...)，一个子库中可以包含单个或N个子表。假设分库分表后，子表的数据量又达到阈值时，DBA只需要横向扩容即可。基于分库分表的数据库设计，目前在国内一些大型互联网企业中应用的非常普遍，比如：阿里巴巴、京东、云集微店等。</p>
+
+<p>最后简单总结一下，分库分表主要是为了解决单库性能瓶颈，充分利用分布式+集群的威力提升数据库的读/写性能。关于互联网场景下常见的性能瓶颈：</p>
 
 <ul>
-<li>具备丰富、完善的技术文档支持；<br>
-</li>
-<li>动态数据源的无缝切换；<br>
-</li>
-<li>master/slave一主一从读写分离；<br>
-</li>
-<li>sharding路由算法丰富、灵活，支持2类4种分布式分片算法；<br>
-</li>
-<li>非proxy架构，与应用集成，应用直连数据库，降低外围系统依赖所带来的宕机风险；<br>
-</li>
-<li>友好支持mysql数据库；<br>
-</li>
-<li>使用简单，侵入性低，站在巨人的肩膀上，依赖于springjdbc、druid；<br>
-</li>
-<li>基于druid的sqlparser完成sql解析任务，解析性能高效、稳定；<br>
-</li>
-<li>对springjdbc进行功能增强，大幅度提升编码效率；<br>
-</li>
-<li>提供多机sequenceid的API支持，解决多机sequenceid难题；<br>
-</li>
-<li>支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
-</li>
-<li>基于velocity模板引擎渲染内容，支持sql语句独立配置和动态拼接，与业务逻辑代码解耦；<br>
-</li>
-<li>提供内置验证页面，方便开发、测试及运维人员对执行后的sql进行验证；<br>
-</li>
-<li>单线程读重试(取决于的数据库连接池是否支持)；<br>
-</li>
-<li>提供自动生成配置文件的API支持，降低配置出错率；<br>
-</li>
-<li>专注于sharding领域，无需兼容通用性，因此核心代码量少、易读易维护；<br>
-</li>
+<li>大量的并发访问，导致单库出现难以承受的负载压力；</li>
+<li>单表数据量过大，导致检索效率低下；</li>
 </ul>
-
-<hr>
 
 <h2>
-<a id="shark的分片模型" class="anchor" href="#shark%E7%9A%84%E5%88%86%E7%89%87%E6%A8%A1%E5%9E%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark的分片模型</h2>
+<a id="12-sharding与cluster的区别" class="anchor" href="#12-sharding%E4%B8%8Ecluster%E7%9A%84%E5%8C%BA%E5%88%AB" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.2 sharding与cluster的区别</h2>
 
-<h5>
-<a id="shark支持2类4种分布式分片算法" class="anchor" href="#shark%E6%94%AF%E6%8C%812%E7%B1%BB4%E7%A7%8D%E5%88%86%E5%B8%83%E5%BC%8F%E5%88%86%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark支持2类4种分布式分片算法：</h5>
-
-<ul>
-<li>库内分片类型：
-
-<ul>
-<li>片名连续的库内分片算法；</li>
-<li>非片名连续的库内分片算法；</li>
-</ul>
-</li>
-<li>一库一片类型：
-
-<ul>
-<li>片名连续的一库一片算法；</li>
-<li>非片名连续的一库一片算法；</li>
-</ul>
-</li>
-</ul>
-
-<hr>
+<p>单纯从技术上来讲，Mysql Cluster仅仅只是一个数据库集群，其优势只是扩展了数据库的并行处理能力，但使用成本、维护成本相当高(目前使用者很少，实施也相对复杂)。而Sharding是一个成熟且实惠的方案，不仅可以解决数据库的并行处理能力，还能够解决单表数据过大的检索瓶颈。简单来说，前者是集群模式，而后者是分布式模式，因此无论从任何一个维度来看，Sharding无疑是当下互联网最好的选择。</p>
 
 <h2>
-<a id="shark总体架构" class="anchor" href="#shark%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark总体架构</h2>
+<a id="13-shark简介" class="anchor" href="#13-shark%E7%AE%80%E4%BB%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.3 shark简介</h2>
 
-<p>Shark采用应用集成架构，其领域模型位于持久层(JdbcTemplate)和JDBC之间，也就是分布式数据路由层。<br>
-<img src="http://dl.iteye.com/upload/picture/pic/135419/0cd4a534-3a06-36d7-9aef-9ce469d3e8c7.jpg" alt=""></p>
-
-<hr>
+<p>shark是一个开源、分布式、轻量级的Mysql分库分表中间件，其具备丰富的Sharding算法支持(2类4种分布式分片算法)，能够方便DBA实现库的水平扩容和降低数据迁移成本。Shark站在巨人的肩膀上(spring jdbc)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。</p>
 
 <h2>
-<a id="shark与其它sharding中间件功能对比" class="anchor" href="#shark%E4%B8%8E%E5%85%B6%E5%AE%83sharding%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%8A%9F%E8%83%BD%E5%AF%B9%E6%AF%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark与其它Sharding中间件功能对比</h2>
+<a id="14-常见的sharding中间件对比" class="anchor" href="#14-%E5%B8%B8%E8%A7%81%E7%9A%84sharding%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AF%B9%E6%AF%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.4 常见的sharding中间件对比</h2>
 
-<p>我们并不认为Shark是最优秀的，但却始终坚信Shark是最好用的。</p>
+<p>目前市面上的分库分表中间件并不多，并且大部分都是基于Proxy架构，在对于不看重通用性的应用场景下，早期基于应用集成架构的中间件比较成熟的则只有淘宝的TDDL，但TDDL并非是完美的，其弊端同样明显，比如：社区并不活跃、技术文档资料匮乏、臃肿的鸡肋功能，再加上并不开源，因此注定了TDDL无法为欣赏它的非淘宝系用户服务。而Shark孕育而生的目的正是为了填补应用集成集成架构场景下的空白。目前常见的一些Shardig中间件产品对，如下所示：</p>
 
 <table>
 <thead>
@@ -195,10 +282,106 @@
 </tbody>
 </table>
 
-<hr>
+<p>基于Proxy架构的Sharding中间件，基本上都衍生自Cobar，并且这类产品对分片算法的支持都有限。具体使用什么样的sharding中间件产品，还需要根据具体的应用场景而定，当然如果你并不看重通用性，使用Shark是非常好的选择。</p>
 
 <h2>
-<a id="shark的使用注意事项" class="anchor" href="#shark%E7%9A%84%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark的使用注意事项</h2>
+<a id="15-从maven中央仓库下载shark的构件" class="anchor" href="#15-%E4%BB%8Emaven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E4%B8%8B%E8%BD%BDshark%E7%9A%84%E6%9E%84%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.5 从maven中央仓库下载shark的构件</h2>
+
+<p>shark构件从1.3.8版本之后已经可以从maven中央仓库中进行下载，生产中建议使用shark1.4.0后的版本。</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;com.sharksharding&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;shark&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.4.1&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<h2>
+<a id="16-shark依赖的其它构件" class="anchor" href="#16-shark%E4%BE%9D%E8%B5%96%E7%9A%84%E5%85%B6%E5%AE%83%E6%9E%84%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.6 shark依赖的其它构件</h2>
+
+<p>shark1.4.1及后续版本的pom.xml文件中将会关闭构件依赖，需要自行下载shark依赖的相关构件,如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">properties</span>&gt;
+    &lt;<span class="pl-ent">java-version</span>&gt;1.7&lt;/<span class="pl-ent">java-version</span>&gt;
+    &lt;<span class="pl-ent">org</span>.springframework-version&gt;3.2.13.RELEASE&lt;/<span class="pl-ent">org</span>.springframework-version&gt;
+    &lt;<span class="pl-ent">org</span>.aspectj-version&gt;1.6.10&lt;/<span class="pl-ent">org</span>.aspectj-version&gt;
+    &lt;<span class="pl-ent">org</span>.slf4j-version&gt;1.6.6&lt;/<span class="pl-ent">org</span>.slf4j-version&gt;
+    &lt;<span class="pl-ent">commons-dbcp</span>.version&gt;1.4&lt;/<span class="pl-ent">commons-dbcp</span>.version&gt;
+    &lt;<span class="pl-ent">commons-pool</span>.version&gt;1.6&lt;/<span class="pl-ent">commons-pool</span>.version&gt;
+    &lt;<span class="pl-ent">commons-logging</span>.version&gt;1.2&lt;/<span class="pl-ent">commons-logging</span>.version&gt;
+    &lt;<span class="pl-ent">commons-io</span>.version&gt;2.4&lt;/<span class="pl-ent">commons-io</span>.version&gt;
+    &lt;<span class="pl-ent">commons-lang3</span>.version&gt;3.4&lt;/<span class="pl-ent">commons-lang3</span>.version&gt;
+    &lt;<span class="pl-ent">cglib-version</span>&gt;2.1.3-201003011305&lt;/<span class="pl-ent">cglib-version</span>&gt;
+    &lt;<span class="pl-ent">aspectjweaver-version</span>&gt;1.8.5&lt;/<span class="pl-ent">aspectjweaver-version</span>&gt;
+    &lt;<span class="pl-ent">servlet-api-version</span>&gt;2.5&lt;/<span class="pl-ent">servlet-api-version</span>&gt;
+    &lt;<span class="pl-ent">fastjson-version</span>&gt;1.2.5&lt;/<span class="pl-ent">fastjson-version</span>&gt;
+    &lt;<span class="pl-ent">junit-version</span>&gt;4.7&lt;/<span class="pl-ent">junit-version</span>&gt;
+    &lt;<span class="pl-ent">zookeeper-version</span>&gt;3.4.6&lt;/<span class="pl-ent">zookeeper-version</span>&gt;
+    &lt;<span class="pl-ent">jedis</span>.version&gt;2.6.2&lt;/<span class="pl-ent">jedis</span>.version&gt;
+    &lt;<span class="pl-ent">project</span>.build.sourceEncoding&gt;UTF-8&lt;/<span class="pl-ent">project</span>.build.sourceEncoding&gt;
+&lt;/<span class="pl-ent">properties</span>&gt;</pre></div>
+
+<h2>
+<a id="161-版本注意" class="anchor" href="#161-%E7%89%88%E6%9C%AC%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.6.1 版本注意</h2>
+
+<p>java version&gt;=1.7.0<br>
+spring version&gt;=3.2.13.RELEASE</p>
+
+<h2>
+<a id="17-下载并编译shark源码" class="anchor" href="#17-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E7%BC%96%E8%AF%91shark%E6%BA%90%E7%A0%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.7 下载并编译shark源码</h2>
+
+<p>shark的源码地址为:<a href="https://github.com/gaoxianglong/shark.git">https://github.com/gaoxianglong/shark.git</a>
+，当成功下载好shark的源码后，首先需要将/lib目录下的所有构件添加到classpath下，或者选择将shark的pom.xml文件中引用其它构件的注释打开，然后再使用如下命令进行编译：</p>
+
+<div class="highlight highlight-text-xml"><pre>mvn compile
+mvn test-compile</pre></div>
+
+<h2>
+<a id="18-shark的架构模型" class="anchor" href="#18-shark%E7%9A%84%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.8 shark的架构模型</h2>
+
+<p>数据路由任务无非就是根据Sharding算法对持有的多数据源进行动态切换，这是任何分库分表中间件的核心功能。使用Shark后，应用层将会持有N个数据源，Shark通过ShardKey进行运算，然后通过Route技术对数据库和数据表进行读/写操作。由于Shark内部并没有实现自己的DBConnectionPool，这就意味着，开发人员可以随意切换DBConnectionPool产品，如果你觉得C3P0没有BonePC性能高，那么你可以切换为BonePC，或者如果你觉得BonePC不够稳定，你又可以切换为druid。</p>
+
+<p>对于开发人员而言，并不需要关心底层的数据库架构，业务逻辑中任何的CRUD操作，都像是在操作单个数据库、单个业务表一样，并且读写效率还不能够比之前低太多(几毫秒之内完成)，而Shark就承担着这样一个任务。Shark所处的领域模型定位，如下所示：<br>
+<img src="http://dl.iteye.com/upload/picture/pic/135431/f716d59a-92cd-3b6d-8203-5d046a05f102.jpg" alt=""> </p>
+
+<p>Shark的领域模型介于持久层和JDBC之间，也就是位于数据路由层。Shark站在巨人的肩膀上，这个巨人正是Spring。简单来说，Shark重写了Spring的JdbcTemplate，并使用AbstractRoutingDataSource作为动态数据源层。因此从另一个侧面反应出了Shark的源码注定是简单、轻量、易阅读、易维护的，因为Shark的核心只做分库分表。我们知道一般的Shading中间件，动不动就上千个类和几十万行代码，其中“猫腻”太多，不仅DBConnectionPool需要自己实现、动态数据源需要自己实现，再加上一些杂七杂八的功能，比如：通用性支持、多种类型的RDBMS或者Nosql支持，那么代码自然臃肿，可读性差。而阅读Shark的代码将会非常轻松和优雅。Shark的3层架构，如下所示：<br>
+<img src="http://dl.iteye.com/upload/picture/pic/135429/52e22f2e-be65-3da7-9dfa-3af440c3f8ec.jpg" alt=""> </p>
+
+<p>既然Shark只考虑最核心的Sharding功能，同时也就意味着它的性能恒定指标还需要结合其它第三方产品，比如Shark的动态数据源层所使用的 DBConnectionPool可以为druid，也可以为BonePC。你别指望Shark还能为你处理边边角角的零碎琐事，想要什么效果，自行组合配置，这就是Shark，一个开源、分布式、轻量级的Mysql分库分表中间件。Shark的应用总体架构，如下所示： 
+<img src="http://dl.iteye.com/upload/picture/pic/135419/0cd4a534-3a06-36d7-9aef-9ce469d3e8c7.jpg" alt=""> <br></p>
+
+<h2>
+<a id="19-shark的分片算法" class="anchor" href="#19-shark%E7%9A%84%E5%88%86%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.9 shark的分片算法</h2>
+
+<ul>
+<li>库内分片类型：
+
+<ul>
+<li>片名连续的库内分片算法；</li>
+<li>非片名连续的库内分片算法；</li>
+</ul>
+</li>
+<li>一库一片类型：
+
+<ul>
+<li>片名连续的一库一片算法；</li>
+<li>非片名连续的一库一片算法；</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="110-单表查询支持的sql模板" class="anchor" href="#110-%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81%E7%9A%84sql%E6%A8%A1%E6%9D%BF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.10 单表查询支持的sql模板</h2>
+
+<p>任何一条sql语句，只要携带路由条件，shark都支持，除了多表查询和子表查询外。目前一些大型互联网公司，比如淘宝、京东、云集微店的数据库方案均是单表sql查询，单表查询比多表联合查询性能慢不了多少，为了扩展性，牺牲一点性能(往返连接、资源消耗等)没什么大不了，so what？互联网场景下，利用单表sql换来的优势有3点：</p>
+
+<ul>
+<li>查询条件简单、易于开理解和维护；</li>
+<li>扩展性极强；</li>
+<li>缓存利用率高；</li>
+</ul>
+
+<h2>
+<a id="111-shark使用过程中的一些注意事项" class="anchor" href="#111-shark%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.11 shark使用过程中的一些注意事项</h2>
 
 <ul>
 <li>不支持强一致性的分布式事务，建议在业务层依赖MQ，保证最终数据一致性；</li>
@@ -207,32 +390,784 @@
 <li>shard key必须是整数类型；</li>
 </ul>
 
-<hr>
+<h2>
+<a id="2配置读写分离操作" class="anchor" href="#2%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2、配置读写分离操作</h2>
+
+<p>com.sharksharding.core.shard.SharkJdbcTemplate是Shark提供jdbc模板，继承自org.springframework.jdbc.core.JdbcTemplate。简单来说，SharkJdbcTemplate支持除批量操作外JdbcTemplate的所有原生方法。对于开发人员而言，只需要将Spring的JdbcTemplate替换为Shark的SharkJdbcTemplate即可，除此之外，业务逻辑代码中不再有任何的侵入。</p>
+
+<p>数据库的主从配置，即可一主一从，也可一主多从，但目前Shark仅支持一主一从模式。读写分离配置，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span> <span class="pl-e">base-package</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">include-filter</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>annotation<span class="pl-pds">"</span></span>
+        <span class="pl-e">expression</span>=<span class="pl-s"><span class="pl-pds">"</span>org.aspectj.lang.annotation.Aspect<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>&gt;
+<span class="pl-c">&lt;!-- 读写分离配置 --&gt;</span>
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>jdbcTemplate<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.shard.SharkJdbcTemplate<span class="pl-pds">"</span></span>
+    <span class="pl-e">init-method</span>=<span class="pl-s"><span class="pl-pds">"</span>init<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>isShard<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource<span class="pl-pds">"</span></span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>wr_index<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>r1w0<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.config.SharkDatasourceGroup<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>targetDataSources<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">map</span> <span class="pl-e">key-type</span>=<span class="pl-s"><span class="pl-pds">"</span>java.lang.Integer<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">entry</span> <span class="pl-e">key</span>=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span> <span class="pl-e">value-ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource1<span class="pl-pds">"</span></span> /&gt;
+            &lt;<span class="pl-ent">entry</span> <span class="pl-e">key</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> <span class="pl-e">value-ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource2<span class="pl-pds">"</span></span> /&gt;
+        &lt;/<span class="pl-ent">map</span>&gt;
+    &lt;/<span class="pl-ent">property</span>&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource1<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.mchange.v2.c3p0.ComboPooledDataSource<span class="pl-pds">"</span></span>
+    <span class="pl-e">destroy-method</span>=<span class="pl-s"><span class="pl-pds">"</span>close<span class="pl-pds">"</span></span>&gt;
+<span class="pl-c">&lt;!-- 省略数据源配置 --&gt;</span>
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource2<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.mchange.v2.c3p0.ComboPooledDataSource<span class="pl-pds">"</span></span>
+    <span class="pl-e">destroy-method</span>=<span class="pl-s"><span class="pl-pds">"</span>close<span class="pl-pds">"</span></span>&gt;
+<span class="pl-c">&lt;!-- 省略数据源配置 --&gt;</span>
+&lt;/<span class="pl-ent">bean</span>&gt;</pre></div>
+
+<p>上述程序实例中，SharkDatasourceGroup就是一个用于管理多数据源的Group，继承自org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource，它充当了shark动态数据源层的角色，由此基础之上实现DBRoute。</p>
+
+<p>在SharkJdbcTemplate中，属性isShard定义了Sharding开关，缺省为false，也就意味着缺省是没有开启分库分表的，那么在不Sharding的情况下，我们依然可以使用shark来完成读写分离操作。wr_index属性定义了读写分离的起始索引，也就是说，有多少个master，就一定需要有等量的slave，比如：master有1个，slave也应该是1个，因此SharkDatasourceGroup中持有的数据源总个数就应该一共是2个，索引从0-1，如果主库的索引为0，那么从库的索引就应该为1，也就是“r1w0”。当配置完成后，一旦shark监测到程序中所执行的sql为写操作时，就会自动切换为master的数据源，反之切换为slave的数据源。</p>
+
+<p>当配置好shark的读写分离后，程序中便可以对SharkJdbcTemplate自动装配，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Resource</span>
+<span class="pl-k">private</span> <span class="pl-smi">SharkJdbcTemplate</span> jdbcTemplate;</pre></div>
+
+<p>shark的启动日志：
+<img src="http://dl.iteye.com/upload/picture/pic/135381/a9d5b910-34eb-364c-9dbe-e115405530ca.jpg" alt=""></p>
 
 <h2>
-<a id="学习--联系我们" class="anchor" href="#%E5%AD%A6%E4%B9%A0--%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>学习 &amp; 联系我们</h2>
+<a id="21sql编写注意事项" class="anchor" href="#21sql%E7%BC%96%E5%86%99%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.1、sql编写注意事项</h2>
+
+<p>sql语句的第一个参数必须是shardkey。耦合在业务代码中的sql语句，如下所示：</p>
+
+<div class="highlight highlight-source-sql"><pre><span class="pl-k">insert into</span> tab(c1,c2) <span class="pl-k">values</span>(?,?)，</pre></div>
+
+<p>上述写法shark是不支持的，约定写法，如下所示：</p>
+
+<div class="highlight highlight-source-sql"><pre><span class="pl-k">insert into</span> tab(c1,c2) <span class="pl-k">values</span>(<span class="pl-s"><span class="pl-pds">"</span>+ c1 +<span class="pl-pds">"</span></span>,?)</pre></div>
+
+<p>也就是说，第一个参数不允许是占位符，而必须是实际参数。在某些情况下，我们可能不太希望将sql耦合在我们的业务代码中，这种情况下，shark提供有类似于mybatis的做法，将sql定义在配置文件中。详情请见3.1小结。</p>
+
+<h2>
+<a id="22sql别名支持" class="anchor" href="#22sql%E5%88%AB%E5%90%8D%E6%94%AF%E6%8C%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.2、sql别名支持</h2>
+
+<p>在shark1.4.1版本之前，sql语句中是不允许带别名的，因为别名的应用场景更多是集中在多表查询中，因此shark早期版本并不打算支持别名，但是shark1.4.1及后续版本中，将正式开始支持，如下所示：</p>
+
+<div class="highlight highlight-source-sql"><pre><span class="pl-c">#带别名</span>
+<span class="pl-k">select</span> <span class="pl-k">*</span> <span class="pl-k">from</span> tab t <span class="pl-k">where</span> <span class="pl-c1">t</span>.<span class="pl-c1">c1</span><span class="pl-k">=</span>? <span class="pl-k">and</span> <span class="pl-c1">t</span>.<span class="pl-c1">c2</span><span class="pl-k">=</span>?
+<span class="pl-c">#不带别名</span>
+<span class="pl-k">select</span> <span class="pl-k">*</span> <span class="pl-k">from</span> tab <span class="pl-k">where</span> c1<span class="pl-k">=</span>? <span class="pl-k">and</span> c2<span class="pl-k">=</span>?</pre></div>
+
+<h2>
+<a id="3配置sharding操作" class="anchor" href="#3%E9%85%8D%E7%BD%AEsharding%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3、配置sharding操作</h2>
+
+<p>如果你觉得使用shark配置读写分离后并不能够满足场景需要，那么你可以使用本节的sharding配置。</p>
+
+<h2>
+<a id="31-数据库sharding后带来的影响" class="anchor" href="#31-%E6%95%B0%E6%8D%AE%E5%BA%93sharding%E5%90%8E%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%BD%B1%E5%93%8D" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.1 数据库sharding后带来的影响</h2>
 
 <ul>
-<li>wiki：<a href="https://github.com/gaoxianglong/shark/wiki">https://github.com/gaoxianglong/shark/wiki</a>
-</li>
-<li>issues：<a href="https://github.com/gaoxianglong/shark/issues">https://github.com/gaoxianglong/shark/issues</a>
-</li>
-<li>blog：<a href="http://gao-xianglong.iteye.com">http://gao-xianglong.iteye.com</a>
-</li>
-<li>email：<a href="mailto:gao_xianglong@sharksharding.com">gao_xianglong@sharksharding.com</a>
-</li>
-<li>
-<img src="http://dl.iteye.com/upload/picture/pic/134683/97e5d3af-cb7b-3115-97c1-230cbf6ad081.png" alt="">qq group：150445731</li>
+<li>ACID无法保证；</li>
+<li>不支持多表查询；</li>
+<li>无法继续使用外键约束；</li>
+<li>无法继续使用单库单表自增序列生成唯一id；</li>
 </ul>
 
-<hr>
+<h2>
+<a id="32-配置sql文件与逻辑代码结构" class="anchor" href="#32-%E9%85%8D%E7%BD%AEsql%E6%96%87%E4%BB%B6%E4%B8%8E%E9%80%BB%E8%BE%91%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.2 配置sql文件与逻辑代码结构</h2>
+
+<p>在某些情况下，我们不太希望将sql语句耦合在业务逻辑代码中，因为这样不利于维护。因此shark提供有类似于mybatis的做法，将sql定义在配置文件中以此达到降低耦合的目的。shark将sql文件定义在properties文件中，采用key-value的方式，key建议定义为持久层的方法名称，value为具体的sql语句。sql写法，如下所示：</p>
+
+<div class="highlight highlight-source-sql"><pre>addTab<span class="pl-k">=</span><span class="pl-k">insert into</span> tab(c1,c2) <span class="pl-k">values</span>(?,?)</pre></div>
+
+<p>sql文件的配置方式，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.sql.PropertyPlaceholderConfigurer<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span>
+        <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>classpath:properties/sql.properties<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;</pre></div>
+
+<p>除了允许定义加载classpath下的sql配置文件外，shrak还允许加载文件路径下的sql配置文件。使用方式如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Resource</span>
+<span class="pl-k">private</span> <span class="pl-smi">SharkJdbcTemplate</span> jdbcTemplate;
+@<span class="pl-smi">Resource</span>
+<span class="pl-k">private</span> <span class="pl-smi">PropertyPlaceholderConfigurer</span> property;
+
+@<span class="pl-smi">Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> addTab(<span class="pl-k">long</span> shardKey) {
+    <span class="pl-k">final</span> <span class="pl-smi">String</span> <span class="pl-c1">SQL</span> <span class="pl-k">=</span> property<span class="pl-k">.</span>getSql(<span class="pl-s"><span class="pl-pds">"</span>addTab<span class="pl-pds">"</span></span>, shardKey);
+    jdbcTemplate<span class="pl-k">.</span>update(<span class="pl-c1">SQL</span>);
+}</pre></div>
+
+<p>上述程序示例中，PropertyPlaceholderConfigurer的getSql()方法的第一个参数就是定义在properties中的key，而shardKey就是路由条件。</p>
 
 <h2>
-<a id="典型案例" class="anchor" href="#%E5%85%B8%E5%9E%8B%E6%A1%88%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>典型案例</h2>
+<a id="33-一库一片算法" class="anchor" href="#33-%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3 一库一片算法</h2>
 
-<p><img src="http://dl.iteye.com/upload/picture/pic/135357/01760d0f-d0ff-3606-ac9c-1d99f94f0e30.jpg" alt=""></p>
+<p>shark支持2种一库一片分布式分片算法，分别为片名连续的一库一片算法和非片名连续的一库一片算法。</p>
 
-<hr>
+<h2>
+<a id="331-片名连续的一库一片操作" class="anchor" href="#331-%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3.1 片名连续的一库一片操作</h2>
+
+<p>假设dbSize是1024，tbSize是1024，那么每一个库的片数为1024/1024=1，而片名是按照0000-1023进行分布的， 这就意味着片名是全局唯一的，不允许出现重复。相对于库内分片，一库一片的算法更简单和直观，因为一库一片只跟库相关与片无关，算出了库就等于间接算出了片。如下所示：<br>
+<img src="http://dl.iteye.com/upload/picture/pic/135383/775398ce-33cc-3085-ab4f-9c32849a2bae.jpg" alt=""></p>
+
+<p>配置信息，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>
+    <span class="pl-e">base-package</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">include-filter</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>annotation<span class="pl-pds">"</span></span>
+        <span class="pl-e">expression</span>=<span class="pl-s"><span class="pl-pds">"</span>org.aspectj.lang.annotation.Aspect<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>jdbcTemplate<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.shard.SharkJdbcTemplate<span class="pl-pds">"</span></span>
+    <span class="pl-e">init-method</span>=<span class="pl-s"><span class="pl-pds">"</span>init<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>isShard<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource<span class="pl-pds">"</span></span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>wr_index<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>r1024w0<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>shardMode<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>consistent<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dbRuleArray<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>tbSuffix<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.config.SharkDatasourceGroup<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>targetDataSources<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">map</span> <span class="pl-e">key-type</span>=<span class="pl-s"><span class="pl-pds">"</span>java.lang.Integer<span class="pl-pds">"</span></span>&gt;
+            <span class="pl-c">&lt;!-- 省略引用2048个数据源配置 --&gt;</span>
+        &lt;/<span class="pl-ent">map</span>&gt;
+    &lt;/<span class="pl-ent">property</span>&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.sql.PropertyPlaceholderConfigurer<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span>
+        <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>classpath:properties/sql.properties<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+<span class="pl-c">&lt;!-- 省略2048个数据源配置 --&gt;</span></pre></div>
+
+<p>上述程序示例中，主库一共是1024个(1024个子表，每个库包含子表数为1个)，那么自然从库也就是1024个，在SharkDatasourceGroup中一共会持有2048个数据源，数据源索引为0-2048。</p>
+
+<p>在SharkJdbcTemplate中，属性isShard定义了sharding开关,true为开启。属性wr_index定义了读写分离的起始索引，这也就意味着0-1023都是master，而1024-2047都是slave，一旦shark监测到程序中所执行的sql为写操作时，就会自动切换为master的数据源，反之切换为slave的数据源(当然如果不希望配置slave，那么属性wr_index应该定义为r0w0)。属性shardMode定义了需要使用shark的哪一种分片算法，true为一库一片，而false则为库内分片。属性consistent定义了片名是否连续，true为片名连续,false为非片名连续。属性dbRuleArray定义了分库规则，其中一共包含有2个shardkey，分别为uid和email_hash，然后再%dbSize便可计算出数据究竟应该落盘到哪个片内。tbSuffix属性指明了子库和子表的后缀。</p>
+
+<p>如果sql语句中的第一个参数并不是shardkey时，shark将会抛出下述异常信息：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
+
+<h2>
+<a id="332-非片名连续的一库一片操作" class="anchor" href="#332-%E9%9D%9E%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3.2 非片名连续的一库一片操作</h2>
+
+<p>假设dbSize是1024，tbSize是1024，那么每一个库的片数为1024/1024=1，非片名连续的一库一片算法，所有片名全局一致，所有片名无需后缀。
+<img src="http://dl.iteye.com/upload/picture/pic/135385/c562c14b-6ff7-3de8-bb34-59f370d64f76.jpg" alt=""></p>
+
+<p>配置信息，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>
+    <span class="pl-e">base-package</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">include-filter</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>annotation<span class="pl-pds">"</span></span>
+        <span class="pl-e">expression</span>=<span class="pl-s"><span class="pl-pds">"</span>org.aspectj.lang.annotation.Aspect<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>jdbcTemplate<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.shard.SharkJdbcTemplate<span class="pl-pds">"</span></span>
+    <span class="pl-e">init-method</span>=<span class="pl-s"><span class="pl-pds">"</span>init<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>isShard<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource<span class="pl-pds">"</span></span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>wr_index<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>r1024w0<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>shardMode<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>consistent<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dbRuleArray<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>tbSuffix<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.config.SharkDatasourceGroup<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>targetDataSources<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">map</span> <span class="pl-e">key-type</span>=<span class="pl-s"><span class="pl-pds">"</span>java.lang.Integer<span class="pl-pds">"</span></span>&gt;
+            <span class="pl-c">&lt;!-- 省略引用2048个数据源配置 --&gt;</span>
+        &lt;/<span class="pl-ent">map</span>&gt;
+    &lt;/<span class="pl-ent">property</span>&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.sql.PropertyPlaceholderConfigurer<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span>
+        <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>classpath:properties/sql.properties<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+<span class="pl-c">&lt;!-- 省略2048个数据源配置 --&gt;</span></pre></div>
+
+<p>上述程序示例中，主库一共是1024个(1024个子表，每个库包含子表数为1个)，那么自然从库也就是1024个，在SharkDatasourceGroup中一共会持有2048个数据源，数据源索引为0-2048。</p>
+
+<p>在SharkJdbcTemplate中，属性isShard定义了sharding开关,true为开启。属性wr_index定义了读写分离的起始索引，这也就意味着0-1023都是master，而1024-2047都是slave，一旦shark监测到程序中所执行的sql为写操作时，就会自动切换为master的数据源，反之切换为slave的数据源(当然如果不希望配置slave，那么属性wr_index应该定义为r0w0)。属性shardMode定义了需要使用shark的哪一种分片算法，true为一库一片，而false则为库内分片。属性consistent定义了片名是否连续，true为片名连续,false为非片名连续。属性dbRuleArray定义了分库规则，其中一共包含有2个shardkey，分别为uid和email_hash，然后再%dbSize便可计算出数据究竟应该落盘到哪个片内。tbSuffix属性指明了子库的后缀。</p>
+
+<p>如果sql语句中的第一个参数并不是shardkey时，shark将会抛出下述异常信息：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
+
+<h2>
+<a id="34-库内分片算法" class="anchor" href="#34-%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4 库内分片算法</h2>
+
+<p>shark支持2种库内分片分布式分片算法，分别为片名连续的库内分片算法和非片名连续的库内分片算法。</p>
+
+<h2>
+<a id="341-片名连续的库内分片操作" class="anchor" href="#341-%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4.1 片名连续的库内分片操作</h2>
+
+<p>假设dbSize是32，tbSize是1024，那么每一个库的片数为1024/32=32，片名是按照0000-1023进行分布的，这就意味着片名是全局唯一的，不允许出现重复。<br>
+<img src="http://dl.iteye.com/upload/picture/pic/135389/da3425d9-d970-3719-8e56-c20c409a4f16.jpg" alt=""></p>
+
+<p>配置信息，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>
+    <span class="pl-e">base-package</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">include-filter</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>annotation<span class="pl-pds">"</span></span>
+        <span class="pl-e">expression</span>=<span class="pl-s"><span class="pl-pds">"</span>org.aspectj.lang.annotation.Aspect<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>jdbcTemplate<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.shard.SharkJdbcTemplate<span class="pl-pds">"</span></span>
+    <span class="pl-e">init-method</span>=<span class="pl-s"><span class="pl-pds">"</span>init<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>isShard<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource<span class="pl-pds">"</span></span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>wr_index<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>r32w0<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>shardMode<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>consistent<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dbRuleArray<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024 / 32<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>tbRuleArray<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024 % 32<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>tbSuffix<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.config.SharkDatasourceGroup<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>targetDataSources<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">map</span> <span class="pl-e">key-type</span>=<span class="pl-s"><span class="pl-pds">"</span>java.lang.Integer<span class="pl-pds">"</span></span>&gt;
+            <span class="pl-c">&lt;!-- 省略引用64个数据源配置 --&gt;</span>
+        &lt;/<span class="pl-ent">map</span>&gt;
+    &lt;/<span class="pl-ent">property</span>&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.sql.PropertyPlaceholderConfigurer<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span>
+        <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>classpath:properties/sql.properties<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+<span class="pl-c">&lt;!-- 省略64个数据源配置 --&gt;</span></pre></div>
+
+<p>上述程序示例中，主库一共是32个(1024个子表，每个库包含子表数为32个)，那么自然从库也就是32个，在SharkDatasourceGroup中一共会持有64个数据源，数据源索引为0-63。</p>
+
+<p>在SharkJdbcTemplate中，属性isShard定义了sharding开关,true为开启。属性wr_index定义了读写分离的起始索引，这也就意味着0-31都是master，而32-63都是slave，一旦shark监测到程序中所执行的sql为写操作时，就会自动切换为master的数据源，反之切换为slave的数据源(当然如果不希望配置slave，那么属性wr_index应该定义为r0w0)。属性shardMode定义了需要使用shark的哪一种分片算法，true为一库一片，而false则为库内分片。属性consistent定义了片名是否连续，true为片名连续,false为非片名连续。属性dbRuleArray定义了分库规则，其中一共包含有2个shardkey，分别为uid和email_hash，然后再%dbSize便可计算出数据究竟应该落盘到哪个片内。tbSuffix属性指明了子库的后缀。</p>
+
+<p>如果sql语句中的第一个参数并不是shardkey时，shark将会抛出下述异常信息：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
+
+<h2>
+<a id="342-非片名连续的库内分片操作" class="anchor" href="#342-%E9%9D%9E%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4.2 非片名连续的库内分片操作</h2>
+
+<p>假设dbSize是32，tbSize是1024，那么每一个库的片数为1024/32=32，片名在每一个库中都是按照0-31进行分布的，非全局唯一，这样的好处，相对于片名连续的库内分片更容易扩容和数据迁移。<br>
+<img src="http://dl.iteye.com/upload/picture/pic/135387/280b2b39-7d48-323b-955a-cc210f285597.jpg" alt=""></p>
+
+<p>配置信息，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>
+    <span class="pl-e">base-package</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">include-filter</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>annotation<span class="pl-pds">"</span></span>
+        <span class="pl-e">expression</span>=<span class="pl-s"><span class="pl-pds">"</span>org.aspectj.lang.annotation.Aspect<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>jdbcTemplate<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.shard.SharkJdbcTemplate<span class="pl-pds">"</span></span>
+    <span class="pl-e">init-method</span>=<span class="pl-s"><span class="pl-pds">"</span>init<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>isShard<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource<span class="pl-pds">"</span></span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>wr_index<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>r32w0<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>shardMode<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>consistent<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>dbRuleArray<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024 / 32<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>tbRuleArray<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024 % 32<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>tbSuffix<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.config.SharkDatasourceGroup<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>targetDataSources<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">map</span> <span class="pl-e">key-type</span>=<span class="pl-s"><span class="pl-pds">"</span>java.lang.Integer<span class="pl-pds">"</span></span>&gt;
+            <span class="pl-c">&lt;!-- 省略引用64个数据源配置 --&gt;</span>
+        &lt;/<span class="pl-ent">map</span>&gt;
+    &lt;/<span class="pl-ent">property</span>&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.sql.PropertyPlaceholderConfigurer<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span>
+        <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>classpath:properties/sql.properties<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+<span class="pl-c">&lt;!-- 省略64个数据源配置 --&gt;</span></pre></div>
+
+<p>上述程序示例中，主库一共是32个(1024个子表，每个库包含子表数为32个)，那么自然从库也就是32个，在SharkDatasourceGroup中一共会持有64个数据源，数据源索引为0-63。</p>
+
+<p>在SharkJdbcTemplate中，属性isShard定义了sharding开关,true为开启。属性wr_index定义了读写分离的起始索引，这也就意味着0-31都是master，而32-63都是slave，一旦shark监测到程序中所执行的sql为写操作时，就会自动切换为master的数据源，反之切换为slave的数据源(当然如果不希望配置slave，那么属性wr_index应该定义为r0w0)。属性shardMode定义了需要使用shark的哪一种分片算法，true为一库一片，而false则为库内分片。属性consistent定义了片名是否连续，true为片名连续,false为非片名连续。属性dbRuleArray定义了分库规则，其中一共包含有2个shardkey，分别为uid和email_hash，然后再%dbSize便可计算出数据究竟应该落盘到哪个片内。tbSuffix属性指明了子库的后缀。</p>
+
+<p>如果sql语句中的第一个参数并不是shardkey时，shark将会抛出下述异常信息：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
+
+<h2>
+<a id="35-自动生成数据源文件" class="anchor" href="#35-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E6%BA%90%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.5 自动生成数据源文件</h2>
+
+<p>为了避免手工配置出现错误的情况，shark提供有自动生成sharding配置文件和数据源配置文件的功能(支持druid和c3p0)。 </p>
+
+<h2>
+<a id="351-自动生成sharding配置文件" class="anchor" href="#351-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90sharding%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.5.1 自动生成sharding配置文件</h2>
+
+<p>假设采用片名连续的库内分片模式，32个库1024个表，使用com.sharksharding.util.xml.CreateCoreXml进行生成，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> @<span class="pl-smi">Test</span> <span class="pl-k">void</span> testCreateCoreXml() {
+    <span class="pl-smi">CreateCoreXml</span> c_xml <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">CreateCoreXml</span>();
+    <span class="pl-c">/* 是否控制台输出生成的配置文件 */</span>
+    c_xml<span class="pl-k">.</span>setIsShow(<span class="pl-c1">true</span>);
+    c_xml<span class="pl-k">.</span>setDbSize(<span class="pl-s"><span class="pl-pds">"</span>64<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setShard(<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setWr_index(<span class="pl-s"><span class="pl-pds">"</span>r0w32<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setShardMode(<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setConsistent(<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setDbRuleArray(<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024 / 32<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTbRuleArray(<span class="pl-s"><span class="pl-pds">"</span>#uid|email_hash# % 1024 % 32<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setSqlPath(<span class="pl-s"><span class="pl-pds">"</span>classpath:properties/sqlFile.properties<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 执行配置文件输出 */</span>
+    <span class="pl-smi">Assert</span><span class="pl-k">.</span>assertTrue(c_xml<span class="pl-k">.</span>createCoreXml(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>c:/shark-context.xml<span class="pl-pds">"</span></span>)));
+}</pre></div>
+
+<h2>
+<a id="352-自动生成c3p0数据源文件" class="anchor" href="#352-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90c3p0%E6%95%B0%E6%8D%AE%E6%BA%90%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.5.2 自动生成c3p0数据源文件</h2>
+
+<p>使用com.sharksharding.util.xml.CreateCoreXml进行生成，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-c">/**</span>
+<span class="pl-c"> * 生成c3p0数据源配置文件</span>
+<span class="pl-c"> * </span>
+<span class="pl-c"> * @author gaoxianglong</span>
+<span class="pl-c"> */</span>
+<span class="pl-k">public</span> @<span class="pl-smi">Test</span> <span class="pl-k">void</span> testCreateC3p0Xml() {
+    <span class="pl-smi">CreateC3p0Xml</span> c_xml <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">CreateC3p0Xml</span>();
+    <span class="pl-c">/* 是否控制台输出生成的配置文件 */</span>
+    c_xml<span class="pl-k">.</span>setIsShow(<span class="pl-c1">true</span>);
+    c_xml<span class="pl-k">.</span>setTbSuffix(<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 数据源索引起始 */</span>
+    c_xml<span class="pl-k">.</span>setDataSourceIndex(<span class="pl-c1">1</span>);
+    <span class="pl-c">/* 配置分库分片信息 */</span>
+    c_xml<span class="pl-k">.</span>setDbSize(<span class="pl-s"><span class="pl-pds">"</span>16<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 配置数据源信息 */</span>
+    c_xml<span class="pl-k">.</span>setJdbcUrl(<span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://ip1:3306/db<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUser(<span class="pl-s"><span class="pl-pds">"</span>${name}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPassword(<span class="pl-s"><span class="pl-pds">"</span>${password}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setDriverClass(<span class="pl-s"><span class="pl-pds">"</span>${driverClass}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setInitialPoolSize(<span class="pl-s"><span class="pl-pds">"</span>${initialPoolSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMinPoolSize(<span class="pl-s"><span class="pl-pds">"</span>${minPoolSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxPoolSize(<span class="pl-s"><span class="pl-pds">"</span>${maxPoolSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxStatements(<span class="pl-s"><span class="pl-pds">"</span>${maxStatements}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxIdleTime(<span class="pl-s"><span class="pl-pds">"</span>${maxIdleTime}<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 执行配置文件输出 */</span>
+    <span class="pl-smi">Assert</span><span class="pl-k">.</span>assertTrue(c_xml<span class="pl-k">.</span>createDatasourceXml(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>e:/dataSource-context.xml<span class="pl-pds">"</span></span>)));
+}
+<span class="pl-c">/**</span>
+<span class="pl-c"> * 生成c3p0的master/slave数据源配置文件</span>
+<span class="pl-c"> * </span>
+<span class="pl-c"> * @author gaoxianglong</span>
+<span class="pl-c"> */</span>
+<span class="pl-k">public</span> @<span class="pl-smi">Test</span> <span class="pl-k">void</span> testCreateC3p0MSXml() {
+    <span class="pl-smi">CreateC3p0Xml</span> c_xml <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">CreateC3p0Xml</span>();
+    c_xml<span class="pl-k">.</span>setIsShow(<span class="pl-c1">true</span>);
+    c_xml<span class="pl-k">.</span>setTbSuffix(<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 生成master数据源信息 */</span>
+    c_xml<span class="pl-k">.</span>setDataSourceIndex(<span class="pl-c1">1</span>);
+    c_xml<span class="pl-k">.</span>setDbSize(<span class="pl-s"><span class="pl-pds">"</span>16<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setJdbcUrl(<span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://ip1:3306/db<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUser(<span class="pl-s"><span class="pl-pds">"</span>${name}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPassword(<span class="pl-s"><span class="pl-pds">"</span>${password}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setDriverClass(<span class="pl-s"><span class="pl-pds">"</span>${driverClass}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setInitialPoolSize(<span class="pl-s"><span class="pl-pds">"</span>${initialPoolSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMinPoolSize(<span class="pl-s"><span class="pl-pds">"</span>${minPoolSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxPoolSize(<span class="pl-s"><span class="pl-pds">"</span>${maxPoolSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxStatements(<span class="pl-s"><span class="pl-pds">"</span>${maxStatements}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxIdleTime(<span class="pl-s"><span class="pl-pds">"</span>${maxIdleTime}<span class="pl-pds">"</span></span>);
+    <span class="pl-smi">Assert</span><span class="pl-k">.</span>assertTrue(c_xml<span class="pl-k">.</span>createDatasourceXml(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>e:/masterDataSource-context.xml<span class="pl-pds">"</span></span>)));
+    <span class="pl-c">/* 生成slave数据源信息 */</span>
+    c_xml<span class="pl-k">.</span>setDataSourceIndex(<span class="pl-c1">17</span>);
+    c_xml<span class="pl-k">.</span>setDbSize(<span class="pl-s"><span class="pl-pds">"</span>16<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setJdbcUrl(<span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://ip2:3306/db<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUser(<span class="pl-s"><span class="pl-pds">"</span>${name}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPassword(<span class="pl-s"><span class="pl-pds">"</span>${password}<span class="pl-pds">"</span></span>);
+    <span class="pl-smi">Assert</span><span class="pl-k">.</span>assertTrue(c_xml<span class="pl-k">.</span>createDatasourceXml(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>e:/slaveDataSource-context.xml<span class="pl-pds">"</span></span>)));
+}</pre></div>
+
+<h2>
+<a id="353-自动生成druid数据源文件" class="anchor" href="#353-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90druid%E6%95%B0%E6%8D%AE%E6%BA%90%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.5.3 自动生成druid数据源文件</h2>
+
+<p>使用com.sharksharding.util.xml.CreateCoreXml进行生成，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-c">/**</span>
+<span class="pl-c"> * 生成druid数据源配置文件</span>
+<span class="pl-c"> * </span>
+<span class="pl-c"> * @author gaoxianglong</span>
+<span class="pl-c"> */</span>
+<span class="pl-k">public</span> @<span class="pl-smi">Test</span> <span class="pl-k">void</span> testCreateDruidXml() {
+    <span class="pl-smi">CreateDruidXml</span> c_xml <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">CreateDruidXml</span>();
+    <span class="pl-c">/* 是否控制台输出生成的配置文件 */</span>
+    c_xml<span class="pl-k">.</span>setIsShow(<span class="pl-c1">true</span>);
+    <span class="pl-c">/* 数据源索引起始 */</span>
+    c_xml<span class="pl-k">.</span>setDataSourceIndex(<span class="pl-c1">1</span>);
+    <span class="pl-c">/* 配置分库分片信息 */</span>
+    c_xml<span class="pl-k">.</span>setDbSize(<span class="pl-s"><span class="pl-pds">"</span>16<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* false为懒加载模式，反之启动时开始初始化数据源 */</span>
+    c_xml<span class="pl-k">.</span>setInit_method(<span class="pl-c1">true</span>);
+    c_xml<span class="pl-k">.</span>setTbSuffix(<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 生成数据源信息 */</span>
+    c_xml<span class="pl-k">.</span>setUsername(<span class="pl-s"><span class="pl-pds">"</span>${username}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPassword(<span class="pl-s"><span class="pl-pds">"</span>${password}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUrl(<span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://ip1:3306/db<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setInitialSize(<span class="pl-s"><span class="pl-pds">"</span>${initialSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMinIdle(<span class="pl-s"><span class="pl-pds">"</span>${minIdle}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxActive(<span class="pl-s"><span class="pl-pds">"</span>${maxActive}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPoolPreparedStatements(<span class="pl-s"><span class="pl-pds">"</span>${poolPreparedStatements}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxOpenPreparedStatements(<span class="pl-s"><span class="pl-pds">"</span>${maxOpenPreparedStatements}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTestOnBorrow(<span class="pl-s"><span class="pl-pds">"</span>${testOnBorrow}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTestOnReturn(<span class="pl-s"><span class="pl-pds">"</span>${testOnReturn}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTestWhileIdle(<span class="pl-s"><span class="pl-pds">"</span>${testWhileIdle}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setFilters(<span class="pl-s"><span class="pl-pds">"</span>${filters}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setConnectionProperties(<span class="pl-s"><span class="pl-pds">"</span>${connectionProperties}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUseGlobalDataSourceStat(<span class="pl-s"><span class="pl-pds">"</span>${useGlobalDataSourceStat}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTimeBetweenLogStatsMillis(<span class="pl-s"><span class="pl-pds">"</span>${timeBetweenLogStatsMillis}<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 执行配置文件输出 */</span>
+    <span class="pl-smi">Assert</span><span class="pl-k">.</span>assertTrue(c_xml<span class="pl-k">.</span>createDatasourceXml(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>e:/dataSource-context.xml<span class="pl-pds">"</span></span>)));
+}
+<span class="pl-c">/**</span>
+<span class="pl-c"> * 生成druid数据源配置文件</span>
+<span class="pl-c"> * </span>
+<span class="pl-c"> * @author gaoxianglong</span>
+<span class="pl-c"> */</span>
+<span class="pl-k">public</span> @<span class="pl-smi">Test</span> <span class="pl-k">void</span> testCreateDruidMSXml() {
+    <span class="pl-smi">CreateDruidXml</span> c_xml <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">CreateDruidXml</span>();
+    <span class="pl-c">/* 是否控制台输出生成的配置文件 */</span>
+    c_xml<span class="pl-k">.</span>setIsShow(<span class="pl-c1">true</span>);
+    <span class="pl-c">/* 数据源索引起始 */</span>
+    c_xml<span class="pl-k">.</span>setDataSourceIndex(<span class="pl-c1">1</span>);
+    <span class="pl-c">/* 配置分库分片信息 */</span>
+    c_xml<span class="pl-k">.</span>setDbSize(<span class="pl-s"><span class="pl-pds">"</span>16<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* false为懒加载模式，反之启动时开始初始化数据源 */</span>
+    c_xml<span class="pl-k">.</span>setInit_method(<span class="pl-c1">true</span>);
+    c_xml<span class="pl-k">.</span>setTbSuffix(<span class="pl-s"><span class="pl-pds">"</span>_0000<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 生成master数据源信息 */</span>
+    c_xml<span class="pl-k">.</span>setUsername(<span class="pl-s"><span class="pl-pds">"</span>${username}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPassword(<span class="pl-s"><span class="pl-pds">"</span>${password}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUrl(<span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://ip1:3306/db<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setInitialSize(<span class="pl-s"><span class="pl-pds">"</span>${initialSize}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMinIdle(<span class="pl-s"><span class="pl-pds">"</span>${minIdle}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxActive(<span class="pl-s"><span class="pl-pds">"</span>${maxActive}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPoolPreparedStatements(<span class="pl-s"><span class="pl-pds">"</span>${poolPreparedStatements}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setMaxOpenPreparedStatements(<span class="pl-s"><span class="pl-pds">"</span>${maxOpenPreparedStatements}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTestOnBorrow(<span class="pl-s"><span class="pl-pds">"</span>${testOnBorrow}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTestOnReturn(<span class="pl-s"><span class="pl-pds">"</span>${testOnReturn}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTestWhileIdle(<span class="pl-s"><span class="pl-pds">"</span>${testWhileIdle}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setFilters(<span class="pl-s"><span class="pl-pds">"</span>${filters}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setConnectionProperties(<span class="pl-s"><span class="pl-pds">"</span>${connectionProperties}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUseGlobalDataSourceStat(<span class="pl-s"><span class="pl-pds">"</span>${useGlobalDataSourceStat}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setTimeBetweenLogStatsMillis(<span class="pl-s"><span class="pl-pds">"</span>${timeBetweenLogStatsMillis}<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 执行配置文件输出 */</span>
+    <span class="pl-smi">Assert</span><span class="pl-k">.</span>assertTrue(c_xml<span class="pl-k">.</span>createDatasourceXml(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>e:/masterDataSource-context.xml<span class="pl-pds">"</span></span>)));
+    <span class="pl-c">/* 生成slave数据源信息 */</span>
+    c_xml<span class="pl-k">.</span>setDataSourceIndex(<span class="pl-c1">17</span>);
+    c_xml<span class="pl-k">.</span>setDbSize(<span class="pl-s"><span class="pl-pds">"</span>16<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUsername(<span class="pl-s"><span class="pl-pds">"</span>${username}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setPassword(<span class="pl-s"><span class="pl-pds">"</span>${password}<span class="pl-pds">"</span></span>);
+    c_xml<span class="pl-k">.</span>setUrl(<span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://ip2:3306/db<span class="pl-pds">"</span></span>);
+    <span class="pl-c">/* 执行配置文件输出 */</span>
+    <span class="pl-smi">Assert</span><span class="pl-k">.</span>assertTrue(c_xml<span class="pl-k">.</span>createDatasourceXml(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>e:/slaveDataSource-context.xml<span class="pl-pds">"</span></span>)));
+}</pre></div>
+
+<h2>
+<a id="36-多机sequenceid解决方案" class="anchor" href="#36-%E5%A4%9A%E6%9C%BAsequenceid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.6 多机sequenceid解决方案</h2>
+
+<p>一旦数据库sharding后，原本单库单表中使用的序列自增Id将无法再继续使用，那么我们只能够使用自定义的解决方案，当然必须围绕下述2个方面来进行，如下所示：</p>
+
+<ul>
+<li>唯一性；</li>
+<li>连续性；</li>
+</ul>
+
+<p>shark的解决方案是为每一个应用都集成一个id生成器，然后通过一个全局的存储介质去保证生成id的唯一性和连续性。</p>
+
+<h2>
+<a id="361-基于mysql生成全局唯一sequenceid" class="anchor" href="#361-%E5%9F%BA%E4%BA%8Emysql%E7%94%9F%E6%88%90%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80sequenceid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.6.1 基于mysql生成全局唯一sequenceid</h2>
+
+<p>每一个应用都集成有一个id生成器，统一指定一个数据库作为id的存储介质，数据库中主要负责存储当前id序列的最大值，每次每个id生成器从数据库中拿去id时，都需要锁表。或许你会有一个疑问，是否存在性能问题？如果是每一个id都从数据库去拿必然存在性能问题，因此shark的id生成器一次会从数据库中取出一段id，然后缓存在本地，这样就不用每次都去数据库中取了，但是如果id生成器取了一段id后，突然宕机了，那么这一组id将废弃。其次既然依赖数据库作为存储介质，那么其架构必须是HA，确保高可用。多机sequenceid数据库表结构，如下所示：</p>
+
+<div class="highlight highlight-source-sql"><pre><span class="pl-c">#sequenceid的sql</span>
+<span class="pl-k">CREATE</span> <span class="pl-k">TABLE</span> <span class="pl-en">shark_sequenceid</span>(
+    s_id <span class="pl-k">INT</span> <span class="pl-k">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="pl-s"><span class="pl-pds">'</span>主键<span class="pl-pds">'</span></span>,
+    s_type <span class="pl-k">INT</span> <span class="pl-k">NOT NULL</span> COMMENT <span class="pl-s"><span class="pl-pds">'</span>类型<span class="pl-pds">'</span></span>,
+    s_useData <span class="pl-k">BIGINT</span> <span class="pl-k">NOT NULL</span> COMMENT <span class="pl-s"><span class="pl-pds">'</span>申请占位数量<span class="pl-pds">'</span></span>,
+    <span class="pl-k">PRIMARY KEY</span> (s_id)
+)ENGINE<span class="pl-k">=</span>InnoDB DEFAULT CHARSET<span class="pl-k">=</span>utf8mb4 COLLATE utf8mb4_bin;</pre></div>
+
+<p>使用SequenceIDManger生成sequenceid，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">SequenceIDManger</span><span class="pl-k">.</span>init(<span class="pl-c1">NAME</span>, <span class="pl-c1">PWD</span>, <span class="pl-c1">URL</span>, <span class="pl-c1">DRIVER</span>);
+<span class="pl-k">long</span> sequenceid <span class="pl-k">=</span> <span class="pl-smi">SequenceIDManger</span><span class="pl-k">.</span>getSequenceId(<span class="pl-c1">100</span>, <span class="pl-c1">10</span>, <span class="pl-c1">5000</span>);
+logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"</span>sequenceid--&gt;<span class="pl-pds">"</span></span> <span class="pl-k">+</span> sequenceid);</pre></div>
+
+<p>基于mysql生成全局唯一sequenceid的数字长度为19位，其最大值不可超过二进制位数64位long类型的最大值9223372036854775807。在getSequenceId()方法中，第一个参数为IDC机房编码, 用于区分不同的IDC机房,3位数字长度。第二个参数为业务类别,2位数字长度，最后一个参数为内存占位数。</p>
+
+<h2>
+<a id="362-基于zookeeper生成全局唯一sequenceid" class="anchor" href="#362-%E5%9F%BA%E4%BA%8Ezookeeper%E7%94%9F%E6%88%90%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80sequenceid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.6.2 基于zookeeper生成全局唯一sequenceid</h2>
+
+<p>和基于mysql生成全局唯一sequenceid类似，shark还提供有另外一种形式，那就是基于zookeeper。使用SequenceIDManger生成sequenceid，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">SequenceIDManger</span><span class="pl-k">.</span>init(<span class="pl-c1">ADDRESS</span>, <span class="pl-c1">TIMEOUT</span>);
+<span class="pl-k">long</span> sequenceid <span class="pl-k">=</span> <span class="pl-smi">SequenceIDManger</span><span class="pl-k">.</span>getSequenceId(<span class="pl-c1">PATH</span>, <span class="pl-c1">100</span>, <span class="pl-c1">100000</span>);
+logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"</span>sequenceid--&gt;<span class="pl-pds">"</span></span> <span class="pl-k">+</span> sequenceid);</pre></div>
+
+<p>id的唯一性由zookeeper保证，每次对znode下的数据进行更新时都会产品一个版本号，因此基于zookeeper生成全局唯一sequenceid的数字长度为19位，其最大值不可超过二进制位数64位long类型的最大值9223372036854775807。在getSequenceId()方法中，第一个参数为znode根目录，第二个参数为IDC机房编码, 用于区分不同的IDC机房,3位数字长度。第二个参数为业务类别,6位数字长度。</p>
+
+<p>同3.6.1小节一样，既然依赖zookeeper作为存储介质，那么其架构必须是HA，确保高可用。</p>
+
+<h2>
+<a id="37-事物功能矩阵" class="anchor" href="#37-%E4%BA%8B%E7%89%A9%E5%8A%9F%E8%83%BD%E7%9F%A9%E9%98%B5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.7 事物功能矩阵</h2>
+
+<p><img src="http://dl.iteye.com/upload/picture/pic/134665/824666f0-3902-3709-9dd1-9bb1b960e81d.png" alt=""></p>
+
+<h2>
+<a id="4使用配置中心" class="anchor" href="#4%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4、使用配置中心</h2>
+
+<p>如果项目采用分布式架构进行部署后，配置文件始终是个大问题。开发人员往往希望当配置发生改变后，可以不重新启动程序便可动态加载。目前shark支持基于zookeeper、redis3.x cluster作为集中式资源配置中心，一旦相关配置发生改变后，shark所持有的信息确保将是最新的，相对于本地配置文件，集中式资源配置中心将会大大降低维护成本和部署成本。</p>
+
+<h2>
+<a id="41基于zookeeper的资源配置中心" class="anchor" href="#41%E5%9F%BA%E4%BA%8Ezookeeper%E7%9A%84%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.1、基于zookeeper的资源配置中心</h2>
+
+<p>一旦使用资源配置中心，那么程序中将不再需要将sharding信息和数据源信息配置在本地配置文件中，而是配置在资源配置中心。配置信息，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>
+    <span class="pl-e">base-package</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">include-filter</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>annotation<span class="pl-pds">"</span></span>
+        <span class="pl-e">expression</span>=<span class="pl-s"><span class="pl-pds">"</span>org.aspectj.lang.annotation.Aspect<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.resources.register.bean.RegisterDataSource<span class="pl-pds">"</span></span>/&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.resources.conn.ZookeeperConnectionManager<span class="pl-pds">"</span></span>
+    <span class="pl-e">init-method</span>=<span class="pl-s"><span class="pl-pds">"</span>init<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">index</span>=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>${address}<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">index</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>${session.timeout}<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">index</span>=<span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>${nodepath}<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;</pre></div>
+
+<p>上述程序示例中，RegisterDataSource会动态向spring的ioc容器中注册bean实例。而ZookeeperConnectionManager中，我们需要配置一系列zookeeper相关的信息，其中包括资源文件所在的nodepath。</p>
+
+<p>使用配置中心后，不能继续使用Spring自动装配后的SharkJdbcTemplate，因为当配置中心发生改变后，应用持有的仍然是之前引用，因此必须通过GetJdbcTemplate.getSharkJdbcTemplate()方法获取SharkJdbcTemplate实例，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-c">/* 获取SharkJdbcTemplate实例 */</span>
+<span class="pl-smi">SharkJdbcTemplate</span> jdbcTemlate <span class="pl-k">=</span> <span class="pl-smi">GetJdbcTemplate</span><span class="pl-k">.</span>getSharkJdbcTemplate();</pre></div>
+
+<p>如果使用配置中心，那么建议在客户端的log4j.xml配置文件中关闭如下日志输出：</p>
+
+<div class="highlight highlight-text-xml"><pre><span class="pl-c">&lt;!-- 避免druid抛出javax.management.InstanceAlreadyExistsException异常 --&gt;</span>
+&lt;<span class="pl-ent">logger</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>com.alibaba.druid.stat.DruidDataSourceStatManager<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">level</span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>off<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">logger</span>&gt;</pre></div>
+
+<h2>
+<a id="42基于redis3-cluster的资源配置中心" class="anchor" href="#42%E5%9F%BA%E4%BA%8Eredis3-cluster%E7%9A%84%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.2、基于redis3 cluster的资源配置中心</h2>
+
+<p>shark除了支持基于zookeeper作为资源配置中心外，同时也支持基于redis3 cluster作为资源配置中心。配置信息，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">task</span><span class="pl-ent">:</span><span class="pl-ent">annotation-driven</span> /&gt;
+&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span> <span class="pl-e">base-package</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">include-filter</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>annotation<span class="pl-pds">"</span></span>
+        <span class="pl-e">expression</span>=<span class="pl-s"><span class="pl-pds">"</span>org.aspectj.lang.annotation.Aspect<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.resources.register.bean.RegisterDataSource<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>redisWatcher<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.resources.watcher.RedisWatcher<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">bean</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.resources.conn.RedisConnectionManager<span class="pl-pds">"</span></span>
+    <span class="pl-e">init-method</span>=<span class="pl-s"><span class="pl-pds">"</span>init<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">index</span>=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>${redis.key}<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">index</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>jedisCluster<span class="pl-pds">"</span></span> /&gt;
+    <span class="pl-c">&lt;!-- 0使用版本号比对,1使用MD5校验,缺省为0 --&gt;</span>
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">index</span>=<span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> /&gt;
+    &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>redisWatcher<span class="pl-pds">"</span></span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>redisWatcher<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;
+<span class="pl-c">&lt;!-- 省略redis配置信息 --&gt;</span>
+&lt;/<span class="pl-ent">bean</span>&gt;</pre></div>
+
+<p>上述程序示例中，RegisterDataSource会动态向spring的ioc容器中注册bean实例。而RedisConnectionManager中，我们需要配置一系列redis相关的信息。</p>
+
+<h2>
+<a id="421-使用版本号比对资源差异" class="anchor" href="#421-%E4%BD%BF%E7%94%A8%E7%89%88%E6%9C%AC%E5%8F%B7%E6%AF%94%E5%AF%B9%E8%B5%84%E6%BA%90%E5%B7%AE%E5%BC%82" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.2.1 使用版本号比对资源差异</h2>
+
+<p>如果RedisConnectionManager中使用版本号比对资源差异，那么RedisWatcher每隔10s会自动向配置中心获取一次资源数据。redis的数据结构为key-value(version%@%resource)，当配置中心发生改变时，需要修改当前version的值，shark的配置中心客户端会根据版本差异判断是否是更新了配置中心的数据。</p>
+
+<h2>
+<a id="422-使用md5码比对资源差异" class="anchor" href="#422-%E4%BD%BF%E7%94%A8md5%E7%A0%81%E6%AF%94%E5%AF%B9%E8%B5%84%E6%BA%90%E5%B7%AE%E5%BC%82" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4.2.2 使用md5码比对资源差异</h2>
+
+<p>如果RedisConnectionManager中使用md5码比对资源差异，那么RedisWatcher每隔10s会自动向配置中心获取一次资源数据。如果配置中心的配置信息的md5码与shark的配置中心客户端持有的md5码不一致，则认为配置中心发生了改变。</p>
+
+<h2>
+<a id="5运维监控" class="anchor" href="#5%E8%BF%90%E7%BB%B4%E7%9B%91%E6%8E%A7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5、运维监控</h2>
+
+<p>在进行sharding后，shark提供有一个sql验证页面，能够方便开发、测试、运维人员对落盘后的数据信息进行验证。</p>
+
+<h2>
+<a id="51-配置shark内置验证页面" class="anchor" href="#51-%E9%85%8D%E7%BD%AEshark%E5%86%85%E7%BD%AE%E9%AA%8C%E8%AF%81%E9%A1%B5%E9%9D%A2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5.1 配置shark内置验证页面</h2>
+
+<p>内置验证页面(QueryViewServlet)是一个标准的javax.servlet.http.HttpServlet，需要配置在你web应用中的WEB-INF/web.xml中，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">servlet</span>&gt;
+    &lt;<span class="pl-ent">servlet-name</span>&gt;queryViewServlet&lt;/<span class="pl-ent">servlet-name</span>&gt;
+    &lt;<span class="pl-ent">servlet-class</span>&gt;com.sharksharding.util.web.http.QueryViewServlet&lt;/<span class="pl-ent">servlet-class</span>&gt;
+&lt;/<span class="pl-ent">servlet</span>&gt;
+&lt;<span class="pl-ent">servlet-mapping</span>&gt;
+    &lt;<span class="pl-ent">servlet-name</span>&gt;queryViewServlet&lt;/<span class="pl-ent">servlet-name</span>&gt;
+    &lt;<span class="pl-ent">url-pattern</span>&gt;/shark/*&lt;/<span class="pl-ent">url-pattern</span>&gt;
+&lt;/<span class="pl-ent">servlet-mapping</span>&gt;</pre></div>
+
+<p>根据web.xml配置中的url-pattern来访问内置验证页面，如果是上面的配置，内置验证页面的首页是/shark/index.html。内置验证页面如下所示:
+<img src="http://dl.iteye.com/upload/picture/pic/134661/a1104bf1-d769-3eaf-a90a-415f4cdc4291.png" alt="">
+<img src="http://dl.iteye.com/upload/picture/pic/134663/8968a56a-facd-376b-99f4-9eb949c5ca63.png" alt=""></p>
+
+<p>考虑到测试环境、生产环境的安全性，内置验证页面缺省是只支持query操作，而其他写入操作将不支持。 </p>
+
+<h2>
+<a id="6ha方案" class="anchor" href="#6ha%E6%96%B9%E6%A1%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6、HA方案</h2>
+
+<p>shark缺省并没有提供HA机制，但是可以在生产或测试环境中，使用Keepalived、MHA、配置中心等方式来实现高可用。如果业务场景不允许在主从切换过程中出现少量数据的丢失，那么建议使用MHA等方式。</p>
+
+<h2>
+<a id="61-基于资源配置中心实现ha" class="anchor" href="#61-%E5%9F%BA%E4%BA%8E%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0ha" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6.1 基于资源配置中心实现HA</h2>
+
+<p>当master的实例挂了以后，立即修改配置中心master的ip即可。</p>
+
+<h2>
+<a id="62-基于keepalive实现ha" class="anchor" href="#62-%E5%9F%BA%E4%BA%8Ekeepalive%E5%AE%9E%E7%8E%B0ha" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6.2 基于keepalive实现HA</h2>
+
+<p>如果使用Keepalived实现HA，那么在shark的配置中需要将master绑定VIP（VirtualIP，虚拟IP）地址，而slave绑定真实的物理IP地址即可。当master的实例挂了以后，Keepalived可以实现自动将ip飘到Slave上。</p>
+
+<h2>
+<a id="63-基于mha实现ha" class="anchor" href="#63-%E5%9F%BA%E4%BA%8Emha%E5%AE%9E%E7%8E%B0ha" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6.3 基于MHA实现HA</h2>
+
+<p>基于MHA实现HA，理论上是不会丢失数据信息的，而6.1和6.2小节的HA方案都会丢失数据，因此如果不希望生产丢失数据，建议使用MHA实现HA。</p>
+
+<h2>
+<a id="7增强spring-jdbc" class="anchor" href="#7%E5%A2%9E%E5%BC%BAspring-jdbc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7、增强Spring Jdbc</h2>
+
+<p>shark之所以会在springjdbc的现有功能上进行增强，主要是为了提升开发人员的编码效率，给予最大程度上得实惠，增强功能在shark1.4.1及后续版本开始提供支持。</p>
+
+<h2>
+<a id="71-mapper自动映射" class="anchor" href="#71-mapper%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7.1 mapper自动映射</h2>
+
+<p>相信大家使用springjdbc时都曾遇见过一个烦恼，业务在进行查询操作的时候，便会接触到org.springframework.jdbc.core.RowMapper，RowMapper会将数据库检索出的数据信息自动映射到对应的entitybean的字段中，但是如果检索的字段较多时，重写mapRow()方法的时候将会是一件体力活，我们需要将ResultSet中的数据逐个set一遍，因此使用shark的mapper自动映射后，将不再需要手动set。</p>
+
+<p>shark的com.sharksharding.util.mapper包下提供有3个annotation，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Mapper</span>
+@<span class="pl-smi">Column</span>
+@<span class="pl-smi">AutoColumn</span></pre></div>
+
+<p>注解<a href="https://github.com/Mapper" class="user-mention">@Mapper</a>作用于类型，只有标记了该注解的类型才能实现mapper自动映射。而<a href="https://github.com/Column" class="user-mention">@Column</a>作用于字段和方法，用于标记需要自动映射的目标对象的字段。那么在entitybean上加上<a href="https://github.com/Mapper" class="user-mention">@Mapper</a>和<a href="https://github.com/Column" class="user-mention">@Column</a>注解后，重写mapRow()方法时将不再需要将ResultSet中的数据逐个set一遍。注解使用，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Mapper</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">UserInfo</span> {
+    <span class="pl-k">@Column</span>
+    <span class="pl-k">private</span> <span class="pl-k">long</span> uid;
+    <span class="pl-k">@Column</span>
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> userName;
+    <span class="pl-c">/* 此处省略set和get方法 */</span>
+}</pre></div>
+
+<p>或许大家会有一个疑问，如果被标记的字段名称与数据库字段名称不一致时怎么办？这其实是一个非常常见的场景，往往entitybean的字段命名规则都是与业务相关的，因此自然不会与数据库的表字段名一致，因此使用<a href="https://github.com/Column" class="user-mention">@Column</a>注解标记entitybean的字段时，可以使用<a href="https://github.com/Column" class="user-mention">@Column</a>注解的那么属性，给目标字段定义备用名称，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Mapper</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">UserInfo</span> {
+    <span class="pl-k">@Column</span>(<span class="pl-c1">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>uid<span class="pl-pds">"</span></span>)
+    <span class="pl-k">private</span> <span class="pl-k">long</span> id;
+    <span class="pl-k">@Column</span>(<span class="pl-c1">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>userName<span class="pl-pds">"</span></span>)
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> name;
+    <span class="pl-c">/* 此处省略set和get方法 */</span>
+}</pre></div>
+
+<p>当在entitybean上标记好<a href="https://github.com/Mapper" class="user-mention">@Mapper</a>和<a href="https://github.com/Column" class="user-mention">@Column</a>注解后，我们还需要在重写mapRow()方法的时候显式指定使用shark提供的mapper自动映射功能，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-smi">UserInfo</span> mapRow(<span class="pl-smi">ResultSet</span> rs, <span class="pl-k">int</span> rowNum) throws <span class="pl-smi">SQLException</span> {
+    <span class="pl-smi">UserInfo</span> user <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">UserInfo</span>();
+    <span class="pl-c">/* 使用shark的mapper自动映射 */</span>
+    <span class="pl-smi">BeanMapper</span><span class="pl-k">.</span>mapper(user, rs);
+    <span class="pl-k">return</span> user;
+}</pre></div>
+
+<p>@AutoColumn和<a href="https://github.com/Column" class="user-mention">@Column</a>注解类似，不过@AutoColumn作用于类型并非字段和方法，当在entitybean上标记@AutoColumn后，entitybean中所有的字段缺省都会自动映射，除非显式设置@AutoColumn的value属性为false。如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Mapper</span>
+@<span class="pl-smi">AutoColumn</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">UserInfo</span> {
+    <span class="pl-k">private</span> <span class="pl-k">long</span> uid;
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> userName;
+    <span class="pl-c">/* 此处省略set和get方法 */</span>
+}</pre></div>
+
+<h2>
+<a id="711-autocolumn和column的执行优先级" class="anchor" href="#711-autocolumn%E5%92%8Ccolumn%E7%9A%84%E6%89%A7%E8%A1%8C%E4%BC%98%E5%85%88%E7%BA%A7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7.1.1 @AutoColumn和<a href="https://github.com/Column" class="user-mention">@Column</a>的执行优先级</h2>
+
+<p>这里存在一个和之前一样的应用场景，当使用@AutoColumn后，如果被标记的字段名称与数据库字段名称不一致时怎么办？其实@AutoColumn和<a href="https://github.com/Column" class="user-mention">@Column</a>这2个注解是并存的，意味着可以同时使用，只不过<a href="https://github.com/Column" class="user-mention">@Column</a>的执行优先级会高于@AutoColumn，也就是说，如果entitybean的字段上标记有<a href="https://github.com/Column" class="user-mention">@Column</a>，将不执行被@AutoColumn标记的字段。如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Mapper</span>
+@<span class="pl-smi">AutoColumn</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">UserInfo</span> {
+    <span class="pl-k">@Column</span>(<span class="pl-c1">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>uid<span class="pl-pds">"</span></span>)
+    <span class="pl-k">private</span> <span class="pl-k">long</span> id;
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> userName;
+    <span class="pl-c">/* 此处省略set和get方法 */</span>
+}</pre></div>
+
+<h2>
+<a id="72-sql语句文件独立配置" class="anchor" href="#72-sql%E8%AF%AD%E5%8F%A5%E6%96%87%E4%BB%B6%E7%8B%AC%E7%AB%8B%E9%85%8D%E7%BD%AE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7.2 sql语句文件独立配置</h2>
+
+<p>shark支持sql语句硬编码在业务代码中，同时也支持将sql语句独立配置在sql.xml或者sql.properties文件中。由于spring并没有提供类似mybaties那样强大的动态sql拼接，所以在使用springjdbc时难免存在一些不便的情况，因此shark弥补了这块空白。</p>
+
+<p>配置SQLTemplate，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>sqlTemplate<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.sql.SQLTemplate<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">constructor-arg</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>classpath:properties/sql.xml<span class="pl-pds">"</span></span> /&gt;
+&lt;/<span class="pl-ent">bean</span>&gt;</pre></div>
+
+<p>sql.xml配置文件可以在classpath下，shark同时也支持文件路径。使用SQLTemplate，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Resource</span>
+<span class="pl-k">private</span> <span class="pl-smi">SQLTemplate</span> sqlTemplate;
+@<span class="pl-smi">Override</span>
+<span class="pl-k">public</span> <span class="pl-k">List&lt;<span class="pl-smi">TabInfo</span>&gt;</span> getTab(<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span> params) throws <span class="pl-smi">Exception</span> {
+    <span class="pl-k">final</span> <span class="pl-smi">String</span> sql <span class="pl-k">=</span> sqlTemplate<span class="pl-k">.</span>getSql(<span class="pl-s"><span class="pl-pds">"</span>getTab<span class="pl-pds">"</span></span>, params);
+    <span class="pl-k">return</span> jdbcTemplate<span class="pl-k">.</span>query(sql, tabMapper);
+}</pre></div>
+
+<p>通过SQLTemplate.getSql()方法即可成功从sql.xml文件中获取指定的sql语句。其中第一个参数为就是定义在sql.xml文件中的sql key，而params就是结果集。</p>
+
+<h2>
+<a id="721-动态sql拼接" class="anchor" href="#721-%E5%8A%A8%E6%80%81sql%E6%8B%BC%E6%8E%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7.2.1 动态sql拼接</h2>
+
+<p>先来了解下如何配置sql.xml，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;?<span class="pl-ent">xml</span><span class="pl-e"> version</span>=<span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span><span class="pl-e"> encoding</span>=<span class="pl-s"><span class="pl-pds">"</span>UTF-8<span class="pl-pds">"</span></span>?&gt;
+&lt;<span class="pl-ent">sqls</span>&gt;
+    &lt;<span class="pl-ent">sql</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>setTab<span class="pl-pds">"</span></span>&gt;
+        <span class="pl-s"><span class="pl-pds">&lt;![CDATA[</span></span>
+<span class="pl-s">            INSERT INTO tab(c1,c2) VALUES(${c1},'${c2}')</span>
+<span class="pl-s">        <span class="pl-pds">]]&gt;</span></span>
+    &lt;/<span class="pl-ent">sql</span>&gt;
+    &lt;<span class="pl-ent">sql</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>getTab<span class="pl-pds">"</span></span>&gt;
+        <span class="pl-s"><span class="pl-pds">&lt;![CDATA[</span></span>
+<span class="pl-s">            SELECT * FROM tab WHERE c1=${c1} AND c2='${c2}'</span>
+<span class="pl-s">        <span class="pl-pds">]]&gt;</span></span>
+    &lt;/<span class="pl-ent">sql</span>&gt;
+&lt;/<span class="pl-ent">sqls</span>&gt;</pre></div>
+
+<p>根标签为&lt;sqls/&gt;，每一个sql语句都包含有一个独立的&lt;sql&gt;标签，其中属性name定义了sql key，不允许出现重复。由于shark是基于velocity模板引擎渲染内容，因此自然也支持velocity语法实现sql的动态拼接，如下所示：</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">sql</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>getTab<span class="pl-pds">"</span></span>&gt;
+    <span class="pl-s"><span class="pl-pds">&lt;![CDATA[</span></span>
+<span class="pl-s">        SELECT * FROM Tab </span>
+<span class="pl-s">        #if(${c1})</span>
+<span class="pl-s">            WHERE c1 = ${c1} </span>
+<span class="pl-s">        #end</span>
+<span class="pl-s">        #if(${c2})</span>
+<span class="pl-s">            AND c2 = '${c2}'</span>
+<span class="pl-s">        #end</span>
+<span class="pl-s">    <span class="pl-pds">]]&gt;</span></span>
+&lt;/<span class="pl-ent">sql</span>&gt;</pre></div>
+
+<p>上述是一个典型的根据字段条件实现sql语句的动态拼接示例。由于velocity的语法还支持foreach、逻辑运算等功能，但并不会在shark用户手册里进行讲解，感兴趣的同学可以自行查阅。</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/gaoxianglong/shark">Shark</a> is maintained by <a href="https://github.com/gaoxianglong">gaoxianglong</a>.</span>
