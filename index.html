@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Shark by gaoxianglong</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Shark</h1>
+      <h2 class="project-tagline">轻量级的分布式mysql分库分表中间件</h2>
+      <a href="https://github.com/gaoxianglong/shark" class="btn">View on GitHub</a>
+      <a href="https://github.com/gaoxianglong/shark/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/gaoxianglong/shark/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><img src="http://dl.iteye.com/upload/picture/pic/135281/e0f25517-ae0c-3af9-a910-b8c05b4436ff.jpg" alt=""></p>
+
+<h2>
+<a id="shark简介----" class="anchor" href="#shark%E7%AE%80%E4%BB%8B----" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark简介 <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg" alt="License"></a> <a href="https://gitter.im/gaoxianglong/shark?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/gaoxianglong/shark.svg" alt="Join the chat at https://gitter.im/gaoxianglong/shark"></a> <a href="https://github.com/gaoxianglong/shark/releases"><img src="https://img.shields.io/github/release/gaoxianglong/shark.svg" alt="GitHub release"></a> <a href="http://search.maven.org/#artifactdetails%7Ccom.sharksharding%7Cshark%7C1.3.8%7Cjar/"><img src="https://maven-badges.herokuapp.com/maven-central/com.sharksharding/shark/badge.svg" alt="Maven Central"></a>
+</h2>
+
+<p>轻量级的分布式mysql分库分表中间件，丰富、灵活的sharding路由算法支持，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。<br></p>
+
+<ul>
+<li>
+<a href="https://github.com/gaoxianglong/shark/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97">用户指南</a><br>
+</li>
+<li>
+<a href="https://github.com/gaoxianglong/shark/wiki/shark-benchmark-result">基准测试</a><br>
+</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="shark的优点" class="anchor" href="#shark%E7%9A%84%E4%BC%98%E7%82%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark的优点</h2>
+
+<ul>
+<li>具备丰富、完善的技术文档支持；<br>
+</li>
+<li>动态数据源的无缝切换；<br>
+</li>
+<li>master/slave一主一从读写分离；<br>
+</li>
+<li>sharding路由算法丰富、灵活，支持2类4种分布式分片算法；<br>
+</li>
+<li>非proxy架构，与应用集成，应用直连数据库，降低外围系统依赖所带来的宕机风险；<br>
+</li>
+<li>友好支持mysql数据库；<br>
+</li>
+<li>使用简单，侵入性低，站在巨人的肩膀上，依赖于springjdbc、druid；<br>
+</li>
+<li>基于druid的sqlparser完成sql解析任务，解析性能高效、稳定；<br>
+</li>
+<li>对springjdbc进行功能增强，大幅度提升编码效率；<br>
+</li>
+<li>提供多机sequenceid的API支持，解决多机sequenceid难题；<br>
+</li>
+<li>支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
+</li>
+<li>基于velocity模板引擎渲染内容，支持sql语句独立配置和动态拼接，与业务逻辑代码解耦；<br>
+</li>
+<li>提供内置验证页面，方便开发、测试及运维人员对执行后的sql进行验证；<br>
+</li>
+<li>单线程读重试(取决于的数据库连接池是否支持)；<br>
+</li>
+<li>提供自动生成配置文件的API支持，降低配置出错率；<br>
+</li>
+<li>专注于sharding领域，无需兼容通用性，因此核心代码量少、易读易维护；<br>
+</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="shark的分片模型" class="anchor" href="#shark%E7%9A%84%E5%88%86%E7%89%87%E6%A8%A1%E5%9E%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark的分片模型</h2>
+
+<h5>
+<a id="shark支持2类4种分布式分片算法" class="anchor" href="#shark%E6%94%AF%E6%8C%812%E7%B1%BB4%E7%A7%8D%E5%88%86%E5%B8%83%E5%BC%8F%E5%88%86%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark支持2类4种分布式分片算法：</h5>
+
+<ul>
+<li>库内分片类型：
+
+<ul>
+<li>片名连续的库内分片算法；</li>
+<li>非片名连续的库内分片算法；</li>
+</ul>
+</li>
+<li>一库一片类型：
+
+<ul>
+<li>片名连续的一库一片算法；</li>
+<li>非片名连续的一库一片算法；</li>
+</ul>
+</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="shark总体架构" class="anchor" href="#shark%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark总体架构</h2>
+
+<p>Shark采用应用集成架构，其领域模型位于持久层(JdbcTemplate)和JDBC之间，也就是分布式数据路由层。<br>
+<img src="http://dl.iteye.com/upload/picture/pic/135419/0cd4a534-3a06-36d7-9aef-9ce469d3e8c7.jpg" alt=""></p>
+
+<hr>
+
+<h2>
+<a id="shark与其它sharding中间件功能对比" class="anchor" href="#shark%E4%B8%8E%E5%85%B6%E5%AE%83sharding%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%8A%9F%E8%83%BD%E5%AF%B9%E6%AF%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark与其它Sharding中间件功能对比</h2>
+
+<p>我们并不认为Shark是最优秀的，但却始终坚信Shark是最好用的。</p>
+
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Cobar</th>
+<th>Mycat</th>
+<th>Heisenberg</th>
+<th>Shark</th>
+<th>TDDL</th>
+<th>Sharding-JDBC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是否开源</td>
+<td>开源</td>
+<td>开源</td>
+<td>开源</td>
+<td>开源</td>
+<td>部分开源</td>
+<td>开源</td>
+</tr>
+<tr>
+<td>架构模型</td>
+<td>Proxy架构</td>
+<td>Proxy架构</td>
+<td>Proxy架构</td>
+<td>应用集成架构</td>
+<td>应用集成架构</td>
+<td>应用集成架构</td>
+</tr>
+<tr>
+<td>分布式分片</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>数据库支持</td>
+<td>MySQL</td>
+<td>任意</td>
+<td>任意</td>
+<td>MySQL</td>
+<td>任意</td>
+<td>MySQL</td>
+</tr>
+<tr>
+<td>外围依赖</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>Diamond</td>
+<td>无</td>
+</tr>
+<tr>
+<td>使用复杂度</td>
+<td>一般</td>
+<td>一般</td>
+<td>一般</td>
+<td>简单</td>
+<td>复杂</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>技术文档支持</td>
+<td>较少</td>
+<td>付费</td>
+<td>较少</td>
+<td>丰富</td>
+<td>无</td>
+<td>一般</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>
+<a id="shark的使用注意事项" class="anchor" href="#shark%E7%9A%84%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shark的使用注意事项</h2>
+
+<ul>
+<li>不支持强一致性的分布式事务，建议在业务层依赖MQ，保证最终数据一致性；</li>
+<li>不建议、不支持多表查询，所有多表查询sql，务必全部打散为单条sql逐条执行；</li>
+<li>sql语句的第一个参数务必是shard key；</li>
+<li>shard key必须是整数类型；</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="学习--联系我们" class="anchor" href="#%E5%AD%A6%E4%B9%A0--%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>学习 &amp; 联系我们</h2>
+
+<ul>
+<li>wiki：<a href="https://github.com/gaoxianglong/shark/wiki">https://github.com/gaoxianglong/shark/wiki</a>
+</li>
+<li>issues：<a href="https://github.com/gaoxianglong/shark/issues">https://github.com/gaoxianglong/shark/issues</a>
+</li>
+<li>blog：<a href="http://gao-xianglong.iteye.com">http://gao-xianglong.iteye.com</a>
+</li>
+<li>email：<a href="mailto:gao_xianglong@sharksharding.com">gao_xianglong@sharksharding.com</a>
+</li>
+<li>
+<img src="http://dl.iteye.com/upload/picture/pic/134683/97e5d3af-cb7b-3115-97c1-230cbf6ad081.png" alt="">qq group：150445731</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="典型案例" class="anchor" href="#%E5%85%B8%E5%9E%8B%E6%A1%88%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>典型案例</h2>
+
+<p><img src="http://dl.iteye.com/upload/picture/pic/135357/01760d0f-d0ff-3606-ac9c-1d99f94f0e30.jpg" alt=""></p>
+
+<hr>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/gaoxianglong/shark">Shark</a> is maintained by <a href="https://github.com/gaoxianglong">gaoxianglong</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
