@@ -32,7 +32,7 @@ import com.sharksharding.util.sequence.zookeeper.CreateZookeeperSequenceId;
  * @author gaoxianglong
  */
 public class GetZookeeperSequenceIdTest {
-	final static String ADDRESS = "120.25.58.116:2181,120.25.58.116:2182,120.25.58.116:2183,120.25.58.116:2184";
+	final static String ADDRESS = "ip:port";
 	final static int TIMEOUT = 30000;
 	final String PATH = "/root";
 

@@ -12,7 +12,7 @@
 		destroy-method="close">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
-		<property name="jdbcUrl" value="jdbc:mysql://120.24.75.22:3306/master_test" />
+		<property name="jdbcUrl" value="jdbc:mysql://ip:port/master_test" />
 		<property name="driverClass" value="${driverClass}" />
 		<property name="initialPoolSize" value="${initialPoolSize}" />
 		<property name="minPoolSize" value="${minPoolSize}" />
@@ -24,7 +24,7 @@
 		destroy-method="close">
 		<property name="user" value="${name}" />
 		<property name="password" value="${password}" />
-		<property name="jdbcUrl" value="jdbc:mysql://120.24.75.22:3306/master_test" />
+		<property name="jdbcUrl" value="jdbc:mysql://ip:port/master_test" />
 		<property name="driverClass" value="${driverClass}" />
 		<property name="initialPoolSize" value="${initialPoolSize}" />
 		<property name="minPoolSize" value="${minPoolSize}" />

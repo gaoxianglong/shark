@@ -43,30 +43,28 @@ public class ZkSetData {
 			while (null != (value = reader.readLine()))
 				str.append(value);
 			final CountDownLatch countDownLatch = new CountDownLatch(1);
-			ZooKeeper zk_client = new ZooKeeper(
-					"120.25.58.116:2181,120.25.58.116:2182,120.25.58.116:2183,120.25.58.116:2184", 30000,
-					new Watcher() {
-						@Override
-						public void process(WatchedEvent event) {
-							final KeeperState STATE = event.getState();
-							switch (STATE) {
-							case SyncConnected:
-								countDownLatch.countDown();
-								logger.info("connection zookeeper success");
-								break;
-							case Disconnected:
-								logger.warn("zookeeper connection is disconnected");
-								break;
-							case Expired:
-								logger.error("zookeeper session expired");
-								break;
-							case AuthFailed:
-								logger.error("authentication failure");
-							default:
-								break;
-							}
-						}
-					});
+			ZooKeeper zk_client = new ZooKeeper("ip:port", 30000, new Watcher() {
+				@Override
+				public void process(WatchedEvent event) {
+					final KeeperState STATE = event.getState();
+					switch (STATE) {
+					case SyncConnected:
+						countDownLatch.countDown();
+						logger.info("connection zookeeper success");
+						break;
+					case Disconnected:
+						logger.warn("zookeeper connection is disconnected");
+						break;
+					case Expired:
+						logger.error("zookeeper session expired");
+						break;
+					case AuthFailed:
+						logger.error("authentication failure");
+					default:
+						break;
+					}
+				}
+			});
 			countDownLatch.await();
 			zk_client.setData("/info/datasource", str.toString().getBytes(), -1);
 			logger.info("insert success");

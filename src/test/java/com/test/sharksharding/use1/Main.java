@@ -52,7 +52,7 @@ public class Main {
 	private EmailInfo emailInfo;
 	final static String NAME = "root";
 	final static String PWD = "cndmss_db";
-	final static String URL = "jdbc:mysql://120.24.75.22:3306/id";
+	final static String URL = "jdbc:mysql://ip:port/id";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	private static long sequenceid;
 	private static String email = UUID.randomUUID().toString();

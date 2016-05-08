@@ -18,7 +18,7 @@
 		<property name="name" value="dataSource1" />
 		<property name="username" value="${um.username}" />
 		<property name="password" value="${um.password}" />
-		<property name="url" value="jdbc:mysql://120.24.75.22:3306/db_0000" />
+		<property name="url" value="jdbc:mysql://ip:port/db_0000" />
 		<property name="initialSize" value="${um.initialSize}" />
 		<property name="minIdle" value="${um.minIdle}" />
 		<property name="maxActive" value="${um.maxActive}" />
@@ -43,7 +43,7 @@
 		<property name="name" value="dataSource2" />
 		<property name="username" value="${um.username}" />
 		<property name="password" value="${um.password}" />
-		<property name="url" value="jdbc:mysql://120.24.75.22:3306/db_0001" />
+		<property name="url" value="jdbc:mysql://ip:port/db_0001" />
 		<property name="initialSize" value="${um.initialSize}" />
 		<property name="minIdle" value="${um.minIdle}" />
 		<property name="maxActive" value="${um.maxActive}" />

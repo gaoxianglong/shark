@@ -1,4 +1,5 @@
 package com.test.sharksharding.use.resource;
+
 /*
  * Copyright 2015-2101 gaoxianglong
  *
@@ -47,7 +48,7 @@ public class RedisSetData {
 		cfg.setTestOnBorrow(true);
 		cfg.setTestOnReturn(true);
 		Set<HostAndPort> hostAndPorts = new HashSet<HostAndPort>();
-		HostAndPort hostAndPort = new HostAndPort("120.24.75.22", 7000);
+		HostAndPort hostAndPort = new HostAndPort("ip", 7000);
 		hostAndPorts.add(hostAndPort);
 		jedis = new JedisCluster(hostAndPorts, cfg);
 	}
