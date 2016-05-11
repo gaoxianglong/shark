@@ -1,7 +1,7 @@
 ![](http://dl.iteye.com/upload/picture/pic/135281/e0f25517-ae0c-3af9-a910-b8c05b4436ff.jpg)
 ## Shark简介 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) [![Join the chat at https://gitter.im/gaoxianglong/shark](https://badges.gitter.im/gaoxianglong/shark.svg)](https://gitter.im/gaoxianglong/shark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub release](https://img.shields.io/github/release/gaoxianglong/shark.svg)](https://github.com/gaoxianglong/shark/releases) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.sharksharding/shark/badge.svg)](http://search.maven.org/#artifactdetails%7Ccom.sharksharding%7Cshark%7C1.3.8%7Cjar/)
 
-轻量级的分布式mysql分库分表中间件，丰富、灵活的sharding路由算法支持，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。**目前shark每天为不同的企业、业务提供超过千万级别的sql读/写服务**。<br>
+轻量级的分布式mysql sharding中间件，sharding领域的一站式解决方案。具备丰富、灵活的路由算法支持，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。**目前shark每天为不同的企业、业务提供超过千万级别的sql读/写服务**。<br>
 
 - [用户指南](http://gaoxianglong.github.io/shark/)<br>
 - [基准测试](https://github.com/gaoxianglong/shark/wiki/shark-benchmark-result)<br>
@@ -12,12 +12,12 @@
 - 具备丰富、完善的技术文档支持；<br>
 - 动态数据源的无缝切换；<br>
 - master/slave一主一从读写分离；<br>
-- sharding路由算法丰富、灵活，支持2类4种分布式分片算法；<br>
+- 支持2类4种丰富、灵活的分布式路由算法；<br>
 - 非proxy架构，与应用集成，应用直连数据库，降低外围系统依赖所带来的宕机风险；<br>
 - 友好支持mysql数据库；<br>
 - 使用简单，侵入性低，站在巨人的肩膀上，依赖于springjdbc、druid；<br>
 - 基于druid的sqlparser完成sql解析任务，解析性能高效、稳定；<br>
-- 对springjdbc进行功能增强，大幅度提升编码效率；<br>
+- 对spring jdbc进行功能增强，大幅度提升编码效率；<br>
 - 提供多机sequenceid的API支持，解决多机sequenceid难题；<br>
 - 支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
 - 基于velocity模板引擎渲染内容，支持sql语句独立配置和动态拼接，与业务逻辑代码解耦；<br>
@@ -28,8 +28,8 @@
 
 ----------
 
-## Shark的分片模型
-##### Shark支持2类4种分布式分片算法：
+## Shark的分库分片模型
+##### Shark支持2类4种分布式路由算法：
 - 库内分片类型：
   - 片名连续的库内分片算法；
   - 非片名连续的库内分片算法；
