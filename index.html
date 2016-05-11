@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">Shark用户指南</h1>
-      <h2 class="project-tagline">轻量级的分布式mysql分库分表中间件，丰富、灵活的sharding路由算法支持，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。</h2>
+      <h2 class="project-tagline">分布式mysql分库分表中间件，sharding领域的一站式解决方案。具备丰富、灵活的sharding路由算法支持，能够方便DBA实现库的水平扩容和降低数据迁移成本。shark站在巨人的肩膀上(springjdbc、druid)，采用与应用集成架构，放弃通用性，只为换取更好的执行性能与降低分布式环境下外围系统的宕机风险。</h2>
       <a href="https://github.com/gaoxianglong/shark" class="btn">View on GitHub</a>
       <a href="https://github.com/gaoxianglong/shark/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/gaoxianglong/shark/tarball/master" class="btn">Download .tar.gz</a>
@@ -47,7 +47,7 @@
 </li>
 <li>1.8 shark的架构模型<br>
 </li>
-<li>1.9 shark的分片算法<br>
+<li>1.9 shark的分布式路由算法<br>
 </li>
 <li>1.10 单表查询支持的sql模板<br>
 </li>
@@ -71,21 +71,21 @@
 </li>
 <li>3.2 配置sql文件与逻辑代码结构<br>
 </li>
-<li>3.3 一库一片算法<br>
+<li>3.3 一库一片类型<br>
 
 <ul>
-<li>3.3.1 片名连续的一库一片操作<br>
+<li>3.3.1 片名连续的一库一片路由算法<br>
 </li>
-<li>3.3.2 非片名连续的一库一片操作<br>
+<li>3.3.2 非片名连续的一库一片路由算法<br>
 </li>
 </ul>
 </li>
-<li>3.4 库内分片算法<br>
+<li>3.4 库内分片类型<br>
 
 <ul>
-<li>3.4.1 片名连续的库内分片操作<br>
+<li>3.4.1 片名连续的库内分片路由算法<br>
 </li>
-<li>3.4.2 非片名连续的库内分片操作<br>
+<li>3.4.2 非片名连续的库内分片路由算法<br>
 </li>
 </ul>
 </li>
@@ -352,21 +352,21 @@ mvn test-compile</pre></div>
 <img src="http://dl.iteye.com/upload/picture/pic/135419/0cd4a534-3a06-36d7-9aef-9ce469d3e8c7.jpg" alt=""> <br></p>
 
 <h2>
-<a id="19-shark的分片算法" class="anchor" href="#19-shark%E7%9A%84%E5%88%86%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.9 shark的分片算法</h2>
+<a id="19-shark的分布式路由算法" class="anchor" href="#19-shark%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.9 shark的分布式路由算法</h2>
 
 <ul>
 <li>库内分片类型：
 
 <ul>
-<li>片名连续的库内分片算法；</li>
-<li>非片名连续的库内分片算法；</li>
+<li>片名连续的库内分片路由算法；</li>
+<li>非片名连续的库内分片路由算法；</li>
 </ul>
 </li>
 <li>一库一片类型：
 
 <ul>
-<li>片名连续的一库一片算法；</li>
-<li>非片名连续的一库一片算法；</li>
+<li>片名连续的一库一片路由算法；</li>
+<li>非片名连续的一库一片路由算法；</li>
 </ul>
 </li>
 </ul>
@@ -508,12 +508,12 @@ mvn test-compile</pre></div>
 <p>上述程序示例中，PropertyPlaceholderConfigurer的getSql()方法的第一个参数就是定义在properties中的key，而shardKey就是路由条件。</p>
 
 <h2>
-<a id="33-一库一片算法" class="anchor" href="#33-%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3 一库一片算法</h2>
+<a id="33-一库一片类型" class="anchor" href="#33-%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E7%B1%BB%E5%9E%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3 一库一片类型</h2>
 
-<p>shark支持2种一库一片分布式分片算法，分别为片名连续的一库一片算法和非片名连续的一库一片算法。</p>
+<p>shark支持2种类型的一库一片路由算法，分别为片名连续的一库一片路由算法和非片名连续的一库一片路由算法。</p>
 
 <h2>
-<a id="331-片名连续的一库一片操作" class="anchor" href="#331-%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3.1 片名连续的一库一片操作</h2>
+<a id="331-片名连续的一库一片路由算法" class="anchor" href="#331-%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3.1 片名连续的一库一片路由算法</h2>
 
 <p>假设dbSize是1024，tbSize是1024，那么每一个库的片数为1024/1024=1，而片名是按照0000-1023进行分布的， 这就意味着片名是全局唯一的，不允许出现重复。相对于库内分片，一库一片的算法更简单和直观，因为一库一片只跟库相关与片无关，算出了库就等于间接算出了片。如下所示：<br>
 <img src="http://dl.iteye.com/upload/picture/pic/135383/775398ce-33cc-3085-ab4f-9c32849a2bae.jpg" alt=""></p>
@@ -558,7 +558,7 @@ mvn test-compile</pre></div>
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
 
 <h2>
-<a id="332-非片名连续的一库一片操作" class="anchor" href="#332-%E9%9D%9E%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3.2 非片名连续的一库一片操作</h2>
+<a id="332-非片名连续的一库一片路由算法" class="anchor" href="#332-%E9%9D%9E%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E4%B8%80%E5%BA%93%E4%B8%80%E7%89%87%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3.2 非片名连续的一库一片路由算法</h2>
 
 <p>假设dbSize是1024，tbSize是1024，那么每一个库的片数为1024/1024=1，非片名连续的一库一片算法，所有片名全局一致，所有片名无需后缀。
 <img src="http://dl.iteye.com/upload/picture/pic/135385/c562c14b-6ff7-3de8-bb34-59f370d64f76.jpg" alt=""></p>
@@ -603,12 +603,12 @@ mvn test-compile</pre></div>
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
 
 <h2>
-<a id="34-库内分片算法" class="anchor" href="#34-%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4 库内分片算法</h2>
+<a id="34-库内分片类型" class="anchor" href="#34-%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E7%B1%BB%E5%9E%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4 库内分片类型</h2>
 
 <p>shark支持2种库内分片分布式分片算法，分别为片名连续的库内分片算法和非片名连续的库内分片算法。</p>
 
 <h2>
-<a id="341-片名连续的库内分片操作" class="anchor" href="#341-%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4.1 片名连续的库内分片操作</h2>
+<a id="341-片名连续的库内分片路由算法" class="anchor" href="#341-%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4.1 片名连续的库内分片路由算法</h2>
 
 <p>假设dbSize是32，tbSize是1024，那么每一个库的片数为1024/32=32，片名是按照0000-1023进行分布的，这就意味着片名是全局唯一的，不允许出现重复。<br>
 <img src="http://dl.iteye.com/upload/picture/pic/135389/da3425d9-d970-3719-8e56-c20c409a4f16.jpg" alt=""></p>
@@ -654,7 +654,7 @@ mvn test-compile</pre></div>
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
 
 <h2>
-<a id="342-非片名连续的库内分片操作" class="anchor" href="#342-%E9%9D%9E%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E6%93%8D%E4%BD%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4.2 非片名连续的库内分片操作</h2>
+<a id="342-非片名连续的库内分片路由算法" class="anchor" href="#342-%E9%9D%9E%E7%89%87%E5%90%8D%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%BA%93%E5%86%85%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4.2 非片名连续的库内分片路由算法</h2>
 
 <p>假设dbSize是32，tbSize是1024，那么每一个库的片数为1024/32=32，片名在每一个库中都是按照0-31进行分布的，非全局唯一，这样的好处，相对于片名连续的库内分片更容易扩容和数据迁移。<br>
 <img src="http://dl.iteye.com/upload/picture/pic/135387/280b2b39-7d48-323b-955a-cc210f285597.jpg" alt=""></p>
