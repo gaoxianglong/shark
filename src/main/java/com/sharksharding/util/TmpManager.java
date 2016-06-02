@@ -39,9 +39,8 @@ public class TmpManager {
 	 */
 	public static boolean deleteTmp(String path) {
 		boolean result = false;
-		if (IsFileExist.exist(path)) {
+		if (FileExist.exists(path))
 			result = new File(path).delete();
-		}
 		return result;
 	}
 
@@ -53,10 +52,9 @@ public class TmpManager {
 	 * @return String tmp文件全限定名
 	 */
 	public static String createTmp() {
-		tmpdir = System.getProperty("java.io.tmpdir") + "shark-" + System.currentTimeMillis() + ".xml";
-		if (IsFileExist.exist(tmpdir)) {
+		tmpdir = System.getProperty("java.io.tmpdir") + File.separator + "shark-" + System.currentTimeMillis() + ".xml";
+		if (FileExist.exists(tmpdir))
 			createTmp();
-		}
 		return tmpdir;
 	}
 }

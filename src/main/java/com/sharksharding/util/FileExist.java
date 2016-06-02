@@ -24,12 +24,16 @@ import java.io.File;
  * 
  * @version 1.3.7
  */
-public class IsFileExist {
-	public static boolean exist(String path) {
+public class FileExist {
+	public @Deprecated static boolean exist(String path) {
 		boolean result = false;
 		if (new File(path).exists()) {
 			result = true;
 		}
 		return result;
+	}
+
+	public static boolean exists(String path) {
+		return new File(path).exists();
 	}
 }
