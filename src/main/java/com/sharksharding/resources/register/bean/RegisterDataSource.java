@@ -17,7 +17,6 @@ package com.sharksharding.resources.register.bean;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -26,10 +25,10 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.FileSystemResource;
-
 import com.sharksharding.core.shard.GetJdbcTemplate;
 import com.sharksharding.core.shard.SharkJdbcTemplate;
 import com.sharksharding.exception.RegisterBeanException;
+import com.sharksharding.exception.SharkRuntimeException;
 import com.sharksharding.util.TmpManager;
 
 /**
@@ -43,9 +42,38 @@ public class RegisterDataSource implements RegisterBean {
 	private static ApplicationContext aContext;
 	private static Logger logger = LoggerFactory.getLogger(RegisterDataSource.class);
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.aContext = applicationContext;
+	}
+
+	/**
+	 * 通过指定的beanName从spring的ioc容器中获取SharkJdbcTemplate实例
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param beanName
+	 * 
+	 * @return SharkJdbcTemplate
+	 */
+	public static SharkJdbcTemplate getBean(String beanName) {
+		if (null != beanName) {
+			/* 检查ioc容器中是否包含指定beanName的实例 */
+			if (aContext.containsBean(beanName)) {
+				Object obj = null;
+				obj = aContext.getBean(beanName);
+				if (obj instanceof SharkJdbcTemplate) {
+					return (SharkJdbcTemplate) obj;
+				} else {
+					throw new SharkRuntimeException(
+							"beanName " + beanName + " is not an instance of SharkJdbcTemplate");
+				}
+			} else {
+				logger.warn("beanName " + beanName + " not found");
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -73,20 +101,38 @@ public class RegisterDataSource implements RegisterBean {
 				FileSystemResource resource = new FileSystemResource(tmpdir);
 				ConfigurableApplicationContext cfgContext = (ConfigurableApplicationContext) aContext;
 				DefaultListableBeanFactory beanfactory = (DefaultListableBeanFactory) cfgContext.getBeanFactory();
-				/* 验证jdbcTemplate是否已经存在 */
-				if (beanfactory.isBeanNameInUse("jdbcTemplate")) {
-					beanfactory.removeBeanDefinition("jdbcTemplate");
-					logger.debug("delete bean-->jdbcTemplate");
-				}
-				/* 将配置中心获取的配置信息与当前上下文中的ioc容器进行合并 */
+				/*
+				 * 将配置中心获取的配置信息与当前上下文中的ioc容器进行合并,不需要手动移除之前的bean,
+				 * 调用loadBeanDefinitions()方法时会进行自动移除
+				 */
 				new XmlBeanDefinitionReader(beanfactory).loadBeanDefinitions(resource);
-				/* 替换jdbcTemplate引用 */
-				GetJdbcTemplate.setSharkJdbcTemplate((SharkJdbcTemplate) beanfactory.getBean("jdbcTemplate"));
+				final String jdbcTemplateBeanName = "jdbcTemplate";
+				String[] beanNames = beanfactory.getBeanDefinitionNames();
+				for (String beanName : beanNames) {
+					/* 实例化所有所有未实例化的bean */
+					beanfactory.getBean(beanName);
+					/* 替换上下文中SharkJdbcTemplate的引用 */
+					if (jdbcTemplateBeanName.equals(beanName)) {
+						GetJdbcTemplate
+								.setSharkJdbcTemplate((SharkJdbcTemplate) beanfactory.getBean(jdbcTemplateBeanName));
+					}
+				}
 			}
 		} catch (Exception e) {
 			throw new RegisterBeanException(e.toString());
 		} finally {
 			TmpManager.deleteTmp(tmpdir);
+		}
+	}
+
+	/**
+	 * 手动从ioc容器中移除指定bean
+	 *
+	 * @author gaoxianglong
+	 */
+	private @Deprecated void removeBean(DefaultListableBeanFactory beanfactory, String beanName) {
+		if (beanfactory.containsBean(beanName)) {
+			beanfactory.removeBeanDefinition(beanName);
 		}
 	}
 

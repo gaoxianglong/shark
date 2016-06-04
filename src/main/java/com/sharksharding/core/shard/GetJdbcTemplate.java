@@ -15,6 +15,8 @@
  */
 package com.sharksharding.core.shard;
 
+import com.sharksharding.resources.register.bean.RegisterDataSource;
+
 /**
  * 从zookeeper、redis等配置中心读取到相关配置后,
  * 从此类中获取SharkJdbcTemplate实例,避免watcher监听到事件后重新注册相关bean时,应用持有的还是之前引用
@@ -28,6 +30,19 @@ public class GetJdbcTemplate {
 
 	public static SharkJdbcTemplate getSharkJdbcTemplate() {
 		return jdbcTemplate;
+	}
+
+	/**
+	 * 通过指定的beanName从ioc容器中获取SharkJdbcTemplate实例
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param beanName
+	 * 
+	 * @return SharkJdbcTemplate
+	 */
+	public static SharkJdbcTemplate getSharkJdbcTemplate(String beanName) {
+		return RegisterDataSource.getBean(beanName);
 	}
 
 	public static void setSharkJdbcTemplate(SharkJdbcTemplate jdbcTemplate) {

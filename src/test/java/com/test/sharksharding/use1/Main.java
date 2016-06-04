@@ -36,11 +36,11 @@ import com.sharksharding.util.sequence.SequenceIDManger;
 /* 片名连续的库内分片配置 */
 // @ContextConfiguration(locations = "classpath*:shark2-context.xml")
 /* 非片名连续的库内分片配置 */
-// @ContextConfiguration(locations = "classpath*:shark3-context.xml")
+@ContextConfiguration(locations = "classpath*:shark3-context.xml")
 /* 片名连续的一库一片配置 */
 // @ContextConfiguration(locations = "classpath*:shark4-context.xml")
 /* 非片名连续的一库一片配置 */
-@ContextConfiguration(locations = "classpath*:shark5-context.xml")
+//@ContextConfiguration(locations = "classpath*:shark5-context.xml")
 public class Main {
 	@Resource
 	private UserDao userDao;
@@ -51,8 +51,8 @@ public class Main {
 	@Resource
 	private EmailInfo emailInfo;
 	final static String NAME = "root";
-	final static String PWD = "cndmss_db";
-	final static String URL = "jdbc:mysql://ip:port/id";
+	final static String PWD = "";
+	final static String URL = "jdbc:mysql://ip:port/test_id";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	private static long sequenceid;
 	private static String email = UUID.randomUUID().toString();
