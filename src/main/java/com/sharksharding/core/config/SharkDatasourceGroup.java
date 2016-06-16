@@ -44,7 +44,7 @@ public class SharkDatasourceGroup extends AbstractRoutingDataSource implements D
 		if (null != dataSourceHolder) {
 			/* 获取存放在ThreadLocal中的数据源索引 */
 			index = dataSourceHolder.getIndex();
-			logger.info("set datasource success,dbindex-->" + index);
+			logger.info("datasource index-->" + index);
 		}
 		return index;
 	}
