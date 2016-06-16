@@ -16,7 +16,7 @@
 package com.sharksharding.core.config;
 
 /**
- * shark的数据源路由接口
+ * shark动态数据源标记接口
  * 
  * @author gaoxianglong
  * 

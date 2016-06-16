@@ -16,13 +16,23 @@
 package com.sharksharding.core.config;
 
 /**
- * master数据源路由选择器
+ * 数据源路由选择器
  * 
  * @author gaoxianglong
  * 
  * @version 1.3.5
  */
 public class SharkDataSourceHolder implements DataSourceHolder {
+	/*
+	 * 关于并发环境下AbstractRoutingDataSource的线程安全问题,
+	 * 由SharkDataSourceHolder中的ThreadLocal负责保障。每个线程的数据源索引都保存在ThreadLocal中,非线程共享。
+	 * 
+	 * 流程:getConnection() --> AbstractRoutingDataSource.determineTargetDataSource() --> AbstractRoutingDataSource.determineCurrentLookupKey()
+	 * 
+	 * 当jdbc调用getConnection()方法获取数据库会话时,
+	 * 会先调用AbstractRoutingDataSource.determineTargetDataSource()方法获取出具体的数据源,
+	 * 而此方法内部需要调用重写后的determineCurrentLookupKey()方法才知道线程存放在ThreadLocal中的数据源索引。
+	 */
 	private static final ThreadLocal<Integer> holder;
 
 	static {

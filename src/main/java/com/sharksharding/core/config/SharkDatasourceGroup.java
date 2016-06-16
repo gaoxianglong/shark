@@ -21,9 +21,9 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import com.sharksharding.factory.DataSourceHolderFactory;
 
 /**
- * shark数据源路由实现，持有多数据源
+ * shark动态数据源实现
  * 
- * 该数据源继承自Spring提供的AbstractRoutingDataSource，可以根据配置文件中的数据源key对多数据源进行动态切换，
+ * 该数据源继承自Spring提供的AbstractRoutingDataSource,可以根据配置文件中的数据源索引对多数据源进行动态切换,
  * 能够非常方便的实现数据源路由工作
  * 
  * @author gaoxianglong
@@ -42,6 +42,7 @@ public class SharkDatasourceGroup extends AbstractRoutingDataSource implements D
 	protected Object determineCurrentLookupKey() {
 		int index = -1;
 		if (null != dataSourceHolder) {
+			/* 获取存放在ThreadLocal中的数据源索引 */
 			index = dataSourceHolder.getIndex();
 			logger.info("set datasource success,dbindex-->" + index);
 		}
