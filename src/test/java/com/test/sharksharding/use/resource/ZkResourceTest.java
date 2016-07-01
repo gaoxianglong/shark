@@ -32,8 +32,8 @@ public class ZkResourceTest {
 			System.out.println("input-->");
 			Scanner scan = new Scanner(System.in);
 			final String uid = scan.nextLine();
-//			SharkJdbcTemplate jdbcTemlate = GetJdbcTemplate.getSharkJdbcTemplate("jdbcTemplate");
-			SharkJdbcTemplate jdbcTemlate = GetJdbcTemplate.getSharkJdbcTemplate();
+			SharkJdbcTemplate jdbcTemlate = GetJdbcTemplate.getSharkJdbcTemplate("jdbcTemplate");
+			//SharkJdbcTemplate jdbcTemlate = GetJdbcTemplate.getSharkJdbcTemplate();
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("uid", Long.valueOf(uid));
 			params.put("userName", "gaoxianglong");

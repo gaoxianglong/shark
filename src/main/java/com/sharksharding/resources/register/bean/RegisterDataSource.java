@@ -106,15 +106,15 @@ public class RegisterDataSource implements RegisterBean {
 				 * 调用loadBeanDefinitions()方法时会进行自动移除
 				 */
 				new XmlBeanDefinitionReader(beanfactory).loadBeanDefinitions(resource);
-				final String jdbcTemplateBeanName = "jdbcTemplate";
+				final String defaultBeanName = "jdbcTemplate";
 				String[] beanNames = beanfactory.getBeanDefinitionNames();
 				for (String beanName : beanNames) {
-					/* 实例化所有所有未实例化的bean */
-					beanfactory.getBean(beanName);
-					/* 替换上下文中SharkJdbcTemplate的引用 */
-					if (jdbcTemplateBeanName.equals(beanName)) {
-						GetJdbcTemplate
-								.setSharkJdbcTemplate((SharkJdbcTemplate) beanfactory.getBean(jdbcTemplateBeanName));
+					/* 替换上下文中缺省beanName为jdbcTemplate的SharkJdbcTemplate的引用 */
+					if (defaultBeanName.equals(beanName)) {
+						GetJdbcTemplate.setSharkJdbcTemplate((SharkJdbcTemplate) beanfactory.getBean(defaultBeanName));
+					} else {
+						/* 实例化所有所有未实例化的bean */
+						beanfactory.getBean(beanName);
 					}
 				}
 			}

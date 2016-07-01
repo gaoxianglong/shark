@@ -82,7 +82,6 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 	}
 
 	public void init() {
-		logger.info("shark initializeing");
 		sharkInfo.setWr_index(this.getWr_index());
 		sharkInfo.setIsShard(this.isShard());
 		sharkInfo.setShardMode(this.isShardMode());
@@ -90,16 +89,11 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 		sharkInfo.setDbRuleArray(this.getDbRuleArray());
 		sharkInfo.setTbRuleArray(this.getTbRuleArray());
 		sharkInfo.setTbSuffix(this.getTbSuffix());
-		final String sharkinfo = LoadSharkLogo.load()
-				.replaceFirst("\\[shark_version\\]", "[" + LoadVersion.getVersion() + "]")
-				.replaceAll("\\[wr_index\\]", "[" + wr_index + "]").replaceAll("\\[is_shard\\]", "[" + isShard + "]")
-				.replaceAll("\\[shard_mode\\]", "[" + shardMode + "]")
-				.replaceAll("\\[consistent\\]", "[" + consistent + "]")
-				.replaceAll("\\[db_rulearray\\]", "[" + dbRuleArray + "]")
-				.replaceAll("\\[tb_rulearray\\]", "[" + tbRuleArray + "]")
-				.replaceAll("\\[tb_suffix\\]", "[" + tbSuffix + "]");
-		logger.info("\n===============================shark config info===============================\n" + sharkinfo
-				+ "\n===============================================================================");
+		logger.debug("wr_index-->" + sharkInfo.getWr_index() + "\tisShard-->" + sharkInfo.getIsShard()
+				+ "\tshardMode-->" + sharkInfo.getShardMode() + "\tconsistent" + sharkInfo.getConsistent()
+				+ "\tdbRuleArray" + sharkInfo.getDbRuleArray() + "\ttbRuleArray" + sharkInfo.getTbRuleArray());
+		logger.info(
+				"\nWelcome to Shark\n" + LoadSharkLogo.load().replaceFirst("\\[version\\]", LoadVersion.getVersion()));
 		/* 进行配置合法性验证 */
 		new ConfigValidate(sharkInfo).validate();
 	}
