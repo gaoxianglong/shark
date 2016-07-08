@@ -313,18 +313,6 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 	}
 
 	@Override
-	public long queryForLong(String sql) throws DataAccessException {
-
-		return super.queryForLong(sql);
-	}
-
-	@Override
-	public int queryForInt(String sql) throws DataAccessException {
-
-		return super.queryForInt(sql);
-	}
-
-	@Override
 	public <T> List<T> queryForList(String sql, Class<T> elementType) throws DataAccessException {
 
 		return super.queryForList(sql, elementType);
@@ -514,30 +502,6 @@ public class SharkJdbcTemplate extends JdbcTemplate {
 	public Map<String, Object> queryForMap(String sql, Object... args) throws DataAccessException {
 
 		return super.queryForMap(sql, args);
-	}
-
-	@Override
-	public long queryForLong(String sql, Object[] args, int[] argTypes) throws DataAccessException {
-
-		return super.queryForLong(sql, args, argTypes);
-	}
-
-	@Override
-	public long queryForLong(String sql, Object... args) throws DataAccessException {
-
-		return super.queryForLong(sql, args);
-	}
-
-	@Override
-	public int queryForInt(String sql, Object[] args, int[] argTypes) throws DataAccessException {
-
-		return super.queryForInt(sql, args, argTypes);
-	}
-
-	@Override
-	public int queryForInt(String sql, Object... args) throws DataAccessException {
-
-		return super.queryForInt(sql, args);
 	}
 
 	@Override

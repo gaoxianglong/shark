@@ -51,7 +51,7 @@ public class Main {
 	@Resource
 	private EmailInfo emailInfo;
 	final static String NAME = "root";
-	final static String PWD = "pwd";
+	final static String PWD = "yunji";
 	final static String URL = "jdbc:mysql://ip:port/test_id";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	private static long sequenceid;
