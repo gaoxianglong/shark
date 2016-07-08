@@ -294,33 +294,13 @@
 <div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
     &lt;<span class="pl-ent">groupId</span>&gt;com.sharksharding&lt;/<span class="pl-ent">groupId</span>&gt;
     &lt;<span class="pl-ent">artifactId</span>&gt;shark&lt;/<span class="pl-ent">artifactId</span>&gt;
-    &lt;<span class="pl-ent">version</span>&gt;1.4.1&lt;/<span class="pl-ent">version</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.4.2.RELEASE&lt;/<span class="pl-ent">version</span>&gt;
 &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
 <h2>
 <a id="16-shark依赖的其它构件" class="anchor" href="#16-shark%E4%BE%9D%E8%B5%96%E7%9A%84%E5%85%B6%E5%AE%83%E6%9E%84%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.6 shark依赖的其它构件</h2>
 
-<p>shark1.4.1及后续版本的pom.xml文件中将会关闭构件依赖，需要自行下载shark依赖的相关构件,如下所示：</p>
-
-<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">properties</span>&gt;
-    &lt;<span class="pl-ent">java-version</span>&gt;1.7&lt;/<span class="pl-ent">java-version</span>&gt;
-    &lt;<span class="pl-ent">org</span>.springframework-version&gt;3.2.13.RELEASE&lt;/<span class="pl-ent">org</span>.springframework-version&gt;
-    &lt;<span class="pl-ent">org</span>.aspectj-version&gt;1.6.10&lt;/<span class="pl-ent">org</span>.aspectj-version&gt;
-    &lt;<span class="pl-ent">org</span>.slf4j-version&gt;1.6.6&lt;/<span class="pl-ent">org</span>.slf4j-version&gt;
-    &lt;<span class="pl-ent">commons-dbcp</span>.version&gt;1.4&lt;/<span class="pl-ent">commons-dbcp</span>.version&gt;
-    &lt;<span class="pl-ent">commons-pool</span>.version&gt;1.6&lt;/<span class="pl-ent">commons-pool</span>.version&gt;
-    &lt;<span class="pl-ent">commons-logging</span>.version&gt;1.2&lt;/<span class="pl-ent">commons-logging</span>.version&gt;
-    &lt;<span class="pl-ent">commons-io</span>.version&gt;2.4&lt;/<span class="pl-ent">commons-io</span>.version&gt;
-    &lt;<span class="pl-ent">commons-lang3</span>.version&gt;3.4&lt;/<span class="pl-ent">commons-lang3</span>.version&gt;
-    &lt;<span class="pl-ent">cglib-version</span>&gt;2.1.3-201003011305&lt;/<span class="pl-ent">cglib-version</span>&gt;
-    &lt;<span class="pl-ent">aspectjweaver-version</span>&gt;1.8.5&lt;/<span class="pl-ent">aspectjweaver-version</span>&gt;
-    &lt;<span class="pl-ent">servlet-api-version</span>&gt;2.5&lt;/<span class="pl-ent">servlet-api-version</span>&gt;
-    &lt;<span class="pl-ent">fastjson-version</span>&gt;1.2.5&lt;/<span class="pl-ent">fastjson-version</span>&gt;
-    &lt;<span class="pl-ent">junit-version</span>&gt;4.7&lt;/<span class="pl-ent">junit-version</span>&gt;
-    &lt;<span class="pl-ent">zookeeper-version</span>&gt;3.4.6&lt;/<span class="pl-ent">zookeeper-version</span>&gt;
-    &lt;<span class="pl-ent">jedis</span>.version&gt;2.6.2&lt;/<span class="pl-ent">jedis</span>.version&gt;
-    &lt;<span class="pl-ent">project</span>.build.sourceEncoding&gt;UTF-8&lt;/<span class="pl-ent">project</span>.build.sourceEncoding&gt;
-&lt;/<span class="pl-ent">properties</span>&gt;</pre></div>
+<p>shark项目的pom.xml文件中依赖的一些其它构件(比如依赖的Spring版本为3.2.13.RELEASE)，如果你觉得版本过低，那么可在项目的pom.xml文件中使用maven的&lt;exclusions/&gt;标签来排除依赖，自行下载所需版本的构件。</p>
 
 <h2>
 <a id="161-版本注意" class="anchor" href="#161-%E7%89%88%E6%9C%AC%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.6.1 版本注意</h2>
