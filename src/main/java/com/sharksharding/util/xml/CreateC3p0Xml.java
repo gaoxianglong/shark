@@ -22,7 +22,7 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-import com.sharksharding.core.shard.ResolveDbname;
+import com.sharksharding.core.shard.ResolveDbName;
 
 /**
  * 生成基于c3p0的数据源配置文件
@@ -81,7 +81,7 @@ public class CreateC3p0Xml implements CreateDSXml {
 				password.setValue(this.getPassword());
 				Property jdbcUrl = new Property();
 				jdbcUrl.setName("jdbcUrl");
-				jdbcUrl.setValue(ResolveDbname.getNewDbName(i, this.getJdbcUrl(), tbSuffix));
+				jdbcUrl.setValue(ResolveDbName.getNewDbName(i, this.getJdbcUrl(), tbSuffix));
 				Property driverClass = new Property();
 				driverClass.setName("driverClass");
 				driverClass.setValue(this.getDriverClass());

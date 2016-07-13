@@ -17,12 +17,12 @@ package com.test.sharksharding.core.shard;
 
 import org.junit.Assert;
 import org.junit.Test;
-import com.sharksharding.core.shard.ResolveDbname;
+import com.sharksharding.core.shard.ResolveDbName;
 
 public class ResolveDbnameTest {
 	public @Test void testGetNewDbName() {
-		Assert.assertEquals("userinfo_test_0010", ResolveDbname.getNewDbName(10, "userinfo_test", "_0000"));
-		Assert.assertEquals("userinfo_test_0100", ResolveDbname.getNewDbName(100, "userinfo_test", "_0000"));
-		Assert.assertEquals("userinfo_test_1000", ResolveDbname.getNewDbName(1000, "userinfo_test", "_0000"));
+		Assert.assertEquals("userinfo_test_0010", ResolveDbName.getNewDbName(10, "userinfo_test", "_0000"));
+		Assert.assertEquals("userinfo_test_0100", ResolveDbName.getNewDbName(100, "userinfo_test", "_0000"));
+		Assert.assertEquals("userinfo_test_1000", ResolveDbName.getNewDbName(1000, "userinfo_test", "_0000"));
 	}
 }

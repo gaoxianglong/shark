@@ -17,34 +17,34 @@ package com.test.sharksharding.sql.mysql.parser;
 
 import org.junit.Test;
 
-import com.sharksharding.core.shard.ResolveTabname;
+import com.sharksharding.core.shard.ResolveTbName;
 
 import junit.framework.Assert;
 
 public class ResolveTableNameTest {
 	public @Test void getTabNamebySelect() {
 		String sql = "SELECT * FROM userinfo_test WHERE uid = 10000 AND name = gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		Assert.assertEquals("userinfo_test", ResolveTbName.getTbName(sql));
 		sql = "SELECT * FROM userinfo_test u WHERE u.uid = 10000 AND u.name = gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		Assert.assertEquals("userinfo_test", ResolveTbName.getTbName(sql));
 	}
 
 	public @Test void getTabNamebyInsert() {
 		String sql = "INSERT INTO userinfo_test(uid,name) VALUES(10000,gaoxianglong)";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		Assert.assertEquals("userinfo_test", ResolveTbName.getTbName(sql));
 	}
 
 	public @Test void getTabNamebyUpdate() {
 		String sql = "UPDATE userinfo_test SET sex = ? WHERE uid=10000 AND name=gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		Assert.assertEquals("userinfo_test", ResolveTbName.getTbName(sql));
 		sql = "UPDATE userinfo_test u SET u.sex = ? WHERE u.uid=10000 AND u.name=gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		Assert.assertEquals("userinfo_test", ResolveTbName.getTbName(sql));
 	}
 
 	public @Test void getTabNamebyDelete() {
 		String sql = "DELETE FROM userinfo_test WHERE uid=10000 AND name=gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		Assert.assertEquals("userinfo_test", ResolveTbName.getTbName(sql));
 		sql = "DELETE FROM userinfo_test u WHERE u.uid=10000 AND u.name=gaoxianglong";
-		Assert.assertEquals("userinfo_test", ResolveTabname.getTabName(sql));
+		Assert.assertEquals("userinfo_test", ResolveTbName.getTbName(sql));
 	}
 }

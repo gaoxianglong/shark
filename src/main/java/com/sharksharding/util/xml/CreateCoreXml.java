@@ -67,17 +67,25 @@ public class CreateCoreXml {
 			/* 创建配置文件的根目录<beans/>标签 */
 			Beans beans = new Beans();
 			/* 创建<bean/>子标签 */
+			Bean bean0 = new Bean();
+			bean0.setId("jdbcTemplate");
+			bean0.setClass_("org.springframework.jdbc.core.JdbcTemplate");
+			/* 创建<property/>子标签 */
+			Property dataSource = new Property();
+			dataSource.setName("dataSource");
+			dataSource.setRef("dataSourceGroup");
+			List<Property> propertys = new ArrayList<Property>();
+			propertys.add(dataSource);
+			bean0.setProperty(propertys);
+
 			Bean bean1 = new Bean();
-			bean1.setId("jdbcTemplate");
-			bean1.setClass_("com.sharksharding.core.shard.SharkJdbcTemplate");
+			bean1.setId("shardRule");
+			bean1.setClass_("com.sharksharding.core.shard.ShardRule");
 			bean1.setInit_method("init");
 			/* 创建<property/>子标签 */
 			Property isShard = new Property();
 			isShard.setName("isShard");
 			isShard.setValue("true");
-			Property dataSource = new Property();
-			dataSource.setName("dataSource");
-			dataSource.setRef("dataSourceGroup");
 			Property wr_index = new Property();
 			wr_index.setName("wr_index");
 			wr_index.setValue(this.getWr_index());
@@ -96,9 +104,8 @@ public class CreateCoreXml {
 			Property tbSuffix = new Property();
 			tbSuffix.setName("tbSuffix");
 			tbSuffix.setValue(this.getTbSuffix());
-			List<Property> propertys = new ArrayList<Property>();
+			propertys = new ArrayList<Property>();
 			propertys.add(isShard);
-			propertys.add(dataSource);
 			propertys.add(wr_index);
 			propertys.add(shardMode);
 			propertys.add(consistent);
@@ -144,6 +151,7 @@ public class CreateCoreXml {
 			constructor_arg1.setValue(this.getSqlPath());
 			bean3.setConstructor_arg(constructor_arg1);
 			List<Bean> beanList = new ArrayList<Bean>();
+			beanList.add(bean0);
 			beanList.add(bean1);
 			beanList.add(bean2);
 			beanList.add(bean3);

@@ -34,14 +34,8 @@ public class RuleTest {
 	}
 
 	public @Test void testGetTabIndex() {
-		Assert.assertEquals(10000 % 1024 % 32, RuleImpl.getTabIndex(10000, "#10000#%1024%32"));
-		Assert.assertEquals(10000 % 2048 % 64, RuleImpl.getTabIndex(10000, "#10000#%2048%64"));
-		Assert.assertEquals(10000 & (2048 - 1) & (64 - 1), RuleImpl.getTabIndex(10000, "#10000#%2048%64"));
-	}
-
-	public @Test void testGetDbIndexbyOne() {
-		Assert.assertEquals(10000 % 32, RuleImpl.getDbIndexbyOne(10000, "#10000#%32"));
-		Assert.assertEquals(10000 % 64, RuleImpl.getDbIndexbyOne(10000, "#10000#%64"));
-		Assert.assertEquals(10000 & (128 - 1), RuleImpl.getDbIndexbyOne(10000, "#10000#%128"));
+		Assert.assertEquals(10000 % 1024 % 32, RuleImpl.getTbIndex(10000, "#10000#%1024%32", true));
+		Assert.assertEquals(10000 % 2048 % 64, RuleImpl.getTbIndex(10000, "#10000#%2048%64", true));
+		Assert.assertEquals(10000 & (2048 - 1) & (64 - 1), RuleImpl.getTbIndex(10000, "#10000#%2048%64", true));
 	}
 }

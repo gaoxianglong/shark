@@ -19,35 +19,27 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.sharksharding.core.shard.ResolveRule;
+import com.sharksharding.core.shard.ResolveRouteRule;
 
 import junit.framework.Assert;
 
 public class ResolveRuleTest {
 	public @Test void testResolveDbRule() {
-		List<Integer> list = ResolveRule.resolveDbRule("#userinfo_id|email_hash#%1024/32");
+		List<Integer> list = ResolveRouteRule.resolveDbRule("#userinfo_id|email_hash#%1024/32");
 		if (!list.isEmpty()) {
-			final int TAB_SIZE = list.get(0);
+			final int TB_SIZE = list.get(0);
 			final int DB_SIZE = list.get(1);
-			Assert.assertEquals(1024, TAB_SIZE);
+			Assert.assertEquals(1024, TB_SIZE);
 			Assert.assertEquals(32, DB_SIZE);
 		}
 	}
 
 	public @Test void testResolveTabRule() {
-		List<Integer> list = ResolveRule.resolveTabRule("#userinfo_id|email_hash#%1024%32");
+		List<Integer> list = ResolveRouteRule.resolveTbRule("#userinfo_id|email_hash#%1024%32", true);
 		if (!list.isEmpty()) {
-			final int TAB_SIZE = list.get(0);
+			final int TB_SIZE = list.get(0);
 			final int DB_SIZE = list.get(1);
-			Assert.assertEquals(1024, TAB_SIZE);
-			Assert.assertEquals(32, DB_SIZE);
-		}
-	}
-
-	public @Test void testResolveDbRulebyOne() {
-		List<Integer> list = ResolveRule.resolveDbRulebyOne("#userinfo_id|email_hash#%32");
-		if (!list.isEmpty()) {
-			final int DB_SIZE = list.get(0);
+			Assert.assertEquals(1024, TB_SIZE);
 			Assert.assertEquals(32, DB_SIZE);
 		}
 	}

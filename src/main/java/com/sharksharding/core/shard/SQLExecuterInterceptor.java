@@ -36,7 +36,7 @@ public class SQLExecuterInterceptor {
 	}
 
 	/**
-	 * 基于SpringAop的方式对org.springframework.jdbc.core.JdbcTemplate下所有的update()
+	 * 基于Spring Aop的方式对org.springframework.jdbc.core.JdbcTemplate类下所有的update()
 	 * 方法进行拦截
 	 * 
 	 * @author gaoxianglong
@@ -48,13 +48,13 @@ public class SQLExecuterInterceptor {
 	 * 
 	 * @return Object
 	 */
-	@Around("execution(* com.sharksharding.core.shard.SharkJdbcTemplate.update*(..))")
+	@Around("execution(* org.springframework.jdbc.core.JdbcTemplate.update*(..))")
 	public Object interceptUpdateSQL(ProceedingJoinPoint proceedingJoinPoint) {
 		return sqlExecute.execute(proceedingJoinPoint, true);
 	}
 
 	/**
-	 * 基于SpringAop的方式对org.springframework.jdbc.core.JdbcTemplate下所有的query()
+	 * 基于Spring Aop的方式对org.springframework.jdbc.core.JdbcTemplate类下所有的query()
 	 * 方法进行拦截
 	 * 
 	 * @author gaoxianglong
@@ -66,7 +66,7 @@ public class SQLExecuterInterceptor {
 	 * 
 	 * @return Object
 	 */
-	@Around("execution(* com.sharksharding.core.shard.SharkJdbcTemplate.query*(..))")
+	@Around("execution(* org.springframework.jdbc.core.JdbcTemplate.query*(..))")
 	public Object interceptQuerySQL(ProceedingJoinPoint proceedingJoinPoint) {
 		return sqlExecute.execute(proceedingJoinPoint, false);
 	}

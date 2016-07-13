@@ -23,21 +23,18 @@ package com.sharksharding.core.shard;
  * @version 1.3.5
  */
 public class DbRule extends RuleImpl {
-	private boolean shardMode;
+	private ShardConfigInfo sharkConfigInfo;
+
+	public DbRule() {
+		sharkConfigInfo = ShardConfigInfo.getShardInfo();
+	}
 
 	@Override
 	public int getIndex(long routeValue, String ruleArray) {
 		int dbIndex = -1;
-		if (shardMode) {
-			dbIndex = super.getDbIndexbyOne(routeValue, ruleArray);
-		} else {
+		/* 只有多库多表模式下需要计算数据源索引 */
+		if (sharkConfigInfo.getShardMode())
 			dbIndex = super.getDbIndex(routeValue, ruleArray);
-		}
 		return dbIndex;
-	}
-
-	@Override
-	public void setShardMode(boolean shardMode) {
-		this.shardMode = shardMode;
 	}
 }

@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 解析分库分表的关键字
+ * 解析分库分表字段
  * 
  * @author gaoxianglong
  * 
@@ -27,26 +27,26 @@ import java.util.List;
  */
 public class ResolveShardkey {
 	/**
-	 * 解析并获取配置文件中的分库分表关键字
+	 * 从分库分表算法中解shardkey
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @param sharkInfo
+	 * @param shardConfigInfo
 	 *            分库分表配置信息
 	 * 
-	 * @return List<String> 分库分表关键字集合
+	 * @return List<String> shardKeys
 	 */
-	public static List<String> getKeys(SharkInfo sharkInfo) {
-		// List<String> keyNames = null;
-		// if (sharkInfo.getShardMode()) {
-		// String dbKeyName = sharkInfo.getDbRuleArray().split("\\#")[1];
-		// keyNames = Arrays.asList(dbKeyName.split("\\|"));
-		// } else {
-		// String dbKeyName = sharkInfo.getDbRuleArray().split("\\#")[1];
-		// String tbKeyName = sharkInfo.getTbRuleArray().split("\\#")[1];
-		// keyNames = Arrays.asList(dbKeyName.split("\\|"));
-		// }
-		String dbKeyName = sharkInfo.getDbRuleArray().split("\\#")[1];
-		return Arrays.asList(dbKeyName.split("\\|"));
+	public static List<String> getShardKeys(ShardConfigInfo shardConfigInfo) {
+		final String dbRuleArray = shardConfigInfo.getDbRuleArray();
+		final String tbRuleArray = shardConfigInfo.getTbRuleArray();
+		String shardKey = null;
+		if (null != dbRuleArray) {
+			shardKey = dbRuleArray.split("\\#")[1];
+			return Arrays.asList(shardKey.split("\\|"));
+		} else if (null != tbRuleArray) {
+			shardKey = tbRuleArray.split("\\#")[1];
+			return Arrays.asList(shardKey.split("\\|"));
+		}
+		return null;
 	}
 }

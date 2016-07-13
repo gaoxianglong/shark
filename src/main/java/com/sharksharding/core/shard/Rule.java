@@ -42,6 +42,4 @@ public interface Rule {
 	 * @return int 库索引/表索引
 	 */
 	public int getIndex(long routeValue, String ruleArray);
-	
-	public void setShardMode(boolean shardMode);
 }

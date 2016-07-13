@@ -18,7 +18,7 @@ package com.sharksharding.util.web.http;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.alibaba.fastjson.JSONObject;
-import com.sharksharding.core.shard.SharkJdbcTemplate;
+import com.sharksharding.core.shard.ShardRule;
 import com.sharksharding.util.LoadVersion;
 
 /**
@@ -40,12 +40,12 @@ public abstract class GetIndexData {
 	 * 
 	 * @author gaoxianglong
 	 * 
-	 * @param jdbcTemplate
-	 *            jdbc模板
+	 * @param shardRule
+	 *            shark分库分表规则
 	 * 
 	 * @return String 首页数据
 	 */
-	protected static String getData(SharkJdbcTemplate jdbcTemplate) {
+	protected static String getData(ShardRule shardRule) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("sharkVersion", LoadVersion.getVersion());
 		jsonObj.put("osName", System.getProperty("os.name"));
@@ -53,14 +53,14 @@ public abstract class GetIndexData {
 		jsonObj.put("JvmName", System.getProperty("java.vm.name"));
 		jsonObj.put("JavaPath", System.getProperty("java.home"));
 		String shardType = null;
-		if (jdbcTemplate.isShard()) {
-			if (jdbcTemplate.isShardMode()) {
-				shardType = jdbcTemplate.isConsistent() ? "片名连续的一库一片模式" : "非片名连续的一库一片模式";
+		if (shardRule.isShard()) {
+			if (shardRule.isShardMode()) {
+				shardType = "多库多片模式";
 			} else {
-				shardType = jdbcTemplate.isConsistent() ? "片名连续的库内分片模式" : "非片名连续的库内分片模式";
+				shardType = "单库多片模式";
 			}
 			jsonObj.put("shardType", shardType);
-			String dbKeyName = jdbcTemplate.getDbRuleArray().split("\\#")[1];
+			String dbKeyName = shardRule.getDbRuleArray().split("\\#")[1];
 			jsonObj.put("route", dbKeyName);
 		} else {
 			jsonObj.put("shardType", "未开启分库分表开关");

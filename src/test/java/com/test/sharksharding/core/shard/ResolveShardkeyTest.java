@@ -20,7 +20,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.sharksharding.core.shard.ResolveShardkey;
-import com.sharksharding.core.shard.SharkInfo;
+import com.sharksharding.core.shard.ShardConfigInfo;
 
 import junit.framework.Assert;
 
@@ -36,16 +36,16 @@ public class ResolveShardkeyTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void testGetNamebyMany() {
-		SharkInfo sharkInfo = SharkInfo.getShardInfo();
+		ShardConfigInfo sharkInfo = ShardConfigInfo.getShardInfo();
 		sharkInfo.setDbRuleArray("#uid|email_hash#%1024/32");
 		sharkInfo.setTbRuleArray("#uid|email_hash#%1024%32");
-		List<String> keyNames = ResolveShardkey.getKeys(sharkInfo);
+		List<String> keyNames = ResolveShardkey.getShardKeys(sharkInfo);
 		Assert.assertEquals(2, keyNames.size());
 		Assert.assertEquals("uid", keyNames.get(0));
 		Assert.assertEquals("email_hash", keyNames.get(1));
 		/* 只有一个分库分表关键字 */
 		sharkInfo.setDbRuleArray("#uid#%1024/32");
-		keyNames = ResolveShardkey.getKeys(sharkInfo);
+		keyNames = ResolveShardkey.getShardKeys(sharkInfo);
 		Assert.assertEquals(1, keyNames.size());
 		Assert.assertEquals("uid", keyNames.get(0));
 	}
@@ -56,15 +56,15 @@ public class ResolveShardkeyTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void testGetNamebyOne() {
-		SharkInfo sharkInfo = SharkInfo.getShardInfo();
+		ShardConfigInfo sharkInfo = ShardConfigInfo.getShardInfo();
 		sharkInfo.setDbRuleArray("#uid|email_hash#%32");
-		List<String> keyNames = ResolveShardkey.getKeys(sharkInfo);
+		List<String> keyNames = ResolveShardkey.getShardKeys(sharkInfo);
 		Assert.assertEquals(2, keyNames.size());
 		Assert.assertEquals("uid", keyNames.get(0));
 		Assert.assertEquals("email_hash", keyNames.get(1));
 		/* 只有一个分库分表关键字 */
 		sharkInfo.setDbRuleArray("#uid#%32");
-		keyNames = ResolveShardkey.getKeys(sharkInfo);
+		keyNames = ResolveShardkey.getShardKeys(sharkInfo);
 		Assert.assertEquals(1, keyNames.size());
 		Assert.assertEquals("uid", keyNames.get(0));
 	}

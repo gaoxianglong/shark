@@ -16,7 +16,7 @@
 package com.sharksharding.core.shard;
 
 /**
- * 数据路由模式接口
+ * 分库分表模式接口
  * 
  * @author gaoxianglong
  * 
@@ -24,8 +24,8 @@ package com.sharksharding.core.shard;
  */
 public interface Route {
 	/**
-	 * 一库一片路由模式
-	 * 
+	 * 分库分表模式[单库多表]
+	 *
 	 * @author gaoxianglong
 	 * 
 	 * @param sql
@@ -39,11 +39,11 @@ public interface Route {
 	 * 
 	 * @return Object[] 重写后的委托对象的上下文信息
 	 */
-	public Object[] dbRouteByOne(String sql, Object[] params, boolean indexType);
+	public Object[] routeSingle(String sql, Object[] params, boolean indexType);
 
 	/**
-	 * 库内分片路由模式
-	 * 
+	 * 分库分表模式[多库多表]
+	 *
 	 * @author gaoxianglong
 	 * 
 	 * @param sql
@@ -57,5 +57,5 @@ public interface Route {
 	 * 
 	 * @return Object[] 重写后的委托对象的上下文信息
 	 */
-	public Object[] dbRouteByMany(String sql, Object[] params, boolean indexType);
+	public Object[] routeMany(String sql, Object[] params, boolean indexType);
 }

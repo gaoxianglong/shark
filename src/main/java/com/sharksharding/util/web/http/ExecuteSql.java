@@ -17,7 +17,7 @@ package com.sharksharding.util.web.http;
 
 import java.util.Map;
 
-import com.sharksharding.core.shard.SharkJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * 执行sql操作
@@ -27,9 +27,9 @@ import com.sharksharding.core.shard.SharkJdbcTemplate;
  * @version 1.3.5
  */
 public class ExecuteSql {
-	private SharkJdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
-	protected ExecuteSql(SharkJdbcTemplate jdbcTemplate) {
+	protected ExecuteSql(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 

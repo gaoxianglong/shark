@@ -18,7 +18,6 @@ package com.sharksharding.core.shard;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.sharksharding.core.config.DataSourceHolder;
 import com.sharksharding.factory.DataSourceHolderFactory;
 import com.sharksharding.factory.RouteFacadeFactory;
 
@@ -30,13 +29,13 @@ import com.sharksharding.factory.RouteFacadeFactory;
  * @version 1.3.5
  */
 public class SQLExecute {
-	private SharkInfo sharkInfo;
+	private ShardConfigInfo sharkInfo;
 	private DataSourceHolder dataSourceHolder;
 	private Route route;
 	private static Logger logger = LoggerFactory.getLogger(SQLExecute.class);
 
 	public SQLExecute() {
-		sharkInfo = SharkInfo.getShardInfo();
+		sharkInfo = ShardConfigInfo.getShardInfo();
 		dataSourceHolder = DataSourceHolderFactory.getDataSourceHolder();
 		route = RouteFacadeFactory.getRoute();
 	}
@@ -70,12 +69,12 @@ public class SQLExecute {
 			if (param instanceof String) {
 				String sql = param.toString();
 				logger.info("before sql-->" + sql);
-				/* 检查sharding开关是否打开 */
+				/* 检查分库分表开关是否打开 */
 				if (sharkInfo.getIsShard()) {
 					if (sharkInfo.getShardMode()) {
-						params = route.dbRouteByOne(sql, params, indexType);
+						params = route.routeMany(sql, params, indexType);
 					} else {
-						params = route.dbRouteByMany(sql, params, indexType);
+						params = route.routeSingle(sql, params, indexType);
 					}
 					sql = params[0].toString();
 				} else {

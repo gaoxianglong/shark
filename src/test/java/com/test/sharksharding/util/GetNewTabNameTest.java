@@ -17,11 +17,11 @@ package com.test.sharksharding.util;
 
 import org.junit.Test;
 
-import com.sharksharding.core.shard.ResolveTabname;
+import com.sharksharding.core.shard.ResolveTbName;
 
 public class GetNewTabNameTest {
 	public @Test void getNewTabName() {
-		System.out.println(ResolveTabname.getNewTabName(1, "userinfo_test", "_00000"));
-		System.out.println(ResolveTabname.getNewTabName(1024, "userinfo_test", "_0000"));
+		System.out.println(ResolveTbName.getNewTbName(1, "userinfo_test", "_00000"));
+		System.out.println(ResolveTbName.getNewTbName(1024, "userinfo_test", "_0000"));
 	}
 }

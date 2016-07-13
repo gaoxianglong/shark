@@ -15,37 +15,39 @@
  */
 package com.sharksharding.core.shard;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import com.sharksharding.resources.register.bean.RegisterDataSource;
 
 /**
  * 从zookeeper、redis等配置中心读取到相关配置后,
- * 从此类中获取SharkJdbcTemplate实例,避免watcher监听到事件后重新注册相关bean时,应用持有的还是之前引用
+ * 从此类中获取JdbcTemplate实例,避免watcher监听到事件后重新注册相关bean时,应用持有的还是之前引用
  * 
  * @author gaoxianglong
  * 
  * @version 1.3.5
  */
 public class GetJdbcTemplate {
-	private static SharkJdbcTemplate jdbcTemplate;
+	private static JdbcTemplate jdbcTemplate;
 
-	public static SharkJdbcTemplate getSharkJdbcTemplate() {
+	public static JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 
 	/**
-	 * 通过指定的beanName从ioc容器中获取SharkJdbcTemplate实例
+	 * 通过指定的beanName从ioc容器中获取JdbcTemplate实例
 	 * 
 	 * @author gaoxianglong
 	 * 
 	 * @param beanName
 	 * 
-	 * @return SharkJdbcTemplate
+	 * @return JdbcTemplate
 	 */
-	public static SharkJdbcTemplate getSharkJdbcTemplate(String beanName) {
+	public static JdbcTemplate getJdbcTemplate(String beanName) {
 		return RegisterDataSource.getBean(beanName);
 	}
 
-	public static void setSharkJdbcTemplate(SharkJdbcTemplate jdbcTemplate) {
+	public static void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		GetJdbcTemplate.jdbcTemplate = jdbcTemplate;
 	}
 }

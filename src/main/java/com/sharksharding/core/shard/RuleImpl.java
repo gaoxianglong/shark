@@ -30,12 +30,8 @@ public abstract class RuleImpl implements Rule {
 		return -1;
 	}
 
-	@Override
-	public void setShardMode(boolean shardMode) {
-	}
-
 	/**
-	 * 根据库内分片模式下的分库规则计算出数据源索引
+	 * 根据分库规则计算出数据源索引
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -49,7 +45,7 @@ public abstract class RuleImpl implements Rule {
 	 */
 	public static int getDbIndex(long shardKey, String dbRuleArray) {
 		int index = -1;
-		List<Integer> list = ResolveRule.resolveDbRule(dbRuleArray);
+		List<Integer> list = ResolveRouteRule.resolveDbRule(dbRuleArray);
 		if (!list.isEmpty()) {
 			final int tbSize = list.get(0);
 			final int dbSize = list.get(1);
@@ -60,7 +56,7 @@ public abstract class RuleImpl implements Rule {
 	}
 
 	/**
-	 * 根据库内分片模式下的分片规则计算出片索引
+	 * 根据分片规则计算出数据库表索引
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -70,40 +66,25 @@ public abstract class RuleImpl implements Rule {
 	 * @param tbRuleArray
 	 *            分表规则
 	 * 
-	 * @return int 片索引
+	 * @param shardMode
+	 *            分库分表模式
+	 * 
+	 * @return int 数据库表索引
 	 */
-	public static int getTabIndex(long shardKey, String tbRuleArray) {
+	public static int getTbIndex(long shardKey, String tbRuleArray, boolean shardMode) {
 		int index = -1;
-		List<Integer> list = ResolveRule.resolveTabRule(tbRuleArray);
+		List<Integer> list = ResolveRouteRule.resolveTbRule(tbRuleArray, shardMode);
 		if (!list.isEmpty()) {
-			final int tbSize = list.get(0);
-			final int dbSize = list.get(1);
-			/* shardKey % tbSize % dbSize */
-			return (int) (shardKey & (tbSize - 1) & (dbSize - 1));
-		}
-		return index;
-	}
-
-	/**
-	 * 根据一库一片模式下的分库规则计算出数据源索引
-	 * 
-	 * @author gaoxianglong
-	 * 
-	 * @param shardKey
-	 *            路由条件
-	 * 
-	 * @param dbRuleArray
-	 *            分库规则
-	 * 
-	 * @return int 数据源索引
-	 */
-	public static int getDbIndexbyOne(long shardKey, String dbRuleArray) {
-		int index = -1;
-		List<Integer> list = ResolveRule.resolveDbRulebyOne(dbRuleArray);
-		if (!list.isEmpty()) {
-			final int dbSize = list.get(0);
-			/* shardKey % dbSize */
-			index = (int) (shardKey & (dbSize - 1));
+			if (shardMode) {
+				final int tbSize = list.get(0);
+				final int dbSize = list.get(1);
+				/* shardKey % tbSize % dbSize */
+				return (int) (shardKey & (tbSize - 1) & (dbSize - 1));
+			} else {
+				final int tbSize = list.get(0);
+				/* shardKey % tbSize */
+				return (int) (shardKey & (tbSize - 1));
+			}
 		}
 		return index;
 	}

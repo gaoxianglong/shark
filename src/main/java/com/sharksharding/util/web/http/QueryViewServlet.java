@@ -30,11 +30,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sharksharding.core.shard.SharkJdbcTemplate;
+import com.sharksharding.core.shard.ShardRule;
 import com.sharksharding.exception.FileNotFoundException;
 
 /**
@@ -59,8 +60,9 @@ public class QueryViewServlet extends HttpServlet {
 		/* 加载Ioc容器 */
 		WebApplicationContext context = WebApplicationContextUtils
 				.getWebApplicationContext(request.getSession().getServletContext());
-		SharkJdbcTemplate jdbcTemplate = (SharkJdbcTemplate) context.getBean("jdbcTemplate");
-		if (null != jdbcTemplate) {
+		ShardRule shardRule = (ShardRule) context.getBean("shardRule");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) context.getBean("jdbcTemplate");
+		if (null != shardRule) {
 			byte[] viewData = null;
 			byte[] responseData = null;
 			/* 1为跳转页面操作、2为获取数据操作 */
@@ -106,7 +108,7 @@ public class QueryViewServlet extends HttpServlet {
 							responseData = jsonObj.toString().getBytes("utf-8");
 						}
 					} else {
-						responseData = GetIndexData.getData(jdbcTemplate).getBytes("utf-8");
+						responseData = GetIndexData.getData(shardRule).getBytes("utf-8");
 					}
 					if (null != responseData) {
 						write(response, responseData);

@@ -15,8 +15,8 @@
  */
 package com.sharksharding.factory;
 
-import com.sharksharding.core.config.DataSourceHolder;
-import com.sharksharding.core.config.SharkDataSourceHolder;
+import com.sharksharding.core.shard.DataSourceHolder;
+import com.sharksharding.core.shard.SharkDataSourceHolder;
 
 /**
  * 数据源路由选择器工厂类

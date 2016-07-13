@@ -11,27 +11,26 @@
 			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	<import resource="datasource2-context.xml" />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<!-- 自动扫描 -->
 	<context:component-scan
-		base-package="com.sharksharding.core,com.test.sharksharding.use1">
+		base-package="com.sharksharding.core,com.test.sharksharding.use">
 		<context:include-filter type="annotation"
 			expression="org.aspectj.lang.annotation.Aspect" />
 	</context:component-scan>
-	<!-- 片名连续的库内分片配置 -->
-	<bean id="jdbcTemplate" class="com.sharksharding.core.shard.SharkJdbcTemplate"
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSourceGroup" />
+	</bean>
+	<!-- 多库多片模式 -->
+	<bean id="shardRule" class="com.sharksharding.core.shard.ShardRule"
 		init-method="init">
 		<property name="isShard" value="true" />
-		<property name="dataSource" ref="dataSourceGroup" />
 		<property name="wr_index" value="r0w0" />
-		<!-- 分片模式,false为库内分片模式,true为一库一表分片模式 -->
-		<property name="shardMode" value="false" />
-		<!-- 片名是否连续,true为片名连续,false为非片名连续 -->
+		<property name="shardMode" value="true" />
 		<property name="consistent" value="true" />
 		<property name="dbRuleArray" value="#uid|email_hash# % 4 / 2" />
 		<property name="tbRuleArray" value="#uid|email_hash# % 4 % 2" />
 		<property name="tbSuffix" value="_0000" />
 	</bean>
-	<bean id="dataSourceGroup" class="com.sharksharding.core.config.SharkDatasourceGroup">
+	<bean id="dataSourceGroup" class="com.sharksharding.core.shard.SharkDatasourceGroup">
 		<property name="targetDataSources">
 			<map key-type="java.lang.Integer">
 				<entry key="0" value-ref="dataSource1" />

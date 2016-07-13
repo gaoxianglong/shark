@@ -15,29 +15,14 @@
  */
 package com.sharksharding.core.shard;
 
-import com.sharksharding.core.config.DataSourceHolder;
-
 /**
- * 设置数据源
+ * 设置数据源索引
  * 
  * @author gaoxianglong
  * 
  * @version 1.3.5
  */
 public class SetDatasource {
-	/**
-	 * 切换数据源路由索引
-	 * 
-	 * @author gaoxianglong
-	 * 
-	 * @param index
-	 *            数据库索引
-	 * 
-	 * @param dataSourceHolder
-	 *            数据源路由选择器接口
-	 * 
-	 * @return void
-	 */
 	protected static void setIndex(int index, DataSourceHolder dataSourceHolder) {
 		dataSourceHolder.setIndex(index);
 	}

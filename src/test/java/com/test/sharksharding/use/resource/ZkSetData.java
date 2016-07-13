@@ -66,7 +66,7 @@ public class ZkSetData {
 				}
 			});
 			countDownLatch.await();
-			zk_client.setData("/info/datasource", str.toString().getBytes(), -1);
+			zk_client.setData("/info/shark", str.toString().getBytes(), -1);
 			logger.info("insert success");
 		} catch (Exception e) {
 			logger.error("insert fail", e);

@@ -21,74 +21,68 @@ import java.util.List;
 import com.sharksharding.factory.DataSourceHolderFactory;
 import com.sharksharding.factory.DbRuleFactory;
 import com.sharksharding.factory.RuleFactory;
-import com.sharksharding.factory.TabRuleFactory;
+import com.sharksharding.factory.TbRuleFactory;
 
 /**
- * 路由模式的外观类
+ * 分库分表模式的外观类
  * 
  * @author gaoxianglong
  * 
  * @version 1.3.5
  */
 public class RouteFacade implements Route {
-	private SharkInfo sharkInfo;
+	private ShardConfigInfo shardConfigInfo;
 
 	public RouteFacade() {
-		sharkInfo = SharkInfo.getShardInfo();
+		shardConfigInfo = ShardConfigInfo.getShardInfo();
 	}
 
 	@Override
-	public Object[] dbRouteByOne(String sql, Object[] params, boolean indexType) {
+	public Object[] routeSingle(String sql, Object[] params, boolean indexType) {
 		String newSql = null;
-		String dbRuleArray = sharkInfo.getDbRuleArray();
-		List<String> keyNames = ResolveShardkey.getKeys(sharkInfo);
+		String tbRuleArray = shardConfigInfo.getTbRuleArray();
+		List<String> keyNames = ResolveShardkey.getShardKeys(shardConfigInfo);
 		if (keyNames.isEmpty())
 			return null;
-		/* 解析sql语句中的路由条件 */
-		long shardValue = ResolveRoute.getRoute(sql, keyNames);
-		Rule dbRule = getDbRule();
-		dbRule.setShardMode(sharkInfo.getShardMode());
-		int dbIndex = dbRule.getIndex(shardValue, dbRuleArray);
-		if (sharkInfo.getConsistent()) {
-			/* 解析数据库表名 */
-			final String tabName = ResolveTabname.getTabName(sql);
-			/* 设置真正的数据库片名 */
-			newSql = SetTab.setName(sharkInfo, dbIndex, tabName, sql);
-		} else
-			newSql = sql;
-		int index = ResolveIndex.getIndex(sharkInfo.getWr_index(), indexType);
-		dbIndex += index;
-		/* 切换数据源 */
-		SetDatasource.setIndex(dbIndex, DataSourceHolderFactory.getDataSourceHolder());
+		/* 解析sql语句中的路由参数 */
+		long shardValue = ResolveRouteValue.getRoute(sql, keyNames);
+		Rule tbRule = getTbRule();
+		int tbIndex = tbRule.getIndex(shardValue, tbRuleArray);
+		/* 解析数据库表名 */
+		final String tbName = ResolveTbName.getTbName(sql);
+		/* 单库多表模式下设定真正的数据库表名 */
+		newSql = SetTbName.setName(shardConfigInfo, tbIndex, tbName, sql);
+		final int index = ResolveIndex.getIndex(shardConfigInfo.getWr_index(), indexType);
+		/* 切换数据源索引 */
+		SetDatasource.setIndex(index, DataSourceHolderFactory.getDataSourceHolder());
 		return updateParam(newSql, params);
 	}
 
 	@Override
-	public Object[] dbRouteByMany(String sql, Object[] params, boolean indexType) {
+	public Object[] routeMany(String sql, Object[] params, boolean indexType) {
 		String newSql = null;
-		String dbRuleArray = sharkInfo.getDbRuleArray();
-		String tbRuleArray = sharkInfo.getTbRuleArray();
-		List<String> keyNames = ResolveShardkey.getKeys(sharkInfo);
+		String dbRuleArray = shardConfigInfo.getDbRuleArray();
+		String tbRuleArray = shardConfigInfo.getTbRuleArray();
+		List<String> keyNames = ResolveShardkey.getShardKeys(shardConfigInfo);
 		if (keyNames.isEmpty())
 			return null;
 		/* 解析sql语句中的路由条件 */
-		long shardValue = ResolveRoute.getRoute(sql, keyNames);
+		long shardValue = ResolveRouteValue.getRoute(sql, keyNames);
 		Rule dbRule = getDbRule();
-		dbRule.setShardMode(sharkInfo.getShardMode());
 		int dbIndex = dbRule.getIndex(shardValue, dbRuleArray);
-		Rule tabRule = getTabRule();
-		int tbIndex = tabRule.getIndex(shardValue, tbRuleArray);
+		Rule tbRule = getTbRule();
+		int tbIndex = tbRule.getIndex(shardValue, tbRuleArray);
 		/* 解析配置文件中数据库和数据库表的数量 */
 		String values[] = tbRuleArray.split("[\\%]");
 		int tbSize = Integer.parseInt(values[1]);
 		int dbSize = Integer.parseInt(values[2]);
 		/* 解析数据库表名 */
-		final String tabName = ResolveTabname.getTabName(sql);
-		/* 设置片名 */
-		newSql = SetTab.setName(sharkInfo, dbIndex, tbIndex, dbSize, tbSize, tabName, sql);
-		int index = ResolveIndex.getIndex(sharkInfo.getWr_index(), indexType);
+		final String tbName = ResolveTbName.getTbName(sql);
+		/* 单库多表模式下设定真正的数据库表名 */
+		newSql = SetTbName.setName(shardConfigInfo, dbIndex, tbIndex, dbSize, tbSize, tbName, sql);
+		int index = ResolveIndex.getIndex(shardConfigInfo.getWr_index(), indexType);
 		dbIndex += index;
-		/* 切换数据源 */
+		/* 切换数据源索引 */
 		SetDatasource.setIndex(dbIndex, DataSourceHolderFactory.getDataSourceHolder());
 		return updateParam(newSql, params);
 	}
@@ -117,8 +111,8 @@ public class RouteFacade implements Route {
 		return dbRuleFactory.getRule();
 	}
 
-	public Rule getTabRule() {
-		RuleFactory tabRuleFactory = new TabRuleFactory();
-		return tabRuleFactory.getRule();
+	public Rule getTbRule() {
+		RuleFactory tbRuleFactory = new TbRuleFactory();
+		return tbRuleFactory.getRule();
 	}
 }

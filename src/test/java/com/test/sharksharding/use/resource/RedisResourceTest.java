@@ -23,11 +23,11 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sharksharding.core.shard.GetJdbcTemplate;
-import com.sharksharding.core.shard.SharkJdbcTemplate;
 import com.sharksharding.sql.SQLTemplate;
 
 /**
@@ -47,7 +47,7 @@ public class RedisResourceTest {
 			System.out.println("input-->");
 			Scanner scan = new Scanner(System.in);
 			final String uid = scan.nextLine();
-			SharkJdbcTemplate jdbcTemlate = GetJdbcTemplate.getSharkJdbcTemplate();
+			JdbcTemplate jdbcTemlate = GetJdbcTemplate.getJdbcTemplate();
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("uid", Long.valueOf(uid));
 			params.put("userName", "gaoxianglong");

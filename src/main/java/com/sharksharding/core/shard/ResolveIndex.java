@@ -16,7 +16,7 @@
 package com.sharksharding.core.shard;
 
 /**
- * 解析读写分离起始索引
+ * 解析读写分离的起始索引
  * 
  * @author gaoxianglong
  * 
