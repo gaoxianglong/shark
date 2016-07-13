@@ -12,7 +12,7 @@
 - 动态数据源的无缝切换；<br>
 - 丰富、灵活的分布式路由算法支持；<br>
 - 非proxy架构，应用直连数据库，降低外围系统依赖所带来的宕机风险；<br>
-- 业务零侵入,配置简单；<br>
+- 业务零侵入，配置简单；<br>
 - 站在巨人的肩膀上(springjdbc、基于druid的sqlparser完成sql解析任务)，执行性能高效、稳定；<br>
 - 提供多机sequenceid的API支持，解决多机sequenceid难题；<br>
 - 支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
