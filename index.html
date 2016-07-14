@@ -463,7 +463,11 @@ mvn test-compile</pre></div>
 <h2>
 <a id="33-单库多表模式" class="anchor" href="#33-%E5%8D%95%E5%BA%93%E5%A4%9A%E8%A1%A8%E6%A8%A1%E5%BC%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.3 单库多表模式</h2>
 
-<p>shark支持2种分库分表模式，即单库多表和多库多表。单库分表模式的算法为tbIndex=“key % tbSize”。配置信息，如下所示：</p>
+<p>shark支持2种分库分表模式，即单库多表和多库多表。单库分表模式的算法为:</p>
+
+<div class="highlight highlight-source-shell"><pre>tbIndex=“key % tbSize”</pre></div>
+
+<p>配置信息，如下所示：</p>
 
 <div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">aop</span><span class="pl-ent">:</span><span class="pl-ent">aspectj-autoproxy</span> <span class="pl-e">proxy-target-class</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> /&gt;
 &lt;<span class="pl-ent">context</span><span class="pl-ent">:</span><span class="pl-ent">component-scan</span>
@@ -497,9 +501,10 @@ mvn test-compile</pre></div>
 <h2>
 <a id="34-多库多表模式" class="anchor" href="#34-%E5%A4%9A%E5%BA%93%E5%A4%9A%E8%A1%A8%E6%A8%A1%E5%BC%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.4 多库多表模式</h2>
 
-<p>shark支持2种分库分表模式，即单库多表和多库多表。多库分表模式的算法为
-dbIndex=“key % tbSize / dbSize”
-tbIndex=“key % tbSize % dbSize”</p>
+<p>shark支持2种分库分表模式，即单库多表和多库多表。多库分表模式的算法为:</p>
+
+<div class="highlight highlight-source-shell"><pre>dbIndex=“key % tbSize / dbSize” 
+tbIndex=“key % tbSize % dbSize”</pre></div>
 
 <p>配置信息，如下所示：</p>
 
@@ -526,8 +531,10 @@ tbIndex=“key % tbSize % dbSize”</p>
 &lt;<span class="pl-ent">bean</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSourceGroup<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>com.sharksharding.core.shard.SharkDatasourceGroup<span class="pl-pds">"</span></span>&gt;
     &lt;<span class="pl-ent">property</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>targetDataSources<span class="pl-pds">"</span></span>&gt;
         &lt;<span class="pl-ent">map</span> <span class="pl-e">key-type</span>=<span class="pl-s"><span class="pl-pds">"</span>java.lang.Integer<span class="pl-pds">"</span></span>&gt;
+<span class="pl-c">&lt;!-- 省略数据源引用 --&gt;</span>
             &lt;<span class="pl-ent">entry</span> <span class="pl-e">key</span>=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span> <span class="pl-e">value-ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource1<span class="pl-pds">"</span></span> /&gt;
-            &lt;<span class="pl-ent">entry</span> <span class="pl-e">key</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> <span class="pl-e">value-ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource2<span class="pl-pds">"</span></span> /&gt;
+            &lt;<span class="pl-ent">entry</span> <span class="pl-e">key</span>=<span class="pl-s"><span class="pl-pds">"</span>...<span class="pl-pds">"</span></span> <span class="pl-e">value-ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource...<span class="pl-pds">"</span></span> /&gt;
+            &lt;<span class="pl-ent">entry</span> <span class="pl-e">key</span>=<span class="pl-s"><span class="pl-pds">"</span>1023<span class="pl-pds">"</span></span> <span class="pl-e">value-ref</span>=<span class="pl-s"><span class="pl-pds">"</span>dataSource1024<span class="pl-pds">"</span></span> /&gt;
         &lt;/<span class="pl-ent">map</span>&gt;
     &lt;/<span class="pl-ent">property</span>&gt;
 &lt;/<span class="pl-ent">bean</span>&gt;
@@ -540,15 +547,19 @@ tbIndex=“key % tbSize % dbSize”</p>
 
 <p>如果sql语句中的第一个参数并不是shardkey时，shark将会抛出下述异常信息：</p>
 
-<div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">com.sharksharding.exception<span class="pl-k">.</span>SqlParserException</span><span class="pl-k">:</span> can not find shardkey</pre></div>
 
-## <span class="pl-c1">3.5</span> 自动生成数据源文件
-为了避免手工配置出现错误的情况，shark提供有自动生成sharding配置文件和数据源配置文件的功能(支持druid和c3p0)。 
+<h2>
+<a id="35-自动生成数据源文件" class="anchor" href="#35-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E6%BA%90%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.5 自动生成数据源文件</h2>
 
-## <span class="pl-c1">3.5</span><span class="pl-k">.</span><span class="pl-c1">1</span> 自动生成sharding配置文件
-假设采用片名连续的库内分片模式，<span class="pl-c1">32</span>个库<span class="pl-c1">1024</span>个表，使用<span class="pl-smi">com.sharksharding.util.xml<span class="pl-k">.</span>CreateCoreXml</span>进行生成，如下所示：
-```<span class="pl-smi">Java</span>
-<span class="pl-k">public</span> @<span class="pl-smi">Test</span> <span class="pl-k">void</span> testCreateCoreXml() {
+<p>为了避免手工配置出现错误的情况，shark提供有自动生成sharding配置文件和数据源配置文件的功能(支持druid和c3p0)。 </p>
+
+<h2>
+<a id="351-自动生成sharding配置文件" class="anchor" href="#351-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90sharding%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3.5.1 自动生成sharding配置文件</h2>
+
+<p>假设采用片名连续的库内分片模式，32个库1024个表，使用com.sharksharding.util.xml.CreateCoreXml进行生成，如下所示：</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> @<span class="pl-smi">Test</span> <span class="pl-k">void</span> testCreateCoreXml() {
     <span class="pl-smi">CreateCoreXml</span> c_xml <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">CreateCoreXml</span>();
     <span class="pl-c">/* 是否控制台输出生成的配置文件 */</span>
     c_xml<span class="pl-k">.</span>setIsShow(<span class="pl-c1">true</span>);
