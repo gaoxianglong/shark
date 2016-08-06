@@ -48,8 +48,8 @@ public class Main {
 	@Resource
 	private EmailInfo emailInfo;
 	final static String NAME = "root";
-	final static String PWD = "";
-	final static String URL = "jdbc:mysql://ip:port/test_id";
+	final static String PWD = "yunji";
+	final static String URL = "jdbc:mysql://192.168.1.2:3306/test_id";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	private static long sequenceid;
 	private static String email = UUID.randomUUID().toString();
@@ -81,7 +81,7 @@ public class Main {
 			logger.info("insert table:email_test success");
 			params = new HashMap<String, Object>();
 			params.put("uid", sequenceid);
-			params.put("userName", "gaoxianglong");
+			params.put("userName", "gxl");
 			userDao.setUserInfo(params);
 			logger.info("insert table:userinfo_test success");
 			testQuery();

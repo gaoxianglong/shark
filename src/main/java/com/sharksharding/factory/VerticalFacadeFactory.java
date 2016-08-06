@@ -16,23 +16,24 @@
 package com.sharksharding.factory;
 
 import com.sharksharding.core.shard.Route;
-import com.sharksharding.core.shard.RouteFacade;
+import com.sharksharding.core.shard.VerticalFacade;
 
 /**
- * 路由模式工厂类
+ * 垂直分库,水平分片模式的工厂类
  *
  * @author gaoxianglong
  * 
- * @version 1.4.0
+ * @author 2.0.1
  */
-public class RouteFacadeFactory implements SharkFactory {
-	private static Route route;
+public class VerticalFacadeFactory implements RouteFactory {
+	private static Route verticalFacade;
 
 	static {
-		route = new RouteFacade();
+		verticalFacade = new VerticalFacade();
 	}
 
-	public static Route getRoute() {
-		return route;
+	@Override
+	public Route getRoute() {
+		return verticalFacade;
 	}
 }

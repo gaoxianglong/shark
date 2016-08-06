@@ -13,31 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sharksharding.core.shard;
+package com.sharksharding.factory;
+
+import com.sharksharding.core.shard.HorizontalFacade;
+import com.sharksharding.core.shard.Route;
 
 /**
- * 分库分表路由模式接口
- * 
+ * 水平分库,水平分片模式的工厂类
+ *
  * @author gaoxianglong
  * 
- * @version 1.3.5
+ * @author 2.0.1
  */
-public interface Route {
-	/**
-	 * 数据路由
-	 *
-	 * @author gaoxianglong
-	 * 
-	 * @param sql
-	 *            需要进行重写的sql语句
-	 * 
-	 * @param params
-	 *            委托对象的方法入参
-	 * 
-	 * @param indexType
-	 *            true为master启始索引,false为slave启始索引
-	 * 
-	 * @return Object[] 重写后的委托对象的上下文信息
-	 */
-	public Object[] route(String sql, Object[] params, boolean indexType);
+public class HorizontalFacadeFactory implements RouteFactory {
+	private static Route horizontalFacade;
+
+	static {
+		horizontalFacade = new HorizontalFacade();
+	}
+
+	@Override
+	public Route getRoute() {
+		return horizontalFacade;
+	}
 }

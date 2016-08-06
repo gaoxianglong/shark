@@ -40,7 +40,7 @@ public class SetTbName {
 	 * @param dbSize
 	 *            配置文件中数据库的数量
 	 * 
-	 * @param dbSize
+	 * @param tbSize
 	 *            配置文件中数据库表的数量
 	 * 
 	 * @param tbName

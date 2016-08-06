@@ -29,14 +29,14 @@ public class ResolveIndex {
 	 * @author gaoxianglong
 	 * 
 	 * @param wr_index
-	 *            读写权重比例,如比r0w1024
+	 *            读写起始索引,如比r0w1024
 	 * 
 	 * @param operation
 	 *            true为master启始索引,false为slave启始索引
 	 * 
 	 * @return int 启始索引
 	 */
-	public static int getIndex(String wr_index, boolean operation) {
+	public static int getBeginIndex(String wr_index, boolean operation) {
 		int index = -1;
 		wr_index = wr_index.toUpperCase();
 		String type = null;

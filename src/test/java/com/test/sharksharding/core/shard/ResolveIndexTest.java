@@ -21,9 +21,9 @@ import junit.framework.Assert;
 
 public class ResolveIndexTest {
 	public @Test void testGetIndex() {
-		Assert.assertEquals(0, ResolveIndex.getIndex("r1024w0", true));
-		Assert.assertEquals(1024, ResolveIndex.getIndex("r1024w0", false));
-		Assert.assertEquals(0, ResolveIndex.getIndex("R1024W0", true));
-		Assert.assertEquals(1024, ResolveIndex.getIndex("R0w1024", true));
+		Assert.assertEquals(0, ResolveIndex.getBeginIndex("r1024w0", true));
+		Assert.assertEquals(1024, ResolveIndex.getBeginIndex("r1024w0", false));
+		Assert.assertEquals(0, ResolveIndex.getBeginIndex("R1024W0", true));
+		Assert.assertEquals(1024, ResolveIndex.getBeginIndex("R0w1024", true));
 	}
 }

@@ -19,7 +19,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.sharksharding.factory.DataSourceHolderFactory;
-import com.sharksharding.factory.RouteFacadeFactory;
+import com.sharksharding.factory.HorizontalFacadeFactory;
+import com.sharksharding.factory.RouteFactory;
+import com.sharksharding.factory.VerticalFacadeFactory;
 
 /**
  * 在sql执行之前进行数据路由
@@ -31,13 +33,16 @@ import com.sharksharding.factory.RouteFacadeFactory;
 public class SQLExecute {
 	private ShardConfigInfo sharkInfo;
 	private DataSourceHolder dataSourceHolder;
-	private Route route;
+	private Route horizontalFacade, verticalFacade;
 	private static Logger logger = LoggerFactory.getLogger(SQLExecute.class);
 
 	public SQLExecute() {
 		sharkInfo = ShardConfigInfo.getShardInfo();
 		dataSourceHolder = DataSourceHolderFactory.getDataSourceHolder();
-		route = RouteFacadeFactory.getRoute();
+		RouteFactory horizontalFacadeFactory = new HorizontalFacadeFactory();
+		RouteFactory verticalFacadeFactory = new VerticalFacadeFactory();
+		horizontalFacade = horizontalFacadeFactory.getRoute();
+		verticalFacade = verticalFacadeFactory.getRoute();
 	}
 
 	/**
@@ -72,14 +77,14 @@ public class SQLExecute {
 				/* 检查分库分表开关是否打开 */
 				if (sharkInfo.getIsShard()) {
 					if (sharkInfo.getShardMode()) {
-						params = route.routeMany(sql, params, indexType);
+						params = horizontalFacade.route(sql, params, indexType);
 					} else {
-						params = route.routeSingle(sql, params, indexType);
+						params = verticalFacade.route(sql, params, indexType);
 					}
 					sql = params[0].toString();
 				} else {
 					/* 获取master/slave的数据源启始索引 */
-					final int index = ResolveIndex.getIndex(sharkInfo.getWr_index(), indexType);
+					final int index = ResolveIndex.getBeginIndex(sharkInfo.getWr_index(), indexType);
 					SetDatasource.setIndex(index, dataSourceHolder);
 				}
 				logger.info("after sql-->" + sql);
