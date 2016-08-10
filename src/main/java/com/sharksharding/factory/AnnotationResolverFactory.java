@@ -15,24 +15,15 @@
  */
 package com.sharksharding.factory;
 
-import com.sharksharding.core.shard.DataSourceHolder;
-import com.sharksharding.core.shard.SharkDataSourceHolder;
+import com.sharksharding.util.mapper.SharkAnnotationResolver;
 
 /**
- * 数据源路由选择器工厂类
- * 
+ * shark注解解析器工厂方法类
+ *
  * @author gaoxianglong
  * 
- * @version 1.4.0
+ * @version 1.4.1
  */
-public class DataSourceHolderFactory implements SharkFactory {
-	private static DataSourceHolder dataSourceHolder;
-
-	static {
-		dataSourceHolder = new SharkDataSourceHolder();
-	}
-
-	public static DataSourceHolder getDataSourceHolder() {
-		return dataSourceHolder;
-	}
+public interface AnnotationResolverFactory {
+	public SharkAnnotationResolver getSharkAnnotationResolver();
 }

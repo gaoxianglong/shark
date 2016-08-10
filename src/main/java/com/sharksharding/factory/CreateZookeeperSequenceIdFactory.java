@@ -26,14 +26,8 @@ import com.sharksharding.util.sequence.zookeeper.CreateZookeeperSequenceId;
  * @version 1.4.1
  */
 public class CreateZookeeperSequenceIdFactory implements CreateSequenceIdServiceFactory {
-	private static CreateSequenceIdService createSequenceIdService;
-
-	static {
-		createSequenceIdService = new CreateZookeeperSequenceId();
-	}
-
 	@Override
 	public CreateSequenceIdService getCreateSequenceIdService() {
-		return createSequenceIdService;
+		return new CreateZookeeperSequenceId();
 	}
 }

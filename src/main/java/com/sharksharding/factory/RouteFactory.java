@@ -20,12 +20,12 @@ import com.sharksharding.core.shard.RouteImpl;
 import com.sharksharding.util.sequence.CreateSequenceIdService;
 
 /**
- * 路由模式工厂类
+ * 路由模式工厂方法类
  *
  * @author gaoxianglong
  * 
  * @version 1.4.0
  */
-public interface RouteFactory extends SharkFactory {
+public interface RouteFactory {
 	public Route getRoute();
 }

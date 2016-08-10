@@ -17,7 +17,7 @@ package com.sharksharding.resources.conn;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
-import javax.annotation.Resource;
+
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
@@ -26,8 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sharksharding.exception.ConnectionException;
-import com.sharksharding.exception.ResourceException;
-import com.sharksharding.factory.RegisterNodeFactory;
+import com.sharksharding.resources.register.zookeeper.node.RegisterDataSourceNode;
 import com.sharksharding.resources.register.zookeeper.node.RegisterNode;
 
 /**
@@ -54,7 +53,7 @@ public class ZookeeperConnectionManager {
 		this.zk_address = zk_address;
 		this.zk_session_timeout = zk_session_timeout;
 		this.nodePath = nodePath;
-		registerNode = RegisterNodeFactory.getRegisterNode();
+		registerNode = new RegisterDataSourceNode();
 		countDownLatch = new CountDownLatch(1);
 	}
 

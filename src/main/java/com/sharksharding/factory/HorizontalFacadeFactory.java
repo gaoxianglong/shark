@@ -26,14 +26,8 @@ import com.sharksharding.core.shard.Route;
  * @author 2.0.1
  */
 public class HorizontalFacadeFactory implements RouteFactory {
-	private static Route horizontalFacade;
-
-	static {
-		horizontalFacade = new HorizontalFacade();
-	}
-
 	@Override
 	public Route getRoute() {
-		return horizontalFacade;
+		return new HorizontalFacade();
 	}
 }

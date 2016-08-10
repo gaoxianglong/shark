@@ -25,15 +25,9 @@ import com.sharksharding.util.mapper.SharkAnnotationResolver;
  * 
  * @version 1.4.1
  */
-public class ClassResolverFactory implements SharkAnnotationResolverFactory {
-	private static SharkAnnotationResolver sharkAnnotationResolver;
-
-	static {
-		sharkAnnotationResolver = new ClassResolver();
-	}
-
+public class ClassResolverFactory implements AnnotationResolverFactory {
 	@Override
 	public SharkAnnotationResolver getSharkAnnotationResolver() {
-		return sharkAnnotationResolver;
+		return new ClassResolver();
 	}
 }

@@ -18,7 +18,6 @@ package com.sharksharding.core.shard;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import com.sharksharding.factory.SQLExecuteFactory;
 
 /**
  * 数据路由入口
@@ -32,7 +31,7 @@ public class SQLExecuterInterceptor {
 	private SQLExecute sqlExecute;
 
 	private SQLExecuterInterceptor() {
-		sqlExecute = SQLExecuteFactory.getSQLExecute();
+		sqlExecute = new SQLExecute();
 	}
 
 	/**

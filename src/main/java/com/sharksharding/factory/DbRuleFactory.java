@@ -26,14 +26,8 @@ import com.sharksharding.core.shard.Rule;
  * @version 1.4.0
  */
 public class DbRuleFactory implements RuleFactory{
-	private static Rule rule;
-
-	static {
-		rule = new DbRule();
-	}
-
 	@Override
 	public Rule getRule() {
-		return rule;
+		return new DbRule();
 	}
 }

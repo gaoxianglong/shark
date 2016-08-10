@@ -18,12 +18,12 @@ package com.sharksharding.factory;
 import com.sharksharding.util.sequence.CreateSequenceIdService;
 
 /**
- * 生成SequenceId服务工厂类
+ * 生成SequenceId服务工厂方法类
  * 
  * @author gaoxianglong
  * 
  * @version 1.4.1
  */
-public interface CreateSequenceIdServiceFactory extends SharkFactory {
+public interface CreateSequenceIdServiceFactory {
 	public CreateSequenceIdService getCreateSequenceIdService();
 }

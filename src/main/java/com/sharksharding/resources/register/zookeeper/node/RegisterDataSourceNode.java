@@ -16,13 +16,10 @@
 package com.sharksharding.resources.register.zookeeper.node;
 
 import javax.annotation.Resource;
-
 import org.apache.zookeeper.ZooKeeper;
 import org.springframework.stereotype.Component;
-
 import com.sharksharding.exception.ConnectionException;
 import com.sharksharding.exception.ResourceException;
-import com.sharksharding.factory.ZookeeperWatcherFactory;
 import com.sharksharding.resources.conn.DataSourceBean;
 import com.sharksharding.resources.register.bean.RegisterBean;
 import com.sharksharding.resources.register.bean.RegisterDataSource;
@@ -39,7 +36,7 @@ public class RegisterDataSourceNode implements RegisterNode {
 	private ZookeeperWatcher zookeeperWatcher;
 
 	public RegisterDataSourceNode() {
-		zookeeperWatcher = ZookeeperWatcherFactory.getZookeeperWatcher();
+		zookeeperWatcher = new ZookeeperWatcher();
 	}
 
 	@Override

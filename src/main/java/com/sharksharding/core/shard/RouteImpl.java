@@ -17,8 +17,6 @@ package com.sharksharding.core.shard;
 
 import java.util.Arrays;
 import java.util.List;
-
-import com.sharksharding.factory.DataSourceHolderFactory;
 import com.sharksharding.factory.DbRuleFactory;
 import com.sharksharding.factory.RuleFactory;
 import com.sharksharding.factory.TbRuleFactory;

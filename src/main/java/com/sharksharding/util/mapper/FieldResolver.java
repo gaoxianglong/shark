@@ -17,7 +17,6 @@ package com.sharksharding.util.mapper;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
-import com.sharksharding.factory.SetValueFactory;
 
 /**
  * 字段注解解析器，用于解析标记了@Column的字段
@@ -27,7 +26,11 @@ import com.sharksharding.factory.SetValueFactory;
  * @version 1.4.1
  */
 public class FieldResolver extends SharkAnnotationResolverImpl {
-	private SetValue setValue = SetValueFactory.getSetValue();
+	private SetValue setValue;
+
+	public FieldResolver() {
+		setValue = new SetValue();
+	}
 
 	@Override
 	public <T> void fieldResolver(T goalObject, ResultSet rs) {

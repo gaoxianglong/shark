@@ -16,7 +16,6 @@
 package com.sharksharding.core.shard;
 
 import java.util.List;
-import com.sharksharding.factory.DataSourceHolderFactory;
 
 /**
  * 水平分库(对垂直分库后的单一业务库进行水平化),水平分片的一种关系型数据库分库分表模式
@@ -26,6 +25,12 @@ import com.sharksharding.factory.DataSourceHolderFactory;
  * @author 2.0.1
  */
 public class HorizontalFacade extends RouteImpl {
+	private DataSourceHolder dataSourceHolder;
+
+	public HorizontalFacade() {
+		dataSourceHolder = SharkDataSourceHolder.getDataSourceHolder();
+	}
+
 	@Override
 	public Object[] route(String sql, Object[] params, boolean indexType) {
 		String newSql = null;
@@ -50,7 +55,7 @@ public class HorizontalFacade extends RouteImpl {
 		newSql = SetTbName.setName(shardConfigInfo, dbIndex, tbIndex, DB_SIZE, TB_SIZE, TB_NAME, sql);
 		final int DB_BEGIN_INDEX = ResolveIndex.getBeginIndex(shardConfigInfo.getWr_index(), indexType);
 		/* 切换数据源索引 */
-		SetDatasource.setIndex(dbIndex += DB_BEGIN_INDEX, DataSourceHolderFactory.getDataSourceHolder());
+		SetDatasource.setIndex(dbIndex += DB_BEGIN_INDEX, dataSourceHolder);
 		return updateParam(newSql, params);
 	}
 }

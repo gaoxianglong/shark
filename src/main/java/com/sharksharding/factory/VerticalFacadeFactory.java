@@ -26,14 +26,8 @@ import com.sharksharding.core.shard.VerticalFacade;
  * @author 2.0.1
  */
 public class VerticalFacadeFactory implements RouteFactory {
-	private static Route verticalFacade;
-
-	static {
-		verticalFacade = new VerticalFacade();
-	}
-
 	@Override
 	public Route getRoute() {
-		return verticalFacade;
+		return new VerticalFacade();
 	}
 }

@@ -18,7 +18,6 @@ package com.sharksharding.core.shard;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.sharksharding.factory.DataSourceHolderFactory;
 import com.sharksharding.factory.HorizontalFacadeFactory;
 import com.sharksharding.factory.RouteFactory;
 import com.sharksharding.factory.VerticalFacadeFactory;
@@ -38,7 +37,7 @@ public class SQLExecute {
 
 	public SQLExecute() {
 		sharkInfo = ShardConfigInfo.getShardInfo();
-		dataSourceHolder = DataSourceHolderFactory.getDataSourceHolder();
+		dataSourceHolder = SharkDataSourceHolder.getDataSourceHolder();
 		RouteFactory horizontalFacadeFactory = new HorizontalFacadeFactory();
 		RouteFactory verticalFacadeFactory = new VerticalFacadeFactory();
 		horizontalFacade = horizontalFacadeFactory.getRoute();

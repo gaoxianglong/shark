@@ -26,14 +26,8 @@ import com.sharksharding.core.shard.TbRule;
  * @version 1.4.0
  */
 public class TbRuleFactory implements RuleFactory{
-	private static Rule rule;
-
-	static {
-		rule = new TbRule();
-	}
-
 	@Override
 	public Rule getRule() {
-		return rule;
+		return new TbRule();
 	}
 }

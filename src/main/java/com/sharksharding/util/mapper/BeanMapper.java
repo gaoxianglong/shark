@@ -19,7 +19,7 @@ import java.sql.ResultSet;
 
 import com.sharksharding.factory.ClassResolverFactory;
 import com.sharksharding.factory.FieldResolverFactory;
-import com.sharksharding.factory.SharkAnnotationResolverFactory;
+import com.sharksharding.factory.AnnotationResolverFactory;
 
 /**
  * 自动映射操作
@@ -29,6 +29,13 @@ import com.sharksharding.factory.SharkAnnotationResolverFactory;
  * @version 1.4.1
  */
 public class BeanMapper {
+	private static AnnotationResolverFactory classResolverFactory, fieldResolverFactory;
+
+	static {
+		classResolverFactory = new ClassResolverFactory();
+		fieldResolverFactory = new FieldResolverFactory();
+	}
+
 	/**
 	 * 调用自动赋值,支持任意修饰字段
 	 * 
@@ -42,8 +49,6 @@ public class BeanMapper {
 	 * @return void
 	 */
 	public static <T> void mapper(T goalObject, ResultSet rs) {
-		SharkAnnotationResolverFactory classResolverFactory = new ClassResolverFactory();
-		SharkAnnotationResolverFactory fieldResolverFactory = new FieldResolverFactory();
 		/* 检测目标对象是否标记有@Mapper注解 */
 		if (classResolverFactory.getSharkAnnotationResolver().classResolver(goalObject)) {
 			/* 字段注解解析 */

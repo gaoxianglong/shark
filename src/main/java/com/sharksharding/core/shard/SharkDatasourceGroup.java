@@ -18,7 +18,6 @@ package com.sharksharding.core.shard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-import com.sharksharding.factory.DataSourceHolderFactory;
 
 /**
  * shark动态数据源实现
@@ -35,7 +34,7 @@ public class SharkDatasourceGroup extends AbstractRoutingDataSource implements D
 	private static Logger logger = LoggerFactory.getLogger(SharkDatasourceGroup.class);
 
 	private SharkDatasourceGroup() {
-		dataSourceHolder = DataSourceHolderFactory.getDataSourceHolder();
+		dataSourceHolder = SharkDataSourceHolder.getDataSourceHolder();
 	}
 
 	@Override

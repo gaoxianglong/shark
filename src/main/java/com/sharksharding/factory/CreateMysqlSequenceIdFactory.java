@@ -26,14 +26,8 @@ import com.sharksharding.util.sequence.mysql.CreateMysqlSequenceId;
  * @version 1.4.1
  */
 public class CreateMysqlSequenceIdFactory implements CreateSequenceIdServiceFactory {
-	private static CreateSequenceIdService createSequenceIdService;
-
-	static {
-		createSequenceIdService = new CreateMysqlSequenceId();
-	}
-
 	@Override
 	public CreateSequenceIdService getCreateSequenceIdService() {
-		return createSequenceIdService;
+		return new CreateMysqlSequenceId();
 	}
 }
