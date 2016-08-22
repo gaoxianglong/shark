@@ -49,7 +49,7 @@ public class CreateMysqlSequenceId extends CreateSequenceIdServiceImpl {
 			if (null != createUserNameDao) {
 				this.memData = memData;
 				/* idc机房编码数据长度必须为3位,type数据长度必须为2位 */
-				if (3 == String.valueOf(100).length() && 2 == String.valueOf(type).length()) {
+				if (3 == String.valueOf(idcNum).length() && 2 == String.valueOf(type).length()) {
 					try {
 						/* 根据指定的类别从内存中获取剩余的占位数量 */
 						Integer surplusData = surplusDataMap.get(type);

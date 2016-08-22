@@ -56,7 +56,7 @@ public class CreateZookeeperSequenceId extends CreateSequenceIdServiceImpl {
 				this.memData = memData;
 				final String childrenNodePath = String.valueOf(type);
 				/* idc机房编码数据长度必须为3位,type数据长度必须为6位 */
-				if (3 == String.valueOf(100).length() && 6 == childrenNodePath.length()) {
+				if (3 == String.valueOf(idcNum).length() && 6 == childrenNodePath.length()) {
 					try {
 						/* 根据指定的类别从内存中获取剩余的占位数量 */
 						Integer surplusData = surplusDataMap.get(type);

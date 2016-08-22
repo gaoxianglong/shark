@@ -29,9 +29,9 @@ import com.sharksharding.util.sequence.SequenceIDManger;
  * @author gaoxianglong
  */
 public class GetMysqlSequenceIdTest {
-	final static String NAME = "root";
-	final static String PWD = "pwd";
-	final static String URL = "jdbc:mysql://ip:port/id";
+	final static String NAME = "";
+	final static String PWD = "";
+	final static String URL = "jdbc:mysql://ip:port/db";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 
 	/**
@@ -49,7 +49,7 @@ public class GetMysqlSequenceIdTest {
 	 * @author gaoxianglong
 	 */
 	public @Test void getSequenceId() {
-		System.out.println(SequenceIDManger.getSequenceId(100, 10, 5000));
+		System.out.println(SequenceIDManger.getSequenceId(100, 10, 100));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class GetMysqlSequenceIdTest {
 	 */
 	public @Test void getSequenceId2() {
 		for (int i = 0; i < 1000; i++) {
-			System.out.println(SequenceIDManger.getSequenceId(100, 10, 5000));
+			System.out.println(SequenceIDManger.getSequenceId(100, 10, 100));
 		}
 	}
 
