@@ -15,7 +15,8 @@
  */
 package com.sharksharding.util.sequence;
 
-import com.sharksharding.exception.ResourceException;
+import javax.sql.DataSource;
+
 import com.sharksharding.factory.CreateMysqlSequenceIdFactory;
 import com.sharksharding.factory.CreateSequenceIdServiceFactory;
 import com.sharksharding.factory.CreateZookeeperSequenceIdFactory;
@@ -58,6 +59,20 @@ public class SequenceIDManger {
 	 */
 	public static void init(String name, String password, String jdbcUrl, String driverClass) {
 		DbConnectionManager.init(name, password, jdbcUrl, driverClass);
+	}
+
+	/**
+	 * 初始化mysql数据源信息
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param dataSource
+	 *            数据源信息
+	 * 
+	 * @return void
+	 */
+	public static void init(DataSource dataSource) {
+		DbConnectionManager.init(dataSource);
 	}
 
 	/**

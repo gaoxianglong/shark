@@ -17,6 +17,9 @@ package com.sharksharding.util.sequence.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
+import javax.sql.DataSource;
+
 import com.sharksharding.exception.ConnectionException;
 
 /**
@@ -31,6 +34,7 @@ public class DbConnectionManager {
 	private static String password;
 	private static String jdbcUrl;
 	private static String driverClass;
+	private static DataSource dataSource;
 
 	private DbConnectionManager() {
 	}
@@ -59,6 +63,10 @@ public class DbConnectionManager {
 		setDriverClass(driverClass);
 	}
 
+	public static void init(DataSource dataSource) {
+		DbConnectionManager.dataSource = dataSource;
+	}
+
 	/**
 	 * 获取数据库链接
 	 * 
@@ -71,8 +79,12 @@ public class DbConnectionManager {
 	public static Connection getConn() throws ConnectionException {
 		Connection conn = null;
 		try {
-			Class.forName(getDriverClass());
-			conn = DriverManager.getConnection(getJdbcUrl(), getName(), getPassword());
+			if (null != dataSource) {
+				conn = dataSource.getConnection();
+			} else {
+				Class.forName(getDriverClass());
+				conn = DriverManager.getConnection(getJdbcUrl(), getName(), getPassword());
+			}
 		} catch (Exception e) {
 			throw new ConnectionException(e.toString());
 		}

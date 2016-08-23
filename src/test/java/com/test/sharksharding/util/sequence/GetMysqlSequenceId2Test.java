@@ -18,9 +18,18 @@ package com.test.sharksharding.util.sequence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.alibaba.druid.pool.DruidDataSource;
 import com.sharksharding.util.sequence.SequenceIDManger;
 
 /**
@@ -28,19 +37,19 @@ import com.sharksharding.util.sequence.SequenceIDManger;
  * 
  * @author gaoxianglong
  */
-public class GetMysqlSequenceIdTest {
-	final static String NAME = "root";
-	final static String PWD = "yunji";
-	final static String URL = "jdbc:mysql://192.168.1.2/test_id";
-	final static String DRIVER = "com.mysql.jdbc.Driver";
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath*:datasource3-context.xml")
+public class GetMysqlSequenceId2Test {
+	@Resource
+	private DataSource dataSource;
 
 	/**
 	 * 初始化数据源信息
 	 * 
 	 * @author gaoxianglong
 	 */
-	public @BeforeClass static void init() {
-		SequenceIDManger.init(NAME, PWD, URL, DRIVER);
+	public void init() {
+		SequenceIDManger.init(dataSource);
 	}
 
 	/**

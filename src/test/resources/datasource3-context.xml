@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<context:component-scan base-package="com.test.sharksharding.util.sequence" />
+	<bean class="com.test.sharksharding.util.sequence.GetMysqlSequenceId2Test"
+		init-method="init" />
+	<!-- 加载本地数据源配置信息 -->
+	<context:property-placeholder
+		location="classpath*:properties/druid-jdbc.properties" />
+	<bean id="dataSource1" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="name" value="dataSource1" />
+		<property name="username" value="${um.username}" />
+		<property name="password" value="${um.password}" />
+		<property name="url" value="jdbc:mysql://192.168.1.2:3306/test_id" />
+		<property name="initialSize" value="${um.initialSize}" />
+		<property name="minIdle" value="${um.minIdle}" />
+		<property name="maxActive" value="${um.maxActive}" />
+		<!-- 是否缓存preparedStatement，也就是PSCache，在mysql下建议关闭，分库分表较多的数据库，建议配置为false -->
+		<property name="poolPreparedStatements" value="${um.poolPreparedStatements}" />
+		<property name="maxOpenPreparedStatements" value="${um.maxOpenPreparedStatements}" />
+		<!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+		<property name="testOnBorrow" value="${um.testOnBorrow}" />
+		<!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+		<property name="testOnReturn" value="${um.testOnReturn}" />
+		<!-- 建议配置为true，不影响性能 -->
+		<property name="testWhileIdle" value="${um.testWhileIdle}" />
+		<property name="filters" value="${um.filters}" />
+		<property name="connectionProperties" value="${um.connectionProperties}" />
+		<!-- 合并多个DruidDataSource的监控数据 -->
+		<property name="useGlobalDataSourceStat" value="${um.useGlobalDataSourceStat}" />
+		<!-- 保存DruidDataSource的监控记录到日志中 -->
+		<property name="timeBetweenLogStatsMillis" value="${um.timeBetweenLogStatsMillis}" />
+	</bean>
+</beans>
