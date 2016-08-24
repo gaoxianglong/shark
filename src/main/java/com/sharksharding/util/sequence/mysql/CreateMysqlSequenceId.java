@@ -100,7 +100,7 @@ public class CreateMysqlSequenceId extends CreateSequenceIdServiceImpl {
 					} finally {
 						try {
 							if (null != CreateSequenceIdDaoImpl.conn && !CreateSequenceIdDaoImpl.conn.isClosed()) {
-								CreateSequenceIdDaoImpl.conn.close();
+								DBConnectionManager.close(CreateSequenceIdDaoImpl.conn);
 							}
 						} catch (SQLException e) {
 							e.printStackTrace();

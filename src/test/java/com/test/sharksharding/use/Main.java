@@ -37,7 +37,7 @@ import com.sharksharding.util.sequence.SequenceIDManger;
 /* 多库多表模式 */
 @ContextConfiguration(locations = "classpath*:shark2-context.xml")
 /* 单库多表模式 */
-//@ContextConfiguration(locations = "classpath*:shark3-context.xml")
+// @ContextConfiguration(locations = "classpath*:shark3-context.xml")
 public class Main {
 	@Resource
 	private UserDao userDao;

@@ -34,7 +34,7 @@ public final class CreateSequenceIdDaoImpl implements CreateSequenceIdDao {
 	@Override
 	public void insertSequenceId(int type, Long useData) throws SQLException {
 		if (null == conn || conn.isClosed()) {
-			conn = DbConnectionManager.getConn();
+			conn = DBConnectionManager.getConn();
 			conn.setAutoCommit(false);
 		}
 		final String SQL = "INSERT INTO shark_sequenceid(s_type, s_useData) VALUES(?, ?)";
@@ -49,7 +49,7 @@ public final class CreateSequenceIdDaoImpl implements CreateSequenceIdDao {
 	@Override
 	public Long queryMaxUseData() throws SQLException {
 		if (null == conn || conn.isClosed()) {
-			conn = DbConnectionManager.getConn();
+			conn = DBConnectionManager.getConn();
 			conn.setAutoCommit(false);
 		}
 		Long useData = null;
@@ -66,7 +66,7 @@ public final class CreateSequenceIdDaoImpl implements CreateSequenceIdDao {
 	@Override
 	public Long queryUseDatabyType(int type) throws SQLException {
 		if (null == conn || conn.isClosed()) {
-			conn = DbConnectionManager.getConn();
+			conn = DBConnectionManager.getConn();
 			conn.setAutoCommit(false);
 		}
 		Long useData = null;
@@ -84,7 +84,7 @@ public final class CreateSequenceIdDaoImpl implements CreateSequenceIdDao {
 	@Override
 	public void changeUseData(int type, Long useData) throws SQLException {
 		if (null == conn || conn.isClosed()) {
-			conn = DbConnectionManager.getConn();
+			conn = DBConnectionManager.getConn();
 			conn.setAutoCommit(false);
 		}
 		final String SQL = "UPDATE shark_sequenceid s SET s.s_useData = ? WHERE s.s_type = ?";

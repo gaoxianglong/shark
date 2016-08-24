@@ -17,6 +17,7 @@ package com.sharksharding.util.sequence.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -29,42 +30,14 @@ import com.sharksharding.exception.ConnectionException;
  * 
  * @version 1.3.5
  */
-public class DbConnectionManager {
+public class DBConnectionManager {
 	private static String name;
 	private static String password;
 	private static String jdbcUrl;
 	private static String driverClass;
 	private static DataSource dataSource;
 
-	private DbConnectionManager() {
-	}
-
-	/**
-	 * 初始化数据源信息
-	 * 
-	 * @author gaoxianglong
-	 * 
-	 * @param name
-	 *            数据库用户帐号
-	 * 
-	 * @param password
-	 *            数据库用户密码
-	 * 
-	 * @param jdbcUrl
-	 *            数据源地址
-	 * 
-	 * @param driverClass
-	 *            数据库驱动
-	 */
-	public static void init(String name, String password, String jdbcUrl, String driverClass) {
-		setName(name);
-		setPassword(password);
-		setJdbcUrl(jdbcUrl);
-		setDriverClass(driverClass);
-	}
-
-	public static void init(DataSource dataSource) {
-		DbConnectionManager.dataSource = dataSource;
+	private DBConnectionManager() {
 	}
 
 	/**
@@ -76,7 +49,7 @@ public class DbConnectionManager {
 	 * 
 	 * @return Connection 数据库会话链接
 	 */
-	public static Connection getConn() throws ConnectionException {
+	protected static Connection getConn() throws ConnectionException {
 		Connection conn = null;
 		try {
 			if (null != dataSource) {
@@ -91,12 +64,23 @@ public class DbConnectionManager {
 		return conn;
 	}
 
+	/**
+	 * 回收资源
+	 * 
+	 * @author gaoxianglong
+	 * @throws SQLException
+	 */
+	protected static void close(Connection conn) throws SQLException {
+		if (null != conn)
+			conn.close();
+	}
+
 	public static String getName() {
 		return name;
 	}
 
 	public static void setName(String name) {
-		DbConnectionManager.name = name;
+		DBConnectionManager.name = name;
 	}
 
 	public static String getPassword() {
@@ -104,7 +88,7 @@ public class DbConnectionManager {
 	}
 
 	public static void setPassword(String password) {
-		DbConnectionManager.password = password;
+		DBConnectionManager.password = password;
 	}
 
 	public static String getJdbcUrl() {
@@ -112,7 +96,7 @@ public class DbConnectionManager {
 	}
 
 	public static void setJdbcUrl(String jdbcUrl) {
-		DbConnectionManager.jdbcUrl = jdbcUrl;
+		DBConnectionManager.jdbcUrl = jdbcUrl;
 	}
 
 	public static String getDriverClass() {
@@ -120,6 +104,14 @@ public class DbConnectionManager {
 	}
 
 	public static void setDriverClass(String driverClass) {
-		DbConnectionManager.driverClass = driverClass;
+		DBConnectionManager.driverClass = driverClass;
+	}
+
+	public static DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public static void setDataSource(DataSource dataSource) {
+		DBConnectionManager.dataSource = dataSource;
 	}
 }

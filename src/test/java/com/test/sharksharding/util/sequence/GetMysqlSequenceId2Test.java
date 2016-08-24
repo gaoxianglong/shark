@@ -33,7 +33,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.sharksharding.util.sequence.SequenceIDManger;
 
 /**
- * 获取mysql生成的SequenceId测试类
+ * 获取mysql生成的SequenceId测试类,基于连接池
  * 
  * @author gaoxianglong
  */

@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import com.sharksharding.factory.CreateMysqlSequenceIdFactory;
 import com.sharksharding.factory.CreateSequenceIdServiceFactory;
 import com.sharksharding.factory.CreateZookeeperSequenceIdFactory;
-import com.sharksharding.util.sequence.mysql.DbConnectionManager;
+import com.sharksharding.util.sequence.mysql.DBConnectionManager;
 import com.sharksharding.util.sequence.zookeeper.ZookeeperConnectionManager;
 
 /**
@@ -57,12 +57,16 @@ public class SequenceIDManger {
 	 * 
 	 * @return void
 	 */
+	@Deprecated
 	public static void init(String name, String password, String jdbcUrl, String driverClass) {
-		DbConnectionManager.init(name, password, jdbcUrl, driverClass);
+		DBConnectionManager.setName(name);
+		DBConnectionManager.setPassword(password);
+		DBConnectionManager.setJdbcUrl(jdbcUrl);
+		DBConnectionManager.setDriverClass(driverClass);
 	}
 
 	/**
-	 * 初始化mysql数据源信息
+	 * 初始化mysql数据源信息,基于连接池
 	 * 
 	 * @author gaoxianglong
 	 * 
@@ -72,7 +76,7 @@ public class SequenceIDManger {
 	 * @return void
 	 */
 	public static void init(DataSource dataSource) {
-		DbConnectionManager.init(dataSource);
+		DBConnectionManager.setDataSource(dataSource);
 	}
 
 	/**
