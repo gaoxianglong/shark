@@ -73,7 +73,6 @@ public class SendMail {
 					logger.debug("mail sending success");
 				} catch (Exception e) {
 					logger.debug("mail sending failed");
-					e.printStackTrace();
 				}
 			}
 		}.start();

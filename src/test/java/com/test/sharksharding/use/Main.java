@@ -85,7 +85,8 @@ public class Main {
 			userDao.setUserInfo(params);
 			logger.info("insert table:userinfo_test success");
 			testQuery();
-			Thread.sleep(2000);
+			/* 等待发邮件 */
+			Thread.sleep(10000);
 		} catch (Exception e) {
 			logger.error("insert data fail", e);
 		}
