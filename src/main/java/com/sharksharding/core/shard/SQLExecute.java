@@ -33,7 +33,7 @@ public class SQLExecute {
 	private ShardConfigInfo sharkInfo;
 	private DataSourceHolder dataSourceHolder;
 	private Route horizontalFacade, verticalFacade;
-	private static Logger logger = LoggerFactory.getLogger(SQLExecute.class);
+	private Logger logger = LoggerFactory.getLogger(SQLExecute.class);
 
 	public SQLExecute() {
 		sharkInfo = ShardConfigInfo.getShardInfo();

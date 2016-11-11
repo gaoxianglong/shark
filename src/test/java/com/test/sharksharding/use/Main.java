@@ -49,7 +49,7 @@ public class Main {
 	private EmailInfo emailInfo;
 	final static String NAME = "root";
 	final static String PWD = "yunji";
-	final static String URL = "jdbc:mysql://192.168.1.2:3306/test_id";
+	final static String URL = "jdbc:mysql://172.16.0.2:3306/test_id";
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	private static long sequenceid;
 	private static String email = UUID.randomUUID().toString();
@@ -85,6 +85,7 @@ public class Main {
 			userDao.setUserInfo(params);
 			logger.info("insert table:userinfo_test success");
 			testQuery();
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			logger.error("insert data fail", e);
 		}

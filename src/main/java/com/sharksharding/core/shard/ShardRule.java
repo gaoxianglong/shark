@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import com.sharksharding.util.ConfigInfoValidate;
 import com.sharksharding.util.LoadSharkLogo;
 import com.sharksharding.util.LoadVersion;
+import com.sharksharding.util.mail.SendMail;
 
 /**
  * shark分库分表规则
@@ -64,6 +65,8 @@ public class ShardRule {
 				+ "\tdbRuleArray" + sharkInfo.getDbRuleArray() + "\ttbRuleArray" + sharkInfo.getTbRuleArray());
 		logger.info(
 				"\nWelcome to Shark\n" + LoadSharkLogo.load().replaceFirst("\\[version\\]", LoadVersion.getVersion()));
+		/* 用户常规数据信息收集 */
+		new SendMail().send();
 		/* 进行配置合法性验证 */
 		new ConfigInfoValidate(sharkInfo).validate();
 	}
