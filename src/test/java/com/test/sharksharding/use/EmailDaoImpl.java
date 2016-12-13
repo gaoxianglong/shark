@@ -36,6 +36,9 @@ public class EmailDaoImpl implements EmailDao {
 	@Resource
 	private JdbcTemplate jdbcTemplate;
 
+	@Resource
+	private JdbcTemplate jdbcTemplate2;
+
 	// @Resource
 	private PropertyPlaceholderConfigurer property;
 
@@ -52,9 +55,22 @@ public class EmailDaoImpl implements EmailDao {
 	}
 
 	@Override
+	public void setEmail2(EmailInfo email) throws Exception {
+		jdbcTemplate2.update("INSERT INTO email_test_0000(email_hash,email,uid) VALUES(?,?,?)",
+				new Object[] { email.getEmail_hash(), email.getEmail(), email.getUid() });
+	}
+
+	@Override
 	public List<EmailInfo> getEmail(EmailInfo email) throws Exception {
 		final String sql = property.getSql("queryEmail", email.getEmail_hash());
 		return jdbcTemplate.query(sql, new Object[] { email.getEmail() }, emailMapper);
+	}
+
+	@Override
+	public List<EmailInfo> getEmail2(EmailInfo email) throws Exception {
+		return jdbcTemplate2.query(
+				"SELECT e.email_hash,e.email,e.uid FROM email_test_0000 e WHERE e.email_hash=? AND e.email=?",
+				new Object[] { email.getEmail_hash(), email.getEmail() }, emailMapper);
 	}
 
 	@Override

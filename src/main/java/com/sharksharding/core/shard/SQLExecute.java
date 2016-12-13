@@ -50,10 +50,10 @@ public class SQLExecute {
 	 * @author gaoxianglong
 	 * 
 	 * @param proceedingJoinPoint
-	 *            委托对象的上下文信息
+	 *            委托对象(即:目标对象/被代理的对象)的上下文信息
 	 * 
 	 * @param indexType
-	 *            true为master启始索引,false为slave启始索引
+	 *            true为master启始索引,false为slave启始索引,读写分离
 	 * 
 	 * @exception Throwable
 	 * 
@@ -72,7 +72,7 @@ public class SQLExecute {
 			 */
 			if (param instanceof String) {
 				String sql = param.toString();
-				logger.info("before sql-->" + sql);
+				logger.debug("before sql-->" + sql);
 				/* 检查分库分表开关是否打开 */
 				if (sharkInfo.getIsShard()) {
 					if (sharkInfo.getShardMode()) {
@@ -86,7 +86,7 @@ public class SQLExecute {
 					final int index = ResolveIndex.getBeginIndex(sharkInfo.getWr_index(), indexType);
 					SetDatasource.setIndex(index, dataSourceHolder);
 				}
-				logger.info("after sql-->" + sql);
+				logger.debug("after sql-->" + sql);
 			}
 			try {
 				obj = proceedingJoinPoint.proceed(params);

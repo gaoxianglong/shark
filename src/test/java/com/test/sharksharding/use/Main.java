@@ -15,19 +15,17 @@ package com.test.sharksharding.use;
  * limitations under the License.
  */
 
-import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.annotation.Resource;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -87,6 +85,29 @@ public class Main {
 			testQuery();
 			/* 等待发邮件 */
 			Thread.sleep(10000);
+		} catch (Exception e) {
+			logger.error("insert data fail", e);
+		}
+	}
+
+	/**
+	 * 不需要进行数据路由操作的JDBCTemplate
+	 * 
+	 * @author gaoxianglong
+	 */
+	public @Test void testNoRoute() {
+		try {
+			EmailInfo emailInfo = new EmailInfo();
+			emailInfo.setEmail(email);
+			emailInfo.setEmail_hash(Math.abs(email.hashCode()));
+			emailInfo.setUid(sequenceid);
+			emailDao.setEmail2(emailInfo);
+			emailInfo.setUid(-1L);
+			List<EmailInfo> emailInfos = emailDao.getEmail2(emailInfo);
+			if (!emailInfos.isEmpty()) {
+				emailInfo = emailInfos.get(0);
+				logger.info(emailInfo.getEmail_hash() + "\n" + emailInfo.getEmail() + "\n" + emailInfo.getUid());
+			}
 		} catch (Exception e) {
 			logger.error("insert data fail", e);
 		}

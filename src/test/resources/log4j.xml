@@ -10,28 +10,21 @@
 
 	<!-- Application Loggers -->
 	<logger name="com.test.sharksharding">
-		<level value="info" />
+		<level value="debug" />
+	</logger>
+	<logger name="com.sharksharding">
+		<level value="debug" />
 	</logger>
 	<!-- 避免druid抛出javax.management.InstanceAlreadyExistsException异常 -->
 	<logger name="com.alibaba.druid.stat.DruidDataSourceStatManager">
 		<level value="off" />
 	</logger>
-	<logger name="com.sharksharding">
+	<logger name="org.springframework">
 		<level value="info" />
 	</logger>
-	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
+	<logger name="druid.sql">
 		<level value="info" />
 	</logger>
-
-	<logger name="org.springframework.beans">
-		<level value="info" />
-	</logger>
-
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
-
 	<!-- 指定logger的设置，additivity指示是否遵循缺省的继承机制 -->
 	<logger name="com.runway.bssp.activeXdemo" additivity="false">
 		<priority value="info" />

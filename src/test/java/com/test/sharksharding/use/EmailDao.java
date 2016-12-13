@@ -26,9 +26,23 @@ import java.util.Map;
 public interface EmailDao {
 	public void setEmail(EmailInfo email) throws Exception;
 
+	/**
+	 * 不需要进行数据路由
+	 *
+	 * @author gaoxianglong
+	 */
+	public void setEmail2(EmailInfo email) throws Exception;
+
 	public void setEmail(Map<String, Object> params) throws Exception;
 
 	public List<EmailInfo> getEmail(EmailInfo email) throws Exception;
+
+	/**
+	 * 不需要进行数据路由
+	 *
+	 * @author gaoxianglong
+	 */
+	public List<EmailInfo> getEmail2(EmailInfo email) throws Exception;
 
 	public List<EmailInfo> getEmail(Map<String, Object> params) throws Exception;
 }

@@ -18,6 +18,7 @@ package com.sharksharding.core.shard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.druid.support.logging.Log;
 import com.sharksharding.util.ConfigInfoValidate;
 import com.sharksharding.util.LoadSharkLogo;
 import com.sharksharding.util.LoadVersion;

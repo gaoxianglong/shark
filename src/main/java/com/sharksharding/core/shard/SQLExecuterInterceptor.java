@@ -18,6 +18,9 @@ package com.sharksharding.core.shard;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * 数据路由入口
@@ -29,6 +32,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class SQLExecuterInterceptor {
 	private SQLExecute sqlExecute;
+	private Logger logger = LoggerFactory.getLogger(SQLExecuterInterceptor.class);
 
 	private SQLExecuterInterceptor() {
 		sqlExecute = new SQLExecute();
@@ -49,7 +53,19 @@ public class SQLExecuterInterceptor {
 	 */
 	@Around("execution(* org.springframework.jdbc.core.JdbcTemplate.update*(..))")
 	public Object interceptUpdateSQL(ProceedingJoinPoint proceedingJoinPoint) {
-		return sqlExecute.execute(proceedingJoinPoint, true);
+		Object result = null;
+		/* 执行路由检测 */
+		if (isRoute(proceedingJoinPoint)) {
+			result = sqlExecute.execute(proceedingJoinPoint, true);
+		} else {
+			try {
+				logger.debug("no need for routing");
+				result = proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -67,6 +83,33 @@ public class SQLExecuterInterceptor {
 	 */
 	@Around("execution(* org.springframework.jdbc.core.JdbcTemplate.query*(..))")
 	public Object interceptQuerySQL(ProceedingJoinPoint proceedingJoinPoint) {
-		return sqlExecute.execute(proceedingJoinPoint, false);
+		Object result = null;
+		/* 执行路由检测 */
+		if (isRoute(proceedingJoinPoint)) {
+			result = sqlExecute.execute(proceedingJoinPoint, false);
+		} else {
+			try {
+				logger.debug("no need for routing");
+				result = proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * 路由检测
+	 * 
+	 * @author gaoxianglong
+	 * 
+	 * @param proceedingJoinPoint
+	 *            委托对象的上下文信息
+	 * 
+	 * @return boolean 是否路由检测结果
+	 */
+	public boolean isRoute(ProceedingJoinPoint proceedingJoinPoint) {
+		/* 如果JdbcTemplate持有的不是SharkDatasourceGroup动态数据源,则不进行数据路由操作 */
+		return ((JdbcTemplate) proceedingJoinPoint.getTarget()).getDataSource() instanceof SharkDatasourceGroup;
 	}
 }
