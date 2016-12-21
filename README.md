@@ -23,8 +23,8 @@
 ----------
 
 ## Shark总体架构
-Shark采用应用集成架构，其领域模型位于持久层(JdbcTemplate)和JDBC之间，也就是分布式数据路由层。<br>
-![](http://dl.iteye.com/upload/picture/pic/135419/0cd4a534-3a06-36d7-9aef-9ce469d3e8c7.jpg)
+Shark采用应用集成架构，其领域模型位于持久层(JdbcTemplate)和JDBC之间，也就是分布式数据层。<br>
+![](http://dl.iteye.com/upload/picture/pic/136485/e4723484-1c23-3114-90c7-7871f0b11181.jpg)
 
 ----------
 
