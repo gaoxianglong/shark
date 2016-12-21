@@ -15,7 +15,7 @@
 - 业务零侵入，配置简单；<br>
 - 站在巨人的肩膀上(springjdbc、基于druid的sqlparser完成sql解析任务)，执行性能高效、稳定；<br>
 - 提供多机sequenceid的API支持，解决多机sequenceid难题；<br>
-- 支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
+- 缺省支持基于zookeeper、redis3.x cluster作为集中式资源配置中心；<br>
 - 基于velocity模板引擎渲染内容，支持sql语句独立配置和动态拼接，与业务逻辑代码解耦；<br>
 - 提供内置验证页面，方便开发、测试及运维人员对执行后的sql进行验证；<br>
 - 提供自动生成配置文件的API支持，降低配置出错率；<br>
